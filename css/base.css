@@ -1,0 +1,27 @@
+/*global elements*/
+body,html{
+	background:#fff;
+	font-size:16px;
+	color:#0b0a09;
+	font-family:"Alegreya",monospace;
+}
+a{
+	text-decoration:underline;
+	cursor:pointer;
+	font-size:48px;
+}
+a:link,
+a:visited,
+a:hover,
+a:active{
+	color:inherit;
+}
+ul{
+	margin:0;
+	padding:0;	
+}
+li{
+	list-style:none;	
+}
+
+
