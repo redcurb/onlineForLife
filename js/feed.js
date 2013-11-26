@@ -18,6 +18,10 @@ onlineForLife.Feed = {
 			$( "#mypanel-right" ).panel( "open" , {} );
 		});
 
+		$( ".feed-share" ).on( "click", function(){
+			alert($(window).width() + ' x ' + $(window).height());
+		});
+
 		$( "li.feed-item" ).on( "swiperight", function(){
 			onlineForLife.Feed.handleSwipe($(this));
 		});
@@ -35,6 +39,7 @@ onlineForLife.Feed = {
 };
 $(function() {
 	onlineForLife.Feed.init();
+	
 });
 
 
