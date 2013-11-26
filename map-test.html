@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Capture Photo</title>
+
+		<link rel="stylesheet" href="css/reset-min.css" />
+		<link rel="stylesheet" href="css/libraries/jquery.mobile-1.3.2.min.css" />
+		<link rel="stylesheet" href="css/base.css" />
+
+		
+		
+  </head>
+  <body>
+  
+  	<style>
+  		#map{
+  			width:1000px;
+  			height:650px;
+  			background:#fff url(img/map-us.png) no-repeat 0 0;
+  			display:block;
+  		}
+  		
+  		.map-state{
+  			position:absolute;
+  		}
+  		.map-state.state-mt{
+			height: 108px;
+			left: 248px;
+			outline: 1px solid #008000;
+			top: 158px;
+			width: 131px;
+  		}
+  			.map-state .pixel-container{
+  				position:relative;
+  			}
+  				.map-state .pixel-container .pixel-row{
+  					position:absolute;
+  					opacity:0.6;
+  				}
+  				.map-state .pixel-container .pixel-row.row-1{
+  					top:0;
+  				}
+  				.map-state .pixel-container .pixel-row.row-2{
+  					top:11px;
+  				}
+  				.map-state .pixel-container .pixel-row.row-3{
+  					top:22px;
+  				}
+  				.map-state .pixel-container .pixel-row.row-4{
+  					top:33px;
+  				}
+  				.map-state .pixel-container .pixel-row.row-5{
+  					top:44px;
+  				}
+  				.map-state .pixel-container .pixel-row.row-6{
+  					top:55px;
+  				}
+  				.map-state .pixel-container .pixel-row.row-7{
+  					top:66px;
+  				}
+  				.map-state .pixel-container .pixel-row.row-8{
+  					top:77px;
+  				}
+  				.map-state .pixel-container .pixel-row.row-9{
+  					top:88px;
+  				}
+  				.map-state .pixel-container .pixel-row.row-10{
+  					top:99px;
+  				}
+  				.map-state .pixel-container .pixel-row.row-11{
+  					top:110px;
+  				}
+					.map-state .pixel{
+						width:10px;
+						height:10px;
+						display:block;
+						background:yellow;
+						position:absolute;
+					}
+					.state-mt .pixel-1{left:0;}
+					.state-mt .pixel-2{left:11px;}
+					.state-mt .pixel-3{left:22px;}
+					.state-mt .pixel-4{left:33px;}
+					.state-mt .pixel-5{left:44px;}
+					.state-mt .pixel-6{left:55px;}
+					.state-mt .pixel-7{left:66px;}
+					.state-mt .pixel-8{left:77px;}
+					.state-mt .pixel-9{left:88px;}
+					.state-mt .pixel-10{left:99px;}
+					.state-mt .pixel-11{left:110px;}
+					.state-mt .pixel-12{left:121px;}
+					.state-mt .pixel-13{left:132px;}
+  		
+  	</style>
+  	<div id="map">
+  		
+  	
+  		<div class="map-state state-mt">
+			<div class="pixel-container">
+				<div class="pixel-row row-1">
+					<i class="pixel pixel-2"></i>
+					<i class="pixel pixel-3"></i>
+					<i class="pixel pixel-4"></i>
+					<i class="pixel pixel-5"></i>
+					<i class="pixel pixel-6"></i>
+					<i class="pixel pixel-7"></i>
+					<i class="pixel pixel-8"></i>
+				</div>
+				<div class="pixel-row row-2">
+					<i class="pixel pixel-2"></i>
+					<i class="pixel pixel-3"></i>
+					<i class="pixel pixel-4"></i>
+					<i class="pixel pixel-5"></i>
+					<i class="pixel pixel-6"></i>
+					<i class="pixel pixel-7"></i>
+					<i class="pixel pixel-8"></i>
+					<i class="pixel pixel-9"></i>
+					<i class="pixel pixel-10"></i>
+					<i class="pixel pixel-11"></i>
+					<i class="pixel pixel-12"></i>
+				</div>
+				<div class="pixel-row row-3">
+					<i class="pixel pixel-1"></i>
+					<i class="pixel pixel-2"></i>
+					<i class="pixel pixel-3"></i>
+					<i class="pixel pixel-4"></i>
+					<i class="pixel pixel-5"></i>
+					<i class="pixel pixel-6"></i>
+					<i class="pixel pixel-7"></i>
+					<i class="pixel pixel-8"></i>
+					<i class="pixel pixel-9"></i>
+					<i class="pixel pixel-10"></i>
+					<i class="pixel pixel-11"></i>
+					<i class="pixel pixel-12"></i>
+				</div>
+				<div class="pixel-row row-4">
+					<i class="pixel pixel-1"></i>
+					<i class="pixel pixel-2"></i>
+					<i class="pixel pixel-3"></i>
+					<i class="pixel pixel-4"></i>
+					<i class="pixel pixel-5"></i>
+					<i class="pixel pixel-6"></i>
+					<i class="pixel pixel-7"></i>
+					<i class="pixel pixel-8"></i>
+					<i class="pixel pixel-9"></i>
+					<i class="pixel pixel-10"></i>
+					<i class="pixel pixel-11"></i>
+					<i class="pixel pixel-12"></i>
+				</div>
+				<div class="pixel-row row-5">
+					<i class="pixel pixel-1"></i>
+					<i class="pixel pixel-2"></i>
+					<i class="pixel pixel-3"></i>
+					<i class="pixel pixel-4"></i>
+					<i class="pixel pixel-5"></i>
+					<i class="pixel pixel-6"></i>
+					<i class="pixel pixel-7"></i>
+					<i class="pixel pixel-8"></i>
+					<i class="pixel pixel-9"></i>
+					<i class="pixel pixel-10"></i>
+					<i class="pixel pixel-11"></i>
+					<i class="pixel pixel-12"></i>
+				</div>
+				<div class="pixel-row row-6">
+					<i class="pixel pixel-1"></i>
+					<i class="pixel pixel-2"></i>
+					<i class="pixel pixel-3"></i>
+					<i class="pixel pixel-4"></i>
+					<i class="pixel pixel-5"></i>
+					<i class="pixel pixel-6"></i>
+					<i class="pixel pixel-7"></i>
+					<i class="pixel pixel-8"></i>
+					<i class="pixel pixel-9"></i>
+					<i class="pixel pixel-10"></i>
+					<i class="pixel pixel-11"></i>
+					<i class="pixel pixel-12"></i>
+					
+				</div>
+				<div class="pixel-row row-7">
+					<i class="pixel pixel-1"></i>
+					<i class="pixel pixel-2"></i>
+					<i class="pixel pixel-3"></i>
+					<i class="pixel pixel-4"></i>
+					<i class="pixel pixel-5"></i>
+					<i class="pixel pixel-6"></i>
+					<i class="pixel pixel-7"></i>
+					<i class="pixel pixel-8"></i>
+					<i class="pixel pixel-9"></i>
+					<i class="pixel pixel-10"></i>
+					<i class="pixel pixel-11"></i>
+					<i class="pixel pixel-12"></i>
+					
+				</div>
+				<div class="pixel-row row-8">
+					<i class="pixel pixel-1"></i>
+					<i class="pixel pixel-2"></i>
+					<i class="pixel pixel-3"></i>
+					<i class="pixel pixel-4"></i>
+					<i class="pixel pixel-5"></i>
+					<i class="pixel pixel-6"></i>
+					<i class="pixel pixel-7"></i>
+					<i class="pixel pixel-8"></i>
+					<i class="pixel pixel-9"></i>
+					<i class="pixel pixel-10"></i>
+					<i class="pixel pixel-11"></i>
+					<i class="pixel pixel-12"></i>
+					
+				</div>
+				<div class="pixel-row row-9">
+					<i class="pixel pixel-1"></i>
+					<i class="pixel pixel-2"></i>
+					<i class="pixel pixel-3"></i>
+					<i class="pixel pixel-4"></i>
+					<i class="pixel pixel-5"></i>
+					<i class="pixel pixel-6"></i>
+					<i class="pixel pixel-7"></i>
+					<i class="pixel pixel-8"></i>
+					<i class="pixel pixel-9"></i>
+					<i class="pixel pixel-10"></i>
+					<i class="pixel pixel-11"></i>
+					<i class="pixel pixel-12"></i>
+					
+				</div>
+				<div class="pixel-row row-10">
+					<i class="pixel pixel-4"></i>
+					<i class="pixel pixel-5"></i>
+					<i class="pixel pixel-6"></i>
+					<i class="pixel pixel-7"></i>
+					<i class="pixel pixel-8"></i>
+					<i class="pixel pixel-9"></i>
+					<i class="pixel pixel-10"></i>
+					<i class="pixel pixel-11"></i>
+					<i class="pixel pixel-12"></i>
+					
+				</div>
+			</div>
+  		</div>
+  	
+  	
+  	</div>
+  </body>
+</html>
+
+
+

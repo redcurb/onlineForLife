@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+	<link rel="stylesheet" href="css/reset-min.css" />
+	<link rel="stylesheet" href="css/libraries/jquery.mobile-1.3.2.min.css" />
+	<link rel="stylesheet" href="css/base.css" />
+
+	
+	<style>
+	.ui-page .ui-header.header-primary {
+		overflow:hidden;
+		background: #de411b !important;
+	}
+		.ui-page .ui-header.header-primary h2{
+			outline:1px solid yellow;
+			font-size:1.5em;
+			color:#fff;
+			text-shadow:none;
+			font-weight:bold;
+			
+		}
+		.header-primary a{
+			position:absolute;
+			left:10px;
+			top:20px;
+		}
+		.header-primary a#panel-left{
+				
+		}
+		.header-primary a#panel-right{
+			left:auto;
+			right:10px;
+		}
+	
+	
+	
+	.content-main{
+		
+	}
+		.content-main h3{
+			color:#383838;
+			text-align:center;
+			font-size:1.5em;
+			font-weight:bold;
+		}
+		#map {
+			width:640px;
+			height:433px;
+			margin: 0 auto;
+		}
+		.content-main p{
+			color:#000;
+			font-size:1.5em;
+			font-weight:bold;
+			width:250px;
+		}
+	</style>
+	
+</head>
+<body>
+<div data-role="page" id="page1">
+
+    <div data-role="panel" id="mypanel-left" data-display="reveal">
+		<div data-theme="b" data-role="header" class="header-secondary">
+			<h2>Prayer Feed</h2>
+			<ul class="nav-primary">
+				<li class="first nav-events"><i></i><a href="events.html">Events</a></li>
+				<li class="nav-prayers"><i></i><a href="prayers.html">My Prayers</a></li>
+				<li class="nav-settings"><i></i><a href="settings.html">Settings</a></li>
+			</ul>
+		</div>
+        
+    </div>
+    <div data-role="panel" id="mypanel-right" data-display="overlay" data-position="right">
+        panel right content
+    </div>
+    
+
+    <div data-theme="a" data-role="header" data-position="fixed" class="header-primary">
+        <h2>Prayer Feed</h2>
+        <a href="#panel-left" data-role="button" id="panel-left" data-inline="true" data-icon="bars" class="header-links">Panel left</a>
+        <a href="#panel-right" data-role="button" id="panel-right" data-inline="true" data-icon="bars" class="header-links">Panel Right</a>
+    </div>
+
+
+    <div data-role="content" class="content-main">
+    	<h3>Prayers Happening Now</h3>
+		<div id="map" style=""></div>
+		<p>Swipe left to right on an event to PRAY!</p>
+		
+		<style>
+		ul.feed{
+			margin-top:30px;
+		}
+			ul.feed li.feed-item{
+				margin-top:10px;
+				background-color:#de3d0d;
+				clear:both;
+				padding:5% 2%;
+			}
+			ul.feed li.feed-item.first{
+				margin-top:0;
+			}
+				ul.feed li.feed-item .action-text{
+					width:80%;
+					padding:0 10%;
+					
+				}
+					ul.feed li.feed-item .action-text p{
+						font-size:1.5em;
+						text-align:center;
+						padding:2% 10% 3%;
+						width:80%;
+						color:#fff;
+						text-shadow:none;
+						
+					}
+					ul.feed li.feed-item .action-text em{
+						display:block;
+						font-size:2em;
+						text-align:center;
+						padding:0% 20% 1%;
+						width:60%;
+						font-weight:bold;
+						text-shadow:none;
+						
+						color:#fff;
+					}
+				ul.feed li.feed-item ul.action-steps{
+					overflow:hidden;
+					margin-top:20px;
+				}
+					ul.feed li.feed-item ul.action-steps li{
+						margin-left:10px;
+						float:left;
+						display:block;
+						width:40px;
+						height:40px;
+						border-radius:20px;
+						line-height:40px;
+						background:#fff;
+					}
+					ul.feed li.feed-item ul.action-steps li.first{
+						margin-left:0;
+					}
+						ul.feed li.feed-item ul.action-steps li i{
+							display:block;
+							width:36px;
+							height:36px;
+							border-radius:18px;
+							line-height:36px;
+							background-color:#de3d0d;
+							left:2px;
+							top:2px;
+							position:relative;
+					}
+					ul.feed li.feed-item ul.action-steps li.step-complete i{
+						background-color:#fff;
+					}
+		</style>
+		<ul class="feed">
+			<li class="feed-item first">
+				<div class="action-text">
+					<p>Woman in California just called an OFL agent</p>
+					<em>Pray</em>
+				</div>
+				<ul class="action-steps">
+					<li class="first step-1 step-complete"><i></i></li>
+					<li class="step-2"><i></i></li>
+					<li class="step-3"><i></i></li>
+					<li class="step-4"><i></i></li>
+				</ul>
+			</li>
+			<li class="feed-item">
+				<div class="action-text">
+					<p>Woman in Miami just scheduled an appointment with a PRC</p>
+					<em>Pray</em>
+				</div>
+				<ul class="action-steps">
+					<li class="first step-1 step-complete"><i></i></li>
+					<li class="step-2 step-complete"><i></i></li>
+					<li class="step-3"><i></i></li>
+					<li class="step-4"><i></i></li>
+				</ul>
+			</li>
+			<li class="feed-item">
+				<div class="action-text">
+					<p>Woman in Portland kept her appointment</p>
+					<em>Pray</em>
+				</div>
+				<ul class="action-steps">
+					<li class="first step-1 step-complete"><i></i></li>
+					<li class="step-2 step-complete"><i></i></li>
+					<li class="step-3 step-complete"><i></i></li>
+					<li class="step-4"><i></i></li>
+				</ul>
+			</li>
+			<li class="feed-item">
+				<div class="action-text">
+					<p>Woman in Seattle chose LIFE!</p>
+					<em>Pray</em>
+				</div>
+				<ul class="action-steps">
+					<li class="first step-1 step-complete"><i></i></li>
+					<li class="step-2 step-complete"><i></i></li>
+					<li class="step-3 step-complete"><i></i></li>
+					<li class="step-4 step-complete"><i></i></li>
+				</ul>
+			</li>
+		</ul>
+    </div>
+
+    <style>
+	.footer-primary{
+		background:none;
+		border:none;
+		background:#e2e2e2 !important;
+		width:90%;
+		left:5%;
+		display:block;
+		text-align:center;
+		color:#000;
+		padding:3% 0 2%;
+	}
+		.footer-primary p{
+			text-shadow:none;
+			font-size:1.6em;
+			
+		}
+		.footer-primary em.prayer-count{
+			font-size: 3em;
+			font-weight: bold;
+			text-shadow: none;
+		}
+		.footer-primary .feed-footer-share{
+			overflow:hidden;	
+		}
+			a.feed-share{
+				clear:both;
+				display:block;
+				width:213px;
+				height:52px;
+				background:transparent url(img/btn-share.jpg) no-repeat 0 0;
+				margin:5px 10px 0 10px;
+				float:left;
+			}
+			.footer-primary ul{
+				overflow:hidden;
+				margin-top:8px;
+			}
+				.footer-primary ul li{
+					margin-left:5px;
+					float:left;
+				}
+				.footer-primary ul li.first{
+					margin-left:0;
+				}
+					.footer-primary ul li a{
+						display:block;
+						width:45px;
+						height:45px;
+						background:url(img/feed-share.jpg) no-repeat 0 0;
+				}
+					.footer-primary ul li.feed-share-twitter a{
+						background-position:-52px 0;
+					}
+					.footer-primary ul li.feed-share-sms a{
+						background-position:-105px 0;
+					}
+    </style>
+
+    <div data-theme="a" data-role="footer" data-position="fixed" class="footer-primary">
+    	<p>Today's Prayer List</p>
+    	<em class="prayer-count">4</em>
+    	<div class="feed-footer-share">
+			<a class="feed-share" data-role="none"></a>
+			<ul class="feed-share-list">
+				<li class="first feed-share-fb"><a></a></li>
+				<li class="feed-share-twitter"><a></a></li>
+				<li class="feed-share-sms"><a></a></li>
+			</ul>
+		</div>
+    </div>
+</div>
+		
+
+    
+
+		
+<script src="js/libraries/jquery-1.9.1.min.js"></script>
+<script src="js/libraries/jquery.mobile-1.3.2.min.js"></script>
+<script src="js/libraries/raphael.js"></script>
+<script src="js/plugins/color.jquery.js"></script>
+<script src="js/plugins/jquery.usmap.js"></script>
+
+<script type="text/javascript" src="js/map-demo.js"></script>
+
+<script type="text/javascript" src="js/feed.js"></script>
+
+
+
+
+
+</body>
+</html>
