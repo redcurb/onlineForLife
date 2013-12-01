@@ -3,7 +3,7 @@ onlineForLife.USMap = {
 	init: function(){
 		onlineForLife.USMap.setupMap();
 		onlineForLife.USMap.setupHandlers();
-		onlineForLife.USMap.toggleState(onlineForLife.USMap.CurrentState);
+//		onlineForLife.USMap.toggleState('CA');
 	},
 	
 	setupMap:function(){
@@ -13,24 +13,18 @@ onlineForLife.USMap = {
 				"stroke-width": 1,
 				'stroke' : '#fff'
 			},
-			'stateHoverStyles': {
+			mouseover: function(event, data) {
+				event.preventDefault();
+			},
+  			'stateHoverStyles': {
 				fill: 'teal'
 			},
 			showLabels: false,
-			'mouseoverState': {
-				'CA' : function(event, data) {
-					//return false;
-					console.log('ca is the best!');
-				}
-			}
 		});
-
 	},
 	
 	setupHandlers:function(){
-		$('#over-ca').click(function(){
-			onlineForLife.USMap.toggleState('CA');				
-		});
+
 	},
 	
 	toggleState:function(state){
@@ -45,7 +39,7 @@ onlineForLife.USMap = {
 
 };
 $(function() {
-	//onlineForLife.USMap.init();
+	onlineForLife.USMap.init();
 });
 
 
