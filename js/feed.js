@@ -28,6 +28,10 @@ onlineForLife.Feed = {
 		onlineForLife.Feed.setupScrolling();
 	},
 	
+	highlightMap:function(){
+		onlineForLife.USMap.toggleState('CA');
+	},
+	
 	setVersion:function(v){
 		var version = onlineForLife.Feed.version;
 		var paramVersion = Redcurb.Helpers.getParameterByName('ver');
@@ -74,7 +78,10 @@ onlineForLife.Feed = {
 			onlineForLife.Feed.handleRefreshStats();
 		});
 		
-
+		$( ".main-refresh .refresh-count" ).on( "click", function(){
+			onlineForLife.Feed.highlightMap();
+		});
+		
 		$( "li.feed-item .feed-content" ).draggable({ 
 			axis: "x",
 			start: function(e, ui) {
@@ -100,18 +107,24 @@ onlineForLife.Feed = {
 	handleSwipe: function($this){
 		//$this.remove();
 		var $parentLi = $this.parents('li');
-		$parentLi.addClass('swipe-complete');
+		//$parentLi.addClass('swipe-complete');
 
 		if(onlineForLife.Feed.version==2){
-			$parentLi.slideUp("slow", function() {
+			$parentLi.slideUp(50, function() {
 				$parentLi.remove();
 			});
 		}
 		else{
-			$this.slideUp("slow", function() {
-				$parentLi.remove();
-				$('ul.feed li:first').addClass('first');
+			$parentLi.find('.feed-content').animate({left:'100%'},200, function(){
+				setTimeout(function() {
+					$this.slideUp(50, function() {
+						$parentLi.remove();
+						$('ul.feed li:first').addClass('first');
+					});
+				}, 500);
 			});
+			/*
+			*/
 		}
 		
 		

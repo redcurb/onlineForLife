@@ -1,3 +1,7 @@
+body,
+.ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button{
+	1font-family:Andada;
+}
 	.ui-page .ui-header.header-primary {
 		overflow:hidden;
 		background: #fff !important;
@@ -55,6 +59,9 @@
 		#map {
 			width:640px;
 			height:433px;
+
+			width:600px;
+			height:406px;
 			margin: 0 auto;
 		}
 		.content-main p{
@@ -352,6 +359,7 @@
 		
 		.main-refresh{
 			overflow:hidden;
+			font-family:Andada;
 		}
 			.main-refresh span.refresh-count{
 				float:left;
@@ -376,11 +384,15 @@
 		}
 			ul.feed li.feed-item{
 				margin-top:10px;
+				margin-top:0;
 				clear:both;
 				position:relative;
 				min-height: 203px;
+				height: 204px;	
 				border-bottom:1px solid #313639;
 				background: #da490a;
+				background:url(../img/phone-version.png) no-repeat 0 0;
+				-1webkit-backface-visibility: hidden;
 			}
 			ul.feed li.feed-item.first{
 				margin-top:0;
@@ -433,10 +445,11 @@
 				}
 				
 				ul.feed li.feed-item .feed-content{
-					padding:5% 2%;
 					position:relative;
 					overflow:hidden;
 					background:#fff;
+					height:184px;
+					padding:10px 0;
 				}
 			
 					ul.feed li.feed-item p.action-text{
@@ -447,6 +460,15 @@
 						color:#313639;
 						text-shadow:none;
 						float:left;
+						
+						font-family:Oswald;
+						font-size:1.45em;
+						color: #313738;
+						line-height: 50px;
+						letter-spacing: 3px;
+						width:62%;
+						line-height:1.1em;
+						font-weight:300;
 					}
 					.action-step{
 						display:block;

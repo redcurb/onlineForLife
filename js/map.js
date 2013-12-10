@@ -3,7 +3,7 @@ onlineForLife.USMap = {
 	init: function(){
 		onlineForLife.USMap.setupMap();
 		onlineForLife.USMap.setupHandlers();
-//		onlineForLife.USMap.toggleState('CA');
+		onlineForLife.USMap.toggleState('CA');
 	},
 	
 	setupMap:function(){
@@ -13,8 +13,12 @@ onlineForLife.USMap = {
 				"stroke-width": 1,
 				'stroke' : '#fff'
 			},
-			mouseover: function(event, data) {
-				event.preventDefault();
+			click: function(event, data) {
+				
+			},
+  			mouseover: function(event, data) {
+				//event.preventDefault();
+				fill: 'teal'
 			},
   			'stateHoverStyles': {
 				fill: 'teal'
