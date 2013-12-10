@@ -56,7 +56,7 @@ onlineForLife.Spin = {
 		
 		setTimeout(function() {
 			onlineForLife.Spin.loadData($element);
-		}, 3000);
+		}, 2500);
 
 	},
 
