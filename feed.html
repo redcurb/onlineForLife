@@ -287,12 +287,34 @@
 
     
 
-		
+<script id="template-feed-item" type="text/x-handlebars-template">
+			<li class="feed-item  action-step-{{step}} {{liClass}}" data-id="{{itemId}}">
+				<i class="feed-prayer-confirmation">Prayed!</i>
+				<i class="feed-prayer-instruction"></i>
+  				<div class="feed-content" data-state="{{stateCode}}">
+				{{#equal step "1" }}
+					<p class="action-text body-step-1">Woman in {{stateName}} just called an OFL agent</p>
+				{{/equal}}
+				{{#equal step "2" }}
+					<p class="action-text body-step-2">Woman in {{stateName}} just scheduled an appointment with a PRC</p>
+				{{/equal}}
+				{{#equal step "3" }}
+					<p class="action-text body-step-3">Woman in {{stateName}} kept her appointment</p>
+				{{/equal}}
+					<i class="action-step step-{{step}}"></i>
+				</div>
+			</li>
+</script>
+
 <script src="js/libraries/jquery-1.9.1.min.js"></script>
 <script src="js/libraries/jquery.mobile-1.3.2.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
 <script src="js/plugins/jquery.ui.touch-punch.min.js"></script>
 <script src="js/libraries/raphael.js"></script>
+<script src="js/libraries/handlebars-v1.1.2.js"></script>
+<script src="js/libraries/handlebars.helpers.js"></script>
+
 <script src="js/plugins/color.jquery.js"></script>
 <script src="js/plugins/jquery.usmap.js"></script>
 

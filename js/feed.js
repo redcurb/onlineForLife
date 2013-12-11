@@ -1,7 +1,23 @@
 var onlineForLife = window.onlineForLife || {}; onlineForLife.Feed = onlineForLife.Feed || {};
 onlineForLife.Feed = {
 	version: 1,
+	
 	fetchCurrent: 1,
+	
+	fetchCountEach: 10,
+	
+	images:{
+		feedBg:{
+			count:10,
+			filenamePrefix: 'phone-version-',
+			filenameExt: '.jpg'
+		}
+	},
+	
+	urls:{
+		feedBg:'js/json/prayer-feed.js'
+	},
+	
 	tempData:{
 		stats:{
 			chooseLife:{
@@ -25,6 +41,7 @@ onlineForLife.Feed = {
 	init: function(){
 		onlineForLife.Feed.setVersion();
 		onlineForLife.Feed.setupHandlers();
+		onlineForLife.Feed.buildFeed();
 		onlineForLife.Feed.setupScrolling();
 	},
 	
@@ -49,6 +66,82 @@ onlineForLife.Feed = {
 		$('body').addClass('version-' + version);
 	},
 
+	setFeedBackgrounds: function(){
+		var imageData = onlineForLife.Feed.images.feedBg;
+		console.log(imageData);
+	},
+	
+	buildFeed: function(){
+		console.log('buildFeed');
+		onlineForLife.Feed.getFeedData();
+	},
+	
+	getFeedData: function(){
+		var url = onlineForLife.Feed.urls.feedBg;
+		console.log('getFeedData: ' + url);
+		$.ajax({
+			dataType: "json",
+			url: url,
+			data: {},
+			success: function(data){
+				onlineForLife.Feed.handleFeedDataSuccess(data);
+			},
+			error: function(){
+				onlineForLife.Feed.handleFeedDataError(data);
+			}
+		});		
+	},
+	
+	getStateName: function(data){
+		
+	},
+	
+	handleFeedDataSuccess: function(data){
+		console.log('handleFeedDataSuccess: ' + data);
+		var fetchCountEach = onlineForLife.Feed.fetchCountEach;
+		var prayers = data.prayers;
+		var dataItemCount = prayers.length;
+		console.log('fetchCountEach: ' + fetchCountEach);
+		console.log('dataItemCount: ' + dataItemCount);
+
+		var feedHtml = '';
+		$.each(prayers, function(index,prayer){
+			console.log(index,prayer);
+			var liClass = (index==0) ? 'first' : '';
+			var itemId = prayer.itemId;
+			var stateCode = prayer.stateCode;
+			var stateName = prayer.stateName;
+			var step = prayer.step;
+			var output = '';
+			output += 'step: ' + itemId + '\n';
+			output += 'stateCode: ' + stateCode + '\n';
+			output += 'stateName: ' + stateName + '\n';
+			output += 'step: ' + step + '\n';
+			console.log(output);
+			
+			feedHtml += onlineForLife.Feed.buildFeedItem(itemId, stateCode, step, stateName, liClass);
+		});
+
+		
+		var $feed = $('ul.feed');
+		$feed.html(feedHtml);
+	},
+	
+	handleFeedDataError: function(data){
+		console.log('handleFeedDataError: ' + data);
+		
+	},
+	
+	buildFeedItem: function(itemId, stateCode, step, stateName, liClass){
+		console.log('buildFeed');
+		var source   = $("#template-feed-item").html();
+		var template = Handlebars.compile(source);
+		var context = {itemId: itemId, stateCode: stateCode, step: step, stateName: stateName, liClass: liClass}
+		var html = template(context);
+		console.log(html);
+		return html;
+	},
+	
 	setupHandlers: function(){
 		console.log('feed setupHandlers');
 		$('#panel-left').on('click',function(){
@@ -298,7 +391,7 @@ onlineForLife.Feed = {
 $(function() {
 	onlineForLife.Feed.init();
 	//$('#panel-left').click();
-	$('#panel-right').click();
+	//$('#panel-right').click();
 });
 
 

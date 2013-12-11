@@ -460,7 +460,6 @@ body,
 						color:#313639;
 						text-shadow:none;
 						float:left;
-						
 						font-family:Oswald;
 						font-size:1.45em;
 						color: #313738;
@@ -483,9 +482,6 @@ body,
 						}
 						.action-step.step-3{
 							background-position:0 -224px;
-						}
-						.action-step.step-4{
-							background-position:0 -336px;
 						}
 					
 		.content-main p.feed-text {
