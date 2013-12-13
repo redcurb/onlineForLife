@@ -2,6 +2,8 @@ var onlineForLife = window.onlineForLife || {}; onlineForLife.Feed = onlineForLi
 onlineForLife.Feed = {
 	version: 1,
 	
+	states: ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'],
+	
 	fetchCurrent: 1,
 	
 	fetchCountEach: 10,
@@ -44,6 +46,7 @@ onlineForLife.Feed = {
 		onlineForLife.Feed.setVersion();
 		onlineForLife.Feed.setupHandlers();
 		onlineForLife.Feed.buildFeed();
+		onlineForLife.Feed.showRandomStates();
 		onlineForLife.Feed.setupScrolling();
 	},
 	
@@ -66,6 +69,24 @@ onlineForLife.Feed = {
 		onlineForLife.Feed.version = version;
 		console.log('v' + version);
 		$('body').addClass('version-' + version);
+	},
+	
+	showRandomStates: function(){
+		console.log('showRandomStates');
+		var showStatesInterval = setInterval(function(){
+			onlineForLife.USMap.toggleState(onlineForLife.Feed.getRandomState());
+		}, 3000);
+	},
+	
+	getRandomState: function(){
+		var states = onlineForLife.Feed.states;
+		var length = states.length;
+		console.log('length:',length);
+		var lower = 0;
+		var upper = length - 1;
+		var randomState = Math.floor(Math.random() * upper) + 1;
+		console.log('randomState: ',states[randomState]);
+		return states[randomState];
 	},
 
 	setFeedBackgrounds: function(){
@@ -190,7 +211,7 @@ onlineForLife.Feed = {
 			onlineForLife.Feed.handleRefreshStats();
 		});
 		
-		$( ".main-refresh .refresh-count" ).on( "click", function(){
+		$( "111.main-refresh .refresh-count" ).on( "click", function(){
 			onlineForLife.Feed.highlightMap();
 		});
 		
