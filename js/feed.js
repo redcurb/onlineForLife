@@ -71,6 +71,45 @@ onlineForLife.Feed = {
 		$('body').addClass('version-' + version);
 	},
 	
+	animateArcs: function(){
+		var $impact = $('.section-your-impact');
+		var $logo = $('.stats-logo');
+		var $called = $logo.find('.step-called');
+		var $scheduled = $logo.find('.step-scheduled');
+		var $visitedPrc = $logo.find('.step-visited-prc');
+		var $choseLife = $logo.find('.step-chose-life');
+		
+		var $textCalled = $impact.find('.impact-step.step-called span');
+		var $textScheduled = $impact.find('.impact-step.step-scheduled span');
+		var $textVisitedPrc = $impact.find('.impact-step.step-visited-prc span');
+		var $textChoseLife = $impact.find('.impact-step.step-chose-life span');
+		
+		$called.fadeIn(500, function(){
+			$textCalled.fadeIn(500);
+			
+			//step 2
+			$scheduled.fadeIn(500, function(){
+				$textScheduled.fadeIn(500);
+
+				//step 3
+				$visitedPrc.fadeIn(500, function(){
+					$textVisitedPrc.fadeIn(500);
+
+					//step 4
+					$choseLife.fadeIn(500, function(){
+						$textChoseLife.fadeIn(500);
+					});
+
+				});
+
+			});
+			
+			
+			
+		});
+		
+	},
+
 	showRandomStates: function(){
 		console.log('showRandomStates');
 		var showStatesInterval = setInterval(function(){
@@ -149,17 +188,7 @@ onlineForLife.Feed = {
 	},
 	
 	centerFeedItemText: function(){
-		navigator.notification.alert(
-			'centerFeedItemText',  // message
-			onlineForLife.Feed.nothing(),         // callback
-			'Test',            // title
-			'Done'                  // buttonName
-		);
-		
-		$('ul.feed').prepend('<li>FIRST</li>');
-		$('ul.feed li').each(function(){
-			$(this).find('p').append('<span style="color:red;"> liHeight: '+$(this).outerHeight()+'</span>');
-		});
+		$('ul.feed').html('<li>aaaa</li>');
 	},
 	
 	handleFeedDataError: function(data){
@@ -205,6 +234,12 @@ onlineForLife.Feed = {
 			$( "#mypanel-right" ).panel( "open" , {} );
 		});
 
+		$( "#mypanel-right").on( "panelopen", function( event, ui ) {
+			setTimeout(function() {
+				onlineForLife.Feed.animateArcs();
+			},500);
+		});
+		
 		$( ".feed-share" ).on( "click", function(){
 			alert($(window).width() + ' x ' + $(window).height());
 		});

@@ -210,6 +210,7 @@ body,
 		.mypanel-right span.user-count{
 			color:#707e7f;
 			font-size:0.8em;
+			visibility:hidden;
 		}
 		.mypanel-right span.total-user-count{
 			color:#d6d8d7;
@@ -248,13 +249,34 @@ body,
 		}
 			.mypanel-right .section-your-impact .impact-col{
 				width:143px;
+				min-height:10px;
 				float:left;
-				
+				display:block;
 			}
 				.mypanel-right .section-your-impact .impact-col .impact-step{
 					overflow:hidden;
 					margin-top:15px;
+					min-height: 72px;
 				}
+				.mypanel-right .section-your-impact .impact-col .impact-step.fadeIn{
+					animation: fadeIn 0.5s;
+					-webkit-animation: fadeIn 0.5s;
+				}
+					@keyframes fadeIn{
+						from {opacity:0;}
+						to {opacity:1;}
+					}
+					@-webkit-keyframes fadeIn{
+						from {opacity:0;}
+						to {opacity:1;}
+					}		
+
+
+
+					.mypanel-right .section-your-impact .impact-col .impact-step span{
+						display:none;
+					}
+
 				.mypanel-right .section-your-impact .impact-col .impact-step.first{
 					margin-top:0;
 				}
@@ -287,7 +309,36 @@ body,
 					width:181px;
 					height:179px;
 					background:#fff url(../img/logo-stats.jpg) no-repeat 0 0;
+					position:relative;
 				}
+					.mypanel-right .section-your-impact .impact-col2 .stats-logo .stats-logo-arc{
+						position:absolute;
+						display:block;
+						width:85px;
+						height:84px;
+						background:transparent url(../img/stats-sprite.png) no-repeat 0 0;
+						display:none;
+					}
+					.mypanel-right .section-your-impact .impact-col2 .stats-logo .stats-logo-arc.step-called{
+						right:0;
+						top:0;
+						background-position:-96px 0;
+					}
+					.mypanel-right .section-your-impact .impact-col2 .stats-logo .stats-logo-arc.step-scheduled{
+						right:0;
+						bottom:0;
+						background-position:-96px -95px;
+					}
+					.mypanel-right .section-your-impact .impact-col2 .stats-logo .stats-logo-arc.step-visited-prc{
+						left:0;
+						bottom:0;
+						background-position:0 -95px;
+					}
+					.mypanel-right .section-your-impact .impact-col2 .stats-logo .stats-logo-arc.step-chose-life{
+						left:0;
+						top:0;
+					}
+				
 
 			.mypanel-right .section-your-impact .impact-col3{
 				
