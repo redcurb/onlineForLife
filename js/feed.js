@@ -86,9 +86,11 @@ onlineForLife.Feed = {
 			url: url,
 			data: {},
 			success: function(data){
+				alert('success');
 				onlineForLife.Feed.handleFeedDataSuccess(data);
 			},
 			error: function(){
+				alert('error');
 				onlineForLife.Feed.handleFeedDataError(data);
 			}
 		});		
