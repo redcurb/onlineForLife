@@ -120,13 +120,11 @@ onlineForLife.Feed = {
 		
 		var $feed = $('ul.feed');
 		$feed.html(feedHtml);
-		alert(feedHtml);
-		onlineForLife.Feed.centerFeedItemText();
+//		onlineForLife.Feed.centerFeedItemText();
 	},
 	
 	centerFeedItemText: function(){
 		console.log('centerFeedItemText');
-		alert('centerFeedItemText');
 		onlineForLife.Feed.setupDraggable();
 		$('ul.feed li').each(function(index,$itemLi){
 			var $this = $(this);

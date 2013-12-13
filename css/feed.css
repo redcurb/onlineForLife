@@ -423,7 +423,7 @@ body,
 				background: #da490a;
 				background:#dd5a15 url(../img/phone-version.png?ver=1213) no-repeat 0 0;
 				-1webkit-backface-visibility: hidden;
-				visibility:hidden;
+				visibility:hidden2;
 			}
 			ul.feed li.feed-item.version-AAA1{
 				background:url(../img/phone-version-1.jpg) no-repeat 0 0;
