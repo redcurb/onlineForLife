@@ -186,15 +186,14 @@ onlineForLife.Feed = {
 		});
 
 		
-		$('#version').text('test version');
+		onlineForLife.Feed.centerFeedItemText();
 		var $feed = $('ul.feed');
 		$feed.html(feedHtml);
 		onlineForLife.Feed.setupDraggable();
-		onlineForLife.Feed.centerFeedItemText();
 	},
 	
 	centerFeedItemText: function(){
-		$('#version').text('test version');
+		$('#version').text('test version 2');
 		
 	},
 	
