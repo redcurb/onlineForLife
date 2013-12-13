@@ -125,21 +125,9 @@ onlineForLife.Feed = {
 	},
 	
 	centerFeedItemText: function(){
-		console.log('centerFeedItemText');
-		$('ul.feed li').each(function(index,$itemLi){
-			var $this = $(this);
-			var $text = $this.find('p.action-text');
-			var $icon = $this.find('.action-step');
-			var liHeight = $this.outerHeight();
-			$text.append('<span style="color:red;"> liHeight: '+liHeight+'</span>');
-			var textHeight = $text.outerHeight();
-			var borderHeight = 1;
-			var marginTop = 10;
-			var totalPadding = (liHeight - textHeight - borderHeight ) / 2;
-			var topPx = totalPadding - marginTop;
-			
-			$text.css('top',topPx+'px');
-			$this.css('visibility','visible');
+		alert('centerFeedItemText');
+		$('ul.feed li').each(function(){
+			$(this).append('<span style="color:red;"> liHeight: '+liHeight+'</span>');
 		});
 	},
 	
