@@ -86,11 +86,9 @@ onlineForLife.Feed = {
 			url: url,
 			data: {},
 			success: function(data){
-				alert('success');
 				onlineForLife.Feed.handleFeedDataSuccess(data);
 			},
 			error: function(){
-				alert('error');
 				onlineForLife.Feed.handleFeedDataError(data);
 			}
 		});		
@@ -122,11 +120,13 @@ onlineForLife.Feed = {
 		
 		var $feed = $('ul.feed');
 		$feed.html(feedHtml);
+		alert(feedHtml);
 		onlineForLife.Feed.centerFeedItemText();
 	},
 	
 	centerFeedItemText: function(){
 		console.log('centerFeedItemText');
+		alert('centerFeedItemText');
 		onlineForLife.Feed.setupDraggable();
 		$('ul.feed li').each(function(index,$itemLi){
 			var $this = $(this);
