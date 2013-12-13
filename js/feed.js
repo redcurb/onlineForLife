@@ -113,16 +113,9 @@ onlineForLife.Feed = {
 	},
 
 	showRandomStates: function(){
-		var todayCount = $( ".main-refresh .refresh-count");
 		console.log('showRandomStates');
 		var showStatesInterval = setInterval(function(){
-			var currentCount = onlineForLife.Feed.prayersToday;
-			console.log('currentCount',currentCount);
 			onlineForLife.USMap.toggleState(onlineForLife.Feed.getRandomState());
-			var newCount = currentCount + 1;
-			onlineForLife.Feed.prayersToday = newCount;
-			todayCount.text(newCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-			
 		}, 3000);
 	},
 	
