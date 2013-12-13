@@ -425,35 +425,20 @@ body,
 				-1webkit-backface-visibility: hidden;
 				visibility:hidden2;
 			}
-			ul.feed li.feed-item.version-AAA1{
+			ul.feed li.feed-item.version-1{
 				background:url(../img/phone-version-1.jpg) no-repeat 0 0;
 			}
-			ul.feed li.feed-item.version-AAA2{
+			ul.feed li.feed-item.version-2{
 				background:url(../img/phone-version-2.jpg) no-repeat 0 0;
 			}
-			ul.feed li.feed-item.version-AAA3{
+			ul.feed li.feed-item.version-3{
 				background:url(../img/phone-version-3.jpg) no-repeat 0 0;
 			}
-			ul.feed li.feed-item.version-AAA4{
+			ul.feed li.feed-item.version-4{
 				background:url(../img/phone-version-4.jpg) no-repeat 0 0;
 			}
-			ul.feed li.feed-item.version-AAA5{
+			ul.feed li.feed-item.version-5{
 				background:url(../img/phone-version-5.jpg) no-repeat 0 0;
-			}
-			ul.feed li.feed-item.version-AAA6{
-				background:url(../img/phone-version-6.jpg) no-repeat 0 0;
-			}
-			ul.feed li.feed-item.version-AAA7{
-				background:url(../img/phone-version-7.jpg) no-repeat 0 0;
-			}
-			ul.feed li.feed-item.version-AAA8{
-				background:url(../img/phone-version-8.jpg) no-repeat 0 0;
-			}
-			ul.feed li.feed-item.version-AAA9{
-				background:url(../img/phone-version-9.jpg) no-repeat 0 0;
-			}
-			ul.feed li.feed-item.version-AAA10{
-				background:url(../img/phone-version-10.jpg) no-repeat 0 0;
 			}
 			ul.feed li.feed-item.first{
 				margin-top:0;

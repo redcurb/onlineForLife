@@ -149,9 +149,9 @@ onlineForLife.Feed = {
 	},
 
 	setBgVersion: function(){
-		var bgVersion = Math.floor((Math.random()*10)+1);
 		var lower = 1;
-		var upper = 10;
+		var upper = 5;
+		var bgVersion = Math.floor(Math.random() * upper) + 1;
 		if(bgVersion==onlineForLife.Feed.feedBgVersion){
 			if(bgVersion==upper){
 				bgVersion = lower;
@@ -160,8 +160,8 @@ onlineForLife.Feed = {
 				bgVersion = bgVersion + 1;
 			}
 		}
+		onlineForLife.Feed.feedBgVersion = bgVersion;
 		return bgVersion;
-		return 0;
 	},	
 	
 	buildFeedItem: function(itemId, stateCode, step, stateName, liClass){
@@ -428,13 +428,13 @@ onlineForLife.Feed = {
 		visibleHeight = document.documentElement.clientHeight;
 		totalPx = visibleHeight + currentScroll;
 		
-		console.log(
-		'total height: ' + totalHeight + ' ' +
-		'totalPx: ' + totalPx + ' ' +
-		'visibleHeight : ' + visibleHeight + ' ' +
-		'currentScroll:' + currentScroll);
+		//console.log(
+		//'total height: ' + totalHeight + ' ' +
+		//'totalPx: ' + totalPx + ' ' +
+		//'visibleHeight : ' + visibleHeight + ' ' +
+		//'currentScroll:' + currentScroll);
 		var isAtBottom = totalHeight <= (totalPx + 200);
-		console.log('isAtBottom', isAtBottom);
+		//console.log('isAtBottom', isAtBottom);
 		return (isAtBottom)
 	},
 
