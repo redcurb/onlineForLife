@@ -92,9 +92,12 @@ body,
 		
 			ul.nav-primary{
 				margin:67px 0 0 7px;
+				overflow:hidden2;
+				background:purple;
 			}
 				ul.nav-primary li{
-					
+					float:left;
+					clear:both;
 					display:block;
 					width:410px;
 					height:186px;
@@ -112,31 +115,54 @@ body,
 						width:100%;
 						height:100%;
 						border-top:1px solid #a6afb0;
+						text-decoration:none;
 					}
 					ul.nav-primary li.selected a{
 						background:#fff;
-						border-top:none;
+						border-top-color:#fff;
 					}
 						ul.nav-primary li a i{
-							background:blue url(../img/menu-left.jpg) no-repeat 0 0;
 							display:block;
-							width:216px;
-							height:120px;
-							position:relative;
+							position: relative;
+							text-align: center;
+							margin-top: 27px;
+							font-size: 66px;
+							color:#313738;
+							left:-10px;
+						}
+						ul.nav-primary li.selected a i{
+							color: #c85129;
 						}
 						ul.nav-primary li.nav-events a i{
-							top:30px;
-							left:85px;
-						}
-						ul.nav-primary li.nav-prayers a i{
-							top:30px;
-							left:85px;
-							background-position:0 -120px;
+							font-size: 60px;
+							left: -8px;
+							top: 10px;
+							margin: 26px 0 8px;
+							text-shadow: 0 1px 0 #000;
 						}
 						ul.nav-primary li.nav-settings a i{
-							top:30px;
-							left:85px;
-							background-position:0 -240px;
+							font-size: 64px;
+							left: -9px;
+							top: 10px;
+							margin: 25px 0 11px;
+							text-shadow: 0 1px 0 #000;
+						}
+						ul.nav-primary li a span{
+							font-family: Oswald;
+							font-weight: 300;
+							text-transform: uppercase;
+							color: #fff;
+							width: 100%;
+							display: block;
+							text-align: center;
+							font-size: 0.72em;
+							letter-spacing: 0.14em;
+							position: relative;
+							left: -9px;
+							top: 2px;
+						}
+						ul.nav-primary li.selected a span{
+							color: #707e80;
 						}
 	
 	.mypanel-right{
@@ -373,9 +399,12 @@ body,
 				font-size:1.1em;
 			}
 			.main-refresh i.fa{
-				opacity:0.5;
 				float:right;
 				margin-right:32px;
+				color:#0f0;
+			}
+			.main-refresh i.fa:hover{
+				color:red;
 			}
 		ul.feed{
 			margin-top:30px;

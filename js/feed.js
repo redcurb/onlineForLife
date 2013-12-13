@@ -106,25 +106,19 @@ onlineForLife.Feed = {
 
 		var feedHtml = '';
 		$.each(prayers, function(index,prayer){
-			console.log(index,prayer);
 			var liClass = (index==0) ? 'first' : '';
 			var itemId = prayer.itemId;
 			var stateCode = prayer.stateCode;
 			var stateName = prayer.stateName;
 			var step = prayer.step;
 			var output = '';
-			output += 'step: ' + itemId + '\n';
-			output += 'stateCode: ' + stateCode + '\n';
-			output += 'stateName: ' + stateName + '\n';
-			output += 'step: ' + step + '\n';
-			console.log(output);
-			
 			feedHtml += onlineForLife.Feed.buildFeedItem(itemId, stateCode, step, stateName, liClass);
 		});
 
 		
 		var $feed = $('ul.feed');
 		$feed.html(feedHtml);
+		onlineForLife.Feed.setupDraggable();
 	},
 	
 	handleFeedDataError: function(data){
@@ -133,12 +127,10 @@ onlineForLife.Feed = {
 	},
 	
 	buildFeedItem: function(itemId, stateCode, step, stateName, liClass){
-		console.log('buildFeed');
 		var source   = $("#template-feed-item").html();
 		var template = Handlebars.compile(source);
 		var context = {itemId: itemId, stateCode: stateCode, step: step, stateName: stateName, liClass: liClass}
 		var html = template(context);
-		console.log(html);
 		return html;
 	},
 	
@@ -175,6 +167,9 @@ onlineForLife.Feed = {
 			onlineForLife.Feed.highlightMap();
 		});
 		
+	},
+
+	setupDraggable: function(){
 		$( "li.feed-item .feed-content" ).draggable({ 
 			axis: "x",
 			start: function(e, ui) {
