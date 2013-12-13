@@ -187,6 +187,21 @@ onlineForLife.Feed = {
 	
 	centerFeedItemText: function(){
 		$('#version').text('test version 3');
+		$('ul.feed li').each(function(index,$itemLi){
+			var $this = $(this);
+			var $text = $this.find('p.action-text');
+			var $icon = $this.find('.action-step');
+			var liHeight = $this.outerHeight();
+			$text.append('<span>liHeight: '+liHeight+'</span>');
+			
+			var textHeight = $text.outerHeight();
+			var borderHeight = 1;
+			var marginTop = 10;
+			var totalPadding = (liHeight - textHeight - borderHeight ) / 2;
+			var topPx = totalPadding - marginTop;
+			
+			$text.css('top',topPx+'px');
+		});
 	},
 	
 	handleFeedDataError: function(data){
