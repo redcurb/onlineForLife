@@ -449,7 +449,7 @@ onlineForLife.Feed = {
 };
 $(function() {
 	onlineForLife.Feed.init();
-	//$('#panel-left').click();
+	$('#panel-left').click();
 	//$('#panel-right').click();
 });
 
