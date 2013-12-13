@@ -192,7 +192,6 @@ onlineForLife.Feed = {
 			var $text = $this.find('p.action-text');
 			var $icon = $this.find('.action-step');
 			var liHeight = $this.outerHeight();
-			$text.append('<span>liHeight: '+liHeight+'</span>');
 			
 			var textHeight = $text.outerHeight();
 			var borderHeight = 1;
@@ -200,6 +199,8 @@ onlineForLife.Feed = {
 			var totalPadding = (liHeight - textHeight - borderHeight ) / 2;
 			var topPx = totalPadding - marginTop;
 			
+			$text.append('<span style="color:red;">liHeight: '+liHeight+'</span>');
+			$text.append('<span style="color:blue;">topPx: '+topPx+'</span>');
 			$text.css('top',topPx+'px');
 		});
 	},
