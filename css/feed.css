@@ -401,32 +401,80 @@ body,
 			.main-refresh i.fa{
 				float:right;
 				margin-right:32px;
-				color:#0f0;
+				color:#d5d8d7;
 			}
 			.main-refresh i.fa:hover{
-				color:red;
+				color:#313738;
 			}
 		ul.feed{
 			margin-top:30px;
 			margin-left:-5%;
 			width:110%;
 		}
+		
 			ul.feed li.feed-item{
 				margin-top:10px;
 				margin-top:0;
 				clear:both;
 				position:relative;
-				min-height: 203px;
-				height: 204px;	
-				border-bottom:1px solid #313639;
+				height: 201px;
+				min-width:640px;
+				border-bottom:1px solid #d5d8d7;
 				background: #da490a;
-				background:url(../img/phone-version.png) no-repeat 0 0;
+				background:#dd5a15 url(../img/phone-version.png?ver=1213) no-repeat 0 0;
 				-1webkit-backface-visibility: hidden;
+				visibility:hidden;
+			}
+			ul.feed li.feed-item.version-AAA1{
+				background:url(../img/phone-version-1.jpg) no-repeat 0 0;
+			}
+			ul.feed li.feed-item.version-AAA2{
+				background:url(../img/phone-version-2.jpg) no-repeat 0 0;
+			}
+			ul.feed li.feed-item.version-AAA3{
+				background:url(../img/phone-version-3.jpg) no-repeat 0 0;
+			}
+			ul.feed li.feed-item.version-AAA4{
+				background:url(../img/phone-version-4.jpg) no-repeat 0 0;
+			}
+			ul.feed li.feed-item.version-AAA5{
+				background:url(../img/phone-version-5.jpg) no-repeat 0 0;
+			}
+			ul.feed li.feed-item.version-AAA6{
+				background:url(../img/phone-version-6.jpg) no-repeat 0 0;
+			}
+			ul.feed li.feed-item.version-AAA7{
+				background:url(../img/phone-version-7.jpg) no-repeat 0 0;
+			}
+			ul.feed li.feed-item.version-AAA8{
+				background:url(../img/phone-version-8.jpg) no-repeat 0 0;
+			}
+			ul.feed li.feed-item.version-AAA9{
+				background:url(../img/phone-version-9.jpg) no-repeat 0 0;
+			}
+			ul.feed li.feed-item.version-AAA10{
+				background:url(../img/phone-version-10.jpg) no-repeat 0 0;
 			}
 			ul.feed li.feed-item.first{
 				margin-top:0;
-				border-top:1px solid #313639;
+				border-top:1px solid #d5d8d7;
 			}
+
+			ul.feed li.feed-item.hideFeedItem{
+				animation: hideFeedItem 0.7s;
+				-webkit-animation: hideFeedItem 0.7s;
+			}
+				@keyframes hideFeedItem{
+					from {height:201px;}
+					to {height:0;}
+				}
+				@-webkit-keyframes hideFeedItem{
+					from {height:201px;}
+					to {height:0;}
+				}		
+
+
+
 			ul.feed li.feed-item.fetch{
 				display:none;
 			}
@@ -437,15 +485,18 @@ body,
 					width: 60px;
 					height:158px;
 					background:transparent url(../img/pray-then-swipe.jpg) no-repeat 0 0;
-					
+					display:none;
 				}
 				ul.feed li.feed-item .feed-prayer-confirmation{
-					left: 200px;
+					left: 203px;
 					position: absolute;
-					top: 54px;
-					width: 100px;
-					font-size: 2em;
+					top: 59px;
+					min-width: 200px;
+					font-size: 2.9em;
 					color: white;
+										
+					font-family: Andada;
+					font-style: normal;
 				}
 				ul.feed li.feed-item.swipe-complete .feed-prayer-confirmation{
 					width:100%;	
@@ -477,10 +528,37 @@ body,
 					position:relative;
 					overflow:hidden;
 					background:#fff;
-					height:184px;
+					height:181px;
 					padding:10px 0;
+					opacity:1;
 				}
-			
+				
+				ul.feed li.feed-item .feed-content.swipeLeftToRight{
+					animation: swipeLeftToRight 1s;
+					-webkit-animation: swipeLeftToRight 1s;
+				}
+					@keyframes swipeLeftToRight{
+						from {left:0;}
+						to {left:100%;}
+					}
+					@-webkit-keyframes swipeLeftToRight{
+						from {left:0;}
+						to {left:100%;}
+					}		
+
+				ul.feed li.feed-item .feed-content.swipeRightToLeft{
+					animation: swipeRightToLeft 1s;
+					-webkit-animation: swipeRightToLeft 1s;
+				}
+					@keyframes swipeRightToLeft{
+						from {left:0;}
+						to {left:-100%;}
+					}
+					@-webkit-keyframes swipeRightToLeft{
+						from {left:0;}
+						to {left:-100%;}
+					}		
+
 					ul.feed li.feed-item p.action-text{
 						padding:0 10%;
 						font-size:1.3em;
@@ -490,13 +568,14 @@ body,
 						text-shadow:none;
 						float:left;
 						font-family:Oswald;
-						font-size:1.45em;
+						font-size:1.3em;
 						color: #313738;
 						line-height: 50px;
 						letter-spacing: 3px;
 						width:62%;
 						line-height:1.1em;
 						font-weight:300;
+						position:relative;
 					}
 					.action-step{
 						display:block;
@@ -504,7 +583,9 @@ body,
 						height:112px;
 						background:url(../img/feed-steps.jpg) no-repeat 0 0;
 						float:right;
-						margin-right:25px;
+						right: 25px;
+						position: relative;
+						top: 35px;
 					}
 						.action-step.step-2{
 							background-position:0 -112px;
@@ -604,6 +685,7 @@ body,
  
 .ui-panel.ui-panel-position-right {
     width: 21em;
+    text-shadow:2px 2px 2px #000;
 }
  
 .ui-panel.ui-panel-closed {
@@ -676,3 +758,4 @@ body,
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 }
+

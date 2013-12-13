@@ -9,8 +9,8 @@ onlineForLife.USMap = {
 	setupMap:function(){
 		$('#map').usmap({
 			'stateStyles': {
-				fill: '#aaa', 
-				"stroke-width": 1,
+				fill: '#EAEDEC', 
+				"stroke-width": 2,
 				'stroke' : '#fff'
 			},
 			click: function(event, data) {
@@ -18,10 +18,10 @@ onlineForLife.USMap = {
 			},
   			mouseover: function(event, data) {
 				//event.preventDefault();
-				fill: 'teal'
+				fill: '#D34923'
 			},
   			'stateHoverStyles': {
-				fill: 'teal'
+				fill: '#D34923'
 			},
 			showLabels: false,
 		});

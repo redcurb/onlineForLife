@@ -6,6 +6,8 @@ onlineForLife.Feed = {
 	
 	fetchCountEach: 10,
 	
+	feedBgVersion:1,
+	
 	images:{
 		feedBg:{
 			count:10,
@@ -118,18 +120,54 @@ onlineForLife.Feed = {
 		
 		var $feed = $('ul.feed');
 		$feed.html(feedHtml);
+		onlineForLife.Feed.centerFeedItemText();
+	},
+	
+	centerFeedItemText: function(){
+		console.log('centerFeedItemText');
 		onlineForLife.Feed.setupDraggable();
+		$('ul.feed li').each(function(index,$itemLi){
+			var $this = $(this);
+			var $text = $this.find('p.action-text');
+			var $icon = $this.find('.action-step');
+			var liHeight = $this.outerHeight();
+			var textHeight = $text.outerHeight();
+			var borderHeight = 1;
+			var marginTop = 10;
+			var totalPadding = (liHeight - textHeight - borderHeight ) / 2;
+			var topPx = totalPadding - marginTop;
+			
+			$text.css('top',topPx+'px');
+			$this.css('visibility','visible');
+		});
 	},
 	
 	handleFeedDataError: function(data){
 		console.log('handleFeedDataError: ' + data);
 		
 	},
+
+	setBgVersion: function(){
+		var bgVersion = Math.floor((Math.random()*10)+1);
+		var lower = 1;
+		var upper = 10;
+		if(bgVersion==onlineForLife.Feed.feedBgVersion){
+			if(bgVersion==upper){
+				bgVersion = lower;
+			}
+			else{
+				bgVersion = bgVersion + 1;
+			}
+		}
+		return bgVersion;
+		return 0;
+	},	
 	
 	buildFeedItem: function(itemId, stateCode, step, stateName, liClass){
 		var source   = $("#template-feed-item").html();
 		var template = Handlebars.compile(source);
-		var context = {itemId: itemId, stateCode: stateCode, step: step, stateName: stateName, liClass: liClass}
+		var BgVersion = onlineForLife.Feed.setBgVersion;
+		var context = {itemId: itemId, stateCode: stateCode, step: step, stateName: stateName, liClass: liClass, BgVersion: BgVersion}
 		var html = template(context);
 		return html;
 	},
@@ -170,17 +208,42 @@ onlineForLife.Feed = {
 	},
 
 	setupDraggable: function(){
-		$( "li.feed-item .feed-content" ).draggable({ 
+		$("li.feed-item .feed-content").swipe( {
+			//Generic swipe handler for all directions
+			swipeLeft:function(event, direction, distance, duration, fingerCount) {
+				onlineForLife.Feed.handleSwipe($(this),direction);
+			},
+			swipeRight:function(event, direction, distance, duration, fingerCount) {
+				onlineForLife.Feed.handleSwipe($(this),direction);
+			},
+			//Default is 75px, set to 0 for demo so any distance triggers swipe
+			threshold:150
+		});
+		$( "2li.feed-item .feed-content" ).draggable({ 
 			axis: "x",
 			start: function(e, ui) {
-				y1 = ui.position.top;
-				x1 = ui.position.left;
+				var y1 = ui.position.top;
+				var x1 = ui.position.left;
 				console.log(y1 + ' - ' + x1);
+				console.log('START: ' + y1 + ' - ' + x1);
+				onlineForLife.Feed.DragXStart = x1;
 			},
 			distance: 50,
 			revert:false,
 			stop: function(e, ui) {
-				onlineForLife.Feed.handleSwipe($(this));
+				var y1 = ui.position.top;
+				var x1 = ui.position.left;
+				console.log('STOP: ' + y1 + ' - ' + x1);
+				onlineForLife.Feed.DragXEnd = x1;
+				console.log(onlineForLife.Feed.DragXStart + ' - ' + onlineForLife.Feed.DragXEnd);
+				if(x1>0){
+					var swipeDir = 'LeftToRight';
+				}
+				else{
+					var swipeDir = 'RightToLeft';
+				}
+				
+				onlineForLife.Feed.handleSwipe($(this),swipeDir);
 			}
 			/*
 			start: function( event, ui ) {
@@ -192,32 +255,33 @@ onlineForLife.Feed = {
 
 	},
 
-	handleSwipe: function($this){
+	handleSwipe: function($this, swipeDir){
 		//$this.remove();
 		var $parentLi = $this.parents('li');
 		//$parentLi.addClass('swipe-complete');
-
-		if(onlineForLife.Feed.version==2){
-			$parentLi.slideUp(50, function() {
-				$parentLi.remove();
-			});
+		console.log('handleSwipe: ' + swipeDir);
+		if(swipeDir=='right'){
+			posLeft = '100%';
+			var animClass = 'swipeLeftToRight';
 		}
 		else{
-			$parentLi.find('.feed-content').animate({left:'100%'},200, function(){
-				setTimeout(function() {
-					$this.slideUp(50, function() {
-						$parentLi.remove();
-						$('ul.feed li:first').addClass('first');
-					});
-				}, 500);
-			});
-			/*
-			*/
+			posLeft = '-100%';
+			var animClass = 'swipeRightToLeft';
 		}
-		
-		
-		
-		
+//		$parentLi.find('.feed-content').addClass(animClass);
+				
+		$parentLi.find('.feed-content').animate({left:posLeft},200,function(){
+				
+				
+			setTimeout(function(){
+				$parentLi.addClass('hideFeedItem');
+				setTimeout(function() {
+					$parentLi.remove();
+					$('ul.feed li:first').addClass('first');
+				},700);
+				
+			}, 500);
+		});
 		
 		var state = $this.data('state');
 		console.log(state);
