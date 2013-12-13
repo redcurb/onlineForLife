@@ -120,8 +120,8 @@ onlineForLife.Feed = {
 		
 		var $feed = $('ul.feed');
 		$feed.html(feedHtml);
-//		onlineForLife.Feed.centerFeedItemText();
 		onlineForLife.Feed.setupDraggable();
+		onlineForLife.Feed.centerFeedItemText();
 	},
 	
 	centerFeedItemText: function(){
@@ -131,6 +131,7 @@ onlineForLife.Feed = {
 			var $text = $this.find('p.action-text');
 			var $icon = $this.find('.action-step');
 			var liHeight = $this.outerHeight();
+			$text.append('<span style="color:red;"> liHeight: '+liHeight+'</span>');
 			var textHeight = $text.outerHeight();
 			var borderHeight = 1;
 			var marginTop = 10;
