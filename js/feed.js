@@ -127,7 +127,7 @@ onlineForLife.Feed = {
 	centerFeedItemText: function(){
 		alert('centerFeedItemText');
 		$('ul.feed li').each(function(){
-			$(this).append('<span style="color:red;"> liHeight: '+liHeight+'</span>');
+			$(this).find('p').append('<span style="color:red;"> liHeight: '+$(this).outerHeight()+'</span>');
 		});
 	},
 	
