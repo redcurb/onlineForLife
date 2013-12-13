@@ -144,8 +144,18 @@ onlineForLife.Feed = {
 		onlineForLife.Feed.centerFeedItemText();
 	},
 	
+	nothing: function(){
+		return false;
+	},
+	
 	centerFeedItemText: function(){
-		navigator.notification.alert('centerFeedItemText');
+		navigator.notification.alert(
+			'centerFeedItemText',  // message
+			onlineForLife.Feed.nothing(),         // callback
+			'Test',            // title
+			'Done'                  // buttonName
+		);
+		
 		$('ul.feed').prepend('<li>FIRST</li>');
 		$('ul.feed li').each(function(){
 			$(this).find('p').append('<span style="color:red;"> liHeight: '+$(this).outerHeight()+'</span>');
