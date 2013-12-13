@@ -81,11 +81,10 @@ onlineForLife.Feed = {
 	getRandomState: function(){
 		var states = onlineForLife.Feed.states;
 		var length = states.length;
-		console.log('length:',length);
 		var lower = 0;
 		var upper = length - 1;
 		var randomState = Math.floor(Math.random() * upper) + 1;
-		console.log('randomState: ',states[randomState]);
+		//console.log('randomState: ',states[randomState]);
 		return states[randomState];
 	},
 
@@ -146,7 +145,8 @@ onlineForLife.Feed = {
 	},
 	
 	centerFeedItemText: function(){
-		alert('centerFeedItemText');
+		navigator.notification.alert('centerFeedItemText');
+		$('ul.feed').prepend('<li>FIRST</li>');
 		$('ul.feed li').each(function(){
 			$(this).find('p').append('<span style="color:red;"> liHeight: '+$(this).outerHeight()+'</span>');
 		});
