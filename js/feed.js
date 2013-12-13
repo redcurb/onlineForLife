@@ -199,8 +199,8 @@ onlineForLife.Feed = {
 			var totalPadding = (liHeight - textHeight - borderHeight ) / 2;
 			var topPx = totalPadding - marginTop;
 			
-			$text.append('<span style="color:red;">liHeight: '+liHeight+'</span>');
-			$text.append('<span style="color:blue;">topPx: '+topPx+'</span>');
+			//$text.append('<span style="color:red;">liHeight: '+liHeight+'</span>');
+			//$text.append('<span style="color:blue;">topPx: '+topPx+'</span>');
 			$text.css('top',topPx+'px');
 		});
 	},
