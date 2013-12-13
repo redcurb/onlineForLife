@@ -86,7 +86,7 @@ body,
 				display:block;
 				width:217px;
 				height:189px;
-				background:blue url(../img/logo-ofl-panel.jpg) no-repeat 0 0;
+				background:url(../img/logo-ofl-panel.jpg) no-repeat 0 0;
 				margin:41px 0 0 92px;
 			}
 		
