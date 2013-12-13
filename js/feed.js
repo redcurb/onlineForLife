@@ -197,7 +197,8 @@ onlineForLife.Feed = {
 	},
 	
 	centerFeedItemText: function(){
-		$('ul.feed').html('<li>aaaa</li>');
+		$('#version').text('test version');
+		
 	},
 	
 	handleFeedDataError: function(data){
