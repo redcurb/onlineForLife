@@ -41,6 +41,13 @@ body,
 			background:transparent url(../img/320/btn-header.jpg) no-repeat 0 -14px;
 		}
 	
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+	.ui-header-fixed .ui-btn-left,
+	.header-primary a#panel-left{
+		background-image:url(../img/btn-header.jpg);
+		top:20px;
+	}
+}
 	
 	
 	.content-main{
