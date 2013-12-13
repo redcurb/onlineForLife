@@ -2,6 +2,8 @@ var onlineForLife = window.onlineForLife || {}; onlineForLife.Feed = onlineForLi
 onlineForLife.Feed = {
 	version: 1,
 	
+	prayersToday: 93432,
+	
 	states: ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'],
 	
 	fetchCurrent: 1,
@@ -111,9 +113,16 @@ onlineForLife.Feed = {
 	},
 
 	showRandomStates: function(){
+		var todayCount = $( ".main-refresh .refresh-count");
 		console.log('showRandomStates');
 		var showStatesInterval = setInterval(function(){
+			var currentCount = onlineForLife.Feed.prayersToday;
+			console.log('currentCount',currentCount);
 			onlineForLife.USMap.toggleState(onlineForLife.Feed.getRandomState());
+			var newCount = currentCount + 1;
+			onlineForLife.Feed.prayersToday = newCount;
+			todayCount.text(newCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+			
 		}, 3000);
 	},
 	
@@ -256,9 +265,6 @@ onlineForLife.Feed = {
 			onlineForLife.Feed.handleRefreshStats();
 		});
 		
-		$( "111.main-refresh .refresh-count" ).on( "click", function(){
-			onlineForLife.Feed.highlightMap();
-		});
 		
 	},
 
