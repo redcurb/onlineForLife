@@ -77,6 +77,16 @@ onlineForLife.Feed = {
 		$('body').addClass('version-' + version);
 	},
 	
+	hideArcs: function(){
+		var $impact = $('.section-your-impact');
+		var $logo = $('.stats-logo');
+		var $arcs = $logo.find('.stats-logo-arc');
+		var $textSpans = $impact.find('.impact-step span');
+		
+		$arcs.hide();
+		$textSpans.hide();
+	},
+	
 	animateArcs: function(){
 		var $impact = $('.section-your-impact');
 		var $logo = $('.stats-logo');
@@ -90,20 +100,20 @@ onlineForLife.Feed = {
 		var $textVisitedPrc = $impact.find('.impact-step.step-visited-prc span');
 		var $textChoseLife = $impact.find('.impact-step.step-chose-life span');
 		
-		$called.fadeIn(500, function(){
-			$textCalled.fadeIn(500);
+		$called.fadeIn(150, function(){
+			$textCalled.fadeIn(150);
 			
 			//step 2
-			$scheduled.fadeIn(500, function(){
-				$textScheduled.fadeIn(500);
+			$scheduled.fadeIn(150, function(){
+				$textScheduled.fadeIn(150);
 
 				//step 3
-				$visitedPrc.fadeIn(500, function(){
-					$textVisitedPrc.fadeIn(500);
+				$visitedPrc.fadeIn(150, function(){
+					$textVisitedPrc.fadeIn(150);
 
 					//step 4
-					$choseLife.fadeIn(500, function(){
-						$textChoseLife.fadeIn(500);
+					$choseLife.fadeIn(150, function(){
+						$textChoseLife.fadeIn(150);
 					});
 
 				});
@@ -261,6 +271,10 @@ onlineForLife.Feed = {
 			},500);
 		});
 		
+		$( "#mypanel-right").on( "panelclose", function( event, ui ) {
+			onlineForLife.Feed.hideArcs();
+		});
+		
 		$( ".feed-share" ).on( "click", function(){
 			alert($(window).width() + ' x ' + $(window).height());
 		});
@@ -350,15 +364,12 @@ onlineForLife.Feed = {
 //		$parentLi.find('.feed-content').addClass(animClass);
 				
 		$parentLi.find('.feed-content').animate({left:posLeft},200,function(){
-				
-				
 			setTimeout(function(){
 				$parentLi.addClass('hideFeedItem');
 				setTimeout(function() {
 					$parentLi.remove();
 					$('ul.feed li:first').addClass('first');
 				},700);
-				
 			}, 500);
 		});
 		
