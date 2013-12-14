@@ -657,7 +657,8 @@ body,
 	.footer-primary{
 		background:none;
 		border:none;
-		background:#e2e2e2 !important;
+		background:#D3C148 !important;
+		opacity:96%;
 		width:90%;
 		left:5%;
 		display:block;
