@@ -253,28 +253,6 @@ onlineForLife.Feed = {
 	},
 	
 	setupHandlers: function(){
-		console.log('feed setupHandlers');
-		$('#panel-left').on('click',function(){
-			//alert('panel-left');
-			$( "#mypanel-left" ).panel( "open" , {
-					display:'reveal'
-			} );
-		});
-		$('#panel-right').on('click',function(){
-			//alert('panel-right');
-			$( "#mypanel-right" ).panel( "open" , {} );
-		});
-
-		$( "#mypanel-right").on( "panelopen", function( event, ui ) {
-			setTimeout(function() {
-				onlineForLife.Feed.animateArcs();
-			},500);
-		});
-		
-		$( "#mypanel-right").on( "panelclose", function( event, ui ) {
-			onlineForLife.Feed.hideArcs();
-		});
-		
 		$( ".feed-share" ).on( "click", function(){
 			alert($(window).width() + ' x ' + $(window).height());
 		});

@@ -12,9 +12,7 @@
 
 	<link rel="stylesheet" href="css/base.css?ver=129.11" />
 	<link rel="stylesheet" href="css/panels.css?ver=129.11" />
-	<link rel="stylesheet" href="css/footer.css?ver=129.11" />
-	
-	<link rel="stylesheet" href="css/feed.css?ver=129.11" />
+	<link rel="stylesheet" href="css/events.css?ver=129.11" />
 
 	
 </head>
@@ -24,13 +22,13 @@
     <div data-role="panel" id="mypanel-left" class="mypanel-left" data-display="reveal" data-position-fixed="true">
 		<h2 class="logo"></h2>
 		<ul class="nav-primary">
-			<li class="first nav-prayers selected">
+			<li class="first nav-prayers">
 				<a href="prayers.html" data-ajax="false">
 					<i class="fa fa-globe"></i>
 					<span>Prayer Feed</span>
 				</a>
 			</li>
-			<li class="nav-events">
+			<li class="nav-events selected">
 				<a href="events.html" data-ajax="false">
 					<i class="fa fa-calendar"></i>
 					<span>Events</span>
@@ -126,55 +124,43 @@
         <a href="#panel-left" data-role="none" id="panel-left" data-inline="true" class="header-links"></a>
         <a href="#panel-right" data-role="none" id="panel-right" data-inline="true" class="header-links"></a>
     </div>
-
-
     <div data-role="content" class="content-main">
-		<div id="map" style=""></div>
-		
-		<div class="main-refresh">
-			<span class="refresh-count">93,432</span>
-			<span class="refresh-label">Prayers Today</span>
-			<i class="fa fa-refresh fa-2x"></i>
-		</div>
-		
-		<ul class="feed"></ul>
-		<p class="feed-text feed-refresh"><i class="fa fa-refresh fa-spin"></i><span>Loading feed items</span></p>
-		<p class="feed-text no-more-items">No additional feed items</p>
+    	<h2 class="icon-events">
+    		<i class="fa fa-calendar fa-5x"></i>
+    		<p>Events</p>
+    	</h2>
+    	<ul class="event-calendar">
+    		<li class="first item-init" data-event-id="1">
+    			<div class="event-title">
+    				<p class="event-description">Group meetup about the latest issues title of event</p>
+    				<i class="fa fa-chevron-down"></i>
+    				<i class="fa fa-chevron-right"></i>
+    			</div>
+    			<div class="event-details">
+    				<h3>January 13th, 2014</h3>
+    				<h6>7:00 - 8:30 PM</h6>
+    				<h4>Church Name as Location</h4>
+    				<p>Additional details would go right here.</p>
+    			</div>
+    		</li>
+    		<li class="item-init" data-event-id="2">
+    			<div class="event-title">
+    				<p class="event-description">Group meetup about the latest issues title of event</p>
+    				<i class="fa fa-chevron-down"></i>
+    				<i class="fa fa-chevron-right"></i>
+    			</div>
+    			<div class="event-details">
+    				<h3>January 13th, 2014</h3>
+    				<h6>7:00 - 8:30 PM</h6>
+    				<h4>Church Name as Location</h4>
+    				<p>Additional details would go right here.</p>
+    			</div>
+    		</li>
+    	</ul>
+    
+    
     </div>
-<!--
-    <div data-theme="a" data-role="footer" data-position="fixed" class="footer-primary">
-    	<p>Today's Prayer List</p>
-    	<em class="prayer-count">4</em>
-    	<div class="feed-footer-share">
-			<a class="feed-share" data-role="none"></a>
-			<ul class="feed-share-list">
-				<li class="first feed-share-fb"><a></a></li>
-				<li class="feed-share-twitter"><a></a></li>
-				<li class="feed-share-sms"><a></a></li>
-			</ul>
-		</div>
-    </div>
-    -->
 </div>
-
-<script id="template-feed-item" type="text/x-handlebars-template">
-			<li class="feed-item  action-step-{{step}} {{liClass}} version-{{BgVersion}}" data-id="{{itemId}}">
-				<i class="feed-prayer-confirmation">Prayed!</i>
-				<i class="feed-prayer-instruction"></i>
-  				<div class="feed-content" data-state="{{stateCode}}">
-				{{#equal step "1" }}
-					<p class="action-text body-step-1">Woman in {{stateName}} just called an OFL agent</p>
-				{{/equal}}
-				{{#equal step "2" }}
-					<p class="action-text body-step-2">Woman in {{stateName}} just scheduled an appointment with a PRC</p>
-				{{/equal}}
-				{{#equal step "3" }}
-					<p class="action-text body-step-3">Woman in {{stateName}} kept her appointment</p>
-				{{/equal}}
-					<i class="action-step step-{{step}}"></i>
-				</div>
-			</li>
-</script>
 
 <script src="js/libraries/jquery-1.9.1.min.js"></script>
 <script src="js/libraries/jquery.mobile-1.3.2.min.js"></script>
@@ -183,16 +169,11 @@
 <script src="js/plugins/jquery.ui.touch-punch.min.js"></script>
 <script src="js/plugins/jquery.touchSwipe.min.js"></script>
 
-<script src="js/libraries/raphael.js"></script>
 <script src="js/libraries/handlebars-v1.1.2.js"></script>
 <script src="js/libraries/handlebars.helpers.js"></script>
 
-<script src="js/plugins/color.jquery.js"></script>
-<script src="js/plugins/jquery.usmap.js"></script>
-
 <script type="text/javascript" src="js/helpers.js?ver=129.11"></script>
-<script type="text/javascript" src="js/map.js?ver=129.11"></script>
 <script type="text/javascript" src="js/panels.js?ver=129.11"></script>
-<script type="text/javascript" src="js/feed.js?ver=129.11"></script>
+<script type="text/javascript" src="js/events.js?ver=129.11"></script>
 </body>
 </html>
