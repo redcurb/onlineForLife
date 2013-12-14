@@ -35,11 +35,11 @@ onlineForLife.USMap = {
 		var todayCount = $( ".main-refresh .refresh-count");
 		var currentCount = onlineForLife.Feed.prayersToday;
 		var newCount = currentCount + 1;
-		console.log('currentCount',currentCount);
+		//console.log('currentCount',currentCount);
 		onlineForLife.Feed.prayersToday = newCount;
 
 
-		console.log('toggleState: ' + state);
+		//console.log('toggleState: ' + state);
 		$('#map').usmap('trigger', state, 'mouseover');
 		todayCount.text(newCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		setTimeout(function() {

@@ -2,6 +2,10 @@ var onlineForLife = window.onlineForLife || {}; onlineForLife.Feed = onlineForLi
 onlineForLife.Feed = {
 	version: 1,
 	
+	tutorial:1,
+	
+	tutorialMax:3,
+	
 	prayersToday: 93432,
 	
 	states: ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'],
@@ -182,6 +186,9 @@ onlineForLife.Feed = {
 		var $feed = $('ul.feed');
 		$feed.html(feedHtml);
 		onlineForLife.Feed.centerFeedItemText();
+		setTimeout(function() {
+			onlineForLife.Feed.animatePraySwipe();
+		},5000);
 		onlineForLife.Feed.setupDraggable();
 	},
 	
@@ -263,7 +270,7 @@ onlineForLife.Feed = {
 		});
 
 		$( ".main-refresh .fa-refresh" ).on( "click", function(){
-			onlineForLife.Feed.handleRefreshMain();
+			onlineForLife.Feed.animatePraySwipe();
 		});
 
 		$( ".mypanel-right .fa-refresh" ).on( "click", function(){
@@ -275,6 +282,7 @@ onlineForLife.Feed = {
 
 	setupDraggable: function(){
 		$("li.feed-item .feed-content").swipe( {
+			onlineForLife.Feed.tutorial = onlineForLife.Feed.tutorialMax;
 			//Generic swipe handler for all directions
 			swipeLeft:function(event, direction, distance, duration, fingerCount) {
 				onlineForLife.Feed.handleSwipe($(this),direction);
@@ -354,6 +362,40 @@ onlineForLife.Feed = {
 		onlineForLife.USMap.toggleState(state);
 	},
 	
+	animatePraySwipe: function(){
+		var $listItem = $('ul.feed li.feed-item:eq(0)');
+		var $listItemContent = $listItem.find('.feed-content');
+		
+		if(onlineForLife.Feed.tutorial<=onlineForLife.Feed.tutorialMax){
+
+			$listItem.addClass('show-tutorial');
+			$listItemContent.animate({'left':'-145px'}, 300, function(){
+				$listItemContent.animate({'left':'-115px'}, 200, function(){
+					$listItemContent.animate({'left':'-125px'}, 100, function(){
+					});
+				});
+			});
+			
+			setTimeout(function() {
+				$listItemContent.animate({'left':'0'}, 300, function(){
+					setTimeout(function() {
+						onlineForLife.Feed.animatePraySwipe();
+					}, 3000);
+				});
+			}, 2500);
+
+			onlineForLife.Feed.tutorial=onlineForLife.Feed.tutorial+1;
+
+		}
+		else{
+			$listItem.removeClass('show-tutorial');
+		}
+		
+		
+		
+	},
+	
+	
 	handleRefreshMain: function($this){
 		console.log('handleRefreshMain');
 		var $body = $('body');
@@ -378,7 +420,7 @@ onlineForLife.Feed = {
 	},
 
 	outOfFeedItemsMain: function(){
-		console.log('outOfFeedItemsMain: ' + onlineForLife.Feed.fetchCurrent);
+		//console.log('outOfFeedItemsMain: ' + onlineForLife.Feed.fetchCurrent);
 		$( "body" ).addClass('feed-loaded');
 		$( ".main-refresh .fa-refresh" ).remove();
 		var $noMoreText = $('p.no-more-items');

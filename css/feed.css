@@ -515,13 +515,16 @@ body,
 				display:none;
 			}
 				ul.feed li.feed-item .feed-prayer-instruction{
-					right: 25px;
+					right: 45px;
 					position: absolute;
-					top: 10px;
-					width: 60px;
+					top: 21px;
+					width: 66px;
 					height:158px;
-					background:transparent url(../img/pray-then-swipe.jpg) no-repeat 0 0;
+					background:transparent url(../img/pray-then-swipe.png) no-repeat 0 0;
 					display:none;
+				}
+				ul.feed li.feed-item.show-tutorial .feed-prayer-instruction{
+					display:block;
 				}
 				ul.feed li.feed-item .feed-prayer-confirmation{
 					left: 203px;
