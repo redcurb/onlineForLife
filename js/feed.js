@@ -282,12 +282,18 @@ onlineForLife.Feed = {
 
 	setupDraggable: function(){
 		$("li.feed-item .feed-content").swipe( {
-			onlineForLife.Feed.tutorial = onlineForLife.Feed.tutorialMax;
 			//Generic swipe handler for all directions
 			swipeLeft:function(event, direction, distance, duration, fingerCount) {
+				if(onlineForLife.Feed.tutorial < onlineForLife.Feed.tutorialMax){
+					onlineForLife.Feed.tutorial = onlineForLife.Feed.tutorialMax;
+				}
 				onlineForLife.Feed.handleSwipe($(this),direction);
 			},
 			swipeRight:function(event, direction, distance, duration, fingerCount) {
+				if(onlineForLife.Feed.tutorial < onlineForLife.Feed.tutorialMax){
+					onlineForLife.Feed.tutorial = onlineForLife.Feed.tutorialMax;
+				}
+				onlineForLife.Feed.tutorial = onlineForLife.Feed.tutorialMax;
 				onlineForLife.Feed.handleSwipe($(this),direction);
 			},
 			//Default is 75px, set to 0 for demo so any distance triggers swipe
