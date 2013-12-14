@@ -296,7 +296,6 @@ onlineForLife.Feed = {
 				onlineForLife.Feed.tutorial = onlineForLife.Feed.tutorialMax;
 				onlineForLife.Feed.handleSwipe($(this),direction);
 			},
-			//Default is 75px, set to 0 for demo so any distance triggers swipe
 			threshold:150
 		});
 		$( "2li.feed-item .feed-content" ).draggable({ 
@@ -365,7 +364,7 @@ onlineForLife.Feed = {
 		
 		var state = $this.data('state');
 		console.log(state);
-		onlineForLife.USMap.toggleState(state);
+		onlineForLife.USMap.toggleState('TX');
 	},
 	
 	animatePraySwipe: function(){
