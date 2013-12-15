@@ -202,7 +202,7 @@
 				.mypanel-right .section-your-impact .impact-col .impact-step{
 					overflow:hidden;
 					margin-top:10px;
-					min-height: 72px;
+					min-height: 104px;
 				}
 				.mypanel-right .section-your-impact .impact-col .impact-step.fadeIn{
 					animation: fadeIn 0.5s;
@@ -220,7 +220,7 @@
 
 
 					.mypanel-right .section-your-impact .impact-col .impact-step span{
-						display:none1;
+						display:none;
 					}
 
 				.mypanel-right .section-your-impact .impact-col .impact-step.first{
