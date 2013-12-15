@@ -1,0 +1,100 @@
+.icon-events{
+	text-align:center;
+	margin:5px 0 0px;
+}
+	.icon-events i.fa{
+		font-size: 9.13em;
+		color: #e7eae9;
+	}
+	.icon-events p{
+		font-size:2.85em;
+		font-family:Andada;
+		text-align:center;
+		text-transform:uppercase;
+		color:#c85129;
+		margin-top:34px;
+		letter-spacing: 0.1em;
+	}
+	
+	ul.event-calendar{
+		margin-top: 5px;
+		margin-left: -5%;
+		width: 110%;
+	}
+		ul.event-calendar li{
+			border-bottom:1px solid #d5d8d7
+		}
+		ul.event-calendar li.first{
+			
+		}
+		ul.event-calendar li.item-closed{
+			
+		}
+			ul.event-calendar li .event-title{
+				overflow:hidden;
+				padding-left:7%;
+				padding-bottom:28px;
+				padding-top: 32px;
+			}
+				ul.event-calendar li .event-title p.event-description{
+					color:#313738;
+					width:80%;
+					float:left;
+					padding-right:3%;
+					font-size:1.7em;
+					line-height: 1.24em;
+					font-weight:300;
+					padding-left: 4px;
+				}
+				ul.event-calendar li .event-title i.fa{
+					float:left;
+					color:#c85129;
+					margin:24px 0 0 7px;
+					font-size:2.3em;
+				}
+				ul.event-calendar li .event-title i.fa-chevron-down,
+				ul.event-calendar li.item-open .event-title i.fa-chevron-right{
+					display:none;
+				}
+				ul.event-calendar li.item-open .event-title i.fa-chevron-down{
+					display:block;
+				}
+				ul.event-calendar li .event-title i.fa-chevron-right{
+					margin:27px 0 0 16px;
+				}
+			ul.event-calendar li .event-details{
+				padding-left:7%;
+				text-shadow:1px 1px 1px #000;
+				height:240px;
+				border-top:1px solid #979797;
+				background: #313839; /* Old browsers */
+				background: -webkit-linear-gradient(top,  #181b19 0%,#313839 20%,#313839 80%,#181b19 100%); /* Chrome10+,Safari5.1+ */
+				height:0;
+				overflow: hidden;
+			}
+				ul.event-calendar li .event-details h3{
+					color: #c85129;
+					font-family: Andada;
+					margin: 23px 0 3px 0;
+					font-size: 1.9em;
+					letter-spacing: -1px;
+				}
+				ul.event-calendar li .event-details h4{
+					color: #c7d8d7;
+					font-weight: 300;
+					font-size: 1.27em;
+					margin: 9px 0 1px ;
+				}
+				ul.event-calendar li .event-details h6{
+					color: #707e7f;
+					font-size: 1.1em;
+					letter-spacing: 3px;
+				}
+				ul.event-calendar li .event-details p{
+					color: #707e7f;
+					font-size: 1.0em;
+					font-weight: 400;
+					text-shadow: 1px 1px 4px #000;
+					letter-spacing: 2px;
+				}
+
