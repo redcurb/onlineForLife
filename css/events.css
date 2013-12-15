@@ -1,3 +1,9 @@
+body{
+	background-color:green;
+}
+.content-main.ui-content{
+	background-color:yellow;
+}
 .icon-events{
 	text-align:center;
 	margin:5px 0 0px;
