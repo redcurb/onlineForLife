@@ -1,9 +1,11 @@
 .ui-body-c, .ui-overlay-c,
 body,
-.ui-page-active.ui-page-panel,
-ul.event-calendar{
+.ui-page-active.ui-page-panel{
 	background:none;
-	background-color:green;
+	background-color:blue;
+}
+ul.event-calendar{
+	background-color:yellow;
 }
 .content-main.ui-content{
 	background:none;
