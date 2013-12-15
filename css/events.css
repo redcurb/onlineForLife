@@ -1,8 +1,12 @@
 .ui-body-c, .ui-overlay-c,
-body{
+body,
+.ui-page-active.ui-page-panel,
+ul.event-calendar{
+	background:none;
 	background-color:green;
 }
 .content-main.ui-content{
+	background:none;
 	background-color:purple;
 }
 .icon-events{
