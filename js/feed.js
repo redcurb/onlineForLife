@@ -29,23 +29,6 @@ onlineForLife.Feed = {
 	},
 	
 	tempData:{
-		stats:{
-			chooseLife:{
-				user:11,
-				friends:47
-			},
-			visitedPrc:{
-				user:73,
-				friends:472
-			},
-			called:{
-				friends:15231
-			},
-			scheduled:{
-				user:95,
-				friends:936
-			}
-		}
 	},
 	
 	init: function(){
@@ -264,11 +247,6 @@ onlineForLife.Feed = {
 		$( ".main-refresh .fa-refresh" ).on( "click", function(){
 			onlineForLife.Feed.animatePraySwipe();
 		});
-
-		$( ".mypanel-right .fa-refresh" ).on( "click", function(){
-			onlineForLife.Feed.handleRefreshStats();
-		});
-		
 		
 	},
 
@@ -422,75 +400,6 @@ onlineForLife.Feed = {
 		
 	},
 
-	handleRefreshStats: function($this){
-		console.log('handleRefreshStats');
-		console.log(onlineForLife.Feed.tempData.stats.visitedPrc);
-		onlineForLife.Feed.toggleStatsRefresh('start');
-		var data = onlineForLife.Feed.tempData.stats;
-		var chooseLifeUser = data.chooseLife.user;
-		var chooseLifeFriends = data.chooseLife.friends;
-		var visitedPrcUser = data.visitedPrc.user;
-		var visitedPrcFriends = data.visitedPrc.friends;
-		var calledFriends = data.called.friends;
-		var scheduledUser = data.scheduled.user;
-		var scheduledFriends = data.scheduled.friends;
-		
-		var $chooseLifeUser = $('.section-your-impact .step-chose-life .user-count');
-		var $chooseLifeFriends = $('.section-your-impact .step-chose-life .total-user-count');
-		var $visitedPrcUser = $('.section-your-impact .step-visited-prc .user-count');
-		var $visitedPrcFriends = $('.section-your-impact .step-visited-prc .total-user-count');
-		var $calledFriends = $('.section-your-impact .step-called .total-user-count');
-		var $scheduledUser = $('.section-your-impact .step-scheduled .user-count');
-		var $scheduledFriends = $('.section-your-impact .step-scheduled .total-user-count');
-		var $sinceCount = $('.section-refresh .refresh-count-value');
-		
-		setTimeout(function() {
-			$chooseLifeUser.text('+' + chooseLifeUser);
-			$chooseLifeFriends.text('+' + chooseLifeFriends);
-			$visitedPrcUser.text('+' + visitedPrcUser);
-			$visitedPrcFriends.text('+' + visitedPrcFriends);
-			$calledFriends.text('+' + calledFriends);
-			$scheduledUser.text('+' + scheduledUser);
-			$scheduledFriends.text('+' + scheduledFriends);
-			$sinceCount.text(0);
-						
-			onlineForLife.Feed.toggleStatsRefresh('stop');
-		}, 2500);
-		
-		var output = '';
-		output += 'chooseLifeUser: ' + chooseLifeUser + '\n';
-		output += 'chooseLifeFriends: ' + chooseLifeFriends + '\n';
-		output += 'visitedPrcUser: ' + visitedPrcUser + '\n';
-		output += 'visitedPrcFriends: ' + visitedPrcFriends + '\n';
-		output += 'calledFriends: ' + calledFriends + '\n';
-		output += 'scheduledUser: ' + scheduledUser + '\n';
-		output += 'scheduledFriends: ' + scheduledFriends + '\n';
-		console.log(output);
-		
-		
-		
-	},
-	
-	toggleStatsRefresh:function(action){
-		var $parent = $('.section-refresh');
-		var $icon = $parent.find('.fa-refresh');
-		var $since = $parent.find('.refresh-count-since');
-		var $sinceCount = $parent.find('.refresh-count-value');
-		var $refreshing = $parent.find('.refresh-count-refreshing');
-		
-		if(action=='start'){
-			$icon.addClass('fa-spin');
-			$since.hide();
-			$refreshing.show();
-		}
-		if(action=='stop'){
-			$icon.removeClass('fa-spin');
-			$since.show();
-			$refreshing.hide();
-		}
-		
-	},
-	
 	setupScrolling:function(){
 		
 		var eventsElement = $('ul.feed');
