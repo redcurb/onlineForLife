@@ -81,7 +81,7 @@ onlineForLife.Panels = {
 $(function() {
 	onlineForLife.Panels.init();
 	//$('#panel-left').click();
-	$('#panel-right').click();
+	//$('#panel-right').click();
 });
 
 
