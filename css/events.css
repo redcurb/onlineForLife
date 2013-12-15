@@ -1,15 +1,4 @@
-.ui-body-c, .ui-overlay-c,
-body,
-.ui-page-active.ui-page-panel{
-	background:none;
-	background-color:blue;
-}
-ul.event-calendar{
-	background-color:yellow;
-}
 .content-main.ui-content{
-	background:none;
-	background-color:purple;
 }
 .icon-events{
 	text-align:center;

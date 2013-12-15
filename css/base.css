@@ -8,6 +8,14 @@ body,html{
 .ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button{
 	font-family: Oswald;
 }
+
+body,
+.ui-body-c, .ui-overlay-c,
+.ui-page-active.ui-page-panel{
+	background:none;
+	background-color:#fff;
+}
+
 a{
 	text-decoration:underline;
 	cursor:pointer;
