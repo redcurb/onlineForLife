@@ -2,7 +2,9 @@ var onlineForLife = window.onlineForLife || {}; onlineForLife.Feed = onlineForLi
 onlineForLife.Feed = {
 	version: 1,
 	
-	tutorial:1,
+	showTutorial:true,
+	
+	tutorial:0,
 	
 	tutorialMax:3,
 	
@@ -245,8 +247,9 @@ onlineForLife.Feed = {
 		});
 
 		$( ".main-refresh .fa-refresh" ).on( "click", function(){
-			onlineForLife.Feed.animatePraySwipe();
+			onlineForLife.Feed.handleSwipe($('li.feed-item .feed-content:eq(1)'),'left');
 		});
+		
 		
 	},
 
@@ -254,16 +257,9 @@ onlineForLife.Feed = {
 		$("li.feed-item .feed-content").swipe( {
 			//Generic swipe handler for all directions
 			swipeLeft:function(event, direction, distance, duration, fingerCount) {
-				if(onlineForLife.Feed.tutorial < onlineForLife.Feed.tutorialMax){
-					onlineForLife.Feed.tutorial = onlineForLife.Feed.tutorialMax;
-				}
 				onlineForLife.Feed.handleSwipe($(this),direction);
 			},
 			swipeRight:function(event, direction, distance, duration, fingerCount) {
-				if(onlineForLife.Feed.tutorial < onlineForLife.Feed.tutorialMax){
-					onlineForLife.Feed.tutorial = onlineForLife.Feed.tutorialMax;
-				}
-				onlineForLife.Feed.tutorial = onlineForLife.Feed.tutorialMax;
 				onlineForLife.Feed.handleSwipe($(this),direction);
 			},
 			threshold:150
@@ -306,6 +302,7 @@ onlineForLife.Feed = {
 
 	handleSwipe: function($this, swipeDir){
 		//$this.remove();
+		onlineForLife.Feed.showTutorial=false;
 		var $parentLi = $this.parents('li');
 		//$parentLi.addClass('swipe-complete');
 		console.log('handleSwipe: ' + swipeDir);
@@ -335,32 +332,32 @@ onlineForLife.Feed = {
 	},
 	
 	animatePraySwipe: function(){
-		var $listItem = $('ul.feed li.feed-item:eq(0)');
-		var $listItemContent = $listItem.find('.feed-content');
-		
-		if(onlineForLife.Feed.tutorial<=onlineForLife.Feed.tutorialMax){
-
-			$listItem.addClass('show-tutorial');
-			$listItemContent.animate({'left':'-145px'}, 300, function(){
-				$listItemContent.animate({'left':'-115px'}, 200, function(){
-					$listItemContent.animate({'left':'-125px'}, 100, function(){
+		if(onlineForLife.Feed.showTutorial){
+			var $listItem = $('ul.feed li.feed-item:eq(0)');
+			var $listItemContent = $listItem.find('.feed-content');
+			
+			if(onlineForLife.Feed.tutorial<onlineForLife.Feed.tutorialMax){
+	
+				$listItem.addClass('show-tutorial');
+				$listItemContent.animate({'left':'-145px'}, 300, function(){
+					$listItemContent.animate({'left':'-115px'}, 200, function(){
+						$listItemContent.animate({'left':'-125px'}, 100, function(){
+						});
 					});
 				});
-			});
-			
-			setTimeout(function() {
-				$listItemContent.animate({'left':'0'}, 300, function(){
-					setTimeout(function() {
-						onlineForLife.Feed.animatePraySwipe();
-					}, 3000);
-				});
-			}, 2500);
-
-			onlineForLife.Feed.tutorial=onlineForLife.Feed.tutorial+1;
-
-		}
-		else{
-			$listItem.removeClass('show-tutorial');
+				
+				setTimeout(function() {
+					$listItemContent.animate({'left':'0'}, 300, function(){
+						setTimeout(function() {
+							onlineForLife.Feed.animatePraySwipe();
+						}, 3000);
+					});
+				}, 2500);
+				onlineForLife.Feed.tutorial=onlineForLife.Feed.tutorial+1;
+			}
+			else{
+				$listItem.removeClass('show-tutorial');
+			}
 		}
 		
 		
