@@ -17,17 +17,26 @@
 	}
 	
 	ul.settings-list{
-		margin-top: 5px;
+		margin: 46px 0 0 34px;
 	}
 		ul.settings-list li{
-			font-family: Andada;
-			font-size: 1.5em;
-			font-weight: normal;
+			margin-top:35px;
 		}
 		ul.settings-list li.first{
-			
+			margin-top:0;
 		}
-		ul.settings-list li i.fa{
-			color:#c85129;
-		}
+			ul.settings-list li span{
+				font-family: Oswald;
+				font-size: 1.5em;
+				font-weight: 300;
+				letter-spacing: 4.5px;
+			}
+			ul.settings-list li i.fa{
+				font-weight: 300;
+				margin-left:15px;
+				color:#c85129;
+				font-size:2.7em;
+				top: 10px;
+				position: relative;
+			}
 
