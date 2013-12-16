@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Device Properties Example</title>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    // Wait for Cordova to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // Cordova is ready
+    //
+    function onDeviceReady() {
+        var element = document.getElementById('deviceProperties');
+
+        element.innerHTML = 'Device Name: '     + device.name     + '<br />' + 
+                            'Device Cordova: '  + device.cordova + '<br />' + 
+                            'Device Platform: ' + device.platform + '<br />' + 
+                            'Device UUID: '     + device.uuid     + '<br />' + 
+                            'Device Model: '    + device.model     + '<br />' + 
+                            'Device Version: '  + device.version  + '<br />';
+
+
+		var model = device.model;
+		var url = 'feed-iphone.html';
+		if(model.indexOf('iPhone')>=0){
+			url = 'feed-ipad.html';
+		}
+        element.innerHTML = 'Device Name: '     + device.name     + '<br />' + 
+                            'Device Cordova: '  + device.cordova + '<br />' + 
+                            'Device Platform: ' + device.platform + '<br />' + 
+                            'Device UUID: '     + device.uuid     + '<br />' + 
+                            'Device Model: '    + device.model     + '<br />' + 
+                            'Device Version: '    + device.version     + '<br />' + 
+                            'Device URL: '  + url  + '<br />';
+
+		window.open(url,'_self');
+							
+                            
+                            
+	}
+
+    </script>
+  </head>
+  <body>
+    <p id="deviceProperties">Loading device properties...</p>
+    
+
+    <br>
+    <a href="index.html">Home</a>
+  </body>
+</html>
+

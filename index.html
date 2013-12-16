@@ -1,56 +1,204 @@
 <!DOCTYPE html>
+
 <html>
-  <head>
-    <title>Device Properties Example</title>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=no;"/>
+	
+	<link rel="stylesheet" href="css/reset-min.css" />
+	<link rel="stylesheet" href="css/libraries/jquery.mobile-1.3.2.min.css" />
+    <link href='css/fonts.css' rel='stylesheet' type='text/css'>
+	<link href="css/font-awesome.css" rel="stylesheet">
 
-    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-    <script type="text/javascript" charset="utf-8">
+	<link rel="stylesheet" href="css/base.css?ver=12.02" />
+	<link rel="stylesheet" href="css/panels.css?ver=12.02" />
+	<link rel="stylesheet" href="css/footer.css?ver=12.02" />
+	
+	<link rel="stylesheet" href="css/feed.css?ver=12.02" />
 
-    // Wait for Cordova to load
-    //
-    document.addEventListener("deviceready", onDeviceReady, false);
+	
+</head>
+<body>
+<div data-role="page" id="page1">
+	<!--<span id="version">ver. 12.13.19</span>-->
+    <div data-role="panel" id="mypanel-left" class="mypanel-left" data-display="reveal" data-position-fixed="true">
+		<h2 class="logo"></h2>
+		<ul class="nav-primary">
+			<li class="first nav-prayers selected">
+				<a href="prayers.html" data-ajax="false">
+					<i class="fa fa-globe"></i>
+					<span>Prayer Feed</span>
+				</a>
+			</li>
+			<li class="nav-events">
+				<a href="events.html" data-ajax="false">
+					<i class="fa fa-calendar"></i>
+					<span>Events</span>
+				</a>
+			</li>
+			<li class="nav-settings">
+				<a href="settings.html" data-ajax="false">
+					<i class="fa fa-gear"></i>
+					<span>Settings</span>
+				</a>
+			</li>
+			<li class="nav-settings">
+				<a href="dev.html" data-ajax="false">
+					<i class="fa fa-gear"></i>
+					<span>Dev Info</span>
+				</a>
+			</li>
+		</ul>
+        
+    </div>
+    
+    <div data-role="panel" id="mypanel-right" class="mypanel-right" data-display="reveal" data-position="right" data-position-fixed="true">
+		<div class="section-refresh">
+			<i class="fa fa-refresh fa-2x"></i>
+			<span class="refresh-count-text">
+				<span class="refresh-count-since"><span class="refresh-count-value">14</span> days since last refresh</span>
+				<span class="refresh-count-refreshing">refreshing</span>
+			</span>
+		</div>
+		<div class="section-total-saved">
+			<span class="user-count">+157</span>
+			<span class="total-user-count">748,932</span>
+			<span class="step-label">Babies Saved</span>
+		</div>
+		<div class="section-your-impact">
+			<div class="impact-col impact-col1">
+				<div class="impact-step step-chose-life first">
+					<span class="user-count">+3</span>
+					<span class="total-user-count">27</span>
+					<span class="step-label">Chose Life</span>
+				</div>
+				<div class="impact-step step-visited-prc">
+					<span class="user-count">+17</span>
+					<span class="total-user-count">193</span>
+					<span class="step-label">Visited PRC</span>
+				</div>
+			</div>
+			<div class="impact-col impact-col2">
+				<em class="stats-logo">
+					<i class="stats-logo-arc step-called"></i>
+					<i class="stats-logo-arc step-scheduled"></i>
+					<i class="stats-logo-arc step-visited-prc"></i>
+					<i class="stats-logo-arc step-chose-life"></i>
+				</em>
+			</div>
+			<div class="impact-col impact-col3">
+				<div class="impact-step step-called first">
+					<span class="user-count">&nbsp;</span>
+					<span class="total-user-count">7,132</span>
+					<span class="step-label">Called</span>
+				</div>
+				<div class="impact-step step-scheduled">
+					<span class="user-count">+24</span>
+					<span class="total-user-count">492</span>
+					<span class="step-label">Scheduled</span>
+				</div>
+			</div>
+		</div>
+		<div class="toggle-stats">
+			<ul>
+				<li class="your-impact first selected" data-type="user"><a data-role="none">Your<br>Impact</a></li>
+				<li class="friends-impact" data-type="friends"><a data-role="none"><span class="friends-impact-count">92</span> Friends<br>Impact</a></li>
+			</ul>
+		</div>
+		<div class="section-updates">
+			<h2>Updates:</h2>
+			<ul class="stats-updates">
+				<li class="first">
+					<img src="img/fpo-baby-1.jpg" alt="" width="104" height="104" />
+					<span class="text-update">Woman in California keeps her baby, check out the photo!</span>
+				</li>
+				<li>
+					<img src="img/fpo-baby-2.jpg" alt=""/>
+					<span class="text-update">Woman in Oklahoma keeps her baby, check out the photo!</span>
+				</li>
+				<li>
+					<img src="img/fpo-baby-3.jpg" alt=""/>
+					<span class="text-update">Woman in Michigan keeps her baby, check out the photo!</span>
+				</li>
+				<li>
+					<span class="text-update">Woman in Florida kept her appointment!</span>
+				</li>
+			</ul>
+		</div>
+    </div>
+    
 
-    // Cordova is ready
-    //
-    function onDeviceReady() {
-        var element = document.getElementById('deviceProperties');
-
-        element.innerHTML = 'Device Name: '     + device.name     + '<br />' + 
-                            'Device Cordova: '  + device.cordova + '<br />' + 
-                            'Device Platform: ' + device.platform + '<br />' + 
-                            'Device UUID: '     + device.uuid     + '<br />' + 
-                            'Device Model: '    + device.model     + '<br />' + 
-                            'Device Version: '  + device.version  + '<br />';
+    <div data-theme="a" data-role="header" data-position="fixed" class="header-primary">
+        <a href="#panel-left" data-role="none" id="panel-left" data-inline="true" class="header-links"></a>
+        <a href="#panel-right" data-role="none" id="panel-right" data-inline="true" class="header-links"></a>
+    </div>
 
 
-		var model = device.model;
-		var url = 'feed-iphone.html';
-		if(model.indexOf('iPhone')>=0){
-			url = 'feed-ipad.html';
-		}
-		//document.location(url);
+    <div data-role="content" class="content-main">
+		<div id="map" style=""></div>
+		
+		<div class="main-refresh">
+			<span class="refresh-count">93,432</span>
+			<span class="refresh-label">Prayers Today</span>
+			<i class="fa fa-refresh fa-2x"></i>
+		</div>
+		
+		<ul class="feed"></ul>
+		<p class="feed-text feed-refresh"><i class="fa fa-refresh fa-spin"></i><span>Loading feed items</span></p>
+		<p class="feed-text no-more-items">No additional feed items</p>
+    </div>
+<!--
+    <div data-theme="a" data-role="footer" data-position="fixed" class="footer-primary">
+    	<p>Today's Prayer List</p>
+    	<em class="prayer-count">4</em>
+    	<div class="feed-footer-share">
+			<a class="feed-share" data-role="none"></a>
+			<ul class="feed-share-list">
+				<li class="first feed-share-fb"><a></a></li>
+				<li class="feed-share-twitter"><a></a></li>
+				<li class="feed-share-sms"><a></a></li>
+			</ul>
+		</div>
+    </div>
+    -->
+</div>
 
-        element.innerHTML = 'Device Name: '     + device.name     + '<br />' + 
-                            'Device Cordova: '  + device.cordova + '<br />' + 
-                            'Device Platform: ' + device.platform + '<br />' + 
-                            'Device UUID: '     + device.uuid     + '<br />' + 
-                            'Device Model: '    + device.model     + '<br />' + 
-                            'Device Version: '    + device.version     + '<br />' + 
-                            'Device URL: '  + url  + '<br />';
+<script id="template-feed-item" type="text/x-handlebars-template">
+			<li class="feed-item  action-step-{{step}} {{liClass}} version-{{BgVersion}}" data-id="{{itemId}}">
+				<i class="feed-prayer-confirmation">Prayed!</i>
+				<i class="feed-prayer-instruction"></i>
+  				<div class="feed-content" data-state="{{stateCode}}">
+				{{#equal step "1" }}
+					<p class="action-text body-step-1">Woman in {{stateName}} just called an OFL agent</p>
+				{{/equal}}
+				{{#equal step "2" }}
+					<p class="action-text body-step-2">Woman in {{stateName}} just scheduled an appointment with a PRC</p>
+				{{/equal}}
+				{{#equal step "3" }}
+					<p class="action-text body-step-3">Woman in {{stateName}} kept her appointment</p>
+				{{/equal}}
+					<i class="action-step step-{{step}}"></i>
+				</div>
+			</li>
+</script>
 
-                            
-                            
-                            
-	}
+<script src="js/libraries/jquery-1.9.1.min.js"></script>
+<script src="js/libraries/jquery.mobile-1.3.2.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
-    </script>
-  </head>
-  <body>
-    <p id="deviceProperties">Loading device properties...</p>
+<script src="js/plugins/jquery.ui.touch-punch.min.js"></script>
+<script src="js/plugins/jquery.touchSwipe.min.js"></script>
 
+<script src="js/libraries/raphael.js"></script>
+<script src="js/libraries/handlebars-v1.1.2.js"></script>
+<script src="js/libraries/handlebars.helpers.js"></script>
 
-    <br>
-    <a href="index.html">Home</a>
-  </body>
+<script src="js/plugins/color.jquery.js"></script>
+<script src="js/plugins/jquery.usmap.js"></script>
+
+<script type="text/javascript" src="js/helpers.js?ver=12.02"></script>
+<script type="text/javascript" src="js/map.js?ver=12.02"></script>
+<script type="text/javascript" src="js/panels.js?ver=12.02"></script>
+<script type="text/javascript" src="js/feed.js?ver=12.02"></script>
+</body>
 </html>
-
