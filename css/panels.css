@@ -20,8 +20,8 @@
 		
 			ul.nav-primary{
 				margin:67px 0 0 7px;
-				overflow:hidden2;
-				background:purple;
+				overflow:hidden;
+				padding-bottom:20px;
 			}
 				ul.nav-primary li{
 					float:left;

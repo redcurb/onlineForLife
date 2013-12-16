@@ -74,8 +74,11 @@ onlineForLife.Panels = {
 	},
 	
 	setupIpad: function(){
-		//$( "#mypanel-left" ).attr( "data-role","none").attr('class', 'ipad-panel ipad-panel-left');
-		//$( "#mypanel-left" ).data( "role","none");
+		if($('body').data('device')=='ipad'){
+			setTimeout(function() {
+				onlineForLife.Panels.animateArcs();
+			},1000);
+		}
 	},
 	
 	setupHandlers: function(){

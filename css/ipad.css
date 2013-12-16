@@ -1,4 +1,52 @@
+.ui-mobile .ui-page{
+	background-color:#313738;	
+}
+
 .header-primary{
 	display:none2;	
 }
+
+ul.nav-primary {
+
+}
+	ul.nav-primary li{
+		float:right;
+	}
+
+
+.mypanel-right .section-your-impact .impact-col1{
+	width:230px;
+}
+.mypanel-right .section-your-impact .impact-col3{
+	width:212px;	
+}
+
+			ul.feed li.feed-item{
+				margin-top:10px;
+				margin-top:0;
+				clear:both;
+				position:relative;
+				height: 201px;
+				min-width:640px;
+				border-bottom:1px solid #d5d8d7;
+				background: #da490a;
+				background:#dd5a15 url(../img/tablet-version.png?ver=1213) no-repeat 0 0;
+				-1webkit-backface-visibility: hidden;
+				visibility:hidden2;
+			}
+			ul.feed li.feed-item.version-1{
+				background:url(../img/tablet-version-1.png) no-repeat 0 0;
+			}
+			ul.feed li.feed-item.version-2{
+				background:url(../img/tablet-version-2.png) no-repeat 0 0;
+			}
+			ul.feed li.feed-item.version-3{
+				background:url(../img/tablet-version-3.png) no-repeat 0 0;
+			}
+			ul.feed li.feed-item.version-4{
+				background:url(../img/tablet-version-4.png) no-repeat 0 0;
+			}
+			ul.feed li.feed-item.version-5{
+				background:url(../img/tablet-version-5.png) no-repeat 0 0;
+			}
 
