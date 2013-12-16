@@ -270,6 +270,7 @@ onlineForLife.Panels = {
 };
 $(function() {
 	onlineForLife.Panels.init();
+	$('.refresh-label').text(device);
 	//$('#panel-left').click();
 	//$('#panel-right').click();
 });
