@@ -3,39 +3,49 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=0.1, maximum-scale=0.5" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=no;"/>
+	
 	<link rel="stylesheet" href="css/reset-min.css" />
 	<link rel="stylesheet" href="css/libraries/jquery.mobile-1.3.2.min.css" />
     <link href='css/fonts.css' rel='stylesheet' type='text/css'>
 	<link href="css/font-awesome.css" rel="stylesheet">
 
-	<link rel="stylesheet" href="css/base.css?ver=129.9" />
-	<link rel="stylesheet" href="css/feed.css?ver=129.9" />
+	<link rel="stylesheet" href="css/base.css?ver=12.02" />
+	<link rel="stylesheet" href="css/panels.css?ver=12.02" />
+	<link rel="stylesheet" href="css/footer.css?ver=12.02" />
+	
+	<link rel="stylesheet" href="css/feed.css?ver=12.02" />
 
 	
 </head>
 <body>
 <div data-role="page" id="page1">
-
+	<!--<span id="version">ver. 12.13.19</span>-->
     <div data-role="panel" id="mypanel-left" class="mypanel-left" data-display="reveal" data-position-fixed="true">
 		<h2 class="logo"></h2>
 		<ul class="nav-primary">
 			<li class="first nav-prayers selected">
-				<a href="prayers.html">
+				<a href="prayers.html" data-ajax="false">
 					<i class="fa fa-globe"></i>
 					<span>Prayer Feed</span>
 				</a>
 			</li>
 			<li class="nav-events">
-				<a href="events.html">
+				<a href="events.html" data-ajax="false">
 					<i class="fa fa-calendar"></i>
 					<span>Events</span>
 				</a>
 			</li>
 			<li class="nav-settings">
-				<a href="settings.html">
+				<a href="settings.html" data-ajax="false">
 					<i class="fa fa-gear"></i>
 					<span>Settings</span>
+				</a>
+			</li>
+			<li class="nav-settings">
+				<a href="dev.html" data-ajax="false">
+					<i class="fa fa-gear"></i>
+					<span>Dev Info</span>
 				</a>
 			</li>
 		</ul>
@@ -68,7 +78,14 @@
 					<span class="step-label">Visited PRC</span>
 				</div>
 			</div>
-			<div class="impact-col impact-col2"><i class="stats-logo"></i></div>
+			<div class="impact-col impact-col2">
+				<em class="stats-logo">
+					<i class="stats-logo-arc step-called"></i>
+					<i class="stats-logo-arc step-scheduled"></i>
+					<i class="stats-logo-arc step-visited-prc"></i>
+					<i class="stats-logo-arc step-chose-life"></i>
+				</em>
+			</div>
 			<div class="impact-col impact-col3">
 				<div class="impact-step step-called first">
 					<span class="user-count">&nbsp;</span>
@@ -118,7 +135,6 @@
 
 
     <div data-role="content" class="content-main">
-    	<!--	<h3>Prayers Happening Now</h3>	-->
 		<div id="map" style=""></div>
 		
 		<div class="main-refresh">
@@ -131,8 +147,7 @@
 		<p class="feed-text feed-refresh"><i class="fa fa-refresh fa-spin"></i><span>Loading feed items</span></p>
 		<p class="feed-text no-more-items">No additional feed items</p>
     </div>
-
-    <!--
+<!--
     <div data-theme="a" data-role="footer" data-position="fixed" class="footer-primary">
     	<p>Today's Prayer List</p>
     	<em class="prayer-count">4</em>
@@ -147,9 +162,6 @@
     </div>
     -->
 </div>
-		
-
-    
 
 <script id="template-feed-item" type="text/x-handlebars-template">
 			<li class="feed-item  action-step-{{step}} {{liClass}} version-{{BgVersion}}" data-id="{{itemId}}">
@@ -184,8 +196,9 @@
 <script src="js/plugins/color.jquery.js"></script>
 <script src="js/plugins/jquery.usmap.js"></script>
 
-<script type="text/javascript" src="js/helpers.js?ver=129.9"></script>
-<script type="text/javascript" src="js/map.js?ver=129.9"></script>
-<script type="text/javascript" src="js/feed.js?ver=129.9"></script>
+<script type="text/javascript" src="js/helpers.js?ver=12.02"></script>
+<script type="text/javascript" src="js/map.js?ver=12.02"></script>
+<script type="text/javascript" src="js/panels.js?ver=12.02"></script>
+<script type="text/javascript" src="js/feed.js?ver=12.02"></script>
 </body>
 </html>
