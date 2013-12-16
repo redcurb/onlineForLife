@@ -2,6 +2,7 @@ var onlineForLife = window.onlineForLife || {}; onlineForLife.Panels = onlineFor
 onlineForLife.Panels = {
 	init: function(){
 		onlineForLife.Panels.setupHandlers();
+		onlineForLife.Panels.setupIpad();
 	},
 	
 	refreshed:false,
@@ -72,10 +73,16 @@ onlineForLife.Panels = {
 		$textSpans.hide();
 	},
 	
+	setupIpad: function(){
+		//$( "#mypanel-left" ).attr( "data-role","none").attr('class', 'ipad-panel ipad-panel-left');
+		//$( "#mypanel-left" ).data( "role","none");
+	},
+	
 	setupHandlers: function(){
 		$('#panel-left').on('click',function(){
 			$( "#mypanel-left" ).panel( "open" , {
-					display:'reveal'
+					display:'reveal',
+					dismissible: false
 			} );
 		});
 		$('#panel-right').on('click',function(){
