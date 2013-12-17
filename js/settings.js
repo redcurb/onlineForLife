@@ -9,7 +9,8 @@ onlineForLife.Settings = {
 	setupHandlers: function(){
 		$('.link-settings-ofl').on('click',function(){
 			//window.location.href = 'http://www.onlineforlife.org';
-			window.location.href = 'events.html';
+			//window.location.href = 'events.html';
+			window.plugins.childBrowser.showWebPage('http://www.google.com', { showLocationBar: true });
 		});
 	},
 };
