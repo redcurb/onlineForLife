@@ -17,7 +17,6 @@
     <gap:plugin name="org.apache.cordova.geolocation" />
     <gap:plugin name="org.apache.cordova.camera" />
     
-    <gap:plugin name="com.phonegap.plugins.childbrowser" />
     
     <preference name="EnableViewportScale" value="true" />
     
