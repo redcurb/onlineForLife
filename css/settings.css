@@ -39,4 +39,8 @@
 				top: 10px;
 				position: relative;
 			}
+			ul.settings-list li a i.fa{
+				font-size: 1.4em;
+			}
+			
 
