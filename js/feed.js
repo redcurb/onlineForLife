@@ -27,6 +27,7 @@ onlineForLife.Feed = {
 	},
 	
 	urls:{
+		//this will eventually come from salesforce.
 		feedBg:'js/json/prayer-feed.js'
 	},
 	
