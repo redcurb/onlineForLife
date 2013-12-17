@@ -7,7 +7,7 @@ onlineForLife.Settings = {
 	},
 	
 	setupHandlers: function(){
-		$('.link-settings-ofl i.fa').on('click',function(){
+		$('.link-settings-ofl').on('click',function(){
 			$('h2 p').text('Settings 2');
 			window.location.href = 'http://www.onlineforlife.org';
 		});
