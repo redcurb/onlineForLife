@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Device Properties Example</title>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    function onDeviceReady() {
+		var model = device.model;
+		var url = 'feed.html';
+		if(model.indexOf('iPhone')>=0){
+			url = 'feed-ipad.html';
+			url = 'feed-iphone.html';
+			url = 'feed.html';
+		}
+		window.location.href = url;
+	}
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
+
