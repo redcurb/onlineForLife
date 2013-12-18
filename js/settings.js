@@ -20,6 +20,7 @@ onlineForLife.Settings = {
 			$('h2 p').text('test text');
 		});
 		$('#blank-yes-back').on('click',function(){
+			//does NOT work - confirmed
 			var id = $(this).attr('id');
 			$('h2 p').text(id);
 			var url = 'http://www.onlineforlife.org';
@@ -27,6 +28,7 @@ onlineForLife.Settings = {
 			window.open(url, '_blank', 'location=yes', 'closebuttoncaption=back'); 
 		});
 		$('#self-yes-back').on('click',function(){
+			//does NOT work - confirmed
 			var id = $(this).attr('id');
 			$('h2 p').text(id);
 			var url = 'http://www.onlineforlife.org';
@@ -34,6 +36,7 @@ onlineForLife.Settings = {
 			window.open(url, '_self', 'location=yes', 'closebuttoncaption=back'); 
 		});
 		$('#self-yes').on('click',function(){
+			//does NOT work - confirmed
 			var id = $(this).attr('id');
 			$('h2 p').text(id);
 			var url = 'http://www.onlineforlife.org';
@@ -41,6 +44,7 @@ onlineForLife.Settings = {
 			window.open(url, '_self', 'location=yes'); 
 		});
 		$('#loadUrl').on('click',function(){
+			//does NOT work
 			var id = $(this).attr('id');
 			$('h2 p').text(id);
 			var url = 'http://www.onlineforlife.org';
