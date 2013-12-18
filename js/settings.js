@@ -19,13 +19,13 @@ onlineForLife.Settings = {
 		$('.link-settings-ofl-2').on('click',function(){
 			$('h2 p').text('test text');
 		});
-		$('#blank-yes-back').on('click',function(){
+		$('#blank-loc-tool-back').on('click',function(){
 			//does NOT work - confirmed
 			var id = $(this).attr('id');
 			$('h2 p').text(id);
 			var url = 'http://www.onlineforlife.org';
 			myURL = encodeURI(url);
-			window.open(url, '_blank', 'location=yes', 'closebuttoncaption=back'); 
+			window.open(url, '_blank', 'location=yes,toolbar=yes', 'closebuttoncaption=back'); 
 		});
 		$('#self-yes-back').on('click',function(){
 			//does NOT work - confirmed
