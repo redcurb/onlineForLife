@@ -34,6 +34,11 @@ onlineForLife.Settings = {
 			myURL = encodeURI(url);
 			window.open(url, '_self', 'location=yes'); 
 		});
+		$('#loadUrl').on('click',function(){
+			var url = 'http://www.onlineforlife.org';
+			myURL = encodeURI(url);
+			navigator.app.loadUrl(url, { openExternal:true });
+		});
 		
 		
 	},
