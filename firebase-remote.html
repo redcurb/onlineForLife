@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+	<script src='https://cdn.firebase.com/v0/firebase.js'></script>
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
+</head>
+<body>
+	<div id='messagesDiv'></div>
+	<input type='text' id='nameInput' placeholder='Name'>
+	<input type='text' id='messageInput' placeholder='Message'>
+	<input type="submit" id="form-submit"/>
+	<script>
+		var dbUrl = 'https://onlineforlife.firebaseio.com/';
+		var dbUrl = 'https://e8kur8aqyeo.firebaseio-demo.com/';
+		var myDataRef = new Firebase(dbUrl);
+		$('#form-submit').click(function (e) {
+			//if (e.keyCode == 13) {
+				var name = $('#nameInput').val();
+				var text = $('#messageInput').val();
+				//myDataRef.set('User ' + name + ' says ' + text);
+				//myDataRef.set({name: name, text: text});
+				myDataRef.push({name: name, text: text});
+				$('#messageInput').val('');
+				
+			//}
+		});
+		myDataRef.on('child_added', function(snapshot) {
+			var message = snapshot.val();
+			displayChatMessage(message.name, message.text);
+		});
+		function displayChatMessage(name, text) {
+			$('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
+			$('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+		};
+	</script>
+</body>
+</html>
