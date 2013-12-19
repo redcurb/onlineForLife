@@ -13,8 +13,8 @@
     // Cordova is ready
     //
     function onDeviceReady() {
-    	alert('Device is ready!');
-
+		var ref = window.open('http://apache.org', '_blank', 'location=yes');
+		ref.addEventListener('loadstop', function() { alert(event.url); });
     }
 
     </script>
@@ -22,6 +22,10 @@
   <body>
   
    <p>link test<br /><br />
+   
+  <a href="#" onclick="window.open('http://www.wikipedia.org','_self','location=yes')">Wikipedia (webview)</a><br /><br />
+  
+  <br /><br />
   <a href="#" onclick="window.open('http://www.wikipedia.org','_self','location=yes')">Wikipedia (webview)</a><br /><br />
   <a href="#" onclick="window.open('http://www.wikipedia.org','_blank','location=yes')">Wikipedia (inAppBrowser)</a><br /><br />
   <a href="#" onclick="window.open('http://www.wikipedia.org','_system','location=yes')">Wikipedia (mobile browser)</a><br /><br />
