@@ -293,7 +293,7 @@ onlineForLife.Feed = {
 	},
 
 	setupDraggable: function(){
-		$("li.feed-item .feed-content").swipe( {
+		$("2li.feed-item .feed-content").swipe( {
 			//Generic swipe handler for all directions
 			swipeLeft:function(event, direction, distance, duration, fingerCount) {
 				console.log('swipe left');
@@ -305,7 +305,7 @@ onlineForLife.Feed = {
 			},
 			threshold:150
 		});
-		$( "2li.feed-item .feed-content" ).draggable({ 
+		$( "li.feed-item .feed-content" ).draggable({ 
 			axis: "x",
 			start: function(e, ui) {
 				var y1 = ui.position.top;
