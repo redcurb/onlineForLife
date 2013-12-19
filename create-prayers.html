@@ -66,6 +66,32 @@
 		<option value="4">Step 4</option>
 	</select>
 	<input type="submit" id="form-submit"/>
+	
+	
+	<style>
+	body{
+		font-family:tahoma;
+	}
+	.danger{
+		margin-top:50px;
+		border-top:1px solid gray;
+	}
+		.danger p{
+			border-radius:10px;
+			background:red;
+			width:400px;
+			padding:25px;
+		}
+			.danger p em{
+				font-style:normal;
+				font-weight:bold;
+			}
+	</style>
+	<div class="danger">
+		<p><em>WARNING:</em><br>
+		Pressing this button will erase all stored prayer data. This is just here for testing.</p>
+		<input type="submit" id="form-reset" value="Reset Prayer Data" />
+	</div>
 	<script>
 		var dbUrl = 'https://onlineforlife.firebaseio.com/prayers';
 		var myDataRef = new Firebase(dbUrl);
@@ -78,6 +104,12 @@
 			myDataRef.push({state: state, stateName:stateName, step: step});
 			$('#inputStep, #inputState').val('');
 		});
+		
+		$('#form-reset').click(function (e) {
+			myDataRef.set({});
+		});
+
+		
 	</script>
 </body>
 </html>
