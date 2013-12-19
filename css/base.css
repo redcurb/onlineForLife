@@ -8,7 +8,10 @@ body,html{
 .ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button{
 	font-family: Oswald;
 }
-
+.test-link,
+ul.nav-primary li.test-link{
+	display:none;
+}
 body,
 .ui-body-c, .ui-overlay-c,
 .ui-page-active.ui-page-panel{
