@@ -2,6 +2,8 @@ var onlineForLife = window.onlineForLife || {}; onlineForLife.Feed = onlineForLi
 onlineForLife.Feed = {
 	version: 1,
 	
+	addFirebaseChild: false,
+	
 	showTutorial:true,
 	
 	tutorial:0,
@@ -37,6 +39,7 @@ onlineForLife.Feed = {
 	init: function(){
 		onlineForLife.Feed.setVersion();
 		onlineForLife.Feed.setupHandlers();
+		onlineForLife.Feed.setupFirebase();
 		onlineForLife.Feed.buildFeed();
 		onlineForLife.Feed.showRandomStates();
 		onlineForLife.Feed.setupScrolling();
@@ -44,6 +47,37 @@ onlineForLife.Feed = {
 	
 	highlightMap:function(){
 		onlineForLife.USMap.toggleState('CA');
+	},
+	
+	setupFirebase:function(){
+		console.log('setupFirebase');
+		var dbUrl = 'https://onlineforlife.firebaseio.com/prayers';
+		var myDataRef = new Firebase(dbUrl);
+		
+		myDataRef.on('child_added', function(snapshot) {
+			var message = snapshot.val();
+			console.log(message);
+			//displayChatMessage(message.name, message.state, message.step);
+			if(onlineForLife.Feed.addFirebaseChild){
+				console.log('onlineForLife.Feed.addFirebaseChild TRUE');
+				onlineForLife.USMap.toggleState(message.state);
+				
+				var newHtml = onlineForLife.Feed.buildFeedItem(1, message.state, message.step, message.stateName, 'first');
+				var $feed = $('ul.feed').prepend(newHtml);
+			}
+			else{
+				console.log('onlineForLife.Feed.addFirebaseChild FALSE');
+			}
+		});
+		function displayChatMessage(name, state, step) {
+			var messageText = 'A user from ' + state + ' just prayed for a woman on step ' + step + '!'; 
+			$('<div/>').text(messageText).appendTo($('#messagesDiv'));
+			$('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+		};
+		setTimeout(function() {
+			onlineForLife.Feed.addFirebaseChild = true;
+		},5000);
+		
 	},
 	
 	setVersion:function(v){

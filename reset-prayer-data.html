@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<head>
+	<script src="js/libraries/firebase.js"></script>
+	<script src="js/libraries/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+	<div id='messagesDiv'></div>
+	<input type="submit" id="form-submit" value="Reset Prayer Data" />
+	<script>
+		var dbUrl = 'https://onlineforlife.firebaseio.com/prayers';
+		var myDataRef = new Firebase(dbUrl);
+		$('#form-submit').click(function (e) {
+			myDataRef.set({});
+		});
+	</script>
+</body>
+</html>
