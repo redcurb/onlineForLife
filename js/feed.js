@@ -63,7 +63,9 @@ onlineForLife.Feed = {
 				onlineForLife.USMap.toggleState(message.state);
 				
 				var newHtml = onlineForLife.Feed.buildFeedItem(1, message.state, message.step, message.stateName, 'first');
-				var $feed = $('ul.feed').prepend(newHtml);
+				$('ul.feed').prepend(newHtml);
+				onlineForLife.Feed.centerFeedItemText($('ul.feed li:first'));
+				onlineForLife.Feed.setupDraggable();
 			}
 			else{
 				console.log('onlineForLife.Feed.addFirebaseChild FALSE');
@@ -75,6 +77,7 @@ onlineForLife.Feed = {
 			$('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
 		};
 		setTimeout(function() {
+			console.log('addFirebaseChild TRUE');
 			onlineForLife.Feed.addFirebaseChild = true;
 		},5000);
 		
@@ -215,31 +218,32 @@ onlineForLife.Feed = {
 		
 		var $feed = $('ul.feed');
 		$feed.html(feedHtml);
-		onlineForLife.Feed.centerFeedItemText();
+		onlineForLife.Feed.centerAllFeedItemText();
 		setTimeout(function() {
 			onlineForLife.Feed.animatePraySwipe();
 		},5000);
 		onlineForLife.Feed.setupDraggable();
 	},
 	
-	centerFeedItemText: function(){
+	centerAllFeedItemText: function(){
 		$('#version').text('test version 3');
 		$('ul.feed li').each(function(index,$itemLi){
 			var $this = $(this);
-			var $text = $this.find('p.action-text');
-			var $icon = $this.find('.action-step');
-			var liHeight = $this.outerHeight();
-			
-			var textHeight = $text.outerHeight();
-			var borderHeight = 1;
-			var marginTop = 10;
-			var totalPadding = (liHeight - textHeight - borderHeight ) / 2;
-			var topPx = totalPadding - marginTop;
-			
-			//$text.append('<span style="color:red;">liHeight: '+liHeight+'</span>');
-			//$text.append('<span style="color:blue;">topPx: '+topPx+'</span>');
-			$text.css('top',topPx+'px');
+			onlineForLife.Feed.centerFeedItemText($this);
 		});
+	},
+	
+	centerFeedItemText: function($this){
+		var $text = $this.find('p.action-text');
+		var $icon = $this.find('.action-step');
+		var liHeight = $this.outerHeight();
+		
+		var textHeight = $text.outerHeight();
+		var borderHeight = 1;
+		var marginTop = 10;
+		var totalPadding = (liHeight - textHeight - borderHeight ) / 2;
+		var topPx = totalPadding - marginTop;
+		$text.css('top',topPx+'px');
 	},
 	
 	handleFeedDataError: function(data){
@@ -292,9 +296,11 @@ onlineForLife.Feed = {
 		$("li.feed-item .feed-content").swipe( {
 			//Generic swipe handler for all directions
 			swipeLeft:function(event, direction, distance, duration, fingerCount) {
+				console.log('swipe left');
 				onlineForLife.Feed.handleSwipe($(this),direction);
 			},
 			swipeRight:function(event, direction, distance, duration, fingerCount) {
+				console.log('swipe right');
 				onlineForLife.Feed.handleSwipe($(this),direction);
 			},
 			threshold:150
