@@ -37,6 +37,7 @@ onlineForLife.Feed = {
 	},
 	
 	init: function(){
+		$('#debug').append('<li>jQuery.ui.version: ' + jQuery.ui.version + '</li>');
 		onlineForLife.Feed.setVersion();
 		onlineForLife.Feed.setupHandlers();
 		onlineForLife.Feed.setupFirebase();
@@ -317,7 +318,6 @@ onlineForLife.Feed = {
 		});
 		$( ".refresh-count, .main-refresh, #map" ).draggable({ 
 		});
-		$('#debug').append('<li>jQuery.ui.version: ' + jQuery.ui.version + '</li>');
 		
 
 	},
