@@ -63,9 +63,11 @@ onlineForLife.Panels = {
 		}
 	},
 
-	hideArcs: function(){
-		var $impact = $('.section-your-impact');
-		var $logo = $('.stats-logo');
+	hideArcs: function($panel){
+		console.log('hideArcs');
+		$panel.css('outline','5px solid yellow');
+		var $impact = $panel.find('.section-your-impact');
+		var $logo = $panel.find('.stats-logo');
 		var $arcs = $logo.find('.stats-logo-arc');
 		var $textSpans = $impact.find('.impact-step span');
 		
@@ -82,43 +84,38 @@ onlineForLife.Panels = {
 	},
 	
 	setupHandlers: function(){
-		$('#panel-left').on('click',function(){
-			$( "#mypanel-left" ).panel( "open" , {
-					display:'reveal',
-					dismissible: false
-			} );
-		});
-		$('#panel-right').on('click',function(){
-			$( "#mypanel-right" ).panel( "open" , {} );
-		});
-
-		$( "#mypanel-right").on( "panelopen", function( event, ui ) {
+		$( ".mypanel-right").on( "panelopen", function( event, ui ) {
+			var $panel = $(this);
 			setTimeout(function() {
-				onlineForLife.Panels.animateArcs();
+				onlineForLife.Panels.animateArcs($panel);
 			},500);
 		});
 		
-		$( "#mypanel-right").on( "panelclose", function( event, ui ) {
-			onlineForLife.Panels.hideArcs();
+		$( ".mypanel-right").on( "panelclose", function( event, ui ) {
+			var $panel = $(this);
+			onlineForLife.Panels.hideArcs($panel);
 		});
 		
 		$( ".mypanel-right .fa-refresh" ).on( "click", function(){
-			onlineForLife.Panels.handleRefreshStats();
+			var $panel = $(this).parents('.mypanel-right');
+			onlineForLife.Panels.handleRefreshStats($panel);
 		});
 
-		$( ".toggle-stats li a" ).on( "click", function(){
+		$( "#feed-mypanel-right .toggle-stats li a" ).on( "click", function(){
 			var $this = $(this);
 			var $li = $this.parents('li');
 			var type = $li.data('type');
+			var $panel = $(this).parents('.mypanel-right');
 			$('.toggle-stats li').removeClass('selected');
 			$li.addClass('selected');
-			onlineForLife.Panels.handleFriendsToggle(type);
+			onlineForLife.Panels.handleFriendsToggle(type,$panel);
 		});
 	},
 	
-	animateArcs: function(){
-		var $impact = $('.section-your-impact');
-		var $logo = $('.stats-logo');
+	animateArcs: function($panel){
+		console.log('animateArcs');
+		var $impact = $panel.find('.section-your-impact');
+		var $logo = $panel.find('.stats-logo');
 		var $called = $logo.find('.step-called');
 		var $scheduled = $logo.find('.step-scheduled');
 		var $visitedPrc = $logo.find('.step-visited-prc');
@@ -151,7 +148,7 @@ onlineForLife.Panels = {
 		
 	},
 	
-	handleRefreshStats: function($this){
+	handleRefreshStats: function($panel){
 		console.log('handleRefreshStats');
 		onlineForLife.Panels.toggleStatsRefresh('start');
 		var data = onlineForLife.Panels.tempData.stats;
@@ -164,17 +161,17 @@ onlineForLife.Panels = {
 		var scheduledUser = userData.scheduled.user.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		var scheduledFriends = userData.scheduled.friends.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		
-		var $chooseLifeUser = $('.section-your-impact .step-chose-life .user-count');
-		var $chooseLifeFriends = $('.section-your-impact .step-chose-life .total-user-count');
-		var $visitedPrcUser = $('.section-your-impact .step-visited-prc .user-count');
-		var $visitedPrcFriends = $('.section-your-impact .step-visited-prc .total-user-count');
-		var $calledFriends = $('.section-your-impact .step-called .total-user-count');
-		var $scheduledUser = $('.section-your-impact .step-scheduled .user-count');
-		var $scheduledFriends = $('.section-your-impact .step-scheduled .total-user-count');
-		var $sinceCount = $('.section-refresh .refresh-count-value');
+		var $chooseLifeUser = $panel.find('.section-your-impact .step-chose-life .user-count');
+		var $chooseLifeFriends = $panel.find('.section-your-impact .step-chose-life .total-user-count');
+		var $visitedPrcUser = $panel.find('.section-your-impact .step-visited-prc .user-count');
+		var $visitedPrcFriends = $panel.find('.section-your-impact .step-visited-prc .total-user-count');
+		var $calledFriends = $panel.find('.section-your-impact .step-called .total-user-count');
+		var $scheduledUser = $panel.find('.section-your-impact .step-scheduled .user-count');
+		var $scheduledFriends = $panel.find('.section-your-impact .step-scheduled .total-user-count');
+		var $sinceCount = $panel.find('.section-refresh .refresh-count-value');
 		
 		setTimeout(function() {
-			onlineForLife.Panels.hideArcs();
+			onlineForLife.Panels.hideArcs($panel);
 			$('.toggle-stats li.selected').removeClass('selected').end().find('.your-impact').addClass('selected');
 			$chooseLifeUser.text('+' + chooseLifeUser);
 			$chooseLifeFriends.text('+' + chooseLifeFriends);
@@ -186,7 +183,7 @@ onlineForLife.Panels = {
 			$sinceCount.text(0);
 						
 			onlineForLife.Panels.toggleStatsRefresh('stop');
-			onlineForLife.Panels.animateArcs();
+			onlineForLife.Panels.animateArcs($panel);
 		}, 2500);
 		
 		var output = '';
@@ -223,10 +220,10 @@ onlineForLife.Panels = {
 		
 	},
 	
-	handleFriendsToggle: function(type){
+	handleFriendsToggle: function(type,$panel){
 		console.log('handleRefreshStats');
 		
-		onlineForLife.Panels.animateArcs();
+		onlineForLife.Panels.animateArcs($panel);
 		if(onlineForLife.Panels.refreshed&&type=='user'){
 			type='refresh';
 		}
@@ -249,7 +246,7 @@ onlineForLife.Panels = {
 		var $scheduledFriends = $('.section-your-impact .step-scheduled .total-user-count');
 		var $sinceCount = $('.section-refresh .refresh-count-value');
 		
-		onlineForLife.Panels.hideArcs();
+		onlineForLife.Panels.hideArcs($panel);
 		$chooseLifeUser.text('+' + chooseLifeUser);
 		$chooseLifeFriends.text('+' + chooseLifeFriends);
 		$visitedPrcUser.text('+' + visitedPrcUser);
@@ -259,7 +256,7 @@ onlineForLife.Panels = {
 		$scheduledFriends.text('+' + scheduledFriends);
 		$sinceCount.text(0);
 		
-		onlineForLife.Panels.animateArcs();
+		onlineForLife.Panels.animateArcs($panel);
 		
 		var output = '';
 		output += 'chooseLifeUser: ' + chooseLifeUser + '\n';

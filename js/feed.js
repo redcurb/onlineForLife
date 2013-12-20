@@ -37,7 +37,18 @@ onlineForLife.Feed = {
 	},
 	
 	init: function(){
-		var uiVer = jQuery.ui.version;
+		console.log('feed init');		
+		$('.refresh-count').on('click',function(){
+			$.mobile.changePage( "events.html", {
+				transition: "pop",
+				changeHash: false,
+				pagechange:function(){
+					alert(1);	
+				}
+			});
+		});
+		
+		//var uiVer = jQuery.ui.version;
 		//var uiVer = jQuery.ui.version;
 		//$('#debug').append('<li>jQuery.ui.version: ' + uiVer + '</li>');
 		onlineForLife.Feed.setVersion();

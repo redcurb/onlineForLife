@@ -482,3 +482,7 @@
 
 
 
+
+.header-primary.ui-header-fixed .ui-btn-active{
+	border:none;	
+}
