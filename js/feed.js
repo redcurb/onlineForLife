@@ -315,6 +315,8 @@ onlineForLife.Feed = {
 		});
 		$( "li.feed-item .feed-content" ).draggable({ 
 		});
+		$( ".refresh-count, .main-refresh, #map" ).draggable({ 
+		});
 
 	},
 
