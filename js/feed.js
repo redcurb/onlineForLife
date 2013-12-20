@@ -296,27 +296,22 @@ onlineForLife.Feed = {
 	},
 
 	setupDraggable: function(){
-		$("1li.feed-item .feed-content").swipe( {
+		$("li.feed-item .feed-content").swipe( {
 			//Generic swipe handler for all directions
-			swipeLeft:function(event, direction, distance, duration, fingerCount) {
-				console.log('swipe left');
-				var $debug = $('#debug');
-				var output = '';
-				output += '<li>event: ' + event + '</li>';
-				output += '<li>direction: ' + direction + '</li>';
-				output += '<li>distance: ' + distance + '</li>';
-				output += '<li>duration: ' + duration + '</li>';
-				output += '<li>fingerCount: ' + fingerCount + '</li>';
-				$debug.html(output);
-				onlineForLife.Feed.handleSwipe($(this),direction);
+			swipeStatus:function(event, phase, direction, distance){
+				var str = "";
+				if (phase=="move"){
+					str="You have moved " + distance +" pixels, past 250 and the handler will fire";
+				}
+				if (phase=="end"){
+					str="Handler fired, you swiped " + direction;
+				}
+				$('#debug #swipeInfo').text(str);
 			},
-			swipeRight:function(event, direction, distance, duration, fingerCount) {
-				console.log('swipe right');
-				onlineForLife.Feed.handleSwipe($(this),direction);
-			},
-			threshold:150
+			triggerOnTouchEnd:false,
+			threshold:250
 		});
-		$( "li.feed-item .feed-content" ).draggable({
+		$("1li.feed-item .feed-content" ).draggable({
 			axis: "x",
 			start: function(e, ui) {
 				var y1 = ui.position.top;
