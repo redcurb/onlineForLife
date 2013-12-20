@@ -95,6 +95,10 @@ onlineForLife.Panels = {
 			var $panel = $(this);
 			onlineForLife.Panels.animateLogo($panel);
 		});
+		$( ".mypanel-left").on( "panelclose", function( event, ui ) {
+			var $panel = $(this);
+			onlineForLife.Panels.resetLogo($panel);
+		});
 		
 		$( ".mypanel-right").on( "panelclose", function( event, ui ) {
 			var $panel = $(this);
@@ -121,7 +125,12 @@ onlineForLife.Panels = {
 		console.log('animateLogo');
 		setTimeout(function() {
 			$('.mypanel-left h2.logo').animate({'top':'0'}, 300);
-		},100);
+		},50);
+	},
+	
+	resetLogo: function($panel){
+		console.log('resetLogo');
+		$('.mypanel-left h2.logo').css({'top':'-260px'});
 	},
 		
 	animateArcs: function($panel){
