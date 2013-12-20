@@ -317,6 +317,8 @@ onlineForLife.Feed = {
 		});
 		$( ".refresh-count, .main-refresh, #map" ).draggable({ 
 		});
+		$('#debug').append('<li>jQuery.ui.version: ' + jQuery.ui.version + '</li>');
+		
 
 	},
 
