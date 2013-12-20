@@ -4,8 +4,8 @@
 
 			width:600px;
 			height:406px;
-			height:370px;
 			margin: 0 auto;
+			padding-left:10px;
 		}
 		.content-main p{
 			color:#000;
@@ -17,12 +17,15 @@
 		.main-refresh{
 			overflow:hidden;
 			font-family:Andada;
+			top: -16px;
+			position: relative;
 		}
 			.main-refresh span.refresh-count{
 				float:left;
 				color:#c85129;
 				font-size:2.9em;
 				line-height:1em;
+				
 			}
 			.main-refresh span.refresh-label{
 				clear:both;
@@ -42,7 +45,7 @@
 				color:#313738;
 			}
 		ul.feed{
-			margin-top:28px;
+			margin-top:12px;
 			margin-left:-5%;
 			width:110%;
 		}
@@ -185,8 +188,9 @@
 					ul.feed li.feed-item p.action-text{
 						padding:0 10%;
 						font-size:1.3em;
-						padding:2% 10% 3% 7.5%;
+						padding:12px 10% 0 45px;
 						width:60%;
+						width:460px;
 						color:#313639;
 						text-shadow:none;
 						float:left;
@@ -206,7 +210,7 @@
 						height:112px;
 						background:url(../img/feed-steps.jpg) no-repeat 0 0;
 						float:right;
-						right: 25px;
+						right: 42px;
 						position: relative;
 						top: 35px;
 					}

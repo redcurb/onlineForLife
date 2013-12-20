@@ -10,8 +10,9 @@ onlineForLife.Events = {
 	
 	setupHandlers: function(){
 		console.log('EVENTS setupHandlers');
-		$('ul.event-calendar li').on('click',function(){
-			onlineForLife.Events.toggleCalendarItem($(this));
+		$('ul.event-calendar li .event-title').on('click',function(){
+			var $li = $(this).parents('li');
+			onlineForLife.Events.toggleCalendarItem($li);
 		});
 	},
 	
@@ -28,10 +29,10 @@ onlineForLife.Events = {
 
 	toggleCalendarItem: function($li){
 		if($li.hasClass('item-open')){
-			$li.removeClass('item-open').find('.event-details').animate({height:0},1000);
+			$li.removeClass('item-open').find('.event-details').slideUp(1000);
 		}
 		else{
-			$li.addClass('item-open').find('.event-details').animate({height:'240px'},1000);
+			$li.addClass('item-open').find('.event-details').slideDown(1000);
 		}
 	}
 

@@ -16,11 +16,14 @@
 				height:189px;
 				background:url(../img/logo-ofl-panel.jpg) no-repeat 0 0;
 				margin:41px 0 0 92px;
+				
+				position: relative;
+				top: -260px;
 			}
 		
 			ul.nav-primary{
 				margin:67px 0 0 7px;
-				overflow:hidden;
+				overflow:hidden1;
 				padding-bottom:20px;
 			}
 				ul.nav-primary li{

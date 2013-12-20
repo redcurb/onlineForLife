@@ -66,14 +66,13 @@ div#events .content-main.ui-content{
 					margin:27px 0 0 16px;
 				}
 			ul.event-calendar li .event-details{
-				padding-left:7%;
+				padding:0 0 10px 46px ;
 				text-shadow:1px 1px 1px #000;
-				height:240px;
 				border-top:1px solid #979797;
 				background: #313839; /* Old browsers */
 				background: -webkit-linear-gradient(top,  #181b19 0%,#313839 20%,#313839 80%,#181b19 100%); /* Chrome10+,Safari5.1+ */
-				height:0;
 				overflow: hidden;
+				display:none;
 			}
 				ul.event-calendar li .event-details h3{
 					color: #c85129;
@@ -81,17 +80,23 @@ div#events .content-main.ui-content{
 					margin: 23px 0 3px 0;
 					font-size: 1.9em;
 					letter-spacing: -1px;
+					float:left;
+					clear:both;
 				}
 				ul.event-calendar li .event-details h4{
 					color: #c7d8d7;
 					font-weight: 300;
 					font-size: 1.27em;
 					margin: 9px 0 1px ;
+					float:left;
+					clear:both;
 				}
 				ul.event-calendar li .event-details h6{
 					color: #707e7f;
 					font-size: 1.1em;
 					letter-spacing: 3px;
+					float:left;
+					clear:both;
 				}
 				ul.event-calendar li .event-details p{
 					color: #707e7f;
@@ -99,5 +104,7 @@ div#events .content-main.ui-content{
 					font-weight: 400;
 					text-shadow: 1px 1px 4px #000;
 					letter-spacing: 2px;
+					float:left;
+					clear:both;
 				}
 

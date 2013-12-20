@@ -85,7 +85,7 @@ onlineForLife.Feed = {
 				//console.log('onlineForLife.Feed.addFirebaseChild TRUE');
 				var newHtml = onlineForLife.Feed.buildFeedItem(1, message.state, message.step, message.stateName, 'first');
 				$('ul.feed').prepend(newHtml);
-				onlineForLife.Feed.centerFeedItemText($('ul.feed li:first'));
+				onlineForLife.Feed.centerFeedItemText('firebase', $('ul.feed li:first'));
 				onlineForLife.Feed.setupDraggable();
 			}
 		});
@@ -250,11 +250,19 @@ onlineForLife.Feed = {
 		//$('#version').text('test version 3');
 		$('ul.feed li').each(function(index,$itemLi){
 			var $this = $(this);
-			onlineForLife.Feed.centerFeedItemText($this);
+			onlineForLife.Feed.centerFeedItemText(index, $this);
 		});
+		setTimeout(function() {
+			onlineForLife.Feed.centerFeedItemText(0, $('ul.feed li:eq(0)'));
+		},10);
+
 	},
+
+
+
+
 	
-	centerFeedItemText: function($this){
+	centerFeedItemText: function(index, $this){
 		var $text = $this.find('p.action-text');
 		var $icon = $this.find('.action-step');
 		var liHeight = $this.outerHeight();
@@ -262,8 +270,20 @@ onlineForLife.Feed = {
 		var textHeight = $text.outerHeight();
 		var borderHeight = 1;
 		var marginTop = 10;
+		marginTop = 17;
 		var totalPadding = (liHeight - textHeight - borderHeight ) / 2;
 		var topPx = totalPadding - marginTop;
+		
+		var output = '';
+		output += 'index: ' + index + '\n';
+		output += 'liHeight: ' + liHeight + '\n';
+		output += 'textHeight: ' + textHeight + '\n';
+		output += 'borderHeight: ' + borderHeight + '\n';
+		output += 'marginTop: ' + marginTop + '\n';
+		output += 'totalPadding: ' + totalPadding + '\n';
+		output += 'topPx: ' + topPx + '\n';
+		output += '\n';
+		//console.log(output);
 		$text.css('top',topPx+'px');
 	},
 	

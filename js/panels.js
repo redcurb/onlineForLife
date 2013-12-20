@@ -91,6 +91,11 @@ onlineForLife.Panels = {
 			},500);
 		});
 		
+		$( ".mypanel-left").on( "panelopen", function( event, ui ) {
+			var $panel = $(this);
+			onlineForLife.Panels.animateLogo($panel);
+		});
+		
 		$( ".mypanel-right").on( "panelclose", function( event, ui ) {
 			var $panel = $(this);
 			onlineForLife.Panels.hideArcs($panel);
@@ -112,6 +117,13 @@ onlineForLife.Panels = {
 		});
 	},
 	
+	animateLogo: function($panel){
+		console.log('animateLogo');
+		setTimeout(function() {
+			$('.mypanel-left h2.logo').animate({'top':'0'}, 300);
+		},100);
+	},
+		
 	animateArcs: function($panel){
 		console.log('animateArcs');
 		var $impact = $panel.find('.section-your-impact');
