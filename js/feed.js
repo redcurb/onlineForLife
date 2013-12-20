@@ -56,10 +56,10 @@ onlineForLife.Feed = {
 		
 		myDataRef.on('child_added', function(snapshot) {
 			var message = snapshot.val();
-			console.log(message);
+			//console.log(message);
 			//displayChatMessage(message.name, message.state, message.step);
 			if(onlineForLife.Feed.addFirebaseChild){
-				console.log('onlineForLife.Feed.addFirebaseChild TRUE');
+				//console.log('onlineForLife.Feed.addFirebaseChild TRUE');
 				onlineForLife.USMap.toggleState(message.state);
 				
 				var newHtml = onlineForLife.Feed.buildFeedItem(1, message.state, message.step, message.stateName, 'first');
@@ -68,7 +68,7 @@ onlineForLife.Feed = {
 				onlineForLife.Feed.setupDraggable();
 			}
 			else{
-				console.log('onlineForLife.Feed.addFirebaseChild FALSE');
+				//console.log('onlineForLife.Feed.addFirebaseChild FALSE');
 			}
 		});
 		function displayChatMessage(name, state, step) {
@@ -293,10 +293,18 @@ onlineForLife.Feed = {
 	},
 
 	setupDraggable: function(){
-		$("2li.feed-item .feed-content").swipe( {
+		$("li.feed-item .feed-content").swipe( {
 			//Generic swipe handler for all directions
 			swipeLeft:function(event, direction, distance, duration, fingerCount) {
 				console.log('swipe left');
+				var $debug = $('#debug');
+				var output = '';
+				output += '<li>event: ' + event + '</li>';
+				output += '<li>direction: ' + direction + '</li>';
+				output += '<li>distance: ' + distance + '</li>';
+				output += '<li>duration: ' + duration + '</li>';
+				output += '<li>fingerCount: ' + fingerCount + '</li>';
+				$debug.html(output);
 				onlineForLife.Feed.handleSwipe($(this),direction);
 			},
 			swipeRight:function(event, direction, distance, duration, fingerCount) {
@@ -305,7 +313,7 @@ onlineForLife.Feed = {
 			},
 			threshold:150
 		});
-		$( "li.feed-item .feed-content" ).draggable({ 
+		$( "2li.feed-item .feed-content" ).draggable({ 
 			axis: "x",
 			start: function(e, ui) {
 				var y1 = ui.position.top;
