@@ -37,8 +37,8 @@ onlineForLife.Feed = {
 	},
 	
 	init: function(){
-		//var uiVer = jQuery.ui.version;
-		var uiVer = 11111;
+		var uiVer = jQuery.ui.version;
+		//var uiVer = 11111;
 		$('#debug').append('<li>jQuery.ui.version: ' + uiVer + '</li>');
 		onlineForLife.Feed.setVersion();
 		onlineForLife.Feed.setupHandlers();
