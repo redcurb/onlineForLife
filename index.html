@@ -26,19 +26,19 @@
 		<h2 class="logo"></h2>
 		<ul class="nav-primary">
 			<li class="first nav-prayers selected">
-				<a href="index.html" data-ajax="false">
+				<a href="#feed" data-ajax="true">
 					<i class="fa fa-globe"></i>
 					<span>Prayer Feed</span>
 				</a>
 			</li>
 			<li class="nav-events">
-				<a href="#events" data-ajax="false">
+				<a href="#events" data-ajax="true">
 					<i class="fa fa-calendar"></i>
 					<span>Events</span>
 				</a>
 			</li>
 			<li class="nav-settings">
-				<a href="settings.html" data-ajax="false">
+				<a href="#settings" data-ajax="true">
 					<i class="fa fa-gear"></i>
 					<span>Settings</span>
 				</a>
@@ -50,7 +50,6 @@
 				</a>
 			</li>
 		</ul>
-        
     </div>
     
     <div data-role="panel" id="feed-mypanel-right" class="mypanel-right" data-display="reveal" data-position="right" data-position-fixed="true">
@@ -174,25 +173,30 @@
 		<h2 class="logo"></h2>
 		<ul class="nav-primary">
 			<li class="first nav-prayers">
-				<a href="index.html" data-ajax="false">
+				<a href="#feed" data-ajax="true">
 					<i class="fa fa-globe"></i>
 					<span>Prayer Feed</span>
 				</a>
 			</li>
 			<li class="nav-events selected">
-				<a href="events.html" data-ajax="false">
+				<a href="#events" data-ajax="true">
 					<i class="fa fa-calendar"></i>
 					<span>Events</span>
 				</a>
 			</li>
 			<li class="nav-settings">
-				<a href="settings.html">
+				<a href="#settings" data-ajax="true">
 					<i class="fa fa-gear"></i>
 					<span>Settings</span>
 				</a>
 			</li>
+			<li class="test-link nav-settings">
+				<a href="dev.html" data-ajax="false">
+					<i class="fa fa-gear"></i>
+					<span>Dev Links</span>
+				</a>
+			</li>
 		</ul>
-        
     </div>
     
     <div data-role="panel" id="events-mypanel-right" class="mypanel-right" data-display="reveal" data-position="right" data-position-fixed="true">
@@ -272,8 +276,8 @@
     
 
     <div data-theme="a" data-role="header" data-position="fixed" class="header-primary">
-        <a href="#panel-left" data-role="none" id="events-panel-left" data-inline="true" class="header-links"></a>
-        <a href="#panel-right" data-role="none" id="events-panel-right" data-inline="true" class="header-links"></a>
+        <a href="#events-mypanel-left" data-role="none" id="events-panel-left" data-inline="true" class="header-links panel-left"></a>
+        <a href="#events-mypanel-right" data-role="none" id="events-panel-right" data-inline="true" class="header-links panel-right"></a>
     </div>
     <div data-role="content" class="content-main">
     	<h2 class="icon-events">
@@ -318,25 +322,30 @@
 		<h2 class="logo"></h2>
 		<ul class="nav-primary">
 			<li class="first nav-prayers">
-				<a href="index.html" data-ajax="false">
+				<a href="#feed" data-ajax="true">
 					<i class="fa fa-globe"></i>
 					<span>Prayer Feed</span>
 				</a>
 			</li>
 			<li class="nav-events">
-				<a href="events.html" data-ajax="false">
+				<a href="#events" data-ajax="true">
 					<i class="fa fa-calendar"></i>
 					<span>Events</span>
 				</a>
 			</li>
 			<li class="nav-settings selected">
-				<a href="settings.html" data-ajax="false">
+				<a href="#settings" data-ajax="true">
 					<i class="fa fa-gear"></i>
 					<span>Settings</span>
 				</a>
 			</li>
+			<li class="test-link nav-settings">
+				<a href="dev.html" data-ajax="false">
+					<i class="fa fa-gear"></i>
+					<span>Dev Links</span>
+				</a>
+			</li>
 		</ul>
-        
     </div>
     
     <div data-role="panel" id="settings-mypanel-right" class="mypanel-right" data-display="reveal" data-position="right" data-position-fixed="true">
@@ -416,8 +425,8 @@
     
 
     <div data-theme="a" data-role="header" data-position="fixed" class="header-primary">
-        <a href="#panel-left" data-role="none" id="settings-panel-left" data-inline="true" class="header-links"></a>
-        <a href="#panel-right" data-role="none" id="settings-panel-right" data-inline="true" class="header-links"></a>
+        <a href="#settings-mypanel-left" data-role="none" id="settings-panel-left" data-inline="true" class="header-links panel-left"></a>
+        <a href="#settings-mypanel-right" data-role="none" id="settings-panel-right" data-inline="true" class="header-links panel-right"></a>
     </div>
     <div data-role="content" class="content-main">
     	<h2 class="icon-settings">

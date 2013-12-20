@@ -3,6 +3,7 @@ onlineForLife.Events = {
 	version: 1,
 
 	init: function(){
+		console.log('events init');
 		onlineForLife.Events.setupHandlers();
 	},
 	

@@ -101,12 +101,12 @@ onlineForLife.Panels = {
 			onlineForLife.Panels.handleRefreshStats($panel);
 		});
 
-		$( "#feed-mypanel-right .toggle-stats li a" ).on( "click", function(){
+		$( ".mypanel-right .toggle-stats li a" ).on( "click", function(){
 			var $this = $(this);
+			var $panel = $(this).parents('.mypanel-right');
 			var $li = $this.parents('li');
 			var type = $li.data('type');
-			var $panel = $(this).parents('.mypanel-right');
-			$('.toggle-stats li').removeClass('selected');
+			$panel.find('.toggle-stats li').removeClass('selected');
 			$li.addClass('selected');
 			onlineForLife.Panels.handleFriendsToggle(type,$panel);
 		});
