@@ -174,6 +174,8 @@ onlineForLife.Panels = {
 		var $sinceCount = $('.section-refresh .refresh-count-value');
 		
 		setTimeout(function() {
+			onlineForLife.Panels.hideArcs();
+			$('.toggle-stats li.selected').removeClass('selected').end().find('.your-impact').addClass('selected');
 			$chooseLifeUser.text('+' + chooseLifeUser);
 			$chooseLifeFriends.text('+' + chooseLifeFriends);
 			$visitedPrcUser.text('+' + visitedPrcUser);
@@ -184,6 +186,7 @@ onlineForLife.Panels = {
 			$sinceCount.text(0);
 						
 			onlineForLife.Panels.toggleStatsRefresh('stop');
+			onlineForLife.Panels.animateArcs();
 		}, 2500);
 		
 		var output = '';
@@ -223,6 +226,7 @@ onlineForLife.Panels = {
 	handleFriendsToggle: function(type){
 		console.log('handleRefreshStats');
 		
+		onlineForLife.Panels.animateArcs();
 		if(onlineForLife.Panels.refreshed&&type=='user'){
 			type='refresh';
 		}
@@ -245,6 +249,7 @@ onlineForLife.Panels = {
 		var $scheduledFriends = $('.section-your-impact .step-scheduled .total-user-count');
 		var $sinceCount = $('.section-refresh .refresh-count-value');
 		
+		onlineForLife.Panels.hideArcs();
 		$chooseLifeUser.text('+' + chooseLifeUser);
 		$chooseLifeFriends.text('+' + chooseLifeFriends);
 		$visitedPrcUser.text('+' + visitedPrcUser);
@@ -253,6 +258,8 @@ onlineForLife.Panels = {
 		$scheduledUser.text('+' + scheduledUser);
 		$scheduledFriends.text('+' + scheduledFriends);
 		$sinceCount.text(0);
+		
+		onlineForLife.Panels.animateArcs();
 		
 		var output = '';
 		output += 'chooseLifeUser: ' + chooseLifeUser + '\n';

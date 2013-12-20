@@ -39,7 +39,7 @@ onlineForLife.Feed = {
 	init: function(){
 		var uiVer = jQuery.ui.version;
 		//var uiVer = jQuery.ui.version;
-		$('#debug').append('<li>jQuery.ui.version: ' + uiVer + '</li>');
+		//$('#debug').append('<li>jQuery.ui.version: ' + uiVer + '</li>');
 		onlineForLife.Feed.setVersion();
 		onlineForLife.Feed.setupHandlers();
 		onlineForLife.Feed.setupFirebase();
@@ -229,7 +229,7 @@ onlineForLife.Feed = {
 	},
 	
 	centerAllFeedItemText: function(){
-		$('#version').text('test version 3');
+		//$('#version').text('test version 3');
 		$('ul.feed li').each(function(index,$itemLi){
 			var $this = $(this);
 			onlineForLife.Feed.centerFeedItemText($this);
@@ -298,19 +298,23 @@ onlineForLife.Feed = {
 	setupDraggable: function(){
 		$("li.feed-item .feed-content").swipe( {
 			//Generic swipe handler for all directions
-			swipeStatus:function(event, phase, direction, distance){
-				onlineForLife.Feed.showTutorial=false;
-				var str = "";
-				if (phase=="move"){
-					str="You have moved " + distance +" pixels, past 250 and the handler will fire";
-				}
-				if (phase=="end"){
-					str="Handler fired, you swiped " + direction;
-				}
-				$('#debug #swipeInfo').text(str);
+			swipeLeft:function(event, direction, distance, duration, fingerCount) {
+				console.log('swipe left');
+				var $debug = $('#debug');
+				var output = '';
+				output += '<li>event: ' + event + '</li>';
+				output += '<li>direction: ' + direction + '</li>';
+				output += '<li>distance: ' + distance + '</li>';
+				output += '<li>duration: ' + duration + '</li>';
+				output += '<li>fingerCount: ' + fingerCount + '</li>';
+				//$debug.html(output);
+				onlineForLife.Feed.handleSwipe($(this),direction);
 			},
-			triggerOnTouchEnd:false,
-			threshold:250
+			swipeRight:function(event, direction, distance, duration, fingerCount) {
+				console.log('swipe right');
+				onlineForLife.Feed.handleSwipe($(this),direction);
+			},
+			threshold:50
 		});
 		$("1li.feed-item .feed-content" ).draggable({
 			axis: "x",
@@ -347,9 +351,6 @@ onlineForLife.Feed = {
 
 		});
 
-		$( ".refresh-count, .main-refresh, #map" ).draggable({ 
-		});
-		
 
 	},
 
@@ -392,9 +393,9 @@ onlineForLife.Feed = {
 			if(onlineForLife.Feed.tutorial<onlineForLife.Feed.tutorialMax){
 	
 				$listItem.addClass('show-tutorial');
-				$listItemContent.animate({'left':'-145px'}, 300, function(){
-					$listItemContent.animate({'left':'-115px'}, 200, function(){
-						$listItemContent.animate({'left':'-125px'}, 100, function(){
+				$listItemContent.animate({'left':'-140px'}, 300, function(){
+					$listItemContent.animate({'left':'-110px'}, 200, function(){
+						$listItemContent.animate({'left':'-120px'}, 100, function(){
 						});
 					});
 				});
@@ -501,7 +502,7 @@ onlineForLife.Feed = {
 	handleSwipeThanks: function($this){
 		console.log('handleSwipe', $this.attr('class'));
 		var $prayerText = $this.find('.action-text em');
-		$prayerText.text('Thank you for your prayer!');
+		//$prayerText.text('Thank you for your prayer!');
 		
 	}
 	

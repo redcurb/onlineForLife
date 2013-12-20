@@ -4,6 +4,7 @@
 
 			width:600px;
 			height:406px;
+			height:370px;
 			margin: 0 auto;
 		}
 		.content-main p{
@@ -20,24 +21,28 @@
 			.main-refresh span.refresh-count{
 				float:left;
 				color:#c85129;
-				font-size:1.9em;
+				font-size:2.9em;
+				line-height:1em;
 			}
 			.main-refresh span.refresh-label{
 				clear:both;
 				float:left;
 				color:#313639;
-				font-size:1.1em;
+				font-size:2.1em;
 			}
 			.main-refresh i.fa{
 				float:right;
 				margin-right:32px;
 				color:#d5d8d7;
+				font-size:2.1em;
+				top:82px;
+				position:relative;
 			}
 			.main-refresh i.fa:hover{
 				color:#313738;
 			}
 		ul.feed{
-			margin-top:30px;
+			margin-top:28px;
 			margin-left:-5%;
 			width:110%;
 		}
@@ -180,7 +185,7 @@
 					ul.feed li.feed-item p.action-text{
 						padding:0 10%;
 						font-size:1.3em;
-						padding:2% 10% 3% 5%;
+						padding:2% 10% 3% 7.5%;
 						width:60%;
 						color:#313639;
 						text-shadow:none;
