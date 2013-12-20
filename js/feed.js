@@ -293,7 +293,7 @@ onlineForLife.Feed = {
 	},
 
 	setupDraggable: function(){
-		$("li.feed-item .feed-content").swipe( {
+		$("1li.feed-item .feed-content").swipe( {
 			//Generic swipe handler for all directions
 			swipeLeft:function(event, direction, distance, duration, fingerCount) {
 				console.log('swipe left');
@@ -313,38 +313,7 @@ onlineForLife.Feed = {
 			},
 			threshold:150
 		});
-		$( "2li.feed-item .feed-content" ).draggable({ 
-			axis: "x",
-			start: function(e, ui) {
-				var y1 = ui.position.top;
-				var x1 = ui.position.left;
-				console.log(y1 + ' - ' + x1);
-				console.log('START: ' + y1 + ' - ' + x1);
-				onlineForLife.Feed.DragXStart = x1;
-			},
-			distance: 50,
-			revert:false,
-			stop: function(e, ui) {
-				var y1 = ui.position.top;
-				var x1 = ui.position.left;
-				console.log('STOP: ' + y1 + ' - ' + x1);
-				onlineForLife.Feed.DragXEnd = x1;
-				console.log(onlineForLife.Feed.DragXStart + ' - ' + onlineForLife.Feed.DragXEnd);
-				if(x1>0){
-					var swipeDir = 'LeftToRight';
-				}
-				else{
-					var swipeDir = 'RightToLeft';
-				}
-				
-				onlineForLife.Feed.handleSwipe($(this),swipeDir);
-			}
-			/*
-			start: function( event, ui ) {
-				console.log(1);
-				onlineForLife.Feed.handleSwipe($(this));
-			}
-			*/
+		$( "li.feed-item .feed-content" ).draggable({ 
 		});
 
 	},
