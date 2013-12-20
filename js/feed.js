@@ -299,6 +299,7 @@ onlineForLife.Feed = {
 		$("li.feed-item .feed-content").swipe( {
 			//Generic swipe handler for all directions
 			swipeStatus:function(event, phase, direction, distance){
+				onlineForLife.Feed.showTutorial=false;
 				var str = "";
 				if (phase=="move"){
 					str="You have moved " + distance +" pixels, past 250 and the handler will fire";
