@@ -64,8 +64,17 @@ onlineForLife.Feed = {
 	},
 	
 	setupFirebase:function(){
-		console.log('setupFirebase');
-		var dbUrl = 'https://onlineforlife.firebaseio.com/prayers';
+		onlineForLife.Feed.setupFirebasePrayers();
+		onlineForLife.Feed.setupFirebaseFeedItem();
+		setTimeout(function() {
+			console.log('addFirebaseChild TRUE');
+			onlineForLife.Feed.addFirebaseChild = true;
+		},5000);
+	},
+	
+	setupFirebaseFeedItem:function(){
+		console.log('setupFirebaseFeedItem');
+		var dbUrl = 'https://onlineforlife.firebaseio.com/feed';
 		var myDataRef = new Firebase(dbUrl);
 		
 		myDataRef.on('child_added', function(snapshot) {
@@ -74,27 +83,25 @@ onlineForLife.Feed = {
 			//displayChatMessage(message.name, message.state, message.step);
 			if(onlineForLife.Feed.addFirebaseChild){
 				//console.log('onlineForLife.Feed.addFirebaseChild TRUE');
-				onlineForLife.USMap.toggleState(message.state);
-				
 				var newHtml = onlineForLife.Feed.buildFeedItem(1, message.state, message.step, message.stateName, 'first');
 				$('ul.feed').prepend(newHtml);
 				onlineForLife.Feed.centerFeedItemText($('ul.feed li:first'));
 				onlineForLife.Feed.setupDraggable();
 			}
-			else{
-				//console.log('onlineForLife.Feed.addFirebaseChild FALSE');
+		});
+	},
+	
+	setupFirebasePrayers:function(){
+		console.log('setupFirebasePrayers');
+		var dbUrl = 'https://onlineforlife.firebaseio.com/prayers';
+		var myDataRef = new Firebase(dbUrl);
+		
+		myDataRef.on('child_added', function(snapshot) {
+			var message = snapshot.val();
+			if(onlineForLife.Feed.addFirebaseChild){
+				onlineForLife.USMap.toggleState(message.state);
 			}
 		});
-		function displayChatMessage(name, state, step) {
-			var messageText = 'A user from ' + state + ' just prayed for a woman on step ' + step + '!'; 
-			$('<div/>').text(messageText).appendTo($('#messagesDiv'));
-			$('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
-		};
-		setTimeout(function() {
-			console.log('addFirebaseChild TRUE');
-			onlineForLife.Feed.addFirebaseChild = true;
-		},5000);
-		
 	},
 	
 	setVersion:function(v){

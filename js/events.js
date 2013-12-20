@@ -5,6 +5,7 @@ onlineForLife.Events = {
 	init: function(){
 		console.log('events init');
 		onlineForLife.Events.setupHandlers();
+		onlineForLife.Events.setupFirebaseEvents();
 	},
 	
 	setupHandlers: function(){
@@ -14,6 +15,17 @@ onlineForLife.Events = {
 		});
 	},
 	
+	setupFirebaseEvents:function(){
+		console.log('setupFirebasePrayers');
+		var dbUrl = 'https://onlineforlife.firebaseio.com/events';
+		var myDataRef = new Firebase(dbUrl);
+		
+		myDataRef.on('child_added', function(snapshot) {
+			var message = snapshot.val();
+			console.log(message);
+		});
+	},
+
 	toggleCalendarItem: function($li){
 		if($li.hasClass('item-open')){
 			$li.removeClass('item-open').find('.event-details').animate({height:0},1000);
