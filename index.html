@@ -284,34 +284,7 @@
     		<i class="fa fa-calendar fa-5x"></i>
     		<p>Events</p>
     	</h2>
-    	<ul class="event-calendar">
-    		<li class="first item-init" data-event-id="1">
-    			<div class="event-title">
-    				<p class="event-description">Group meetup about the latest issues title of event</p>
-    				<i class="fa fa-chevron-down"></i>
-    				<i class="fa fa-chevron-right"></i>
-    			</div>
-    			<div class="event-details">
-    				<h3>January 13th, 2014</h3>
-    				<h6>7:00 - 8:30 PM</h6>
-    				<h4>Church Name as Location</h4>
-    				<p>Additional details would go right here.</p>
-    			</div>
-    		</li>
-    		<li class="item-init" data-event-id="2">
-    			<div class="event-title">
-    				<p class="event-description">Group meetup about the latest issues title of event</p>
-    				<i class="fa fa-chevron-down"></i>
-    				<i class="fa fa-chevron-right"></i>
-    			</div>
-    			<div class="event-details">
-    				<h3>January 13th, 2014</h3>
-    				<h6>7:00 - 8:30 PM</h6>
-    				<h4>Church Name as Location</h4>
-    				<p>Additional details would go right here.</p>
-    			</div>
-    		</li>
-    	</ul>
+    	<ul class="event-calendar"></ul>
     
     
     </div>
@@ -495,6 +468,21 @@
 					<i class="action-step step-{{step}}"></i>
 				</div>
 			</li>
+</script>
+<script id="template-event-item" type="text/x-handlebars-template">
+    		<li class="item-init" data-event-id="{{eventId}}">
+    			<div class="event-title">
+    				<p class="event-description">{{eventTitle}}</p>
+    				<i class="fa fa-chevron-down"></i>
+    				<i class="fa fa-chevron-right"></i>
+    			</div>
+    			<div class="event-details">
+    				<h3>{{eventMonth}} {{eventDay}}, {{eventYear}}</h3>
+    				<h6>{{eventStartHour}}:{{eventStartMinute}} {{eventStartAmpm}} - {{eventEndHour}}:{{eventEndMinute}} {{eventEndAmpm}}</h6>
+    				<h4>{{eventLocation}}</h4>
+    				<p>{{eventDescription}}</p>
+    			</div>
+    		</li> 
 </script>
 
 <script src="js/libraries/jquery-1.9.1.min.js"></script>
