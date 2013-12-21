@@ -57,27 +57,63 @@ li{
 		.header-primary.ui-header-fixed .ui-btn-right,
 		.header-primary a{
 			position:absolute;
-			left:30px;
+			left:31px;
 			top:28px;
 		}
 		.ui-header-fixed .ui-btn-left, 
 		.header-primary a#panel-left{
-			width:148px;
+			width:348px;
 			height:35px;
 			display:block;
 			background:transparent url(../img/btn-header.jpg) no-repeat 0 0;
+			background:none;
+			overflow:hidden;
 		}
+		.header-primary .header-links{
+			text-shadow:0 -1px 0 #31363a;
+		}
+			.header-primary .header-links i{
+				color:#31363a;
+				font-size: 1.0em;
+				float: left;
+				line-height: 0.8em;
+			}
+			.header-primary .header-links span{
+				color: #31363a;
+				font-size: 0.75em;
+				float: left;
+				font-family: Oswald;
+				font-weight: 400;
+				text-transform: uppercase;
+				line-height: 1em;
+				letter-spacing: 3px;
+				margin-left: 14px;
+			}
+			.header-primary .panel-left i{
+				
+			}
+			.header-primary .panel-left span{
+			}
+		
 		.header-primary.ui-header-fixed .ui-btn-right,
 		.header-primary a.panel-right{
 			left:auto;
 			right:26px;
 			top:25px;
-			width:196px;
-			height:42px;
+			width:348px;
+			height:45px;
 			display:block;
-			background:transparent url(../img/btn-header.jpg) no-repeat 0 -40px;
+			overflow:hidden;
 		}
 	
+			.header-primary .panel-right i{
+				float:right;
+				line-height: 1em;
+			}
+			.header-primary .panel-right span{
+				float:right;
+				margin: 3px 13px 0 0;
+			}
 	
 	
 	.content-main{
