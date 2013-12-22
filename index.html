@@ -3,18 +3,27 @@
   <head>
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8">
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    function onDeviceReady() {
-		var model = device.model;
-		var url = 'feed.html';
-		if(model.indexOf('iPhone')>=0){
-			url = 'feed-iphone.html';
+    var testMethod = 'app';
+    testMethod = 'web';
+    if(testMethod=='app'){
+		document.addEventListener("deviceready", onDeviceReady, false);
+		function onDeviceReady() {
+			var model = device.model;
+			var url = 'feed.html';
+			if(model.indexOf('iPhone')>=0){
+				url = 'feed-iphone.html';
+			}
+			else if(model.indexOf('iPad')>=0){
+				url = 'feed-ipad.html';
+			}
+			window.location.href = url;
 		}
-		else if(model.indexOf('iPad')>=0){
-			url = 'feed-ipad.html';
-		}
-		window.location.href = url;
+	}
+    if(testMethod=='web'){
+    	document.write(navigator);
+    	document.write(navigator.userAgent);
+    	var url = 'feed.html';
+    	window.location.href = url;
 	}
     </script>
   </head>
