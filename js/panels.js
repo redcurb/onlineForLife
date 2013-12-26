@@ -65,7 +65,7 @@ onlineForLife.Panels = {
 
 	hideArcs: function($panel){
 		console.log('hideArcs');
-		$panel.css('outline','5px solid yellow');
+		//$panel.css('outline','5px solid yellow');
 		var $impact = $panel.find('.section-your-impact');
 		var $logo = $panel.find('.stats-logo');
 		var $arcs = $logo.find('.stats-logo-arc');

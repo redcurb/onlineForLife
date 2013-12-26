@@ -20,11 +20,8 @@
 	
 </head>
 <body>
-<script type="text/javascript" charset="utf-8">
-	document.write(navigator);
-	document.write(navigator.userAgent);
-</script>
 <div data-role="page" id="feed">
+	<ul id="device-info"></ul>
 	<!--<span id="version">ver. 12.13.19</span>-->
     <div data-role="panel" id="feed-mypanel-left" class="mypanel-left" data-display="reveal" data-position-fixed="true">
 		<h2 class="logo"></h2>
@@ -133,6 +130,7 @@
     
 
     <div data-theme="a" data-role="header" data-position="fixed" class="header-primary">
+    	<div style="height:90px;">
         <a href="#feed-mypanel-left" data-role="none" id="feed-panel-left" data-inline="true" class="header-links panel-left">
         	<i class="fa fa-bars"></i>
         	<span>Menu</span>
@@ -141,6 +139,7 @@
         	<i class="fa fa-bookmark"></i>
         	<span>Prayers</span>
         </a>
+        </div>
     </div>
 
 

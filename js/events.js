@@ -74,7 +74,7 @@ onlineForLife.Events = {
 	},
 
 	buildEventItem: function(eventId, eventTitle, eventMonth, eventDay, eventYear, eventStartHour, eventStartMinute, eventStartAmpm, eventEndHour, eventEndMinute, eventEndAmpm, eventLocation, eventDescription){
-		console.clear();
+		//console.clear();
 		var $calendar = $('ul.event-calendar');
 		var source	= $("#template-event-item").html();
 		var template = Handlebars.compile(source);

@@ -9,8 +9,12 @@ body,html{
 	font-family: Oswald;
 }
 .test-link,
-ul.nav-primary li.test-link{
+ul.nav-primary li.test-link,
+#device-info{
 	display:none;
+}
+#device-info{
+	display:block;
 }
 body,
 .ui-body-c, .ui-overlay-c,
@@ -42,7 +46,7 @@ li{
 		overflow:hidden;
 		background: #fff !important;
 		background: rgba(255,255,255,0.5) !important;
-		height:90px;
+		height:90px2;
 		border:0;
 	}
 		.ui-page .ui-header.header-primary h2{

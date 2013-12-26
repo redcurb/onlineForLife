@@ -1,0 +1,385 @@
+<!doctype html>
+<html>
+<head>
+	<script src='https://cdn.firebase.com/v0/firebase.js'></script>
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+	<style>
+	body{
+		font-family:tahoma;
+	}
+	.content-main{
+		overflow:hidden;
+	}
+	.create-item{
+		overflow:hidden;
+		clear:both;
+		margin-bottom:10px;
+		float:left;
+		border:1px solid gray;
+		border-radius:5px;
+		padding:8px 3px 5px 3px;
+	}
+		label, .create-item select, .create-item input{
+			float:left;
+			margin-right:7px;
+		}
+		label{
+			display:block;
+		}
+		input[type=text]{
+			width:300px;
+		}
+		input[type=submit]{
+			width:100px1;
+		}
+		textarea{
+			width:300px;
+			height:100px;
+		}
+		.row{
+			margin-top:10px;
+			clear:both;
+		}
+		.label-select{
+			margin-top:10px;
+			font-size:14px;
+			width:150px;
+		}
+		.label-select.time-end{
+			width:105px;
+		}
+		
+.col{
+	float:left;	
+}
+.col1{
+	width:140px;
+}
+.col2{
+	width:330px;
+}
+.col3{
+	width:100px;
+}
+.wrap{
+	clear:both;	
+}
+
+#event-submit{
+	position:relative;
+	top:133px;	
+}
+	.danger{
+		clear:both;
+		float:left;
+		margin-top:50px;
+		border-top:1px solid gray;
+	}
+		.danger p{
+			border-radius:10px;
+			background:red;
+			width:400px;
+			padding:25px;
+		}
+			.danger p em{
+				font-style:normal;
+				font-weight:bold;
+			}
+		.danger input{
+			clear:both;
+			margin-top:10px;
+		}
+	</style>
+</head>
+<body>
+<div class="content-main">
+	<div id="create-feed-item" class="create-item">
+		<form name="form-create-feed-item" id="form-create-feed-item">
+			<div class="col col1">
+				<label>Create Feed Item</label>
+			</div>
+			<div class="col col2">
+				<select name="feed-states" id="feed-states">
+					<option value="AL">Alabama</option>
+					<option value="AK">Alaska</option>
+					<option value="AZ">Arizona</option>
+					<option value="AR">Arkansas</option>
+					<option value="CA">California</option>
+					<option value="CO">Colorado</option>
+					<option value="CT">Connecticut</option>
+					<option value="DE">Delaware</option>
+					<option value="FL">Florida</option>
+					<option value="GA">Georgia</option>
+					<option value="HI">Hawaii</option>
+					<option value="ID">Idaho</option>
+					<option value="IL">Illinois</option>
+					<option value="IN">Indiana</option>
+					<option value="IA">Iowa</option>
+					<option value="KS">Kansas</option>
+					<option value="KY">Kentucky</option>
+					<option value="LA">Louisiana</option>
+					<option value="ME">Maine</option>
+					<option value="MD">Maryland</option>
+					<option value="MA">Massachusetts</option>
+					<option value="MI">Michigan</option>
+					<option value="MN">Minnesota</option>
+					<option value="MS">Mississippi</option>
+					<option value="MO">Missouri</option>
+					<option value="MT">Montana</option>
+					<option value="NE">Nebraska</option>
+					<option value="NV">Nevada</option>
+					<option value="NH">New Hampshire</option>
+					<option value="NJ">New Jersey</option>
+					<option value="NM">New Mexico</option>
+					<option value="NY">New York</option>
+					<option value="NC">North Carolina</option>
+					<option value="ND">North Dakota</option>
+					<option value="OH">Ohio</option>
+					<option value="OK">Oklahoma</option>
+					<option value="OR">Oregon</option>
+					<option value="PA">Pennsylvania</option>
+					<option value="RI">Rhode Island</option>
+					<option value="SC">South Carolina</option>
+					<option value="SD">South Dakota</option>
+					<option value="TN">Tennessee</option>
+					<option value="TX">Texas</option>
+					<option value="UT">Utah</option>
+					<option value="VT">Vermont</option>
+					<option value="VA">Virginia</option>
+					<option value="WA">Washington</option>
+					<option value="WV">West Virginia</option>
+					<option value="WI">Wisconsin</option>
+					<option value="WY">Wyoming</option>
+				</select>
+				
+				<select name="feed-steps" id="feed-steps">
+					<option value="1">Step 1</option>
+					<option value="2">Step 2</option>
+					<option value="3">Step 3</option>
+					<option value="4">Step 4</option>
+				</select>
+			</div>
+			<div class="col col3">
+				<input type="submit" id="feed-submit"/>
+			</div>
+		</form>
+	</div>
+	<div id="create-prayer" class="create-item">
+		<form name="form-create-prayer" id="form-create-prayer">
+			<div class="col col1">
+				<label>Create Prayer</label>
+			</div>
+			<div class="col col2">
+				<select name="prayer-states" id="prayer-states">
+					<option value="AL">Alabama</option>
+					<option value="AK">Alaska</option>
+					<option value="AZ">Arizona</option>
+					<option value="AR">Arkansas</option>
+					<option value="CA">California</option>
+					<option value="CO">Colorado</option>
+					<option value="CT">Connecticut</option>
+					<option value="DE">Delaware</option>
+					<option value="FL">Florida</option>
+					<option value="GA">Georgia</option>
+					<option value="HI">Hawaii</option>
+					<option value="ID">Idaho</option>
+					<option value="IL">Illinois</option>
+					<option value="IN">Indiana</option>
+					<option value="IA">Iowa</option>
+					<option value="KS">Kansas</option>
+					<option value="KY">Kentucky</option>
+					<option value="LA">Louisiana</option>
+					<option value="ME">Maine</option>
+					<option value="MD">Maryland</option>
+					<option value="MA">Massachusetts</option>
+					<option value="MI">Michigan</option>
+					<option value="MN">Minnesota</option>
+					<option value="MS">Mississippi</option>
+					<option value="MO">Missouri</option>
+					<option value="MT">Montana</option>
+					<option value="NE">Nebraska</option>
+					<option value="NV">Nevada</option>
+					<option value="NH">New Hampshire</option>
+					<option value="NJ">New Jersey</option>
+					<option value="NM">New Mexico</option>
+					<option value="NY">New York</option>
+					<option value="NC">North Carolina</option>
+					<option value="ND">North Dakota</option>
+					<option value="OH">Ohio</option>
+					<option value="OK">Oklahoma</option>
+					<option value="OR">Oregon</option>
+					<option value="PA">Pennsylvania</option>
+					<option value="RI">Rhode Island</option>
+					<option value="SC">South Carolina</option>
+					<option value="SD">South Dakota</option>
+					<option value="TN">Tennessee</option>
+					<option value="TX">Texas</option>
+					<option value="UT">Utah</option>
+					<option value="VT">Vermont</option>
+					<option value="VA">Virginia</option>
+					<option value="WA">Washington</option>
+					<option value="WV">West Virginia</option>
+					<option value="WI">Wisconsin</option>
+					<option value="WY">Wyoming</option>
+				</select>
+				
+				<select name="prayer-steps" id="prayer-steps">
+					<option value="1">Step 1</option>
+					<option value="2">Step 2</option>
+					<option value="3">Step 3</option>
+					<option value="4">Step 4</option>
+				</select>
+			</div>
+			<div class="col col3">
+				<input type="submit" id="prayer-submit"/>
+			</div>
+		</form>
+	</div>
+	<div id="create-event" class="create-item" style="display:none2;">
+		<form name="form-create-event" id="form-create-event">
+			<div class="col col1">
+				<label>Create Event</label>
+			</div>
+			<div class="col col2">
+				<div class="row wrap">
+					<input type="text" name="event-title" id="event-title" placeholder="Event Title" required />
+				</div>
+				<div class="row wrap">
+					<select name="event-month" id="event-month" class="wrap">
+						<option value="1">January</option>
+						<option value="2">February</option>
+						<option value="3">March</option>
+						<option value="4">April</option>
+						<option value="5">May</option>
+						<option value="6">June</option>
+						<option value="7">July</option>
+						<option value="8">August</option>
+						<option value="9">September</option>
+						<option value="10">October</option>
+						<option value="11">November</option>
+						<option value="12">December</option>
+					</select>
+					<select name="event-day" id="event-day">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+						<option value="31">31</option>
+					</select>
+					<select name="event-year" id="event-year">
+						<option value="2013">2013</option>
+						<option value="2014">2014</option>
+						<option value="2015">2015</option>
+					</select>
+				</div>
+				<div class="row wrap">
+					<label class="label-select time-start">Start Time</label>
+					<label class="label-select time-end">End Time</label>
+				</div>
+				<div class="row wrap">
+					<select name="event-start-hour" id="event-start-hour">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select>
+					<select name="event-start-minute" id="event-start-minute">
+						<option value="00">00</option>
+						<option value="15">15</option>
+						<option value="30">30</option>
+						<option value="45">45</option>
+					</select>
+					<select name="event-start-ampm" id="event-start-ampm">
+						<option value="AM">AM</option>
+						<option value="PM">PM</option>
+					</select>
+					<select name="event-end-hour" id="event-end-hour">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select>
+					<select name="event-end-minute" id="event-end-minute">
+						<option value="00">00</option>
+						<option value="15">15</option>
+						<option value="30">30</option>
+						<option value="45">45</option>
+					</select>
+					<select name="event-end-ampm" id="event-end-ampm">
+						<option value="AM">AM</option>
+						<option value="PM">PM</option>
+					</select>
+				</div>
+				<div class="row wrap">
+					<input type="text" name="event-location" id="event-location" placeholder="Event Location" required />
+				</div>
+				<div class="row wrap">
+					<textarea class="event-description" id="event-description" class="wrap" required></textarea>
+				</div>
+			</div>
+			<div class="col col3">
+				<input type="submit" id="event-submit"/>
+			</div>
+		</form>
+	</div>
+
+	
+	<div class="danger">
+		<p>
+		<span><em>WARNING:</em><br>
+		Pressing these buttons will erase all stored data for the item selected. This is just here for testing.</span>
+		<br>
+		<input type="submit" id="feed-reset" value="Reset Feed Data" />
+		<br>
+		<input type="submit" id="prayer-reset" value="Reset Prayer Data" />
+		<br>
+		<input type="submit" id="event-reset" value="Reset Event Data" />
+		<br>
+		</p>
+		
+	</div>
+	<script src='js/admin.js'></script>
+</body>
+</html>
