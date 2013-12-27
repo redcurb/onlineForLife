@@ -487,5 +487,39 @@
 
 
 .header-primary.ui-header-fixed .ui-btn-active{
-	border:none;	
+	border:none;
+	background:none;
+	outline:none;
 }
+
+	.ui-page.ui-page-panel-open .ui-header.header-primary {
+		
+	}
+	.ui-page.panel-opening .ui-header.header-primary{
+
+	}
+	.ui-page.panel-opening .ui-header.header-primary,
+	.ui-page.panel-closing .ui-header.header-primary{
+		background: rgba(255,255,255,1) !important;
+	}
+
+
+
+	.ui-page .ui-header.header-primary.fadeBgIn{
+		animation: fadeBgIn 0.5s;
+		-webkit-animation: fadeBgIn 0.5s;
+		background: rgba(0,0,0,1) ;
+		
+	}
+		@keyframes fadeBgIn{
+			from {background: rgba(255,255,255,0.5) ;}
+			to {background: rgba(255,255,255,1) ;}
+		}
+		@-webkit-keyframes fadeBgIn{
+			from {background: rgba(255,255,255,0.5) ;}
+			to {background: rgba(255,255,255,1) ;}
+		}		
+	
+	
+	
+	

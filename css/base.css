@@ -14,7 +14,7 @@ ul.nav-primary li.test-link,
 	display:none;
 }
 #device-info{
-	display:block;
+	display:block1;
 }
 body,
 .ui-body-c, .ui-overlay-c,
@@ -46,9 +46,10 @@ li{
 		overflow:hidden;
 		background: #fff !important;
 		background: rgba(255,255,255,0.5) !important;
-		height:90px2;
+		height:90px;
 		border:0;
 	}
+	
 		.ui-page .ui-header.header-primary h2{
 			font-size:1.5em;
 			color:#fff;

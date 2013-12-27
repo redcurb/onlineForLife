@@ -84,26 +84,48 @@ onlineForLife.Panels = {
 	},
 	
 	setupHandlers: function(){
-		$( ".mypanel-right").on( "panelopen", function( event, ui ) {
+		var $panelRight = $( ".mypanel-right");
+		var $panelLeft = $( ".mypanel-left");
+		var $panels = $( ".mypanel-right, .mypanel-left");
+		$panels.on( "panelbeforeopen", function( event, ui ) {
+			var $this = $(this);
+			var $page = $this.parents('.ui-page');
+			$page.addClass('panel-opening');
+		} );
+		$panels.on( "panelbeforeclose", function( event, ui ) {
+			var $this = $(this);
+			var $page = $this.parents('.ui-page');
+			$page.addClass('panel-closing');
+		} );
+		
+		$panelRight.on( "panelopen", function( event, ui ) {
 			var $panel = $(this);
+			var $page = $panel.parents('.ui-page');
+			$page.removeClass('panel-opening');
 			setTimeout(function() {
 				onlineForLife.Panels.animateArcs($panel);
 			},500);
 		});
-		
-		$( ".mypanel-left").on( "panelopen", function( event, ui ) {
+		$panelRight.on( "panelclose", function( event, ui ) {
 			var $panel = $(this);
+			var $page = $panel.parents('.ui-page');
+			$page.removeClass('panel-closing');
+			onlineForLife.Panels.hideArcs($panel);
+		});
+
+		$panelLeft.on( "panelopen", function( event, ui ) {
+			var $panel = $(this);
+			var $page = $panel.parents('.ui-page');
+			$page.removeClass('panel-opening');
 			onlineForLife.Panels.animateLogo($panel);
 		});
-		$( ".mypanel-left").on( "panelclose", function( event, ui ) {
+		$panelLeft.on( "panelclose", function( event, ui ) {
 			var $panel = $(this);
+			var $page = $panel.parents('.ui-page');
+			$page.removeClass('panel-closing');
 			onlineForLife.Panels.resetLogo($panel);
 		});
 		
-		$( ".mypanel-right").on( "panelclose", function( event, ui ) {
-			var $panel = $(this);
-			onlineForLife.Panels.hideArcs($panel);
-		});
 		
 		$( ".mypanel-right .fa-refresh" ).on( "click", function(){
 			var $panel = $(this).parents('.mypanel-right');
