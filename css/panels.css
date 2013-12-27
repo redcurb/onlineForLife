@@ -255,9 +255,17 @@
 			}
 				.mypanel-right .section-your-impact .impact-col2 .stats-logo{
 					display:block;
+
+					width:179px;
+					height:177px;
+					background:#fff url(../img/logo-stats.jpg) no-repeat 0 0;
+
+
 					width:181px;
 					height:179px;
-					background:#fff url(../img/logo-stats.jpg) no-repeat 0 0;
+					background:none;
+					background:transparent url(../img/thin-white-circle.png?ver=1) no-repeat 1px 1px;
+
 					position:relative;
 					margin-top:32px;
 					text-shadow:none;

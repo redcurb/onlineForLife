@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=no;"/>
+	
+	<link rel="stylesheet" href="css/reset-min.css" />
+	<link rel="stylesheet" href="css/libraries/jquery.mobile-1.3.2.min.css" />
+    <link href='css/fonts.css' rel='stylesheet' type='text/css'>
+	<link href="css/font-awesome.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="css/base.css?ver=12.19.1" />
+	<link rel="stylesheet" href="css/panels.css?ver=12.19.1" />
+	<link rel="stylesheet" href="css/footer.css?ver=12.19.1" />
+	
+	<link rel="stylesheet" href="css/feed.css?ver=12.19.1" />
+	<link rel="stylesheet" href="css/events.css?ver=12.19.1" />
+	<link rel="stylesheet" href="css/settings.css?ver=12.19.1" />
+	
+</head>
+<body>
+<div data-role="page" id="feed">
+	<ul id="device-info"></ul>
+	<!--<span id="version">ver. 12.13.19</span>-->
+    <div data-role="panel" id="feed-mypanel-left" class="mypanel-left" data-display="reveal" data-position-fixed="true">
+		<h2 class="logo"></h2>
+		<ul class="nav-primary">
+			<li class="first nav-prayers selected">
+				<a href="#feed" data-ajax="true">
+					<i class="fa fa-globe"></i>
+					<span>Prayer Feed</span>
+				</a>
+			</li>
+			<li class="nav-events">
+				<a href="#events" data-ajax="true">
+					<i class="fa fa-calendar"></i>
+					<span>Events</span>
+				</a>
+			</li>
+			<li class="nav-settings">
+				<a href="#settings" data-ajax="true">
+					<i class="fa fa-gear"></i>
+					<span>Settings</span>
+				</a>
+			</li>
+			<li class="test-link1 nav-settings">
+				<a href="dev.html" data-ajax="false">
+					<i class="fa fa-gear"></i>
+					<span>Dev Links</span>
+				</a>
+			</li>
+		</ul>
+    </div>
+    
+    <div data-role="panel" id="feed-mypanel-right" class="mypanel-right" data-display="reveal" data-position="right" data-position-fixed="true">
+		<div class="section-refresh">
+			<i class="fa fa-refresh fa-2x"></i>
+			<span class="refresh-count-text">
+				<span class="refresh-count-since"><span class="refresh-count-value">14</span> days since last refresh</span>
+				<span class="refresh-count-refreshing">refreshing</span>
+			</span>
+		</div>
+		<div class="section-total-saved">
+			<span class="user-count">+157</span>
+			<span class="total-user-count">748,932</span>
+			<span class="step-label">Babies Saved</span>
+		</div>
+		<div class="section-your-impact">
+			<div class="impact-col impact-col1">
+				<div class="impact-step step-chose-life first">
+					<span class="user-count">+3</span>
+					<span class="total-user-count">27</span>
+					<span class="step-label">Chose Life</span>
+				</div>
+				<div class="impact-step step-visited-prc">
+					<span class="user-count">+17</span>
+					<span class="total-user-count">193</span>
+					<span class="step-label">Visited PRC</span>
+				</div>
+			</div>
+			<div class="impact-col impact-col2">
+				<em class="stats-logo">
+					<i class="stats-logo-arc step-called"></i>
+					<i class="stats-logo-arc step-scheduled"></i>
+					<i class="stats-logo-arc step-visited-prc"></i>
+					<i class="stats-logo-arc step-chose-life"></i>
+				</em>
+			</div>
+			<div class="impact-col impact-col3">
+				<div class="impact-step step-called first">
+					<span class="user-count">&nbsp;</span>
+					<span class="total-user-count">7,132</span>
+					<span class="step-label">Called</span>
+				</div>
+				<div class="impact-step step-scheduled">
+					<span class="user-count">+24</span>
+					<span class="total-user-count">492</span>
+					<span class="step-label">Scheduled</span>
+				</div>
+			</div>
+		</div>
+		<div class="toggle-stats">
+			<ul>
+				<li class="your-impact first selected" data-type="user"><a data-role="none">Your<br>Impact</a></li>
+				<li class="friends-impact" data-type="friends"><a data-role="none"><span class="friends-impact-count">92</span> Friends<br>Impact</a></li>
+			</ul>
+		</div>
+		<div class="section-updates">
+			<h2>Updates:</h2>
+			<ul class="stats-updates">
+				<li class="first">
+					<img src="img/fpo-baby-1.jpg" alt="" width="104" height="104" />
+					<span class="text-update">Woman in California keeps her baby, check out the photo!</span>
+				</li>
+				<li>
+					<img src="img/fpo-baby-2.jpg" alt=""/>
+					<span class="text-update">Woman in Oklahoma keeps her baby, check out the photo!</span>
+				</li>
+				<li>
+					<img src="img/fpo-baby-3.jpg" alt=""/>
+					<span class="text-update">Woman in Michigan keeps her baby, check out the photo!</span>
+				</li>
+				<li>
+					<span class="text-update">Woman in Florida kept her appointment!</span>
+				</li>
+			</ul>
+		</div>
+    </div>
+    
+
+    <div data-theme="a" data-role="header" data-position="fixed" class="header-primary">
+        <a href="#feed-mypanel-left" data-role="none" id="feed-panel-left" data-inline="true" class="header-links panel-left">
+        	<i class="fa fa-bars"></i>
+        	<span>Menu</span>
+        </a>
+        <a href="#feed-mypanel-right" data-role="none" id="feed-panel-right" data-inline="true" class="header-links panel-right">
+        	<i class="fa fa-bookmark"></i>
+        	<span>Prayers</span>
+        </a>
+    </div>
+
+
+    <div data-role="content" class="content-main">
+		<div id="map" style=""></div>
+		
+		<div class="main-refresh">
+			<i class="fa fa-refresh fa-2x"></i>
+			<span class="refresh-count">93,432</span>
+			<span class="refresh-label">Prayers Today</span>
+			<span class="refresh-label" id="messagesDiv"></span>
+		</div>
+		<ul id="debug" style="display:none;">
+			<li id="swipeInfo" style="height:40px;"> Swipe Info</li>
+			<li>App ver. 1.18</li>
+		</ul>
+		
+		<ul class="feed"></ul>
+		<p class="feed-text feed-refresh"><i class="fa fa-refresh fa-spin"></i><span>Loading feed items</span></p>
+		<p class="feed-text no-more-items">No additional feed items</p>
+    </div>
+<!--
+    <div data-theme="a" data-role="footer" data-position="fixed" class="footer-primary">
+    	<p>Today's Prayer List</p>
+    	<em class="prayer-count">4</em>
+    	<div class="feed-footer-share">
+			<a class="feed-share" data-role="none"></a>
+			<ul class="feed-share-list">
+				<li class="first feed-share-fb"><a></a></li>
+				<li class="feed-share-twitter"><a></a></li>
+				<li class="feed-share-sms"><a></a></li>
+			</ul>
+		</div>
+    </div>
+    -->
+</div>
+<div data-role="page" id="events">
+	<!--<span id="version">ver. 12.13.19</span>-->
+    <div data-role="panel" id="events-mypanel-left" class="mypanel-left" data-display="reveal" data-position-fixed="true">
+		<h2 class="logo"></h2>
+		<ul class="nav-primary">
+			<li class="first nav-prayers">
+				<a href="#feed" data-ajax="true">
+					<i class="fa fa-globe"></i>
+					<span>Prayer Feed</span>
+				</a>
+			</li>
+			<li class="nav-events selected">
+				<a href="#events" data-ajax="true">
+					<i class="fa fa-calendar"></i>
+					<span>Events</span>
+				</a>
+			</li>
+			<li class="nav-settings">
+				<a href="#settings" data-ajax="true">
+					<i class="fa fa-gear"></i>
+					<span>Settings</span>
+				</a>
+			</li>
+			<li class="test-link nav-settings">
+				<a href="dev.html" data-ajax="false">
+					<i class="fa fa-gear"></i>
+					<span>Dev Links</span>
+				</a>
+			</li>
+		</ul>
+    </div>
+    
+    <div data-role="panel" id="events-mypanel-right" class="mypanel-right" data-display="reveal" data-position="right" data-position-fixed="true">
+		<div class="section-refresh">
+			<i class="fa fa-refresh fa-2x"></i>
+			<span class="refresh-count-text">
+				<span class="refresh-count-since"><span class="refresh-count-value">14</span> days since last refresh</span>
+				<span class="refresh-count-refreshing">refreshing</span>
+			</span>
+		</div>
+		<div class="section-total-saved">
+			<span class="user-count">+157</span>
+			<span class="total-user-count">748,932</span>
+			<span class="step-label">Babies Saved</span>
+		</div>
+		<div class="section-your-impact">
+			<div class="impact-col impact-col1">
+				<div class="impact-step step-chose-life first">
+					<span class="user-count">+3</span>
+					<span class="total-user-count">27</span>
+					<span class="step-label">Chose Life</span>
+				</div>
+				<div class="impact-step step-visited-prc">
+					<span class="user-count">+17</span>
+					<span class="total-user-count">193</span>
+					<span class="step-label">Visited PRC</span>
+				</div>
+			</div>
+			<div class="impact-col impact-col2">
+				<em class="stats-logo">
+					<i class="stats-logo-arc step-called"></i>
+					<i class="stats-logo-arc step-scheduled"></i>
+					<i class="stats-logo-arc step-visited-prc"></i>
+					<i class="stats-logo-arc step-chose-life"></i>
+				</em>
+			</div>
+			<div class="impact-col impact-col3">
+				<div class="impact-step step-called first">
+					<span class="user-count">&nbsp;</span>
+					<span class="total-user-count">7,132</span>
+					<span class="step-label">Called</span>
+				</div>
+				<div class="impact-step step-scheduled">
+					<span class="user-count">+24</span>
+					<span class="total-user-count">492</span>
+					<span class="step-label">Scheduled</span>
+				</div>
+			</div>
+		</div>
+		<div class="toggle-stats">
+			<ul>
+				<li class="your-impact first selected" data-type="user"><a data-role="none">Your<br>Impact</a></li>
+				<li class="friends-impact" data-type="friends"><a data-role="none"><span class="friends-impact-count">92</span> Friends<br>Impact</a></li>
+			</ul>
+		</div>
+		<div class="section-updates">
+			<h2>Updates:</h2>
+			<ul class="stats-updates">
+				<li class="first">
+					<img src="img/fpo-baby-1.jpg" alt="" width="104" height="104" />
+					<span class="text-update">Woman in California keeps her baby, check out the photo!</span>
+				</li>
+				<li>
+					<img src="img/fpo-baby-2.jpg" alt=""/>
+					<span class="text-update">Woman in Oklahoma keeps her baby, check out the photo!</span>
+				</li>
+				<li>
+					<img src="img/fpo-baby-3.jpg" alt=""/>
+					<span class="text-update">Woman in Michigan keeps her baby, check out the photo!</span>
+				</li>
+				<li>
+					<span class="text-update">Woman in Florida kept her appointment!</span>
+				</li>
+			</ul>
+		</div>
+    </div>
+    
+
+    <div data-theme="a" data-role="header" data-position="fixed" class="header-primary">
+        <a href="#events-mypanel-left" data-role="none" id="events-panel-left" data-inline="true" class="header-links panel-left">
+        	<i class="fa fa-bars"></i>
+        	<span>Menu</span>
+        </a>
+        <a href="#events-mypanel-right" data-role="none" id="events-panel-right" data-inline="true" class="header-links panel-right">
+        	<i class="fa fa-bookmark"></i>
+        	<span>Prayers</span>
+        </a>
+    </div>
+    <div data-role="content" class="content-main">
+    	<h2 class="icon-events">
+    		<i class="fa fa-calendar fa-5x"></i>
+    		<p>Events</p>
+    	</h2>
+    	<ul class="event-calendar"></ul>
+    
+    
+    </div>
+</div>
+<div data-role="page" id="settings">
+	<!--<span id="version">ver. 12.13.19</span>-->
+    <div data-role="panel" id="settings-mypanel-left" class="mypanel-left" data-display="reveal" data-position-fixed="true">
+		<h2 class="logo"></h2>
+		<ul class="nav-primary">
+			<li class="first nav-prayers">
+				<a href="#feed" data-ajax="true">
+					<i class="fa fa-globe"></i>
+					<span>Prayer Feed</span>
+				</a>
+			</li>
+			<li class="nav-events">
+				<a href="#events" data-ajax="true">
+					<i class="fa fa-calendar"></i>
+					<span>Events</span>
+				</a>
+			</li>
+			<li class="nav-settings selected">
+				<a href="#settings" data-ajax="true">
+					<i class="fa fa-gear"></i>
+					<span>Settings</span>
+				</a>
+			</li>
+			<li class="test-link nav-settings">
+				<a href="dev.html" data-ajax="false">
+					<i class="fa fa-gear"></i>
+					<span>Dev Links</span>
+				</a>
+			</li>
+		</ul>
+    </div>
+    
+    <div data-role="panel" id="settings-mypanel-right" class="mypanel-right" data-display="reveal" data-position="right" data-position-fixed="true">
+		<div class="section-refresh">
+			<i class="fa fa-refresh fa-2x"></i>
+			<span class="refresh-count-text">
+				<span class="refresh-count-since"><span class="refresh-count-value">14</span> days since last refresh</span>
+				<span class="refresh-count-refreshing">refreshing</span>
+			</span>
+		</div>
+		<div class="section-total-saved">
+			<span class="user-count">+157</span>
+			<span class="total-user-count">748,932</span>
+			<span class="step-label">Babies Saved</span>
+		</div>
+		<div class="section-your-impact">
+			<div class="impact-col impact-col1">
+				<div class="impact-step step-chose-life first">
+					<span class="user-count">+3</span>
+					<span class="total-user-count">27</span>
+					<span class="step-label">Chose Life</span>
+				</div>
+				<div class="impact-step step-visited-prc">
+					<span class="user-count">+17</span>
+					<span class="total-user-count">193</span>
+					<span class="step-label">Visited PRC</span>
+				</div>
+			</div>
+			<div class="impact-col impact-col2">
+				<em class="stats-logo">
+					<i class="stats-logo-arc step-called"></i>
+					<i class="stats-logo-arc step-scheduled"></i>
+					<i class="stats-logo-arc step-visited-prc"></i>
+					<i class="stats-logo-arc step-chose-life"></i>
+				</em>
+			</div>
+			<div class="impact-col impact-col3">
+				<div class="impact-step step-called first">
+					<span class="user-count">&nbsp;</span>
+					<span class="total-user-count">7,132</span>
+					<span class="step-label">Called</span>
+				</div>
+				<div class="impact-step step-scheduled">
+					<span class="user-count">+24</span>
+					<span class="total-user-count">492</span>
+					<span class="step-label">Scheduled</span>
+				</div>
+			</div>
+		</div>
+		<div class="toggle-stats">
+			<ul>
+				<li class="your-impact first selected" data-type="user"><a data-role="none">Your<br>Impact</a></li>
+				<li class="friends-impact" data-type="friends"><a data-role="none"><span class="friends-impact-count">92</span> Friends<br>Impact</a></li>
+			</ul>
+		</div>
+		<div class="section-updates">
+			<h2>Updates:</h2>
+			<ul class="stats-updates">
+				<li class="first">
+					<img src="img/fpo-baby-1.jpg" alt="" width="104" height="104" />
+					<span class="text-update">Woman in California keeps her baby, check out the photo!</span>
+				</li>
+				<li>
+					<img src="img/fpo-baby-2.jpg" alt=""/>
+					<span class="text-update">Woman in Oklahoma keeps her baby, check out the photo!</span>
+				</li>
+				<li>
+					<img src="img/fpo-baby-3.jpg" alt=""/>
+					<span class="text-update">Woman in Michigan keeps her baby, check out the photo!</span>
+				</li>
+				<li>
+					<span class="text-update">Woman in Florida kept her appointment!</span>
+				</li>
+			</ul>
+		</div>
+    </div>
+    
+
+    <div data-theme="a" data-role="header" data-position="fixed" class="header-primary">
+        <a href="#settings-mypanel-left" data-role="none" id="settings-panel-left" data-inline="true" class="header-links panel-left">
+        	<i class="fa fa-bars"></i>
+        	<span>Menu</span>
+        </a>
+        <a href="#settings-mypanel-right" data-role="none" id="settings-panel-right" data-inline="true" class="header-links panel-right">
+        	<i class="fa fa-bookmark"></i>
+        	<span>Prayers</span>
+        </a>
+    </div>
+    <div data-role="content" class="content-main">
+    	<h2 class="icon-settings">
+    		<i class="fa fa-gear fa-5x"></i>
+    		<p>Settings</p>
+    	</h2>
+    	<ul class="settings-list">
+    		<li class="first" data-event-id="1">
+    			<span>Push Notifications</span>
+    			<i class="fa fa-arrow-circle-right"></i>
+    		</li>
+    		<li class="link-settings-ofl" data-event-id="2">
+    			<span>Visit OnlineForLife.org</span>
+    			<i class="fa fa-arrow-circle-right"></i>
+    		</li>
+    		
+    		<li class="test-link link-settings-ofl-2" data-event-id="2">
+    			<span>Visit google.com</span>
+    			<i class="fa fa-arrow-circle-right"></i>
+    		</li>
+    		<li class="test-link" data-event-id="2" id="blank-loc-tool-back">
+    			<span>Visit blank-loc-tool-back</span>
+    			<i class="fa fa-arrow-circle-right"></i>
+    		</li>
+    		<li class="test-link" data-event-id="2" id="self-yes">
+    			<span>Visit self-yes</span>
+    			<i class="fa fa-arrow-circle-right"></i>
+    		</li>
+    		<li class="test-link" data-event-id="2" id="self-yes-back">
+    			<span>Visit self-yes-back</span>
+    			<i class="fa fa-arrow-circle-right"></i>
+    		</li>
+    		<li class="test-link" data-event-id="2" id="loadUrl">
+    			<span>loadUrl</span>
+    			<i class="fa fa-arrow-circle-right"></i>
+    		</li>
+    		<li class="test-link" data-event-id="2" id="blank">
+    			<span>BLANK</span>
+    			<a href="http://www.onlineforlife.org" target="_blank"><i class="fa fa-arrow-circle-right"></i></a>
+    		</li>
+    		
+    		
+    		<li class="" data-event-id="2">
+    			<span>Privacy Policy</span>
+    			<i class="fa fa-arrow-circle-right"></i>
+    		</li>
+    	</ul>
+    
+    
+    </div>
+</div>
+<script id="template-feed-item" type="text/x-handlebars-template">
+			<li class="feed-item  action-step-{{step}} {{liClass}} version-{{BgVersion}}" data-id="{{itemId}}">
+				<i class="feed-prayer-confirmation">Prayed!</i>
+				<i class="feed-prayer-instruction"></i>
+  				<div class="feed-content" data-state="{{stateCode}}">
+				{{#equal step "1" }}
+					<p class="action-text body-step-1">Woman in {{stateName}} just called an OFL agent</p>
+				{{/equal}}
+				{{#equal step "2" }}
+					<p class="action-text body-step-2">Woman in {{stateName}} just scheduled an appointment with a PRC</p>
+				{{/equal}}
+				{{#equal step "3" }}
+					<p class="action-text body-step-3">Woman in {{stateName}} kept her appointment</p>
+				{{/equal}}
+					<i class="action-step step-{{step}}"></i>
+				</div>
+			</li>
+</script>
+<script id="template-event-item" type="text/x-handlebars-template">
+    		<li class="item-init" data-event-id="{{eventId}}">
+    			<div class="event-title">
+    				<p class="event-description">{{eventTitle}}</p>
+    				<i class="fa fa-chevron-down"></i>
+    				<i class="fa fa-chevron-right"></i>
+    			</div>
+    			<div class="event-details">
+    				<h3>{{eventMonth}} {{eventDay}}, {{eventYear}}</h3>
+    				<h6>{{eventStartHour}}:{{eventStartMinute}} {{eventStartAmpm}} - {{eventEndHour}}:{{eventEndMinute}} {{eventEndAmpm}}</h6>
+    				<h4>{{eventLocation}}</h4>
+    				<p>{{eventDescription}}</p>
+    			</div>
+    		</li> 
+</script>
+
+<script src="js/libraries/jquery-1.9.1.min.js"></script>
+<script src="js/libraries/jquery.mobile-1.3.2.min.js"></script>
+<script src="js/libraries/jquery-ui.min.js"></script>
+
+<script src="js/plugins/jquery.ui.touch-punch.min.js"></script>
+<script src="js/plugins/jquery.touchSwipe.min.js"></script>
+
+<script src="js/libraries/raphael.js"></script>
+<script src="js/libraries/handlebars-v1.1.2.js"></script>
+<script src="js/libraries/handlebars.helpers.js"></script>
+<script src="js/libraries/firebase.js"></script>
+
+<script src="js/plugins/color.jquery.js"></script>
+<script src="js/plugins/jquery.usmap.js"></script>
+
+<script type="text/javascript" src="js/helpers.js?ver=12.19.1"></script>
+<script type="text/javascript" src="js/map.js?ver=12.19.1"></script>
+<script type="text/javascript" src="js/panels.js?ver=12.19.1"></script>
+<script type="text/javascript" src="js/feed.js?ver=12.19.1"></script>
+<script type="text/javascript" src="js/events.js?ver=1.0"></script>
+<script type="text/javascript" src="js/settings.js?ver=1.0"></script>
+</body>
+</html>
