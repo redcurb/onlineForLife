@@ -260,6 +260,9 @@
 					background:#fff url(../img/logo-stats.jpg) no-repeat 0 0;
 					position:relative;
 					margin-top:32px;
+					text-shadow:none;
+					border:none;
+					outline:none;
 				}
 					.mypanel-right .section-your-impact .impact-col2 .stats-logo .stats-logo-arc{
 						position:absolute;
