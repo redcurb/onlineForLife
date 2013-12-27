@@ -360,7 +360,13 @@ onlineForLife.Feed = {
 	},
 
 	setupDraggable: function(){
-		$("li.feed-item .feed-content").swipe( {
+		var $feed = $('ul.feed');
+		var $feedItems = $feed.get(0);
+		
+		
+		
+		
+		$("1li.feed-item .feed-content").swipe( {
 			//Generic swipe handler for all directions
 			swipeLeft:function(event, direction, distance, duration, fingerCount) {
 				console.log('swipe left');
