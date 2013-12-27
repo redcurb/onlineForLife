@@ -14,7 +14,7 @@
 				display:block;
 				width:217px;
 				height:189px;
-				background:url(../img/logo-ofl-panel.jpg) no-repeat 0 0;
+				background:url(../img/logo-ofl-panel.png) no-repeat 0 0;
 				margin:41px 0 0 92px;
 				
 				position: relative;
@@ -496,7 +496,8 @@
 		
 	}
 	.ui-page.panel-opening .ui-header.header-primary{
-
+		border:none;
+		outline:none;
 	}
 	.ui-page.panel-opening .ui-header.header-primary,
 	.ui-page.panel-closing .ui-header.header-primary{
