@@ -2,6 +2,10 @@ var onlineForLife = window.onlineForLife || {}; onlineForLife.Feed = onlineForLi
 onlineForLife.Feed = {
 	version: 1,
 	
+	userPrayersDaily: 0,
+	
+	showFooterOnCount: 3,
+	
 	addFirebaseChild: false,
 	
 	showTutorial:true,
@@ -58,6 +62,7 @@ onlineForLife.Feed = {
 		onlineForLife.Feed.buildFeed();
 		onlineForLife.Feed.showRandomStates();
 		onlineForLife.Feed.setupScrolling();
+		onlineForLife.Feed.updateUserPrayerCount();
 	},
 	
 	writeDeviceInfo:function(){
@@ -366,7 +371,7 @@ onlineForLife.Feed = {
 		
 		
 		
-		$("1li.feed-item .feed-content").swipe( {
+		$("li.feed-item .feed-content").swipe( {
 			//Generic swipe handler for all directions
 			swipeLeft:function(event, direction, distance, duration, fingerCount) {
 				console.log('swipe left');
@@ -450,9 +455,20 @@ onlineForLife.Feed = {
 			}, 500);
 		});
 		
+		onlineForLife.Feed.userPrayersDaily = onlineForLife.Feed.userPrayersDaily + 1;
+		onlineForLife.Feed.updateUserPrayerCount();
 		var state = $this.data('state');
 		console.log(state);
 		onlineForLife.USMap.toggleState('TX');
+	},
+	
+	updateUserPrayerCount: function(){
+		var showFooterOnCount = onlineForLife.Feed.showFooterOnCount;
+		var currentCount = onlineForLife.Feed.userPrayersDaily;
+		$('.prayer-count').text(currentCount);
+		if(currentCount==showFooterOnCount){
+			$('.footer-primary').animate({height: "232px"}, 500)
+		}
 	},
 	
 	animatePraySwipe: function(){

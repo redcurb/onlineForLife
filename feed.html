@@ -129,7 +129,7 @@
     </div>
     
 
-    <div data-theme="a" data-role="header" data-position="fixed" class="header-primary">
+    <div data-theme="a" data-role="header" data-position="fixed" class="header-primary" data-tap-toggle="false">
         <a href="#feed-mypanel-left" data-role="none" id="feed-panel-left" data-inline="true" class="header-links panel-left">
         	<i class="fa fa-bars"></i>
         	<span>Menu</span>
@@ -159,20 +159,17 @@
 		<p class="feed-text feed-refresh"><i class="fa fa-refresh fa-spin"></i><span>Loading feed items</span></p>
 		<p class="feed-text no-more-items">No additional feed items</p>
     </div>
-<!--
-    <div data-theme="a" data-role="footer" data-position="fixed" class="footer-primary">
-    	<p>Today's Prayer List</p>
-    	<em class="prayer-count">4</em>
-    	<div class="feed-footer-share">
-			<a class="feed-share" data-role="none"></a>
+    <div data-theme="a" data-role="footer" data-position="fixed" class="footer-primary" data-tap-toggle="false">
+    	<div class="footer-content">
+			<em class="prayer-count">4</em>
 			<ul class="feed-share-list">
-				<li class="first feed-share-fb"><a></a></li>
-				<li class="feed-share-twitter"><a></a></li>
-				<li class="feed-share-sms"><a></a></li>
+				<li class="first feed-share-fb"><i class="fa fa-facebook"></i></li>
+				<li class="feed-share-twitter"><i class="fa fa-twitter"></i></li>
+				<li class="feed-share-sms"><i>sms</i></li>
 			</ul>
+			<p>Please join us in prayer!</p>
 		</div>
     </div>
-    -->
 </div>
 <div data-role="page" id="events">
 	<!--<span id="version">ver. 12.13.19</span>-->
@@ -282,7 +279,7 @@
     </div>
     
 
-    <div data-theme="a" data-role="header" data-position="fixed" class="header-primary">
+    <div data-theme="a" data-role="header" data-position="fixed" class="header-primary" data-tap-toggle="false">
         <a href="#events-mypanel-left" data-role="none" id="events-panel-left" data-inline="true" class="header-links panel-left">
         	<i class="fa fa-bars"></i>
         	<span>Menu</span>
@@ -410,7 +407,7 @@
     </div>
     
 
-    <div data-theme="a" data-role="header" data-position="fixed" class="header-primary">
+    <div data-theme="a" data-role="header" data-position="fixed" class="header-primary" data-tap-toggle="false">
         <a href="#settings-mypanel-left" data-role="none" id="settings-panel-left" data-inline="true" class="header-links panel-left">
         	<i class="fa fa-bars"></i>
         	<span>Menu</span>
@@ -509,9 +506,9 @@
 <script src="js/libraries/jquery-ui.min.js"></script>
 
 
+<script src="js/plugins/jquery.touchSwipe.min.js"></script>
 <!--
 <script src="js/plugins/jquery.ui.touch-punch.min.js"></script>
-<script src="js/plugins/jquery.touchSwipe.min.js"></script>
 <script src="js/plugins/idangerous.swiper-2.1.min.js"></script>
 <script src="js/plugins/idangerous.swiper.scrollbar-2.1.js"></script>
 <script src="js/plugins/jquery.hammer.min.js"></script>
