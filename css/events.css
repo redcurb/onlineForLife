@@ -70,7 +70,7 @@ div#events .content-main.ui-content{
 				text-shadow:1px 1px 1px #000;
 				border-top:1px solid #979797;
 				background: #313839; /* Old browsers */
-				background: -webkit-linear-gradient(top,  #181b19 0%,#313839 20%,#313839 80%,#181b19 100%); /* Chrome10+,Safari5.1+ */
+				background: -webkit-linear-gradient(top,  #181b19 0%,#313839 46px,#313839 200px,#181b19 100%); /* Chrome10+,Safari5.1+ */
 				overflow: hidden;
 				display:none;
 			}
