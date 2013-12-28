@@ -150,6 +150,9 @@
 					top:10px;
 				}
 				
+				ul.feed li.feed-item ul{
+					overflow:hidden;	
+				}
 				ul.feed li.feed-item .feed-content{
 					position:relative;
 					overflow:hidden;
@@ -157,6 +160,16 @@
 					height:181px;
 					padding:10px 0;
 					opacity:1;
+					width:200px;
+					border:2px solid red;
+					float: left;
+				}
+				
+				ul.feed li.feed-item .feed-content-2{
+					width:50px;
+					display:block;
+					border:2px solid blue;
+					float: left;
 				}
 				
 				ul.feed li.feed-item .feed-content.swipeLeftToRight{

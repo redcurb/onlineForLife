@@ -1,0 +1,8 @@
+window.mySwipe = new Swipe($('li.feed-item:eq(0) ul.li').get(0), {
+	startSlide: 0,
+	speed: 400,
+	callback: function(event, index, elem) {
+	  alert('done ' + i);
+	}
+});
+
