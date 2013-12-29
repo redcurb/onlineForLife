@@ -227,6 +227,8 @@
 						padding:12px 10% 0 45px;
 						width:60%;
 						width:460px;
+						background:blue;
+						display:block;
 						color:#313639;
 						text-shadow:none;
 						float:left;
@@ -249,6 +251,8 @@
 						right: 42px;
 						position: relative;
 						top: 45px;
+
+						background:green;
 					}
 						.action-step.step-2{
 							background-position:0 -112px;
