@@ -368,10 +368,10 @@ onlineForLife.Feed = {
 				startSlide:1,
 				speed: 400, // Speed of prev and next transitions in milliseconds. (default:300)
 				callback: function(event, index, elem) {
-					$('#test-subtext2 span').append('C');
 					var $this = $(elem);
 					var $div = $this.parents('div.feed-content');
 					var direction = $this.data('direction');
+					$('#test-subtext2 span').append(' C-'+direction);
 					if(direction!='none'){
 						onlineForLife.Feed.handleSwipe($div,direction);
 					}
