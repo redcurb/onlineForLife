@@ -352,15 +352,6 @@ onlineForLife.Feed = {
 		$( ".feed-share" ).on( "click", function(){
 			alert($(window).width() + ' x ' + $(window).height());
 		});
-
-		$( "1li.feed-item .feed-content" ).on( "swiperight", function(){
-			onlineForLife.Feed.handleSwipe($(this));
-		});
-
-		$( ".main-refresh .fa-refresh" ).on( "click", function(){
-			onlineForLife.Feed.handleSwipe($('li.feed-item .feed-content:eq(1)'),'left');
-		});
-		
 		
 	},
 
@@ -393,6 +384,7 @@ onlineForLife.Feed = {
 	},
 
 	handleSwipe: function($this, swipeDir){
+		$('#test-subtext span').text('Swipe Occured...');
 		//$this.remove();
 		onlineForLife.Feed.showTutorial=false;
 		var $parentLi = $this.parents('li');
@@ -419,6 +411,10 @@ onlineForLife.Feed = {
 		});
 		
 		onlineForLife.Feed.userPrayersDaily = onlineForLife.Feed.userPrayersDaily + 1;
+		setTimeout(function() {
+			$('#test-subtext span').text(onlineForLife.Feed.userPrayersDaily);
+		},700);
+		
 		onlineForLife.Feed.updateUserPrayerCount();
 		var state = $this.data('state');
 		console.log(state);
