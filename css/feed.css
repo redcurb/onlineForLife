@@ -33,12 +33,18 @@
 				color:#313639;
 				font-size:2.1em;
 			}
+			.main-refresh span.refresh-subtext{
+				clear:both;
+				float:left;
+				color:#707e80;
+				font-size:1.3em;
+			}
 			.main-refresh i.fa{
 				float:right;
 				margin-right:32px;
 				color:#d5d8d7;
 				font-size:2.1em;
-				top:82px;
+				top:111px;
 				position:relative;
 			}
 			.main-refresh i.fa:hover{
@@ -154,8 +160,11 @@
 					position:relative;
 					overflow:hidden;
 					background:#fff;
+					background:transparent;
 					height:181px;
+					height:100%;
 					padding:10px 0;
+					padding:0;
 					opacity:1;
 					
 					1width: 400px;
@@ -163,6 +172,28 @@
 					float: left;
 					display: block;
 				}
+				
+					ul.feed li.feed-item .feed-content ul{
+						overflow:hidden;
+					}
+						ul.feed li.feed-item .feed-content ul li{
+							float:left;
+							display:block;
+							width:100%;
+						}
+						ul.feed li.feed-item .feed-content ul li.feed-content-placeholder{
+							height:100px;
+						}
+						ul.feed li.feed-item .feed-content ul li.feed-content-left{
+							
+						}
+						ul.feed li.feed-item .feed-content ul li.feed-content-right{
+							
+						}
+						ul.feed li.feed-item .feed-content ul li.feed-content-main{
+							height: 201px;
+							background: white;
+						}
 				
 				ul.feed li.feed-item .feed-content.swipeLeftToRight{
 					animation: swipeLeftToRight 1s;
@@ -217,7 +248,7 @@
 						float:right;
 						right: 42px;
 						position: relative;
-						top: 35px;
+						top: 45px;
 					}
 						.action-step.step-2{
 							background-position:0 -112px;

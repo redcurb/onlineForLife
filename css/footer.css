@@ -24,7 +24,7 @@
 		.footer-primary em.prayer-count{
 			font-size: 2.9em;
 			font-weight: bold;
-			text-shadow: none;
+			text-shadow: -1px 1px 1px #000;
 			width: 40%;
 			float: left;
 			color:#fff;

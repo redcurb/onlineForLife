@@ -301,7 +301,7 @@ onlineForLife.Feed = {
 		var textHeight = $text.outerHeight();
 		var borderHeight = 1;
 		var marginTop = 10;
-		marginTop = 17;
+		marginTop = 7;
 		var totalPadding = (liHeight - textHeight - borderHeight ) / 2;
 		var topPx = totalPadding - marginTop;
 		
@@ -372,13 +372,16 @@ onlineForLife.Feed = {
 		$('ul.feed li.feed-item').each(function(i,v){
 			var $this = $(this);
 			var id = $this.find('.feed-content').attr('id');
-			console.log(id);
-
 			new Swipe($('#'+id).get(0), {
 				startSlide:1,
 				speed: 400, // Speed of prev and next transitions in milliseconds. (default:300)
 				callback: function(event, index, elem) {
-					console.log('callback');
+					var $this = $(elem);
+					var $div = $this.parents('div.feed-content');
+					var direction = $this.data('direction');
+					if(direction!='none'){
+						onlineForLife.Feed.handleSwipe($div,direction);
+					}
 				}
 			});
 

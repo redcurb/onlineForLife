@@ -148,7 +148,7 @@
 			<i class="fa fa-refresh fa-2x"></i>
 			<span class="refresh-count">93,432</span>
 			<span class="refresh-label">Prayers Today</span>
-			<span class="refresh-label" id="messagesDiv"></span>
+			<span class="refresh-subtext">Please join us in prayer!</span>
 		</div>
 		<ul id="debug" style="display:none;">
 			<li id="swipeInfo" style="height:40px;"> Swipe Info</li>
@@ -167,7 +167,7 @@
 				<li class="feed-share-twitter"><i class="fa fa-twitter"></i></li>
 				<li class="feed-share-sms"><i>sms</i></li>
 			</ul>
-			<p>Please join us in prayer!</p>
+			<p>Invite friends to pray with you today</p>
 		</div>
     </div>
 </div>
@@ -472,9 +472,9 @@
 				<i class="feed-prayer-confirmation">Prayed!</i>
 				<i class="feed-prayer-instruction"></i>
 				<div class="feed-content" id="content-item-{{itemId}}" data-state="{{stateCode}}" style="overflow:hidden;">
-					<ul>
-						<li style='display:block;width:100%;height:100px;background:blue;float:left;'></li>
-						<li style='display:block;width:100%;1height:100px;1background:green;float:left;'>
+					<ul class="feed-content-container">
+						<li class="feed-content-placeholder feed-content-left" data-direction="right"></li>
+						<li class="feed-content-main" data-direction="none">
 						{{#equal step "1" }}
 							<p class="action-text body-step-1">Woman in {{stateName}} just called an OFL agent</p>
 						{{/equal}}
@@ -486,7 +486,7 @@
 						{{/equal}}
 							<i class="action-step step-{{step}}"></i>
 						</li>
-						<li style='display:block;width:100%;height:100px;background:yellow;float:left;'></li>
+						<li class="feed-content-placeholder feed-content-right" data-direction="left"></li>
 					</ul>
 				</div>
 			</li>
@@ -525,10 +525,6 @@
 	
 
 </script>
-<style>
-ul.feed {
-margin-left: 100px;
-}</style>
 
 <script src="js/libraries/raphael.js"></script>
 <script src="js/libraries/handlebars-v1.1.2.js"></script>
