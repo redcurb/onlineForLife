@@ -150,6 +150,12 @@
 					top:10px;
 				}
 				
+				ul.feed li.feed-item ul{
+					overflow:hidden;	
+				}
+				ul.feed{
+					margin-left:100px;	
+				}
 				ul.feed li.feed-item .feed-content{
 					position:relative;
 					overflow:hidden;
@@ -157,11 +163,21 @@
 					height:181px;
 					padding:10px 0;
 					opacity:1;
-					
-					1width: 400px;
-					1border: 2px solid red;
+					width:400px;
+					border:2px solid red;
 					float: left;
-					display: block;
+					display:block;
+				}
+				
+				ul.feed li.feed-item .feed-content-li-first{
+					border:2px solid blue;
+					float: left;
+					width:400px;
+				}
+				ul.feed li.feed-item .feed-content-li-last{
+					border:2px solid blue;
+					float: left;
+					width:400px;
 				}
 				
 				ul.feed li.feed-item .feed-content.swipeLeftToRight{

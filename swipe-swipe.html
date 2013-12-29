@@ -12,13 +12,24 @@
 
 <h2>250px wide</h2>
 
+<div id='slider1' class='swipe' style='width:250px'>
+  <ul>
+    <li style='display:block;width:250px;height:100px;background:green;'>
+		<p class="action-text">Woman in Nebraska just called an OFL agent</p>
+		<i class="action-step"></i>
+	</li>
+    <li style='display:none;width:250px;height:100px;background:blue;'></li>
+  </ul>
+</div>
+
+
 <div id='slider2' class='swipe' style='width:250px'>
   <ul>
-    <li style='display:block'>
-    	<div>1 - 1</div>
-		<div>1 - 2</div>
+    <li style='display:block;width:250px;height:100px;background:green;'>
+		<p class="action-text">Woman in Nebraska just called an OFL agent</p>
+		<i class="action-step"></i>
 	</li>
-    <li style='display:none'><div>2</div></li>
+    <li style='display:none;width:250px;height:100px;background:blue;'></li>
   </ul>
 </div>
 
@@ -30,8 +41,10 @@
 
 <script src="js/plugins/swipe-1.01.js"></script>
 <script>
-	var $test1 = $('#slider2').get(0);
+	var $test1 = $('#slider1').get(0);
 	new Swipe($test1);
+	var $test2 = $('#slider2').get(0);
+	new Swipe($test2);
 
 </script>
 

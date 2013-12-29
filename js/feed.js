@@ -8,7 +8,7 @@ onlineForLife.Feed = {
 	
 	addFirebaseChild: false,
 	
-	showTutorial:true,
+	showTutorial:false,
 	
 	tutorial:0,
 	
@@ -369,63 +369,23 @@ onlineForLife.Feed = {
 		var $feedItems = $feed.get(0);
 		
 		
-		
-		
-		$("li.feed-item .feed-content").swipe( {
-			//Generic swipe handler for all directions
-			swipeLeft:function(event, direction, distance, duration, fingerCount) {
-				console.log('swipe left');
-				var $debug = $('#debug');
-				var output = '';
-				output += '<li>event: ' + event + '</li>';
-				output += '<li>direction: ' + direction + '</li>';
-				output += '<li>distance: ' + distance + '</li>';
-				output += '<li>duration: ' + duration + '</li>';
-				output += '<li>fingerCount: ' + fingerCount + '</li>';
-				//$debug.html(output);
-				onlineForLife.Feed.handleSwipe($(this),direction);
-			},
-			swipeRight:function(event, direction, distance, duration, fingerCount) {
-				console.log('swipe right');
-				onlineForLife.Feed.handleSwipe($(this),direction);
-			},
-			threshold:50
-		});
-		$("1li.feed-item .feed-content" ).draggable({
-			axis: "x",
-			start: function(e, ui) {
-				var y1 = ui.position.top;
-				var x1 = ui.position.left;
-				console.log(y1 + ' - ' + x1);
-				console.log('START: ' + y1 + ' - ' + x1);
-				onlineForLife.Feed.DragXStart = x1;
-			},
-			distance: 50,
-			revert:false,
-			stop: function(e, ui) {
-				var y1 = ui.position.top;
-				var x1 = ui.position.left;
-				console.log('STOP: ' + y1 + ' - ' + x1);
-				onlineForLife.Feed.DragXEnd = x1;
-				console.log(onlineForLife.Feed.DragXStart + ' - ' + onlineForLife.Feed.DragXEnd);
-				if(x1>0){
-					var swipeDir = 'LeftToRight';
+		$('ul.feed li.feed-item').each(function(i,v){
+			var $this = $(this);
+			var id = $this.find('.feed-content').attr('id');
+			console.log(id);
+
+			new Swipe($('#'+id).get(0), {
+				startSlide:1,
+				speed: 400, // Speed of prev and next transitions in milliseconds. (default:300)
+				callback: function(event, index, elem) {
+					console.log('callback');
 				}
-				else{
-					var swipeDir = 'RightToLeft';
-				}
-				
-				onlineForLife.Feed.handleSwipe($(this),swipeDir);
-			}
-			/*
-			start: function( event, ui ) {
-				console.log(1);
-				onlineForLife.Feed.handleSwipe($(this));
-			}
-			*/
+			});
+
 
 		});
 
+		
 
 	},
 

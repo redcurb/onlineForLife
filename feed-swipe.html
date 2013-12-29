@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="css/panels.css?ver=12.19.1" />
 	<link rel="stylesheet" href="css/footer.css?ver=12.19.1" />
 	
-	<link rel="stylesheet" href="css/feed.css?ver=12.19.1" />
+	<link rel="stylesheet" href="css/feed-swipe.css?ver=12.19.1" />
 	<link rel="stylesheet" href="css/events.css?ver=12.19.1" />
 	<link rel="stylesheet" href="css/settings.css?ver=12.19.1" />
 	
@@ -42,21 +42,47 @@
 					vertical-align: top;
 				}
 	</style>
-	<div id='slider1' class="test-slider">
+	<!--
+	<div id='slider1' class='swipe' style='width:250px'>
 	  <ul>
-		<li style='display:block'>div 1</li>
-		<li style='display:none1'>div 2</li>
+		<li style='display:block;width:250px;height:100px;background:green;'>
+			<p class="action-text">Woman in Nebraska just called an OFL agent</p>
+			<i class="action-step"></i>
+		</li>
+		<li style='display:none;width:250px;height:100px;background:blue;'></li>
 	  </ul>
 	</div>
-	<div id='slider2' class="test-slider" style="display:none;">
+	
+	
+	<div id='slider2' class='swipe' style='width:250px'>
 	  <ul>
-		<li style='display:block'>div 1</li>
-		<li style='display:none'>div 2</li>
-		<li style='display:none'>div 3</li>
-		<li style='display:none'>div 4</li>
-		<li style='display:none'>div 5</li>
+		<li style='display:block;width:250px;height:100px;background:green;'>
+			<p class="action-text">Woman in Nebraska just called an OFL agent</p>
+			<i class="action-step"></i>
+		</li>
+		<li style='display:none;width:250px;height:100px;background:blue;'></li>
 	  </ul>
 	</div>
+
+
+
+	<ul class="feed">
+		<li class="feed-item  action-step-2 first version-3" data-id="1">
+			<i class="feed-prayer-confirmation">Prayed!</i>
+			<i class="feed-prayer-instruction"></i>
+			<div id='slider3' class='swipe feed-content' style='width:250px'>
+				<ul>
+				<li style='display:block;width:250px;height:100px;background:green;float:left;'>
+					Woman in Ohio just scheduled an appointment with a PRC
+				</li>
+				<li style='display:none;width:250px;height:100px;background:blue;float:left;'></li>
+				</ul>	
+					
+			</div>
+		</li>
+	</ul>
+-->
+
     <div data-role="panel" id="feed-mypanel-left" class="mypanel-left" data-display="reveal" data-position-fixed="true">
 		<h2 class="logo"></h2>
 		<ul class="nav-primary">
@@ -189,7 +215,32 @@
 			<li>App ver. 1.18</li>
 		</ul>
 		
-		<ul class="feed"></ul>
+		<ul class="feed">
+			<li class="feed-item  action-step-2 first version-3" data-id="1">
+				<i class="feed-prayer-confirmation">Prayed!</i>
+				<i class="feed-prayer-instruction"></i>
+				<div class="feed-content" id="content-item-1">
+					<ul>
+						<li style='display:block;width:250px;height:100px;background:green;float:left;'>
+							Woman in Ohio just scheduled an appointment with a PRC
+						</li>
+						<li style='display:none;width:250px;height:100px;background:blue;float:left;'></li>
+					</ul>
+				</div>
+			</li>
+
+
+
+			<li class="feed-item  action-step-1  version-2" data-id="2">
+				<i class="feed-prayer-confirmation">Prayed!</i>
+				<i class="feed-prayer-instruction"></i>
+  				<div class="feed-content" data-state="NE">
+					<p class="action-text body-step-1" style="top: 43.5px;">Woman in Nebraska just called an OFL agent</p>
+					<i class="action-step step-1"></i>
+				</div>
+			</li>
+
+		</ul>
 		<p class="feed-text feed-refresh"><i class="fa fa-refresh fa-spin"></i><span>Loading feed items</span></p>
 		<p class="feed-text no-more-items">No additional feed items</p>
     </div>
@@ -505,21 +556,23 @@
 			<li class="feed-item  action-step-{{step}} {{liClass}} version-{{BgVersion}}" data-id="{{itemId}}">
 				<i class="feed-prayer-confirmation">Prayed!</i>
 				<i class="feed-prayer-instruction"></i>
-				<ul class="feed-content-list">
-					<li class="feed-content" data-state="{{stateCode}}">
-					{{#equal step "1" }}
-						<p class="action-text body-step-1">Woman in {{stateName}} just called an OFL agent</p>
-					{{/equal}}
-					{{#equal step "2" }}
-						<p class="action-text body-step-2">Woman in {{stateName}} just scheduled an appointment with a PRC</p>
-					{{/equal}}
-					{{#equal step "3" }}
-						<p class="action-text body-step-3">Woman in {{stateName}} kept her appointment</p>
-					{{/equal}}
-						<i class="action-step step-{{step}}"></i>
-					</li>
-					<li class="feed-content-2">li 2</li>
-				</ul>
+				<div class="feed-content" id="content-item-{{itemId}}">
+					<ul class="feed-content-list">
+						<li style='display:block;width:250px;height:100px;background:green;' class="feed-content" data-state="{{stateCode}}">
+						{{#equal step "1" }}
+							<p class="action-text body-step-1">Woman in {{stateName}} just called an OFL agent</p>
+						{{/equal}}
+						{{#equal step "2" }}
+							<p class="action-text body-step-2">Woman in {{stateName}} just scheduled an appointment with a PRC</p>
+						{{/equal}}
+						{{#equal step "3" }}
+							<p class="action-text body-step-3">Woman in {{stateName}} kept her appointment</p>
+						{{/equal}}
+							<i class="action-step step-{{step}}"></i>
+						</li>
+						<li style='display:block;width:250px;height:100px;background:blue;'></li>
+					</ul>
+				</div>
 			</li>
 </script>
 <script id="template-event-item" type="text/x-handlebars-template">
@@ -551,7 +604,35 @@
 <script src="js/plugins/jquery.hammer.min.js"></script>
 <script src="js/plugins/dragswipe.jquery.js"></script>
 -->
-<script src="js/plugins/swipe-2.01.js"></script>
+<script src="js/plugins/swipe-1.01.js"></script>
+<script>
+	var $test1 = $('#slider1').get(0);
+	new Swipe($test1);
+	var $test2 = $('#slider2').get(0);
+	new Swipe($test2);
+	var $test3 = $('#slider32').get(0);
+
+	
+window.mySwipe3 = new Swipe($test3, {
+	startSlide: 0, // Index position Swipe should start at (default:0)
+	speed: 400, // Speed of prev and next transitions in milliseconds. (default:300)
+	auto: 400, // Speed of prev and next transitions in milliseconds. (default:300)
+	callback: function(event, index, elem) {
+	  // Runs at the end of any slide change. (effective for updating position indicators/counters)
+	  alert('done 1');
+	}
+});
+
+
+
+new Swipe(document.getElementById('content-item-1'), {
+    speed: 400, // Speed of prev and next transitions in milliseconds. (default:300)
+    callback: function(event, index, elem) {
+    	console.log('callback');
+    }
+});
+
+</script>
 
 
 

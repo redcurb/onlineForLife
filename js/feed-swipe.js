@@ -8,7 +8,7 @@ onlineForLife.Feed = {
 	
 	addFirebaseChild: false,
 	
-	showTutorial:true,
+	showTutorial:false,
 	
 	tutorial:0,
 	
@@ -59,7 +59,8 @@ onlineForLife.Feed = {
 		onlineForLife.Feed.setVersion();
 		onlineForLife.Feed.setupHandlers();
 		onlineForLife.Feed.setupFirebase();
-		onlineForLife.Feed.buildFeed();
+		//onlineForLife.Feed.buildFeed();
+		onlineForLife.Feed.setupDraggable();
 		onlineForLife.Feed.showRandomStates();
 		onlineForLife.Feed.setupScrolling();
 		onlineForLife.Feed.updateUserPrayerCount();
@@ -269,7 +270,7 @@ onlineForLife.Feed = {
 
 		
 		var $feed = $('ul.feed');
-		$feed.html(feedHtml);
+		//$feed.html(feedHtml);
 		onlineForLife.Feed.centerAllFeedItemText();
 		setTimeout(function() {
 			onlineForLife.Feed.animatePraySwipe();
@@ -365,86 +366,7 @@ onlineForLife.Feed = {
 	},
 
 	setupDraggable: function(){
-		var $feed = $('ul.feed');
-		var $feedItems = $feed.get(0);
 		
-		//window.mySwipe = new Swipe(document.getElementById('slider'));
-		var $test1 = $('#slider1').get(0);
-		var $test2 = $('#slider21').get(0);
-		var $test3 = $("li.feed-item:eq(1)").get(0);
-		window.mySwipe = new Swipe($test1, {
-			startSlide: 0, // Index position Swipe should start at (default:0)
-			speed: 400, // Speed of prev and next transitions in milliseconds. (default:300)
-			callback: function(event, index, elem) {
-			  // Runs at the end of any slide change. (effective for updating position indicators/counters)
-			  alert('done 1');
-			}
-		});
-		
-		window.mySwipe = new Swipe($test2, {
-			startSlide: 0, // Index position Swipe should start at (default:0)
-			speed: 400, // Speed of prev and next transitions in milliseconds. (default:300)
-			auto: 3000, // Begin with auto slideshow (time in milliseconds between slides)
-			callback: function(event, index, elem) {
-			  // Runs at the end of any slide change. (effective for updating position indicators/counters)
-			  alert('done 2');
-			}
-		});
-		
-		$("1li.feed-item .feed-content").swipe( {
-			//Generic swipe handler for all directions
-			swipeLeft:function(event, direction, distance, duration, fingerCount) {
-				console.log('swipe left');
-				var $debug = $('#debug');
-				var output = '';
-				output += '<li>event: ' + event + '</li>';
-				output += '<li>direction: ' + direction + '</li>';
-				output += '<li>distance: ' + distance + '</li>';
-				output += '<li>duration: ' + duration + '</li>';
-				output += '<li>fingerCount: ' + fingerCount + '</li>';
-				//$debug.html(output);
-				onlineForLife.Feed.handleSwipe($(this),direction);
-			},
-			swipeRight:function(event, direction, distance, duration, fingerCount) {
-				console.log('swipe right');
-				onlineForLife.Feed.handleSwipe($(this),direction);
-			},
-			threshold:50
-		});
-		$("1li.feed-item .feed-content" ).draggable({
-			axis: "x",
-			start: function(e, ui) {
-				var y1 = ui.position.top;
-				var x1 = ui.position.left;
-				console.log(y1 + ' - ' + x1);
-				console.log('START: ' + y1 + ' - ' + x1);
-				onlineForLife.Feed.DragXStart = x1;
-			},
-			distance: 50,
-			revert:false,
-			stop: function(e, ui) {
-				var y1 = ui.position.top;
-				var x1 = ui.position.left;
-				console.log('STOP: ' + y1 + ' - ' + x1);
-				onlineForLife.Feed.DragXEnd = x1;
-				console.log(onlineForLife.Feed.DragXStart + ' - ' + onlineForLife.Feed.DragXEnd);
-				if(x1>0){
-					var swipeDir = 'LeftToRight';
-				}
-				else{
-					var swipeDir = 'RightToLeft';
-				}
-				
-				onlineForLife.Feed.handleSwipe($(this),swipeDir);
-			}
-			/*
-			start: function( event, ui ) {
-				console.log(1);
-				onlineForLife.Feed.handleSwipe($(this));
-			}
-			*/
-
-		});
 
 
 	},
