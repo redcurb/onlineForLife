@@ -179,7 +179,7 @@
 						ul.feed li.feed-item .feed-content ul li{
 							float:left;
 							display:block;
-							width:100%;
+							width:655px;
 						}
 						ul.feed li.feed-item .feed-content ul li.feed-content-placeholder{
 							height:100px;
@@ -225,8 +225,8 @@
 						padding:0 10%;
 						font-size:1.3em;
 						padding:12px 10% 0 45px;
+						padding:12px 0px 0 45px;
 						width:60%;
-						width:460px;
 						background:blue;
 						display:block;
 						color:#313639;
@@ -237,10 +237,11 @@
 						color: #313738;
 						line-height: 50px;
 						letter-spacing: 3px;
-						width:62%;
 						line-height:1.1em;
 						font-weight:300;
 						position:relative;
+						
+						width:460px;
 					}
 					.action-step{
 						display:block;
