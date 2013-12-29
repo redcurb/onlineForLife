@@ -43,13 +43,7 @@ onlineForLife.Feed = {
 	init: function(){
 		console.log('feed init');		
 		$('.refresh-count').on('click',function(){
-			$.mobile.changePage( "events.html", {
-				transition: "pop",
-				changeHash: false,
-				pagechange:function(){
-					alert(1);	
-				}
-			});
+			onlineForLife.Feed.outputFeedWidth();
 		});
 		
 		//var uiVer = jQuery.ui.version;
@@ -258,13 +252,15 @@ onlineForLife.Feed = {
 
 		var feedHtml = '';
 		$.each(prayers, function(index,prayer){
-			var liClass = (index==0) ? 'first' : '';
-			var itemId = prayer.itemId;
-			var stateCode = prayer.stateCode;
-			var stateName = prayer.stateName;
-			var step = prayer.step;
-			var output = '';
-			feedHtml += onlineForLife.Feed.buildFeedItem(itemId, stateCode, step, stateName, liClass);
+			if(index<5){
+				var liClass = (index==0) ? 'first' : '';
+				var itemId = prayer.itemId;
+				var stateCode = prayer.stateCode;
+				var stateName = prayer.stateName;
+				var step = prayer.step;
+				var output = '';
+				feedHtml += onlineForLife.Feed.buildFeedItem(itemId, stateCode, step, stateName, liClass);
+			}
 		});
 
 		
@@ -363,7 +359,9 @@ onlineForLife.Feed = {
 		$('ul.feed li.feed-item').each(function(i,v){
 			var $this = $(this);
 			var id = $this.find('.feed-content').attr('id');
-			var $content = $('#'+id).get(0);
+			var elementId = '#'+id;
+			var $content = $(elementId).get(0);
+			console.log('elementId: ' + elementId);
 			new Swipe($content,{
 				startSlide:1,
 				speed: 400, // Speed of prev and next transitions in milliseconds. (default:300)
@@ -377,6 +375,29 @@ onlineForLife.Feed = {
 					}
 				}
 			});
+			/*
+			var $contentMain = $this.find('.feed-content-main');
+			var contentWidth = $contentMain.width(); 
+			var $actionText = $contentMain.find('.action-text');
+			var textWidth = $actionText.width(); 
+			var $stepText = $contentMain.find('.action-step');
+			var stepWidth = $stepText.width(); 
+			$actionText.append("<br>contentWidth: " + contentWidth + " textWidth: " + textWidth + " stepWidth: " + stepWidth); 
+			*/
+
+		});
+
+		
+
+	},
+
+	outputFeedWidth: function(){
+		$('ul.feed li.feed-item').each(function(i,v){
+			var $this = $(this);
+			var id = $this.find('.feed-content').attr('id');
+			var elementId = '#'+id;
+			var $content = $(elementId).get(0);
+
 			
 			var $contentMain = $this.find('.feed-content-main');
 			var contentWidth = $contentMain.width(); 
@@ -385,11 +406,7 @@ onlineForLife.Feed = {
 			var $stepText = $contentMain.find('.action-step');
 			var stepWidth = $stepText.width(); 
 			$actionText.append("<br>contentWidth: " + contentWidth + " textWidth: " + textWidth + " stepWidth: " + stepWidth); 
-
-
 		});
-
-		
 
 	},
 
