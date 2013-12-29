@@ -363,10 +363,12 @@ onlineForLife.Feed = {
 		$('ul.feed li.feed-item').each(function(i,v){
 			var $this = $(this);
 			var id = $this.find('.feed-content').attr('id');
-			new Swipe($('#'+id).get(0), {
+			var $content = $('#'+id).get(0);
+			new Swipe($content,{
 				startSlide:1,
 				speed: 400, // Speed of prev and next transitions in milliseconds. (default:300)
 				callback: function(event, index, elem) {
+					$('#test-subtext2 span').append('C');
 					var $this = $(elem);
 					var $div = $this.parents('div.feed-content');
 					var direction = $this.data('direction');
@@ -375,6 +377,14 @@ onlineForLife.Feed = {
 					}
 				}
 			});
+			
+			var $contentMain = $this.find('.feed-content-main');
+			var contentWidth = $contentMain.width(); 
+			var $actionText = $contentMain.find('.action-text');
+			var textWidth = $actionText.width(); 
+			var $stepText = $contentMain.find('.action-step');
+			var stepWidth = $stepText.width(); 
+			$actionText.append("<br>contentWidth: " + contentWidth + " textWidth: " + textWidth + " stepWidth: " + stepWidth); 
 
 
 		});
@@ -385,6 +395,7 @@ onlineForLife.Feed = {
 
 	handleSwipe: function($this, swipeDir){
 		$('#test-subtext span').text('Swipe Occured...');
+		$('#test-subtext2 span').append('x');
 		//$this.remove();
 		onlineForLife.Feed.showTutorial=false;
 		var $parentLi = $this.parents('li');
