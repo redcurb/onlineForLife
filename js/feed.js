@@ -8,7 +8,7 @@ onlineForLife.Feed = {
 	
 	addFirebaseChild: false,
 	
-	showTutorial:false,
+	showTutorial:true,
 	
 	tutorial:0,
 	
