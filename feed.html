@@ -44,6 +44,18 @@
 	</script>
 </head>
 <body>
+
+<style>
+body.ui-mobile-viewport, div.ui-mobile-viewport{
+	background:yellow;
+}
+body, .ui-body-c, .ui-overlay-c, .ui-page-active.ui-page-panel{
+	background:red;	
+}
+.content-main.ui-content{
+	background:orange;
+}
+</style>
 <div data-role="page" id="feed">
 	<ul id="device-info"></ul>
 	<!--<span id="version">ver. 12.13.19</span>-->
@@ -173,8 +185,10 @@
 			<span class="refresh-count">93,432</span>
 			<span class="refresh-label">Prayers Today</span>
 			<span class="refresh-subtext">Please join us in prayer!</span>
+			<!--
 			<span class="refresh-subtext" id="test-subtext">Swipes: <span>0</span></span>
 			<span class="refresh-subtext" id="test-subtext2">Swipe Calls: <span></span></span>
+			-->
 		</div>
 		<ul id="debug" style="display:none;">
 			<li id="swipeInfo" style="height:40px;"> Swipe Info</li>

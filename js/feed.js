@@ -42,8 +42,8 @@ onlineForLife.Feed = {
 	
 	init: function(){
 		console.log('feed init');		
-		$('.refresh-count').on('click',function(){
-			onlineForLife.Feed.outputFeedWidth();
+		$('1.refresh-count').on('click',function(){
+			//onlineForLife.Feed.outputFeedWidth();
 			//onlineForLife.Tracking.trackEvent('refresh','click');
 		});
 		
@@ -370,7 +370,7 @@ onlineForLife.Feed = {
 					var $this = $(elem);
 					var $div = $this.parents('div.feed-content');
 					var direction = $this.data('direction');
-					$('#test-subtext2 span').append(' C-'+direction);
+					//$('#test-subtext2 span').append(' C-'+direction);
 					if(direction!='none'){
 						onlineForLife.Feed.handleSwipe($div,direction);
 					}
