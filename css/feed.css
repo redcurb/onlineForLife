@@ -227,7 +227,7 @@
 						padding:12px 10% 0 45px;
 						padding:12px 0px 0 45px;
 						width:60%;
-						background:blue;
+						1background:blue;
 						display:block;
 						color:#313639;
 						text-shadow:none;
@@ -253,7 +253,7 @@
 						position: relative;
 						top: 45px;
 
-						background:green;
+						1background:green;
 					}
 						.action-step.step-2{
 							background-position:0 -112px;

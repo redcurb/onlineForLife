@@ -252,7 +252,7 @@ onlineForLife.Feed = {
 
 		var feedHtml = '';
 		$.each(prayers, function(index,prayer){
-			if(index<45){
+			if(index<25){
 				var liClass = (index==0) ? 'first' : '';
 				var itemId = prayer.itemId;
 				var stateCode = prayer.stateCode;
