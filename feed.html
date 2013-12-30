@@ -43,17 +43,21 @@
 		}
 	</script>
 </head>
-<body>
+<body class="page-ofl mode-test1 page-status-loading">
 
 <style>
-body.ui-mobile-viewport, div.ui-mobile-viewport{
+body.mode-test.ui-mobile-viewport{
 	background:yellow;
 }
-body, .ui-body-c, .ui-overlay-c, .ui-page-active.ui-page-panel{
-	background:#0f0;	
+body.mode-test, .mode-test .ui-body-c, .mode-test .ui-overlay-c, .ui-page-active.ui-page-panel.mode-test{
+	background:#0f0;
 }
-.content-main.ui-content{
+.mode-test .content-main.ui-content{
 	background:orange;
+}
+body.page-status-loading #feed{
+	background:blue;
+	background:#313639 url(img/logo-ofl-panel.png) no-repeat 50% 300px;
 }
 </style>
 <div data-role="page" id="feed">
@@ -509,7 +513,7 @@ body, .ui-body-c, .ui-overlay-c, .ui-page-active.ui-page-panel{
 </div>
 <script>
 $(function() {
-	alert('body loaded')
+	//alert('body loaded')
 });
 </script>
 <script id="template-feed-item" type="text/x-handlebars-template">

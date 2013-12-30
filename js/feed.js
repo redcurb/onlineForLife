@@ -220,7 +220,8 @@ onlineForLife.Feed = {
 	
 	buildFeed: function(){
 		console.log('buildFeed');
-		alert('buildFeed')
+		//alert('buildFeed')
+		$('body').removeClass('page-status-loading');
 		onlineForLife.Feed.getFeedData();
 	},
 	
@@ -246,7 +247,7 @@ onlineForLife.Feed = {
 	
 	handleFeedDataSuccess: function(data){
 		console.log('handleFeedDataSuccess: ' + data);
-		alert('handleFeedDataSuccess')
+		//alert('handleFeedDataSuccess')
 		var fetchCountEach = onlineForLife.Feed.fetchCountEach;
 		var prayers = data.prayers;
 		var dataItemCount = prayers.length;

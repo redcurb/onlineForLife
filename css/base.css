@@ -4,9 +4,11 @@ body,html{
 	font-size:24px;
 	color:#0b0a09;
 	font-family: Oswald;
-	background: #0f0;
+}
+body.mode-test{
 	background: #f0f;
 }
+
 .ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button{
 	font-family: Oswald;
 }
