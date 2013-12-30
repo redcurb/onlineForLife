@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    var testMethod = 'app';
+    testMethod = 'web';
+    if(testMethod=='app'){
+		document.addEventListener("deviceready", onDeviceReady, false);
+		function onDeviceReady() {
+			var model = device.model;
+			var url = 'feed.html';
+			if(model.indexOf('iPhone')>=0){
+				url = 'feed-iphone.html';
+			}
+			else if(model.indexOf('iPad')>=0){
+				url = 'feed-ipad.html';
+			}
+			window.location.href = url;
+		}
+	}
+    if(testMethod=='web'){
+    alert('a');
+    	document.write(navigator);
+    	document.write(navigator.userAgent);
+    	var url = 'feed.html';
+    	//window.location.href = url;
+	}
+    </script>
+	<link rel="stylesheet" href="css/reset-min.css" />
+	<link rel="stylesheet" href="css/libraries/jquery.mobile-1.3.2.min.css" />
+	<link rel="stylesheet" href="css/base.css?ver=12.19.1" />
+  </head>
+  <body class="page-index"></body>
+</html>
+
