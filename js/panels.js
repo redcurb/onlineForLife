@@ -104,7 +104,7 @@ onlineForLife.Panels = {
 			$page.removeClass('panel-opening');
 			setTimeout(function() {
 				onlineForLife.Panels.animateArcs($panel);
-			},500);
+			},250);
 		});
 		$panelRight.on( "panelclose", function( event, ui ) {
 			var $panel = $(this);
@@ -168,21 +168,24 @@ onlineForLife.Panels = {
 		var $textScheduled = $impact.find('.impact-step.step-scheduled span');
 		var $textVisitedPrc = $impact.find('.impact-step.step-visited-prc span');
 		var $textChoseLife = $impact.find('.impact-step.step-chose-life span');
+
+		var arcSpeed = 50;
+		var textDelay = 50;
 		
-		$called.fadeIn(150, function(){
-			$textCalled.fadeIn(150);
+		$called.fadeIn(arcSpeed, function(){
+			$textCalled.fadeIn(textDelay);
 			
 			//step 2
-			$scheduled.fadeIn(150, function(){
-				$textScheduled.fadeIn(150);
+			$scheduled.fadeIn(arcSpeed, function(){
+				$textScheduled.fadeIn(textDelay);
 
 				//step 3
-				$visitedPrc.fadeIn(150, function(){
-					$textVisitedPrc.fadeIn(150);
+				$visitedPrc.fadeIn(arcSpeed, function(){
+					$textVisitedPrc.fadeIn(textDelay);
 
 					//step 4
-					$choseLife.fadeIn(150, function(){
-						$textChoseLife.fadeIn(150);
+					$choseLife.fadeIn(arcSpeed, function(){
+						$textChoseLife.fadeIn(textDelay);
 					});
 
 				});
