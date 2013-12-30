@@ -220,6 +220,7 @@ onlineForLife.Feed = {
 	
 	buildFeed: function(){
 		console.log('buildFeed');
+		alert('buildFeed')
 		onlineForLife.Feed.getFeedData();
 	},
 	
@@ -245,6 +246,7 @@ onlineForLife.Feed = {
 	
 	handleFeedDataSuccess: function(data){
 		console.log('handleFeedDataSuccess: ' + data);
+		alert('handleFeedDataSuccess')
 		var fetchCountEach = onlineForLife.Feed.fetchCountEach;
 		var prayers = data.prayers;
 		var dataItemCount = prayers.length;
