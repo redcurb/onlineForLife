@@ -44,7 +44,7 @@ onlineForLife.Feed = {
 		console.log('feed init');		
 		$('.refresh-count').on('click',function(){
 			onlineForLife.Feed.outputFeedWidth();
-			onlineForLife.Tracking.trackEvent('refresh','click');
+			//onlineForLife.Tracking.trackEvent('refresh','click');
 		});
 		
 		//var uiVer = jQuery.ui.version;
