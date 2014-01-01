@@ -18,7 +18,7 @@
     <gap:plugin name="org.apache.cordova.camera" />
     <gap:plugin name="nl.x-services.plugins.socialsharing" />
     <gap:plugin name="com.adobe.plugins.gaplugin" />
-    <gap:plugin name="com.arnia.plugins.smsbuilder" />
+    
     
     
     <preference name="EnableViewportScale" value="true" />
