@@ -6,7 +6,7 @@ body,html{
 	font-family: Oswald;
 }
 body.mode-test{
-	background: #f0f;
+	1background: #f0f;
 }
 
 .ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button{

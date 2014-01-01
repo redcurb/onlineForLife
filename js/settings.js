@@ -16,6 +16,16 @@ onlineForLife.Settings = {
 			window.open(url, '_blank', 'location=yes'); 
 			
 		});
+		$('.link-settings-privacy').on('click',function(){
+			var url = 'http://onlineforlife.org/privacy-policy/';
+			//window.location.href = 'events.html';
+			//window.plugins.childBrowser.showWebPage('http://www.google.com', { showLocationBar: true });
+			
+			myURL = encodeURI(url);
+			window.open(url, '_blank', 'location=yes'); 
+			
+		});
+		
 		$('.link-settings-ofl-2').on('click',function(){
 			$('h2 p').text('test text');
 		});

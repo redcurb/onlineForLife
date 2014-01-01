@@ -169,8 +169,8 @@ onlineForLife.Panels = {
 		var $textVisitedPrc = $impact.find('.impact-step.step-visited-prc span');
 		var $textChoseLife = $impact.find('.impact-step.step-chose-life span');
 
-		var arcSpeed = 50;
-		var textDelay = 50;
+		var arcSpeed = 100;
+		var textDelay = 100;
 		
 		$called.fadeIn(arcSpeed, function(){
 			$textCalled.fadeIn(textDelay);
