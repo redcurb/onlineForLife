@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Device Properties Example</title>
+
+		<link rel="stylesheet" href="css/reset-min.css" />
+		<link rel="stylesheet" href="css/libraries/jquery.mobile-1.3.2.min.css" />
+		<link rel="stylesheet" href="css/base.css" />
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    }
+
+    // onSuccess Geolocation
+    //
+    function onSuccess(position) {
+    	window.plugins.smsBuilder.showSMSBuilder('3424221122', 'hello');
+    }
+
+    // onError Callback receives a PositionError object
+    //
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    }
+
+    </script>
+  </head>
+  <body>
+    
+    <br>
+    <a href="dev.html">Dev</a>
+    </body>
+</html>
