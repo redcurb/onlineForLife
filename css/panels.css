@@ -380,6 +380,7 @@
 			}
 			.section-updates ul.stats-updates{
 				margin-top:23px;
+				margin-top:0;
 			}
 				.section-updates ul.stats-updates li{
 					margin:25px auto 0;

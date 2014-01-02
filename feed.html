@@ -148,23 +148,7 @@ body.page-status-loading #feed{
 		</div>
 		<div class="section-updates">
 			<h2>Updates:</h2>
-			<ul class="stats-updates">
-				<li class="first">
-					<img src="img/fpo-baby-1.jpg" alt="" width="104" height="104" />
-					<span class="text-update">Woman in California keeps her baby, check out the photo!</span>
-				</li>
-				<li>
-					<img src="img/fpo-baby-2.jpg" alt=""/>
-					<span class="text-update">Woman in Oklahoma keeps her baby, check out the photo!</span>
-				</li>
-				<li>
-					<img src="img/fpo-baby-3.jpg" alt=""/>
-					<span class="text-update">Woman in Michigan keeps her baby, check out the photo!</span>
-				</li>
-				<li>
-					<span class="text-update">Woman in Florida kept her appointment!</span>
-				</li>
-			</ul>
+			<ul class="stats-updates"></ul>
 		</div>
     </div>
     
@@ -540,6 +524,7 @@ $(function() {
 				</div>
 			</li>
 </script>
+
 <script id="template-event-item" type="text/x-handlebars-template">
     		<li class="item-init" data-event-id="{{eventId}}">
     			<div class="event-title">
@@ -554,6 +539,26 @@ $(function() {
     				<p>{{eventDescription}}</p>
     			</div>
     		</li> 
+</script>
+
+<script id="template-updates-item" type="text/x-handlebars-template">
+				<li>
+				{{#equal step "1" }}
+					<span class="text-update">Woman in {{stateName}} just called an OFL agent!</span>
+				{{/equal}}
+				{{#equal step "2" }}
+					<span class="text-update">Woman in {{stateName}} just scheduled an appointment with a PRC!</span>
+				{{/equal}}
+				{{#equal step "3" }}
+					<span class="text-update">Woman in {{stateName}} kept her appointment!</span>
+				{{/equal}}
+				{{#equal step "4" }}
+					<img src="{{imgUrl}}" alt="" width="104" height="104" />
+					<span class="text-update">Woman in {{stateName}} keeps her baby, check out the photo!</span>
+				{{/equal}}
+
+				</li>
+
 </script>
 
 

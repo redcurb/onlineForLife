@@ -11,7 +11,7 @@ onlineForLife.Events = {
 	},
 	
 	setupHandlers: function(){
-		console.log('EVENTS setupHandlers');
+		//console.log('EVENTS setupHandlers');
 		onlineForLife.Events.setupEventItemHandlers();
 	},
 	
@@ -32,7 +32,7 @@ onlineForLife.Events = {
 	},
 	
 	setupFirebaseEvents:function(){
-		console.log('setupFirebasePrayers');
+		//console.log('setupFirebasePrayers');
 		var dbUrl = 'https://onlineforlife.firebaseio.com/events';
 		var myDataRef = new Firebase(dbUrl);
 	
@@ -66,7 +66,7 @@ onlineForLife.Events = {
 				output += 'eventEndMinute: ' + eventEndMinute + '\n';
 				output += 'eventLocation: ' + eventLocation + '\n';
 				output += 'eventDescription: ' + eventDescription + '\n';
-				console.log(output);
+				//console.log(output);
 				
 				onlineForLife.Events.buildEventItem(eventId, eventTitle, eventMonth, eventDay, eventYear, eventStartHour, eventStartMinute, eventStartAmpm, eventEndHour, eventEndMinute, eventEndAmpm, eventLocation, eventDescription);
 			}
@@ -80,7 +80,7 @@ onlineForLife.Events = {
 		var template = Handlebars.compile(source);
 		var context = {eventId: eventId, eventTitle: eventTitle, eventMonth: eventMonth, eventDay: eventDay, eventYear: eventYear, eventStartHour: eventStartHour, eventStartMinute: eventStartMinute, eventStartAmpm: eventStartAmpm, eventEndHour: eventEndHour, eventEndMinute: eventEndMinute, eventEndAmpm: eventEndAmpm, eventLocation: eventLocation, eventDescription: eventDescription};
 		var html = template(context);
-		console.log(html);
+		//console.log(html);
 		$calendar.prepend(html);
 		onlineForLife.Events.setupHandlers();
 		//return html;

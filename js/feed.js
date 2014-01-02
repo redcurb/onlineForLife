@@ -251,8 +251,8 @@ onlineForLife.Feed = {
 		var fetchCountEach = onlineForLife.Feed.fetchCountEach;
 		var prayers = data.prayers;
 		var dataItemCount = prayers.length;
-		console.log('fetchCountEach: ' + fetchCountEach);
-		console.log('dataItemCount: ' + dataItemCount);
+		//console.log('fetchCountEach: ' + fetchCountEach);
+		//console.log('dataItemCount: ' + dataItemCount);
 
 		var feedHtml = '';
 		$.each(prayers, function(index,prayer){
@@ -365,7 +365,7 @@ onlineForLife.Feed = {
 			var id = $this.find('.feed-content').attr('id');
 			var elementId = '#'+id;
 			var $content = $(elementId).get(0);
-			console.log('elementId: ' + elementId);
+			//console.log('elementId: ' + elementId);
 			new Swipe($content,{
 				startSlide:1,
 				speed: 400, // Speed of prev and next transitions in milliseconds. (default:300)

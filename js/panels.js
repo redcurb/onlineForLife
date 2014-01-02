@@ -1,8 +1,11 @@
 var onlineForLife = window.onlineForLife || {}; onlineForLife.Panels = onlineForLife.Panels || {};
 onlineForLife.Panels = {
+	addFirebaseChild:true,
+	
 	init: function(){
 		onlineForLife.Panels.setupHandlers();
 		onlineForLife.Panels.setupIpad();
+		onlineForLife.Panels.setupUpdates();
 	},
 	
 	refreshed:false,
@@ -316,15 +319,45 @@ onlineForLife.Panels = {
 		
 		
 		
+	},
+	
+	setupUpdates: function(){
+		console.log('setupUpdates');
+		var updatesUrl = 'https://onlineforlife.firebaseio.com/updates';
+		var updatesData = new Firebase(updatesUrl);
+		
+		updatesData.on('child_added', function(snapshot) {
+			var message = snapshot.val();
+			//console.log(message);
+			//displayChatMessage(message.name, message.state, message.step);
+			if(onlineForLife.Panels.addFirebaseChild){
+				//console.log('onlineForLife.Feed.addFirebaseChild TRUE');
+				var newHtml = onlineForLife.Panels.buildUpdateItem(message.id, message.state, message.step, message.stateName);
+				$('ul.stats-updates').prepend(newHtml);
+			}
+		});
+	},
+	
+	buildUpdateItem: function(itemId, stateCode, step, stateName){
+		console.log('buildUpdateItem');
+		var source   = $("#template-updates-item").html();
+		var template = Handlebars.compile(source);
+		var BgVersion = onlineForLife.Feed.setBgVersion;
+		var id = itemId.toString();
+		var imgSuffix = id.slice(-1);
+		var imgUrl = 'img/fpo-baby-' + imgSuffix + '.jpg'
+		console.log('imgSuffix',imgSuffix);
+		var context = {itemId: itemId, stateCode: stateCode, step: step, stateName: stateName, imgUrl: imgUrl}
+		var html = template(context);
+		console.log(html);
+		return html;
 	}
 	
-
-
 };
 $(function() {
 	onlineForLife.Panels.init();
 	//$('#panel-left').click();
-	//$('#feed-panel-right').click();
+	$('#feed-panel-right').click();
 });
 
 
