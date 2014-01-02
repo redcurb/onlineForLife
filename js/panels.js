@@ -172,8 +172,8 @@ onlineForLife.Panels = {
 		var $textVisitedPrc = $impact.find('.impact-step.step-visited-prc span');
 		var $textChoseLife = $impact.find('.impact-step.step-chose-life span');
 
-		var arcSpeed = 100;
-		var textDelay = 100;
+		var arcSpeed = 130;
+		var textDelay = 130;
 		
 		$called.fadeIn(arcSpeed, function(){
 			$textCalled.fadeIn(textDelay);
@@ -357,7 +357,7 @@ onlineForLife.Panels = {
 $(function() {
 	onlineForLife.Panels.init();
 	//$('#panel-left').click();
-	$('#feed-panel-right').click();
+	//$('#feed-panel-right').click();
 });
 
 
