@@ -16,7 +16,8 @@ onlineForLife.Footer = {
 			var title = encodeURIComponent('Online For Life');
 			var description = encodeURIComponent('So Every Child Makes Their Mark. Our Mission: Providing comprehensive care to abortion-determined women and men in their deepest time of need.');
 			var imageUrl = encodeURIComponent('http://onlineforlife.org/2-1app/olf-logo.png');
-			var shareUrl = encodeURIComponent('http://onlineforlife.org/2-1app/share.html');
+			var userId = 2313;
+			var shareUrl = encodeURIComponent('http://onlineforlife.org/2-1app/share.html?shareId='+userId);
 			var fbLink = 'http://www.facebook.com/sharer.php?s=100&p[title]='+ title + '&p[summary]=' + description + '&p[url]=' + shareUrl + '&p[images][0]=' + imageUrl;
 			//window.location.href = "https://www.facebook.com/sharer/sharer.php?u=www.onlineforlife.org/2-1app/share.html?id=2123";
 			window.location.href = fbLink;
