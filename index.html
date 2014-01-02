@@ -25,7 +25,7 @@
     	document.write(navigator);
     	document.write(navigator.userAgent);
     	var url = 'feed.html';
-    	window.location.href = url;
+//    	window.location.href = url;
 	}
     </script>
 	<link rel="stylesheet" href="css/reset-min.css" />
@@ -52,6 +52,8 @@
 			display: block;
 			margin: auto;
 			background-size: 100% auto;
+			bottom:10px;
+			position:absolute;
 		}
 		h1 .loading{
 			font-family: Oswald;
@@ -67,8 +69,8 @@
   </style>
   <body class="page-index">
   	<h1>
-  		<i class="icon"></i>
   		<span class="loading">Loading<span class="loading-dots"></span></span>
+  		<i class="icon"></i>
   	</h1>
   </body>
 <script>
