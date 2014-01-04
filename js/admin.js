@@ -1,6 +1,6 @@
 	
 	
-		var prayersUrl = 'https://onlineforlife.firebaseio.com/prayers';
+		var prayersUrl = 'https://ofl.firebaseio.com/prayers';
 		var prayerData = new Firebase(prayersUrl);
 //		prayerData.set({});
 		$('#prayer-submit').click(function (e) {
@@ -18,7 +18,7 @@
 
 	
 		
-		var feedUrl = 'https://onlineforlife.firebaseio.com/feed';
+		var feedUrl = 'https://ofl.firebaseio.com/feed';
 		var feedData = new Firebase(feedUrl);
 //		feedData.set({});
 		$('#feed-submit').click(function (e) {
@@ -36,7 +36,7 @@
 
 	
 		
-		var eventUrl = 'https://onlineforlife.firebaseio.com/events';
+		var eventUrl = 'https://ofl.firebaseio.com/events';
 		var eventData = new Firebase(eventUrl);
 //		eventData.set({});
 		$('#event-submit').click(function (e) {

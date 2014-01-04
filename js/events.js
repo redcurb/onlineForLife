@@ -33,7 +33,7 @@ onlineForLife.Events = {
 	
 	setupFirebaseEvents:function(){
 		//console.log('setupFirebasePrayers');
-		var dbUrl = 'https://onlineforlife.firebaseio.com/events';
+		var dbUrl = 'https://ofl.firebaseio.com/events';
 		var myDataRef = new Firebase(dbUrl);
 	
 		myDataRef.on('child_added', function(snapshot) {

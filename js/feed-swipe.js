@@ -77,7 +77,7 @@ onlineForLife.Feed = {
 		
 		var deviceId = Redcurb.Helpers.getParameterByName('device');
 		console.log('deviceId:' + deviceId);
-		var deviceUrl = 'https://onlineforlife.firebaseio.com/devices';
+		var deviceUrl = 'https://ofl.firebaseio.com/devices';
 		var deviceData = new Firebase(deviceUrl);
 		var data = {
 			id: deviceId,
@@ -106,7 +106,7 @@ onlineForLife.Feed = {
 	
 	setupFirebaseFeedItem:function(){
 		console.log('setupFirebaseFeedItem');
-		var dbUrl = 'https://onlineforlife.firebaseio.com/feed';
+		var dbUrl = 'https://ofl.firebaseio.com/feed';
 		var myDataRef = new Firebase(dbUrl);
 		
 		myDataRef.on('child_added', function(snapshot) {
@@ -125,7 +125,7 @@ onlineForLife.Feed = {
 	
 	setupFirebasePrayers:function(){
 		console.log('setupFirebasePrayers');
-		var dbUrl = 'https://onlineforlife.firebaseio.com/prayers';
+		var dbUrl = 'https://ofl.firebaseio.com/prayers';
 		var myDataRef = new Firebase(dbUrl);
 		
 		myDataRef.on('child_added', function(snapshot) {

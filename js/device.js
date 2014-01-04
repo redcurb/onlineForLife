@@ -15,7 +15,7 @@ onlineForLife.Feed = {
 		
 		var deviceId = Redcurb.Helpers.getParameterByName('device');
 		console.log('deviceId:' + deviceId);
-		var deviceUrl = 'https://onlineforlife.firebaseio.com/devices';
+		var deviceUrl = 'https://ofl.firebaseio.com/devices';
 		var deviceData = new Firebase(deviceUrl);
 		var data = {
 			id: deviceId,
