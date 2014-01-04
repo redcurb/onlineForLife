@@ -52,7 +52,7 @@ onlineForLife.USMap = {
 
 };
 $(function() {
-	onlineForLife.USMap.init();
+	
 });
 
 

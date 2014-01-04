@@ -346,10 +346,10 @@ onlineForLife.Panels = {
 		var id = itemId.toString();
 		var imgSuffix = id.slice(-1);
 		var imgUrl = 'img/fpo-baby-' + imgSuffix + '.jpg'
-		console.log('imgSuffix',imgSuffix);
+		//console.log('imgSuffix',imgSuffix);
 		var context = {itemId: itemId, stateCode: stateCode, step: step, stateName: stateName, imgUrl: imgUrl}
 		var html = template(context);
-		console.log(html);
+		//console.log(html);
 		return html;
 	}
 	

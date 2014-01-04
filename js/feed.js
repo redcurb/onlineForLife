@@ -358,7 +358,7 @@ onlineForLife.Feed = {
 	setupDraggable: function(){
 		var $feed = $('ul.feed');
 		var $feedItems = $feed.get(0);
-		
+		console.log('setupDraggable');
 		
 		$('ul.feed li.feed-item').each(function(i,v){
 			var $this = $(this);
@@ -587,6 +587,7 @@ onlineForLife.Feed = {
 
 };
 $(function() {
+	onlineForLife.USMap.init();
 	onlineForLife.Feed.init();
 });
 

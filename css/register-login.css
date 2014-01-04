@@ -1,0 +1,72 @@
+		body.body-register-login,
+		.page-register-login{
+			background:#313738;
+			padding-bottom:20px;
+			padding-bottom:100px;
+		}
+			.page-register-login h3{
+					
+			}
+				.page-register-login h3{
+					display:block;
+					width:281px;
+					height:268px;
+					background:transparent url(../img/logo-login.png) no-repeat 0 0;
+					margin:95px auto 105px; 
+				}
+				.fieldset{
+					margin:0 auto;
+					width:81.875%;
+					width:524px;
+					display:block;
+					clear:both;
+				}
+					input.input-text {
+						padding:20px 23px 23px;
+						border-radius: 7px;
+						width:476px;
+						border:1px solid #979797;
+						margin-top:24px;
+						font-size: 1.6em;
+						font-weight: 100;
+						letter-spacing:2px;
+					}
+					input.input-text.first {
+						margin-top:0;
+					}
+		
+		.fieldset-btn{
+			margin:28px auto 0;
+		}
+			.fieldset-btn .btn{
+				padding:9px 65px 12px;
+				font-size: 1.6em;
+				font-weight: 100;
+				text-transform:uppercase;
+				text-decoration:none;
+				text-shadow:none;
+				color:white;
+				border-radius:7px;
+			}
+			.fieldset-btn .btn-secondary{
+				background:gray;
+				float:left;
+			}
+			.fieldset-btn .btn-primary{
+				background:#c8512a;
+				float:right;
+				margin-right:3px;
+			}
+			
+			.fieldset-btn .fieldset-col-1{
+				float:left;
+				overflow:hidden;
+			}
+				.fieldset-btn .fieldset-col-1 a{
+					font-size:1.1em;
+					text-decoration:none;
+					color:#fff;
+					clear:both;
+					float:left;
+				}
+
