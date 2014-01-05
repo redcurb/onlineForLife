@@ -34,39 +34,83 @@
 					input.input-text.first {
 						margin-top:0;
 					}
-		
-		.fieldset-btn{
-			margin:28px auto 0;
-		}
-			.fieldset-btn .btn{
-				padding:9px 65px 12px;
-				font-size: 1.6em;
-				font-weight: 100;
-				text-transform:uppercase;
-				text-decoration:none;
-				text-shadow:none;
-				color:white;
-				border-radius:7px;
-			}
-			.fieldset-btn .btn-secondary{
-				background:gray;
-				float:left;
-			}
-			.fieldset-btn .btn-primary{
-				background:#c8512a;
-				float:right;
-				margin-right:3px;
-			}
+					input.input-text.valid-false {
+						background: palegoldenrod;
+					}
+					
+				.fieldset-text{
+					position:relative;
+				}
+					.input-error{
+						display:none;
+						position: absolute;
+						right: 0;
+						top: 20px;
+						background: #000;
+						font-size: 0.9em;
+						color: #fff;
+						font-weight: 100;
+						padding: 2px 12px 5px;
+						font-style: normal;
+						height:32px;
+					}
+					.input-error.error-firstname{
+						top:31px;
+					}
+					.input-error.error-email{
+						top:157px;
+					}
+					.input-error.error-password{
+						top:281px;
+					}
+					.input-error.error-zip{
+						top:405px;
+					}
+						.input-error i.fa{
+							color: #ff0;
+							font-size: 0.9em;
+							position: relative;
+							top: -2px;
+							margin-right: 6px;
+						}
+		.form-register-login{
 			
-			.fieldset-btn .fieldset-col-1{
-				float:left;
-				overflow:hidden;
+		}
+		.form-register-login.form-invalid{
+			1background:yellow;
+		}
+			.fieldset-btn{
+				margin:28px auto 0;
 			}
-				.fieldset-btn .fieldset-col-1 a{
-					font-size:1.1em;
+				.fieldset-btn .btn{
+					padding:9px 65px 12px;
+					font-size: 1.6em;
+					font-weight: 100;
+					text-transform:uppercase;
 					text-decoration:none;
-					color:#fff;
-					clear:both;
+					text-shadow:none;
+					color:white;
+					border-radius:7px;
+				}
+				.fieldset-btn .btn-secondary{
+					background:gray;
 					float:left;
 				}
+				.fieldset-btn .btn-primary{
+					background:#c8512a;
+					float:right;
+					margin-right:3px;
+				}
+				
+				.fieldset-btn .fieldset-col-1{
+					float:left;
+					overflow:hidden;
+				}
+					.fieldset-btn .fieldset-col-1 a{
+						font-size:1.1em;
+						text-decoration:none;
+						color:#fff;
+						clear:both;
+						float:left;
+					}
 

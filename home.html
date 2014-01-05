@@ -41,12 +41,17 @@
 <body class="body-ofl body-register-login">
 	<div data-role="page" id="registration" data-page="registration" class="page-register-login page-register">
 		<h3><i class="logo-main"></i></h3>
-		<form id="form-registration" data-ajax="false">
+		<form id="form-registration" data-ajax="false" novalidate class="form-register-login form-register">
 			<div class="fieldset fieldset-text">
-				<input type="text" placeholder="First Name" required pattern="^[A-Za-z]{2}$" data-role="none" class="input-text first" autofocus title="First Name must be at least 2 letters" />
-				<input type="email" placeholder="Email" required data-role="none" class="input-text" />
-				<input type="password" placeholder="Password" required data-role="none" class="input-text" pattern=".{6,12}" maxlength="12" title="Password must be 6 and 12 characters" />
-				<input type="numeric" placeholder="ZIP Code" required data-role="none" class="input-text" pattern="(\d{5}([\-]\d{4})?)" maxlength="5" title="Please enter 5 digits only" />
+				<input value="b" id="input-register-firstname" name="input-register-firstname" type="text" placeholder="First Name" required pattern="^[A-Za-z]{2}$" data-role="none" class="input-text first" autofocus title="First Name must be at least 2 letters" data-validate="true" />
+				<input value="brianbriancom" id="input-register-email" name="input-register-email" type="email" placeholder="Email" required data-role="none" class="input-text" data-validate="true" />
+				<input value="" id="input-register-password" name="input-register-password" type="password" placeholder="Password (6-12 characters)" required data-role="none" class="input-text" pattern=".{6,12}" maxlength="12" title="Password must be 6 and 12 characters" data-validate="true" />
+				<input value="91107" id="input-register-zip" name="input-register-zip" type="number" placeholder="ZIP Code" required data-role="none" class="input-text" pattern="[0-9]*" maxlength="5" title="Please enter 5 digits only" data-validate="true" />
+				<i class="input-error error-firstname error-1"><i class="fa fa-exclamation-circle"></i><span>Name should only container letters</span></i>
+				<i class="input-error error-firstname error-2"><i class="fa fa-exclamation-circle"></i><span>Name needs to be at least 2 characters</span></i>
+				<i class="input-error error-email"><i class="fa fa-exclamation-circle"></i><span>Please enter a standard email address</span></i>
+				<i class="input-error error-password"><i class="fa fa-exclamation-circle"></i><span>Password should be 6-12 characters</span></i>
+				<i class="input-error error-zip"><i class="fa fa-exclamation-circle"></i><span>ZIP Code must be 5 digits</span></i>
 			</div>
 			<div class="fieldset fieldset-btn">
 				<a href="#login" class="btn btn-secondary" data-role="none">Login</a>
