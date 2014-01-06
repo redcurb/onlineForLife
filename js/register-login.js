@@ -17,15 +17,30 @@ onlineForLife.Auth = {
 	
 	checkLoginStatus: function(){
 		var loggedIn = false;
-		//loggedIn = true;
-		if(loggedIn){
-			document.location="feed.html";
-		}
-		else{
-			onlineForLife.Register.init();
-			onlineForLife.Login.init();
-			onlineForLife.Forgot.init();
-		}
+		
+		var firebaseUrl =  new Firebase('https://ofl.firebaseio.com');
+		var auth = new FirebaseSimpleLogin(firebaseUrl, function(error, user) {
+			if (error) {
+				console.log('error');
+				console.log(error);
+				return;
+			}
+			if (user) {
+				// User is already logged in.
+				console.log(user);
+				console.log(user.email);
+				document.location="feed.html";
+			} else {
+				// User is logged out.
+				console.log('no user');
+				onlineForLife.Register.init();
+				onlineForLife.Login.init();
+				onlineForLife.Forgot.init();
+			}
+		});
+		
+		
+		
 	}
 };
 
@@ -40,17 +55,76 @@ onlineForLife.Register = {
 		console.log('reg init');		
 		onlineForLife.Register.setupFocus();
 		onlineForLife.Register.setupForm();
-		
-		$('#form-registration').on('submit',function(event){
+		var $form = $('#form-registration');
+		$form.on('submit',function(event){
 			event.preventDefault();
-			onlineForLife.Register.handleFormSubmit();
+			onlineForLife.Register.handleFormSubmit($form);
 		});
 	},
 	
-	handleFormSubmit: function(){
+	createUser: function($form){
+		var $firstName = $form.find('#input-register-firstname');
+		var $email = $form.find('#input-register-email');
+		var $password = $form.find('#input-register-password');
+		var $zip = $form.find('#input-register-zip');
+		var firstNameVal = $firstName.val();
+		var emailVal = $email.val();
+		var passwordVal = $password.val();
+		var zipVal = $zip.val();
+		
+		
+		var firebaseUrl =  new Firebase('https://ofl.firebaseio.com');
+		var auth = new FirebaseSimpleLogin(firebaseUrl, function(error, user) {
+			if (error) {
+				console.log('error');
+				return;
+			}
+			if (user) {
+				// User is already logged in.
+				console.log('already logged in');
+				console.log(user);
+			} else {
+				// User is logged out.
+				console.log('NO user logged in');
+
+				auth.createUser(emailVal, passwordVal, function(error,  user) {
+					if (!error) {
+						console.log('user created: ' + user.id);
+						var usersUrl = 'https://ofl.firebaseio.com/users/'+user.id;
+						var usersData = new Firebase(usersUrl);
+		
+						var userId = user.id;
+						var userEmail = user.email;
+						var userName = firstNameVal;
+						var userZip = zipVal;
+						var pushData = { id: userId, email: userEmail, name: userName, zip: userZip };
+						usersData.push(pushData);
+						onlineForLife.Register.handleRegSuccess();
+						
+					} else {
+						console.log('createUser error');
+						console.log(error);
+					}
+				});
+
+
+			}
+		});
+	},
+	
+	handleRegSuccess: function(){
+		console.log('handleRegSuccess');
+		document.location = 'feed.html';
+	},
+	
+	handleRegError: function(){
+		console.log('handleRegError');
+	},
+	
+	handleFormSubmit: function($form){
 		var formOk = onlineForLife.Register.validateForm();
 		if(formOk){
-			document.location = 'feed.html';
+			onlineForLife.Register.createUser($form);
 		}
 		else{
 			//alert('fix it');
@@ -95,7 +169,7 @@ onlineForLife.Register = {
 		var $errorEmail = $form.find('.error-email');
 		var $errorPassword = $form.find('.error-password');
 		var $errorZip = $form.find('.error-zip');
-		console.log($this);
+		//console.log($this);
 		if(fieldId=='input-register-firstname'){
 			var fieldValue = $this.val();
 			console.log('fieldValue',fieldValue);
@@ -229,22 +303,58 @@ onlineForLife.Register = {
 
 onlineForLife.Login = {
 	init: function(){
-		$('#form-login').on('submit',function(){
+		console.log('login init');
+		$('#form-login').on('submit',function(event){
+			event.preventDefault();
+			console.log('login submit clicked');
 			onlineForLife.Login.handleFormSubmit();
+			return false;
 		});
 	},
 	
 	handleFormSubmit: function(){
-		var formOk = true;
-		if(formOk){
-			//document.location="feed.html";
-		}
+		console.log('handleFormSubmit');
+		var $form = $('#form-login');
+		var $email = $form.find('#input-login-email');
+		var $password = $form.find('#input-login-password');
+		var emailVal = $email.val();
+		var passwordVal = $password.val();
+
+		var firebaseUrl =  new Firebase('https://ofl.firebaseio.com');
+		var auth = new FirebaseSimpleLogin(firebaseUrl, function(error, user) {
+			if (error) {
+				console.log('error');
+				console.log(error);
+				return;
+			}
+			if(user){
+				// User is already logged in.
+				console.log('logged in');
+				console.log(user.email);
+				onlineForLife.Login.handleFormSuccess();
+			} else {
+				// User is logged out.
+				console.log('no user');
+				var email = emailVal;
+				var password = passwordVal;
+				auth.login('password', {
+				  email: email,
+				  password: password,
+				  rememberMe: false
+				});
+			}
+		});
+	},
+	
+	handleFormSuccess: function(){
+		document.location="feed.html";
 	}
 };
 
 onlineForLife.Forgot = {
 	init: function(){
-		$('#form-forgot').on('submit',function(){
+		$('#form-forgot').on('submit',function(e){
+			e.preventDefault();
 			onlineForLife.Forgot.handleFormSubmit();
 		});
 	},

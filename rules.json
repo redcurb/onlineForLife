@@ -1,0 +1,27 @@
+{
+  "rules": {
+    "prayers": {
+        ".write": true
+    },
+    "feed": {
+        ".write": true,
+        ".read": "auth.admin == true"
+        
+    },
+    "events": {
+        ".write": true,
+      ".read": "auth != null"
+    },
+    "updates": {
+        ".write": true,
+        ".read": "auth.admin == true"
+    },
+    "devices": {
+        ".write": true
+    },
+    "users": {
+        ".write": true,
+        ".read": true
+    }
+  }
+}

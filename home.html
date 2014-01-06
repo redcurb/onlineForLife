@@ -62,26 +62,31 @@
 	
 	<div data-role="page" id="login" data-page="login" class="page-register-login page-login">
 		<h3><i class="logo-main"></i></h3>
-		<form id="form-login">
+		<form id="form-login" novalidate>
 			<div class="fieldset fieldset-text">
-				<input type="email" placeholder="Email" required data-role="none" class="input-text first" />
-				<input type="password" placeholder="Password" required data-role="none" class="input-text" pattern=".{6,12}" maxlength="12" title="Password must be 6 and 12 characters" />
+				<input type="email" id="input-login-email" placeholder="Email" required data-role="none" class="input-text first" />
+				<input type="password" id="input-login-password" placeholder="Password" required data-role="none" class="input-text" pattern=".{6,12}" maxlength="12" title="Password must be 6 and 12 characters" />
 			</div>
 			<div class="fieldset fieldset-btn">
+				<!--
 				<div class="fieldset-col fieldset-col-1">
 					<a href="#forgot" class="link link-secondary" data-role="none">Forgot Password</a>
 					<a href="#registration" class="link link-secondary" data-role="none">Register</a>
 				</div>
+				-->
+				<a href="#registration" class="btn btn-secondary" data-role="none">Register</a>
 				<button type="submit" class="btn btn-primary" data-role="none">Login</button>
+				<!--
 				<a href="feed.html" data-ajax="false" class="btn btn-primary" data-role="none">Login Bypass</a>
 				<a href="login.html" data-ajax="false" class="btn btn-primary" data-role="none">Login Test</a>
+				-->
 			</div>
 		</form>
 	</div>
 	
 	<div data-role="page" id="forgot" data-page="login" class="page-register-login page-forgot">
 		<h3><i class="logo-main"></i></h3>
-		<form id="form-forgot">
+		<form id="form-forgot" novalidate>
 			<div class="fieldset fieldset-text">
 				<input type="email" placeholder="Email" required data-role="none" class="input-text first" />
 			</div>

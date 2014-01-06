@@ -21,12 +21,14 @@
 	<script src="js/libraries/jquery-ui.min.js"></script>
 </head>
 <body class="body-ofl body-register-login">
-	<button id="registerButton" type="submit">submit reg</button>
-	<button id="loginButton" type="submit">submit login</button>
-	<button id="logoutButton" type="submit">submit logout</button>
+	<button id="registerButton" type="submit">register</button>
+	<button id="loginButton" type="submit">login - user</button>
+	<button id="loginButtonAdmin" type="submit">login - admin</button>
+	<button id="logoutButton" type="submit">logout</button>
 	<button id="getEvents" type="submit">getEvents</button>
+	<button id="getUpdates" type="submit">getUpdates</button>
 	<button id="clearConsole" type="submit">Clear Console</button>
-	<button id="reloadPage" type="submit">Reload Page</button>
+	<button id="reloadPage" type="submit">Reload</button>
 	
 	<ul id="console">
 	
@@ -55,7 +57,7 @@
 		});
 		$("#registerButton").on("click", function() {
 			console.log('reg clicked');
-			var email = 'brian@brian.com';
+			var email = 'brian5@brian.com';
 			var password = 'password1';
 			auth.createUser(email, password, function(error,  user) {
 				if (!error) {
@@ -63,6 +65,20 @@
 					console.log(user.email);
 					console.log(user);
 					$('#console').append('<li>'+user.email+'</li>');
+
+
+					var usersUrl = 'https://ofl.firebaseio.com/users/'+user.id;
+					var usersData = new Firebase(usersUrl);
+
+					var userId = user.id;
+					var userEmail = user.email;
+					var userName = 'brian';
+					var userZip = '91107';
+					var pushData = { id: userId, email: userEmail, name: userName, zip: userZip };
+					usersData.push(pushData);
+
+
+					
 				} else {
 					console.log('error');
 					console.log(error);
@@ -74,6 +90,17 @@
 			console.log('login clicked');
 			var email = 'brian@brian.com';
 			var password = 'password1';
+			auth.login('password', {
+			  email: email,
+			  password: password,
+			  rememberMe: false
+			});
+		});
+		$("#loginButtonAdmin").on("click", function() {
+			console.log('login clicked');
+			var email = 'tgerwing@onlineforlife.org';
+			var password = 'online4life220';
+			//auth.auth('wWHtRZLdybxVBALNg6VP6gOzUSibWeYFVVrOIlC0');
 			auth.login('password', {
 			  email: email,
 			  password: password,
@@ -112,6 +139,28 @@
 			});
 			
 		});
+
+		$("#getUpdates").on("click", function() {
+			var dbUrl = 'https://ofl.firebaseio.com/updates';
+			var myDataRef = new Firebase(dbUrl);
+		
+			myDataRef.on('child_added', function(snapshot) {
+				var message = snapshot.val();
+	
+				var eventId = message.id;
+				var eventTitle = message.title;
+				var eventDescription = message.description;
+	
+				var output = '';
+				output += 'eventId: ' + eventId + '\n';
+				//console.log(output);
+				$('#console').append('<li>'+eventId+'</li>');
+					
+			});
+			
+		});
+		
+		
 	</script>
 	<a href="home.html" data-ajax="false">Home</a>
 </body>
