@@ -83,10 +83,9 @@ onlineForLife.Register = {
 				// User is already logged in.
 				console.log('already logged in');
 				console.log(user);
+				onlineForLife.Register.handleRegSuccess();
 			} else {
 				// User is logged out.
-				console.log('NO user logged in');
-
 				auth.createUser(emailVal, passwordVal, function(error,  user) {
 					if (!error) {
 						console.log('user created: ' + user.id);
@@ -99,20 +98,26 @@ onlineForLife.Register = {
 						var userZip = zipVal;
 						var pushData = { id: userId, email: userEmail, name: userName, zip: userZip };
 						usersData.push(pushData);
-						onlineForLife.Register.handleRegSuccess();
 						
+						var usersPrayersUrl = 'https://ofl.firebaseio.com/users/'+user.id + '/prayers';
+						var usersPrayersData = new Firebase(usersPrayersUrl);
+						usersPrayersData.push("{}");
+		
+						auth.login('password', {
+						  email: emailVal,
+						  password: passwordVal,
+						  rememberMe: true
+						});
 					} else {
 						console.log('createUser error');
 						console.log(error);
 					}
 				});
-
-
 			}
 		});
 	},
 	
-	handleRegSuccess: function(){
+	handleRegSuccess: function(auth, email, password){
 		console.log('handleRegSuccess');
 		document.location = 'feed.html';
 	},

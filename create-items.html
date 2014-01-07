@@ -227,7 +227,6 @@
 					<option value="1">Step 1</option>
 					<option value="2">Step 2</option>
 					<option value="3">Step 3</option>
-					<option value="4">Step 4</option>
 				</select>
 			</div>
 			<div class="col col3">
@@ -482,8 +481,9 @@
 			var stateName = $('#feed-states option:selected').text();
 			var step = $('#feed-steps').val();
 			console.log(state, stateName, step);
+			var timeStamp = new Date().getTime().toString();
 			if($('#form-create-feed-item input:required:invalid').length==0){
-				feedData.push({state: state, stateName:stateName, step: step});
+				feedData.push({id: timeStamp, state: state, stateName:stateName, step: step});
 			}
 		});
 		$('#feed-reset').click(function (e) {
