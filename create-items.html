@@ -453,7 +453,7 @@
 		
 	</div>
 	<script>
-	
+		
 	
 		var prayersUrl = 'https://ofl.firebaseio.com/prayers';
 		var prayerData = new Firebase(prayersUrl);
@@ -466,6 +466,7 @@
 			if($('#form-create-prayer input:required:invalid').length==0){
 				prayerData.push({state: state, stateName:stateName, step: step});
 			}
+			randomizePrayer();
 		});
 		$('#prayer-reset').click(function (e) {
 			prayerData.set({});
@@ -473,6 +474,24 @@
 
 	
 		
+		function randomizeFeed(){
+			var $states = $('#feed-states option');
+			var $step = $('#feed-steps option');
+			var stateCount = $states.length;
+			var stepCount = $step.length;
+
+			var lower = 0;
+			var stateUpper = stateCount - 1;
+			var stepUpper = stepCount - 1;
+			var randomState = Math.floor(Math.random() * stateUpper) + 1;
+			var randomStep = Math.floor(Math.random() * stepUpper) + 1;
+
+			$('#feed-states option:eq(' + randomState + ')').prop('selected',true);
+			$('#feed-steps option:eq(' + randomStep + ')').prop('selected',true);
+
+			console.log('stateCount',stateCount, randomState);
+			console.log('stepCount',stepCount, randomStep);
+		}
 		var feedUrl = 'https://ofl.firebaseio.com/feed';
 		var feedData = new Firebase(feedUrl);
 //		feedData.set({});
@@ -485,6 +504,7 @@
 			if($('#form-create-feed-item input:required:invalid').length==0){
 				feedData.push({id: timeStamp, state: state, stateName:stateName, step: step});
 			}
+			randomizeFeed();
 		});
 		$('#feed-reset').click(function (e) {
 			feedData.set({});
@@ -551,7 +571,9 @@
 			eventData.set({});
 		});
 
-		
+		$(function() {
+			randomizeFeed();
+		});
 		
 	</script>
 </body>
