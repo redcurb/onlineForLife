@@ -61,7 +61,7 @@ onlineForLife.Register = {
 			onlineForLife.Register.handleFormSubmit($form);
 		});
 	},
-	
+
 	createUser: function($form){
 		var $firstName = $form.find('#input-register-firstname');
 		var $email = $form.find('#input-register-email');
@@ -309,10 +309,31 @@ onlineForLife.Register = {
 onlineForLife.Login = {
 	init: function(){
 		console.log('login init');
+		onlineForLife.Login.setupAutoLogin();
 		$('#form-login').on('submit',function(event){
 			event.preventDefault();
 			console.log('login submit clicked');
 			onlineForLife.Login.handleFormSubmit();
+			return false;
+		});
+	},
+	
+	setupAutoLogin: function(){
+		var $form = $('#form-login');
+		var $email = $form.find('#input-login-email');
+		var $password = $form.find('#input-login-password');
+		$('#login-brian').on('click',function(event){
+			event.preventDefault();
+			$email.val('brian@brian.com');
+			$password.val('password1');
+			$('#form-login').submit();
+			return false;
+		});
+		$('#login-jon').on('click',function(event){
+			event.preventDefault();
+			$email.val('jon@redcurbsolutions.com');
+			$password.val('password1');
+			$('#form-login').submit();
 			return false;
 		});
 	},
