@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Device Properties Example</title>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    function onDeviceReady() {
+        var element = document.getElementById('debug');
+        element.innerHTML = 'device ready';
+    }
+
+	function redirectToSystemBrowser(url) {
+		var ref = window.open(encodeURI(url), '_system', 'location=yes');
+	}
+	
+    </script>
+  </head>
+  <body>
+    <div id="debug"></div>
+    <ul>
+        <li onclick="redirectToSystemBrowser('http://www.google.com');">open google in safari</li>
+    </ul>    
+    <br>
+    <a href="index.html">Home</a>
+  </body>
+</html>
