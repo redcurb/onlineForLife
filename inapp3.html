@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>InAppBrowser.executeScript Example</title>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    
+    function onDeviceReady() {
+    	alert('onDeviceReady');
+        
+        window.open('http://apache.org', '_system', 'location=yes');
+    }
+
+    </script>
+  </head>
+  <body>
+  	<div id="debug">loading</div>
+    <br>
+    <a href="dev.html">Dev</a>
+  </body>
+</html>
