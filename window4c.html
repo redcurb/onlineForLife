@@ -3,8 +3,6 @@
   <head>
     <title>window.open Example</title>
 
-    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
     <script type="text/javascript" charset="utf-8">
 
 	//alert(typeof(phonegap));    
@@ -17,8 +15,6 @@
     function onDeviceReady() {
         // external url
         var ref = window.open(encodeURI('http://apache.org'), '_blank', 'location=yes');
-        
-        ref = window.open('feed.html', '_self');
     }
 
     </script>
