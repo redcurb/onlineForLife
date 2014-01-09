@@ -16,12 +16,18 @@
 		var ref = window.open(encodeURI(url), '_system', 'location=yes');
 	}
 	
+	function openURL(urlString){
+		myURL = encodeURI(urlString);
+		window.open(myURL, '_blank');
+	}
+
     </script>
   </head>
   <body>
     <div id="debug"></div>
     <ul>
         <li onclick="redirectToSystemBrowser('http://www.google.com');">open google in safari</li>
+        <li><a href='#' onclick='openURL("http://www.google.com")'/>google.com</li>
     </ul>    
     <br>
     <a href="index.html">Home</a>
