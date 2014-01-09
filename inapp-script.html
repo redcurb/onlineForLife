@@ -31,6 +31,8 @@
     // Cordova is ready
     //
     function onDeviceReady() {
+        var element = document.getElementById('debug');
+        element.innerHTML = 'device ready';
          iabRef = window.open('http://apache.org', '_blank', 'location=yes');
          iabRef.addEventListener('loadstop', replaceHeaderImage);
          iabRef.addEventListener('exit', iabClose);
@@ -39,6 +41,7 @@
     </script>
   </head>
   <body>
+  	<div id="debug">loading</div>
     <br>
     <a href="dev.html">Dev</a>
   </body>
