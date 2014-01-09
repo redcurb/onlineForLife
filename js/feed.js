@@ -47,7 +47,7 @@ onlineForLife.Feed = {
 	},
 	
 	init: function(){
-		console.log('feed init');		
+		//console.log('feed init');		
 		$('1.refresh-count').on('click',function(){
 			//onlineForLife.Feed.outputFeedWidth();
 			//onlineForLife.Tracking.trackEvent('refresh','click');
@@ -66,37 +66,37 @@ onlineForLife.Feed = {
 	},
 	
 	checkLoginStatus: function(){
-		console.log('checkLoginStatus');
+		//console.log('checkLoginStatus');
 		
 		var firebaseUrl =  new Firebase('https://ofl.firebaseio.com');
 		var auth = new FirebaseSimpleLogin(firebaseUrl, function(error, user) {
 			if (error) {
-				console.log('error');
+				//console.log('error');
 				console.log(error);
 				return;
 			}
 			if (user) {
 				// User is already logged in.
-				console.log(user);
-				console.log(user.id);
+				//console.log(user);
+				//console.log(user.id);
 				onlineForLife.Feed.userData.id = user.id;
 				onlineForLife.Feed.setupFirebase();
 			} else {
 				// User is logged out.
-				console.log('no user');
+				//console.log('no user');
 				document.location = 'home.html';
 			}
 		});
 	},
 
 	trackUser:function(event, data){
-		console.log('trackUser',event,data)
+		//console.log('trackUser',event,data)
 		if(event=='feed-loaded'){
 			
 		}
 		if(event=='prayer'){
 			var eventId = data.eventId;
-			console.log('trackUser prayer: ' + eventId);
+			//console.log('trackUser prayer: ' + eventId);
 			onlineForLife.Feed.trackPrayer(eventId);
 		}
 	},
@@ -118,7 +118,7 @@ onlineForLife.Feed = {
 	},
 
 	writeDeviceInfo:function(){
-		console.log('writeDeviceInfo');
+		//console.log('writeDeviceInfo');
 		var $info = $('#device-info');
 		var html = '';
 		html += navigator.userAgent + '<br>';
@@ -127,7 +127,7 @@ onlineForLife.Feed = {
 		$info.append(html);
 		
 		var deviceId = Redcurb.Helpers.getParameterByName('device');
-		console.log('deviceId:' + deviceId);
+		//console.log('deviceId:' + deviceId);
 		var deviceUrl = 'https://ofl.firebaseio.com/devices';
 		var deviceData = new Firebase(deviceUrl);
 		var data = {
@@ -157,42 +157,42 @@ onlineForLife.Feed = {
 	},
 	
 	getPastPrayers:function(){
-		console.log('getPastPrayers');
+		//console.log('getPastPrayers');
 		var dbUrl = 'https://ofl.firebaseio.com/users/' + onlineForLife.Feed.userData.id + '/prayers';
 		var myDataRef = new Firebase(dbUrl);
 		
-		console.log('BEFORE');
+		//console.log('BEFORE');
 		myDataRef.once('value', function(snapshot) {
 			var prayerId = snapshot.val();
-			console.log('getPastPrayers VALUE prayerId: ');
-			console.log(prayerId);
+			//console.log('getPastPrayers VALUE prayerId: ');
+			//console.log(prayerId);
 			if(prayerId!="{}" && prayerId!=null){
 				$.each(prayerId,function(i,v){
-					console.log(v);
+					//console.log(v);
 					onlineForLife.Feed.itemsPrayedFor.push(v.toString());
 				});
 			}
-			console.log('AFTER');
+			//console.log('AFTER');
 			onlineForLife.Feed.setupFirebaseFeedItem();
 		});
 
 	},
 	
 	setupFirebaseFeedItem:function(){
-		console.log('setupFirebaseFeedItem');
+		//console.log('setupFirebaseFeedItem');
 		var dbUrl = 'https://ofl.firebaseio.com/feed';
 		var myDataRef = new Firebase(dbUrl);
 		
-		console.log('FEED ITEMS');
-		console.log(onlineForLife.Feed.itemsPrayedFor);
+		//console.log('FEED ITEMS');
+		//console.log(onlineForLife.Feed.itemsPrayedFor);
 		myDataRef.on('child_added', function(snapshot) {
 			var message = snapshot.val();
-			console.log(message);
+			//console.log(message);
 			//displayChatMessage(message.name, message.state, message.step);
 			//console.log('onlineForLife.Feed.addFirebaseChild TRUE');
 			var messageId = message.id.toString();
-			console.log('messageId: ' + typeof(messageId) + ' - ' + messageId);
-			console.log('indexOf: ' + onlineForLife.Feed.itemsPrayedFor.indexOf(messageId));
+			//console.log('messageId: ' + typeof(messageId) + ' - ' + messageId);
+			//console.log('indexOf: ' + onlineForLife.Feed.itemsPrayedFor.indexOf(messageId));
 			var buildItem = false;
 			if(onlineForLife.Feed.itemsPrayedFor.indexOf(messageId)<0){
 				buildItem = true;
@@ -203,12 +203,12 @@ onlineForLife.Feed = {
 				onlineForLife.Feed.centerFeedItemText('firebase', $('ul.feed li:first'));
 				onlineForLife.Feed.setupDraggableEach($('ul.feed li:first'));
 			}
-			console.log(' ');
+			//console.log(' ');
 		});
 	},
 	
 	setupFirebasePrayers:function(){
-		console.log('setupFirebasePrayers');
+		//console.log('setupFirebasePrayers');
 		var dbUrl = 'https://ofl.firebaseio.com/prayers';
 		var myDataRef = new Firebase(dbUrl);
 		
@@ -229,11 +229,11 @@ onlineForLife.Feed = {
 		else if(paramVersion!=''){
 			version = Redcurb.Helpers.getParameterByName('ver');
 		}
-		console.log(typeof(version));
+		//console.log(typeof(version));
 		version = parseInt(version);
-		console.log(typeof(version));
+		//console.log(typeof(version));
 		onlineForLife.Feed.version = version;
-		console.log('v' + version);
+		//console.log('v' + version);
 		$('body').addClass('version-' + version);
 	},
 	
@@ -287,7 +287,7 @@ onlineForLife.Feed = {
 	},
 
 	showRandomStates: function(){
-		console.log('showRandomStates');
+		//console.log('showRandomStates');
 		var showStatesInterval = setInterval(function(){
 			onlineForLife.USMap.toggleState(onlineForLife.Feed.getRandomState());
 		}, 3000);
@@ -305,7 +305,7 @@ onlineForLife.Feed = {
 
 	setFeedBackgrounds: function(){
 		var imageData = onlineForLife.Feed.images.feedBg;
-		console.log(imageData);
+		//console.log(imageData);
 	},
 	
 	
@@ -410,7 +410,7 @@ onlineForLife.Feed = {
 	setupDraggable: function(){
 		var $feed = $('ul.feed');
 		var $feedItems = $feed.get(0);
-		console.log('setupDraggable');
+		//console.log('setupDraggable');
 		
 		$('ul.feed li.feed-item').each(function(i,v){
 			var $this = $(this);
@@ -473,7 +473,7 @@ onlineForLife.Feed = {
 		onlineForLife.Feed.showTutorial=false;
 		var $parentLi = $this.parents('li');
 		//$parentLi.addClass('swipe-complete');
-		console.log('handleSwipe: ' + swipeDir);
+		//console.log('handleSwipe: ' + swipeDir);
 		if(swipeDir=='right'){
 			posLeft = '100%';
 			var animClass = 'swipeLeftToRight';
@@ -485,7 +485,7 @@ onlineForLife.Feed = {
 //		$parentLi.find('.feed-content').addClass(animClass);
 		
 		var eventId = $parentLi.data('id');
-		console.log('eventId: ' + eventId);
+		//console.log('eventId: ' + eventId);
 		onlineForLife.Feed.trackUser('prayer', {eventId:eventId});		
 		$parentLi.find('.feed-content').animate({left:posLeft},200,function(){
 			setTimeout(function(){
@@ -504,7 +504,7 @@ onlineForLife.Feed = {
 		
 		onlineForLife.Feed.updateUserPrayerCount();
 		var state = $this.data('state');
-		console.log(state);
+		//console.log(state);
 		onlineForLife.USMap.toggleState('TX');
 	},
 	
@@ -552,7 +552,7 @@ onlineForLife.Feed = {
 	
 	
 	handleRefreshMain: function($this){
-		console.log('handleRefreshMain');
+		//console.log('handleRefreshMain');
 		var $body = $('body');
 		$body.addClass('feed-loading');
 		var $refreshText = $('p.feed-refresh');
@@ -591,7 +591,7 @@ onlineForLife.Feed = {
 			var feedLoading = $('body').hasClass('feed-loading') || $('body').hasClass('feed-loaded');
 			if(!feedLoading){
 				if (onlineForLife.Feed.isAtBottom()){
-					console.log("at bottom");
+					//console.log("at bottom");
 					onlineForLife.Feed.handleRefreshMain();
 				}
 			}
@@ -632,7 +632,7 @@ onlineForLife.Feed = {
 	},
 
 	handleSwipeThanks: function($this){
-		console.log('handleSwipe', $this.attr('class'));
+		//console.log('handleSwipe', $this.attr('class'));
 		var $prayerText = $this.find('.action-text em');
 		//$prayerText.text('Thank you for your prayer!');
 		

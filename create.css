@@ -1,0 +1,86 @@
+	body{
+		font-family:tahoma;
+	}
+	.content-main{
+		overflow:hidden;
+	}
+	.create-item{
+		overflow:hidden;
+		clear:both;
+		margin-bottom:10px;
+		float:left;
+		border:1px solid gray;
+		border-radius:5px;
+		padding:8px 3px 5px 3px;
+	}
+		label, .create-item select, .create-item input{
+			float:left;
+			margin-right:7px;
+		}
+		label{
+			display:block;
+		}
+		input[type=text]{
+			width:300px;
+		}
+		input[type=submit]{
+			width:100px1;
+		}
+		textarea{
+			width:300px;
+			height:100px;
+		}
+		.row{
+			margin-top:10px;
+			clear:both;
+		}
+		.label-select{
+			margin-top:10px;
+			font-size:14px;
+			width:150px;
+		}
+		.label-select.time-end{
+			width:105px;
+		}
+		
+.col{
+	float:left;	
+}
+.col1{
+	width:140px;
+}
+.col2{
+	width:330px;
+}
+.col3{
+	width:100px;
+}
+.wrap{
+	clear:both;	
+}
+
+#event-submit{
+	position:relative;
+	top:133px;	
+}
+	.danger{
+		clear:both;
+		float:left;
+		margin-top:50px;
+		border-top:1px solid gray;
+	}
+		.danger p{
+			border-radius:10px;
+			background:red;
+			width:400px;
+			padding:25px;
+		}
+			.danger p em{
+				font-style:normal;
+				font-weight:bold;
+			}
+		.danger input{
+			clear:both;
+			margin-top:10px;
+		}
+

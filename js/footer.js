@@ -3,12 +3,12 @@ onlineForLife.Footer = {
 	version: 1,
 	
 	init: function(){
-		console.log('footer init');
+		//console.log('footer init');
 		onlineForLife.Footer.setupHandlers();
 	},
 
 	setupHandlers: function(){
-		console.log('footer init');
+		//console.log('footer setupHandlers');
 		$('.feed-share-sms').on('click',function(){
 			window.location.href = "sms:6268647084?body=TESTMESSAGE";
 		});

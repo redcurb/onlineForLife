@@ -7,7 +7,7 @@ onlineForLife.USMap = {
 	},
 	
 	setupMap:function(){
-		console.log('setupMap');
+		//console.log('setupMap');
 		$('#map').usmap({
 			'stateStyles': {
 				fill: '#EAEDEC', 

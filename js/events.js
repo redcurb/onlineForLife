@@ -5,7 +5,7 @@ onlineForLife.Events = {
 	addFirebaseChild: true,
 
 	init: function(){
-		console.log('events init');
+		//console.log('events init');
 		onlineForLife.Events.setupHandlers();
 		onlineForLife.Events.setupFirebase();
 	},
@@ -25,7 +25,7 @@ onlineForLife.Events = {
 	
 	setupFirebase:function(){
 		setTimeout(function() {
-			console.log('Events addFirebaseChild TRUE');
+			//console.log('Events addFirebaseChild TRUE');
 			onlineForLife.Events.addFirebaseChild = true;
 		},5000);
 		onlineForLife.Events.setupFirebaseEvents();

@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="create.css" />
+	<script src='https://cdn.firebase.com/v0/firebase.js'></script>
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+</head>
+<body>
+<div class="content-main">
+	<div id="create-feed-item" class="create-item">
+		<form name="form-create-feed-item" id="form-create-feed-item">
+			<div class="col col1">
+				<label>Create Feed Item</label>
+			</div>
+			<div class="col col2">
+				<select name="feed-states" id="feed-states">
+					<option value="AL">Alabama</option>
+					<option value="AK">Alaska</option>
+					<option value="AZ">Arizona</option>
+					<option value="AR">Arkansas</option>
+					<option value="CA">California</option>
+					<option value="CO">Colorado</option>
+				</select>
+				
+				<select name="feed-steps" id="feed-steps">
+					<option value="1">Step 1</option>
+					<option value="2">Step 2</option>
+					<option value="3">Step 3</option>
+				</select>
+			</div>
+			<div class="col col3">
+				<input type="submit" id="feed-submit"/>
+			</div>
+		</form>
+	</div>
+
+	
+	<div class="danger">
+		<p>
+		<span><em>WARNING:</em><br>
+		Pressing this buttons will erase all stored data for the feedData firebase. This is just here for testing.</span>
+		<br>
+		<input type="submit" id="feed-reset" value="Reset Feed Data" />
+		<br>
+		</p>
+		
+	</div>
+	<script>
+		var feedUrl = 'https://ofl.firebaseio.com/feedData';
+		var feedData = new Firebase(feedUrl);
+	
+		function simpleCreate(){
+			var feedUrl = 'https://ofl.firebaseio.com/feedData';
+			var feedData = new Firebase(feedUrl);
+			feedData.push({id: "1001", state: 'CA', stateName:'California', step: "1"});
+		}
+	
+	
+		function randomizeFeed(){
+			var $states = $('#feed-states option');
+			var $step = $('#feed-steps option');
+			var stateCount = $states.length;
+			var stepCount = $step.length;
+
+			var lower = 0;
+			var stateUpper = stateCount - 1;
+			var stepUpper = stepCount - 1;
+			var randomState = Math.floor(Math.random() * stateUpper) + 1;
+			var randomStep = Math.floor(Math.random() * stepUpper) + 1;
+
+			$('#feed-states option:eq(' + randomState + ')').prop('selected',true);
+			$('#feed-steps option:eq(' + randomStep + ')').prop('selected',true);
+
+			console.log('stateCount',stateCount, randomState);
+			console.log('stepCount',stepCount, randomStep);
+		}
+		$('#feed-submit').click(function (e) {
+			var state = $('#feed-states').val();
+			var stateName = $('#feed-states option:selected').text();
+			var step = $('#feed-steps').val();
+			console.log(state, stateName, step);
+			var timeStamp = new Date().getTime().toString();
+			if($('#form-create-feed-item input:required:invalid').length==0){
+				feedData.push({id: timeStamp, state: state, stateName:stateName, step: step});
+			}
+			randomizeFeed();
+		});
+
+		$('#feed-reset').click(function (e) {
+			feedData.set({});
+		});
+
+		$(function() {
+			randomizeFeed();
+		});
+		
+	</script>
+</body>
+</html>

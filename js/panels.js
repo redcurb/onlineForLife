@@ -67,7 +67,7 @@ onlineForLife.Panels = {
 	},
 
 	hideArcs: function($panel){
-		console.log('hideArcs');
+		//console.log('hideArcs');
 		//$panel.css('outline','5px solid yellow');
 		var $impact = $panel.find('.section-your-impact');
 		var $logo = $panel.find('.stats-logo');
@@ -147,19 +147,19 @@ onlineForLife.Panels = {
 	},
 	
 	animateLogo: function($panel){
-		console.log('animateLogo');
+		//console.log('animateLogo');
 		setTimeout(function() {
 			$('.mypanel-left h2.logo').animate({'top':'0'}, 300);
 		},50);
 	},
 	
 	resetLogo: function($panel){
-		console.log('resetLogo');
+		//console.log('resetLogo');
 		$('.mypanel-left h2.logo').css({'top':'-260px'});
 	},
 		
 	animateArcs: function($panel){
-		console.log('animateArcs');
+		//console.log('animateArcs');
 		var $impact = $panel.find('.section-your-impact');
 		var $logo = $panel.find('.stats-logo');
 		var $called = $logo.find('.step-called');
@@ -198,7 +198,7 @@ onlineForLife.Panels = {
 	},
 	
 	handleRefreshStats: function($panel){
-		console.log('handleRefreshStats');
+		//console.log('handleRefreshStats');
 		onlineForLife.Panels.toggleStatsRefresh('start');
 		var data = onlineForLife.Panels.tempData.stats;
 		var userData = data.refresh;
@@ -243,7 +243,7 @@ onlineForLife.Panels = {
 		output += 'calledFriends: ' + calledFriends + '\n';
 		output += 'scheduledUser: ' + scheduledUser + '\n';
 		output += 'scheduledFriends: ' + scheduledFriends + '\n';
-		console.log(output);
+		//console.log(output);
 		onlineForLife.Panels.refreshed = true;
 		
 		
@@ -270,7 +270,7 @@ onlineForLife.Panels = {
 	},
 	
 	handleFriendsToggle: function(type,$panel){
-		console.log('handleRefreshStats');
+		//console.log('handleRefreshStats');
 		
 		onlineForLife.Panels.animateArcs($panel);
 		if(onlineForLife.Panels.refreshed&&type=='user'){
@@ -315,14 +315,14 @@ onlineForLife.Panels = {
 		output += 'calledFriends: ' + calledFriends + '\n';
 		output += 'scheduledUser: ' + scheduledUser + '\n';
 		output += 'scheduledFriends: ' + scheduledFriends + '\n';
-		console.log(output);
+		//console.log(output);
 		
 		
 		
 	},
 	
-	setupUpdates: function(){
-		console.log('setupUpdates');
+	setupUpdatesOld: function(){
+		//console.log('setupUpdates');
 		var updatesUrl = 'https://ofl.firebaseio.com/updates';
 		var updatesData = new Firebase(updatesUrl);
 		
@@ -336,18 +336,99 @@ onlineForLife.Panels = {
 				$('ul.stats-updates').prepend(newHtml);
 			}
 		});
+		onlineForLife.Panels.setupUpdatesWindow();
+
 	},
 	
-	buildUpdateItem: function(itemId, stateCode, step, stateName){
-		console.log('buildUpdateItem');
+	doesPopupContentExist: function(dataHtml){
+		console.log('doesPopupContentExist: ' + dataHtml);
+		var exists = true;
+		if (typeof(dataHtml)=="undefined" || dataHtml==""){
+			exists = false;
+		}
+		return exists
+	},
+	
+	setupUpdates: function(){
+		console.clear();
+		console.log('setupUpdates');
+		var updatesUrl = 'https://ofl.firebaseio.com/updates';
+		var updatesData = new Firebase(updatesUrl);
+		var $updates = $('ul.stats-updates');
+		updatesData.once('value', function(snapshot) {
+			var update = snapshot.val();
+			console.log('================setupUpdates VALUE update: ');
+			console.log(update);
+			console.log(' ');
+
+			var html = '';
+			$.each(update,function(i,updateItem){
+				console.log('updateItem state: ' + updateItem.state);
+				var dataHtml = updateItem.html;
+				console.log('dataHtml',dataHtml);
+				var addPopup = onlineForLife.Panels.doesPopupContentExist(dataHtml);
+				if(addPopup){
+					
+				}
+				else{
+					dataHtml = "";
+				}
+				var dataId = updateItem.id;
+				var dataStep = updateItem.step;
+				var dataState = updateItem.state;
+				var dataStateName = updateItem.stateName;
+				var addPopup = onlineForLife.Panels.doesPopupContentExist(dataHtml);
+				console.log('addPopup: ' + addPopup);
+				console.log(updateItem);
+				var newHtml = onlineForLife.Panels.buildUpdateItem(dataId, dataState, dataStep, dataStateName, dataHtml);
+				html += newHtml;
+				console.log('newHtml');
+				console.log(newHtml);
+				console.log(' ');
+			});
+			$('ul.stats-updates').html(html);
+			/*
+			if(prayerId!="{}" && prayerId!=null){
+				$.each(prayerId,function(i,v){
+					console.log(v);
+					onlineForLife.Feed.itemsPrayedFor.push(v.toString());
+				});
+			}
+			*/
+			console.log('UPDATES AFTER');
+			onlineForLife.Panels.setupUpdatesWindow();
+		});
+		console.log(' ');
+	},
+	
+	setupUpdatesWindow: function(){
+		console.log('setupUpdatesWindow');
+		$('#modalUpdates').dialog({
+			autoOpen: false,
+			resizable:false,
+			close:'none',
+			title:'hello',
+			width:640,
+			height:960,
+			dialogClass:'dialog-updates'
+		});
+		$('ul.stats-updates li.popup-true').on('click',function(){
+			console.log($(this));
+			var html = $(this).data('popup');
+			$('#modalUpdates .modal-content').html(html);
+			$('#modalUpdates').dialog("open");
+		});
+	},
+
+	buildUpdateItem: function(itemId, stateCode, step, stateName, popupContent){
+		//console.log('buildUpdateItem');
 		var source   = $("#template-updates-item").html();
 		var template = Handlebars.compile(source);
-		var BgVersion = onlineForLife.Feed.setBgVersion;
 		var id = itemId.toString();
 		var imgSuffix = id.slice(-1);
 		var imgUrl = 'img/fpo-baby-' + imgSuffix + '.jpg'
 		//console.log('imgSuffix',imgSuffix);
-		var context = {itemId: itemId, stateCode: stateCode, step: step, stateName: stateName, imgUrl: imgUrl}
+		var context = {itemId: itemId, stateCode: stateCode, step: step, stateName: stateName, imgUrl: imgUrl, popup: popupContent}
 		var html = template(context);
 		//console.log(html);
 		return html;
@@ -356,8 +437,8 @@ onlineForLife.Panels = {
 };
 $(function() {
 	onlineForLife.Panels.init();
-	//$('#panel-left').click();
-	//$('#feed-panel-right').click();
+	$('#panel-left').click();
+	$('#feed-panel-right').click();
 });
 
 

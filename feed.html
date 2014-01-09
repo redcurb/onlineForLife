@@ -495,6 +495,31 @@ body.page-status-loading #feed{
     
     </div>
 </div>
+<div data-role="dialog" id="modalUpdatesExternal" data-page="modal-updates">
+	
+</div>
+
+<style>
+.modal-content{
+	background:white;
+	width:100%;
+	height:100%;
+	display:block;
+	background:green;
+}
+.dialog-updates{
+	background: yellow!important;
+	z-index: 99999;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;	
+}
+</style>
+<div data-role="none" id="modalUpdates">
+	<div class="modal-content"></div>
+</div>
+
 <script>
 $(function() {
 	//alert('body loaded')
@@ -542,7 +567,7 @@ $(function() {
 </script>
 
 <script id="template-updates-item" type="text/x-handlebars-template">
-				<li>
+				<li class="{{#if popup }}popup-true{{/if}}{{#unless popup }}popup-false{{/unless}}" data-popup="{{popup}}">
 				{{#equal step "1" }}
 					<span class="text-update">Woman in {{stateName}} just called an OFL agent!</span>
 				{{/equal}}
@@ -556,6 +581,12 @@ $(function() {
 					<img src="{{imgUrl}}" alt="" width="104" height="104" />
 					<span class="text-update">Woman in {{stateName}} keeps her baby, check out the photo!</span>
 				{{/equal}}
+				{{#if popup }}
+					<div class="modal-content modal-content-updates">
+					
+					</div>
+				{{/if}}
+				
 
 				</li>
 
