@@ -20,7 +20,11 @@
 		myURL = encodeURI(urlString);
 		window.open(myURL, '_blank');
 	}
-
+	function openURL2(urlString){
+		myURL = encodeURI(urlString);
+		window.open(myURL, '_system');
+	}
+ 
     </script>
   </head>
   <body>
@@ -28,6 +32,7 @@
     <ul>
         <li onclick="redirectToSystemBrowser('http://www.google.com');">open google in safari</li>
         <li><a href='#' onclick='openURL("http://www.google.com")'/>google.com</li>
+        <li><a href='#' onclick='openURL2("http://www.google.com")'/>google.com 2</li>
     </ul>    
     <br>
     <a href="index.html">Home</a>
