@@ -16,12 +16,14 @@
     // Cordova is ready
     //
     function onDeviceReady() {
+    	alert('ready');
          var ref = window.open('http://apache.org', '_blank', 'location=yes');
          // close InAppBrowser after 5 seconds
          setTimeout(function() {
              ref.close();
          }, 5000);
     }
+    alert('loaded');
 
     </script>
   </head>
