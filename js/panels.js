@@ -408,8 +408,6 @@ onlineForLife.Panels = {
 			resizable:false,
 			draggable:false,
 			close:'none',
-			width:$(window).width(),
-			height:$(window).height(),
 			dialogClass:'dialog-updates',
 			closeText:'x',
 			corners: false,
@@ -417,16 +415,37 @@ onlineForLife.Panels = {
 		});
 		
 		$('#modalUpdates .btn-modal-close').on('click',function(){
-			alert('close');
+			$('#modalUpdates').dialog('close');
 		});
 		$('ul.stats-updates li.popup-true').on('click',function(){
 			console.log($this);
 			var $this = $(this);
 			var html = $this.data('popup');
-			var title = $this.find('.text-update').text();
+			var modalWidth = $(window).width()*.9;
+			var modalHeight = $(window).height()*.9;
+			$('#modalUpdates .modal-title').text($this.find('.text-update').text());
 			$('#modalUpdates .modal-content').html(html);
-			$('#modalUpdates').dialog({title:title, autoOpen:true});
+			$('#modalUpdates').dialog({
+				autoOpen:true,
+				open:function(){
+					onlineForLife.Panels.toggleScreen('open');
+				},
+				close:function(){
+					onlineForLife.Panels.toggleScreen('close');
+				},
+				width:modalWidth,
+				height:modalHeight
+			});
 		});
+	},
+
+	toggleScreen: function(method){
+		if(method=='open'){
+			$('#modal-screen').show();
+		}
+		if(method=='close'){
+			$('#modal-screen').hide();
+		}
 	},
 
 	buildUpdateItem: function(itemId, stateCode, step, stateName, popupContent){
