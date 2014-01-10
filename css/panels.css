@@ -377,10 +377,18 @@
 				font-family: Oswald;
 				text-shadow: none;
 				font-weight: 300;
+				width:100%;
+				margin:0 auto;
+				text-align:center;
 			}
 			.section-updates ul.stats-updates{
 				margin-top:23px;
 				margin-top:0;
+				min-height:120px;
+			}
+			.section-updates ul.stats-updates.status-loading,
+			.section-updates ul.stats-updates.status-no-updates{
+				position:relative;
 			}
 				.section-updates ul.stats-updates li{
 					margin:25px auto 0;
@@ -390,6 +398,30 @@
 				.section-updates ul.stats-updates li.first{
 					margin-top:0;
 				}
+				.section-updates ul.stats-updates li.default-content{
+					position:absolute;
+					top:0;
+					width: 100%;
+				}
+				 
+				.section-updates ul.stats-updates li.spinner{
+					text-align: center;
+				}
+				.section-updates ul.stats-updates.status-no-updates li.spinner,
+				.section-updates ul.stats-updates li.no-records{
+					display:none;
+				}
+				.section-updates ul.stats-updates.status-no-updates li.no-records{
+					display:block;
+				}
+				
+				
+					.section-updates ul.stats-updates li.spinner i.fa{
+						margin: 0 auto;
+						text-shadow: none;
+						color: #707e7f;
+						font-size: 2em;
+					}
 					.section-updates ul.stats-updates li img{
 						margin:0 auto 14px;
 						width:100px;
@@ -549,6 +581,9 @@
 	display:block;
 	background: #fff!important;
 }
+.modal-content a{
+	outline:none;
+}
 .dialog-updates{
 	background: #fff!important;
 	z-index: 99999;
@@ -570,7 +605,7 @@
 	}
 		#modalUpdates .btn-modal-close{
 			position:absolute;
-			right: 20px;
+			right: 6px;
 			top: 5px;
 			font-size: 2em;
 		}

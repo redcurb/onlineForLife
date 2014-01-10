@@ -357,46 +357,55 @@ onlineForLife.Panels = {
 		var $updates = $('ul.stats-updates');
 		updatesData.once('value', function(snapshot) {
 			var update = snapshot.val();
-			console.log('================setupUpdates VALUE update: ');
-			console.log(update);
-			console.log(' ');
-
-			var html = '';
-			$.each(update,function(i,updateItem){
-				console.log('updateItem state: ' + updateItem.state);
-				var dataHtml = updateItem.html;
-				console.log('dataHtml',dataHtml);
-				var addPopup = onlineForLife.Panels.doesPopupContentExist(dataHtml);
-				if(addPopup){
-					
-				}
-				else{
-					dataHtml = "";
-				}
-				var dataId = updateItem.id;
-				var dataStep = updateItem.step;
-				var dataState = updateItem.state;
-				var dataStateName = updateItem.stateName;
-				var addPopup = onlineForLife.Panels.doesPopupContentExist(dataHtml);
-				console.log('addPopup: ' + addPopup);
-				console.log(updateItem);
-				var newHtml = onlineForLife.Panels.buildUpdateItem(dataId, dataState, dataStep, dataStateName, dataHtml);
-				html += newHtml;
-				console.log('newHtml');
-				console.log(newHtml);
-				console.log(' ');
-			});
-			$('ul.stats-updates').html(html);
-			/*
-			if(prayerId!="{}" && prayerId!=null){
-				$.each(prayerId,function(i,v){
-					console.log(v);
-					onlineForLife.Feed.itemsPrayedFor.push(v.toString());
-				});
+			if(update === null) {
+				var $updates = $('ul.stats-updates');
+				//$updates.removeClass('status-loading').addClass('status-no-updates');
+				var $spinner = $updates.find('li.spinner');
+				var $noRecords = $updates.find('li.no-records');
+				var $updates = $('ul.stats-updates');
+				$noRecords.fadeIn(200);
+				$spinner.fadeOut(200);
 			}
-			*/
-			console.log('UPDATES AFTER');
-			onlineForLife.Panels.setupUpdatesWindow();
+			else{
+				console.log('================setupUpdates VALUE update: ');
+				console.log(update);
+				console.log(' ');
+	
+				var html = '';
+				
+				$.each(update,function(i,updateItem){
+					var dataHtml = updateItem.html;
+					var dataTitle = updateItem.title;
+					console.log('dataHtml',dataHtml);
+					var addPopup = onlineForLife.Panels.doesPopupContentExist(dataHtml);
+					if(addPopup){
+						dataHtml = dataHtml.substr(0, (dataHtml.length)-1).slice(1);
+					}
+					else{
+						dataHtml = "";
+					}
+					var dataId = updateItem.id;
+					console.log('addPopup: ' + addPopup);
+					//console.log(updateItem);
+					window.popupHtml = dataHtml;
+					var newHtml = onlineForLife.Panels.buildUpdateItem(dataId, dataHtml, dataTitle);
+					html += newHtml;
+					console.log('newHtml');
+					console.log(newHtml);
+					console.log(' ');
+				});
+				$('ul.stats-updates').html(html).removeClass('status-loading').addClass('status-loaded');
+				/*
+				if(prayerId!="{}" && prayerId!=null){
+					$.each(prayerId,function(i,v){
+						console.log(v);
+						onlineForLife.Feed.itemsPrayedFor.push(v.toString());
+					});
+				}
+				*/
+				console.log('UPDATES AFTER');
+				onlineForLife.Panels.setupUpdatesWindow();
+			}
 		});
 		console.log(' ');
 	},
@@ -425,6 +434,7 @@ onlineForLife.Panels = {
 			var modalHeight = $(window).height()*.9;
 			$('#modalUpdates .modal-title').text($this.find('.text-update').text());
 			$('#modalUpdates .modal-content').html(html);
+			$('#modalUpdates .modal-content').find('a').attr('data-ajax',false).attr('data-role','none');
 			$('#modalUpdates').dialog({
 				autoOpen:true,
 				open:function(){
@@ -448,15 +458,13 @@ onlineForLife.Panels = {
 		}
 	},
 
-	buildUpdateItem: function(itemId, stateCode, step, stateName, popupContent){
+	buildUpdateItem: function(itemId, popupContent, dataTitle){
 		//console.log('buildUpdateItem');
 		var source   = $("#template-updates-item").html();
 		var template = Handlebars.compile(source);
 		var id = itemId.toString();
-		var imgSuffix = id.slice(-1);
-		var imgUrl = 'img/fpo-baby-' + imgSuffix + '.jpg'
 		//console.log('imgSuffix',imgSuffix);
-		var context = {itemId: itemId, stateCode: stateCode, step: step, stateName: stateName, imgUrl: imgUrl, popup: popupContent}
+		var context = {itemId: itemId, popup: popupContent, title: dataTitle}
 		var html = template(context);
 		//console.log(html);
 		return html;

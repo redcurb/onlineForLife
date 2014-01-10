@@ -148,7 +148,10 @@ body.page-status-loading #feed{
 		</div>
 		<div class="section-updates">
 			<h2>Updates:</h2>
-			<ul class="stats-updates"></ul>
+			<ul class="stats-updates status-loading">
+				<li class="default-content spinner"><i class="fa fa-refresh fa-spin"></i></li>
+				<li class="default-content no-records"><span class="text-update">There are no updates to show at this time. Please try again later.</span></li>
+			</ul>
 		</div>
     </div>
     
@@ -550,21 +553,7 @@ $(function() {
 
 <script id="template-updates-item" type="text/x-handlebars-template">
 				<li class="{{#if popup }}popup-true{{/if}}{{#unless popup }}popup-false{{/unless}}" data-popup="{{popup}}">
-				{{#equal step "1" }}
-					<span class="text-update">Woman in {{stateName}} just called an OFL agent!</span>
-				{{/equal}}
-				{{#equal step "2" }}
-					<span class="text-update">Woman in {{stateName}} just scheduled an appointment with a PRC!</span>
-				{{/equal}}
-				{{#equal step "3" }}
-					<span class="text-update">Woman in {{stateName}} kept her appointment!</span>
-				{{/equal}}
-				{{#equal step "4" }}
-					<img src="{{imgUrl}}" alt="" width="104" height="104" />
-					<span class="text-update">Woman in {{stateName}} keeps her baby, check out the photo!</span>
-				{{/equal}}
-				
-
+					<span class="text-update">{{title}}</span>
 				</li>
 
 </script>

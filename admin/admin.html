@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=0.5, maximum-scale=1.0, user-scalable=no;"/>
+
+	<link rel="stylesheet" href="../css/reset-min.css" />
+    <link href='../css/fonts.css' rel='stylesheet' type='text/css'>
+	<link href="../css/font-awesome.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="../css/base.css?ver=12.19.1" />
+	<link rel="stylesheet" href="admin.css?ver=12.19.1" />
+
+	<script src="../js/libraries/jquery-1.9.1.min.js"></script>
+	<script src="../js/libraries/jquery-ui.min.js"></script>
+	<style>
+	body{
+		font-weight:100;
+		font-family:arial;
+		padding:10px;
+		font-size:16px;
+	}
+		#console{
+			
+		}
+			#console li{
+				
+			}
+				#console li mark{
+					font-weight:bold;
+					background:#0f0;
+				}
+				
+				
+	.forms-container{
+		margin-top:20px;
+	}
+		.forms-container form{
+			margin-top:10px;
+			width:600px;
+		}
+			.forms-container h4{
+				overflow:hidden;
+				margin-bottom:10px;
+				width:100%;
+				text-align:center;
+			}
+			.forms-container fieldset{
+				overflow:hidden;
+				margin-bottom:10px;
+			}
+				.forms-container label{
+					clear:both;
+					float:left;
+				}
+				.forms-container input[type=text]{
+					width:99%;
+					font-size:14px;
+					padding:3px 2px;
+				}
+				.forms-container textarea{
+					clear:both;
+					float:left;
+					font-size:16px;
+					width:99%;
+					height:200px;
+				}
+				.forms-container .btn-submit{
+					font-size:20px;
+					padding:3px;
+					float:right;
+					margin-right:1%;
+				}
+			
+	</style>	
+</head>
+<body class="body-ofl body-register-login">
+
+	<button class="btn-login" data-user="events" data-email="admin-events@radiantbone.com" data-pass="password1" type="submit">login - events</button>
+	<button class="btn-login" data-user="updates" data-email="admin-updates@radiantbone.com" data-pass="password1" type="submit">login - updates</button>
+
+	<button id="logoutButton" type="submit">logout</button>
+	<button id="getEvents" type="submit">getEvents</button>
+	<button id="getUpdates" type="submit">getUpdates</button>
+	<button id="clearConsole" type="submit">Clear Console</button>
+	<button data-ajax="false" id="btn-home" type="submit">Home Page</button>
+	
+	
+	<div id="admin-forms" class="forms-container">
+
+		<form id="admin-form-updates" data-role="none">
+			<h4>Updates Admin Form</h4>
+			<fieldset>
+				<input type="text" name="updates-title" class="input-admin input-updates-title" placeholder="Update item title" value="A woman in Connecticut decided on LIFE." />
+			</fieldset>
+			<fieldset>
+				<label for="updates-html">Content for overlay (HTML can be entered here)</label>
+				<textarea name="updates-html" class="textarea-admin textarea-update-html">A 19-year old woman chose life and welcomed a healthy baby boy into the world on January 6th, 2014 at 2:17a.m.
+
+<a href='http://www.facebook.com'>See the photos on facebook</a>
+
+<img src='http://farm4.staticflickr.com/3183/5752454552_271ae92354_b.jpg' /></textarea>
+			</fieldset>
+			<fieldset>
+				<input type="submit" class="btn-submit" id="updates-submit"/>
+			</fieldset>
+		</form>
+
+	</div>
+	
+	<ul id="console"></ul>
+	<script src="../js/libraries/firebase.js"></script>
+	<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>	
+
+	<script>
+		var adminInfo = {
+			
+		}
+		var firebaseUrl =  new Firebase('https://ofl.firebaseio.com');
+		var auth = new FirebaseSimpleLogin(firebaseUrl, function(error, user) {
+			if (error) {
+				console.log('error');
+				console.log(error);
+				$('#console').append('<li>'+error+'</li>');
+				return;
+			}
+			if (user) {
+				// User is already logged in.
+				console.log(user);
+				$('#console').append('<li>You are currently logged in as <mark>'+user.email+' (user id: ' + user.id + ')</mark></li>');
+				adminInfo.email = user.email;
+				adminInfo.id = user.id;
+			} else {
+				// User is logged out.
+				console.log('no user');
+				$('#console').append('<li>no user</li>');
+			}
+		});
+
+		$(".btn-login").on("click", function() {
+			console.log('login clicked');
+			var $this = $(this);
+			var email = $this.data('email');
+			var password = $this.data('pass');
+			auth.login('password', {
+			  email: email,
+			  password: password,
+			  rememberMe: false
+			});
+		});
+		$("#logoutButton").on("click", function() {
+			console.log('logout clicked');
+			auth.logout();
+		});
+		$("#clearConsole").on("click", function() {
+			$('#console').empty();
+		});
+		$("#reloadPage").on("click", function() {
+			location.reload();
+		});
+		$("#btn-home").on("click", function() {
+			document.location.href='../home.html';
+		});
+		
+		
+		$("#getEvents").on("click", function() {
+			var dbUrl = 'https://ofl.firebaseio.com/events';
+			var myDataRef = new Firebase(dbUrl);
+		
+			myDataRef.on('child_added', function(snapshot) {
+				var message = snapshot.val();
+	
+				var eventId = message.id;
+				var eventTitle = message.title;
+				var eventDescription = message.description;
+	
+				var output = '';
+				output += 'eventId: ' + eventId + '\n';
+				output += 'eventTitle: ' + eventTitle + '\n';
+				output += 'eventDescription: ' + eventDescription + '\n';
+				//console.log(output);
+				$('#console').append('<li>'+eventTitle+'</li>');
+					
+			});
+			
+		});
+
+		$("#getUpdates").on("click", function() {
+			var dbUrl = 'https://ofl.firebaseio.com/updates';
+			var myDataRef = new Firebase(dbUrl);
+		
+			myDataRef.on('child_added', function(snapshot) {
+				var message = snapshot.val();
+	
+				var eventId = message.id;
+				var eventTitle = message.title;
+				var eventDescription = message.description;
+	
+				var output = '';
+				output += 'eventId: ' + eventId + '\n';
+				//console.log(output);
+				$('#console').append('<li>'+eventId+'</li>');
+					
+			});
+			
+		});
+		
+		$('#admin-form-updates').on('submit',function(event){
+			event.preventDefault();
+			var updatesUrl = 'https://ofl.firebaseio.com/updates';
+			var updatesData = new Firebase(updatesUrl);
+
+			var $form = $(this);
+			var $title = $form.find('input[name=updates-title]');
+			var $html = $form.find('textarea[name=updates-html]');
+			var titleVal = $title.val();
+
+			var regex = /\\n/gi;
+			var htmlVal = $('textarea[name=updates-html]').val();
+
+			if(htmlVal==""){
+				var htmlValEnc = "";
+			}
+			else{
+				var htmlValEnc = JSON.stringify(htmlVal);
+			}
+			console.log('        ');
+			console.log('===========');
+			console.log('htmlValEnc');
+			console.log(htmlValEnc);
+			window.htmlValEnc = htmlValEnc;
+			window.regex = regex;
+			console.log('===========');
+			console.log('        ');
+			var htmlValEnc = htmlValEnc.replace(regex, "<br>");
+			var updateId = new Date().getTime();
+
+			console.log(titleVal);
+			console.log(updateId);
+			console.log(htmlValEnc=="");
+			console.log("|"+htmlValEnc+"|");
+			
+			
+			updatesData.push({admin:adminInfo.id, id: updateId, title: titleVal, html: htmlValEnc});
+			
+			return false;
+		});
+		
+		
+		
+	</script>
+</body>
+</html>
