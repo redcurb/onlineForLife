@@ -30,6 +30,11 @@
         element2.innerHTML = 'intel ready';
         
     }
+    function onDeviceReadyIntel2() {
+        var element6 = document.getElementById('debug6');
+        element6.innerHTML = 'intel 2 ready';
+        
+    }
 
     // onError Callback receives a PositionError object
     //
@@ -51,6 +56,7 @@
 		document.addEventListener("intel.xdk.device.ready", onDeviceReadyIntel, false);
 	});
 
+		document.addEventListener("intel.xdk.device.ready", onDeviceReadyIntel2, false);
     </script>
   </head>
   <body>
@@ -59,6 +65,7 @@
     <p id="debug3">DOM Waiting...</p>
     <p id="debug4">intel waiting...</p>
     <p id="debug5">appmobi waiting...</p>
+    <p id="debug6">intel 2 waiting...</p>
     <a href="http://www.google.com">google.com</a>
     <br>
     <a href="dev.html">Dev</a>
