@@ -411,7 +411,8 @@ onlineForLife.Panels = {
 			height:$(window).height(),
 			dialogClass:'dialog-updates',
 			closeText:'x',
-			corners: false
+			corners: false,
+			modal:true
 		});
 		$('ul.stats-updates li.popup-true').on('click',function(){
 			console.log($this);
