@@ -532,15 +532,47 @@ body.page-status-loading #feed{
 	border-radius:0;	
 }
 .dialog-updates .ui-dialog-titlebar-close .ui-button-text{
-color: #000;
-font-size: 32px;
-position: relative;
-top: -3px;
-left: 0px;
+	color: #000;
+	font-size: 32px;
+	position: relative;
+	top: -3px;
+	left: 0px;
 }
 
+#modalUpdates .btn-modal-close{
+	position:absolute;
+	right:5px;
+	top:3px;
+		
+	display: block;
+	width: 40px;
+	height: 40px;
+	right: 80px;
+	top: 50px;
+	background:white;
+	border:1px solid black;
+	text-decoration:none;
+}
+	#modalUpdates .btn-modal-close span{
+		color: #000;
+		font-size: 32px;
+		position: relative;
+		top: 1px;
+		left: 0px;
+		display: block;
+		background: yellow;
+		background: none;
+		width: 100%;
+		text-align: center;
+		height: 100%;
+		line-height: 100%;
+	}
 </style>
 <div data-role="none" id="modalUpdates">
+	<div class="modal-header">
+		<h4>Title will go here</h4>
+		<a href="#" data-role="none" data-ajax="false" class="btn btn-modal-close"><span>x</span></a>
+	</div>
 	<div class="modal-content"></div>
 </div>
 

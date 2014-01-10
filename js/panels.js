@@ -406,6 +406,7 @@ onlineForLife.Panels = {
 		$('#modalUpdates').dialog({
 			autoOpen: false,
 			resizable:false,
+			draggable:false,
 			close:'none',
 			width:$(window).width(),
 			height:$(window).height(),
@@ -413,6 +414,10 @@ onlineForLife.Panels = {
 			closeText:'x',
 			corners: false,
 			modal:true
+		});
+		
+		$('#modalUpdates .btn-modal-close').on('click',function(){
+			alert('close');
 		});
 		$('ul.stats-updates li.popup-true').on('click',function(){
 			console.log($this);
