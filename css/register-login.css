@@ -91,6 +91,7 @@
 					text-shadow:none;
 					color:white;
 					border-radius:7px;
+					border:none;
 				}
 				.fieldset-btn .btn-secondary{
 					background:gray;

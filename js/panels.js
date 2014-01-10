@@ -427,17 +427,19 @@ onlineForLife.Panels = {
 			$('#modalUpdates').dialog('close');
 		});
 		$('ul.stats-updates li.popup-true').on('click',function(){
-			console.log($this);
 			var $this = $(this);
+			console.log($this);
 			var html = $this.data('popup');
 			var modalWidth = $(window).width()*.9;
 			var modalHeight = $(window).height()*.9;
 			$('#modalUpdates .modal-title').text($this.find('.text-update').text());
 			$('#modalUpdates .modal-content').html(html);
 			$('#modalUpdates .modal-content').find('a').attr('data-ajax',false).attr('data-role','none');
+			$('#modalUpdates').dialog("open");
 			$('#modalUpdates').dialog({
 				autoOpen:true,
 				open:function(){
+					alert(1);
 					onlineForLife.Panels.toggleScreen('open');
 				},
 				close:function(){

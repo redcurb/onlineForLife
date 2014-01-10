@@ -37,7 +37,17 @@ onlineForLife.Settings = {
 			
 		});
 		$('.link-settings-privacy').on('click',function(){
-			var url = 'http://onlineforlife.org/privacy-policy/';
+			var url = 'http://onlineforlife.org/privacy-policy';
+			//window.location.href = 'events.html';
+			//window.plugins.childBrowser.showWebPage('http://www.google.com', { showLocationBar: true });
+			
+			myURL = encodeURI(url);
+			window.open(url, '_blank', 'location=yes'); 
+			
+		});
+		
+		$('.link-settings-terms').on('click',function(){
+			var url = 'http://onlineforlife.org/terms-and-conditions';
 			//window.location.href = 'events.html';
 			//window.plugins.childBrowser.showWebPage('http://www.google.com', { showLocationBar: true });
 			
