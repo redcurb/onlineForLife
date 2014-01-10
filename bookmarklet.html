@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>InAppBrowser.close Example</title>
+		<link rel="stylesheet" href="css/reset-min.css" />
+		<link rel="stylesheet" href="css/base.css" />
+
+    <style>
+    a{
+    	font-size:72px;	
+    }
+    </style>
+    <script type="text/javascript">
+    	function openLink(){
+	   		alert(3);
+    		javascript:location.href=%22googlechrome%22+location.href.substring(4);
+    	}
+    </script>
+  </head>
+  <body>
+  	<a href="#" onclick="javascript:location.href='googlechrome://www.google.com';">OpenLink - chrome</a>
+    <br>
+    
+  	<a href="#" onclick="javascript:location.href='applesafari:\/\/www.google.com';">OpenLink - safari</a>
+    <br>
+    
+  	<a href="#" onclick="alert(location.href.substring(4));">OpenLink - location</a>
+    <br>
+  	<a href="#" onclick="alert(3);">OpenLink - alert</a>
+    <br>
+    <a href="dev.html">Dev</a>
+  </body>
+</html>
