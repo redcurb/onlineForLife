@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Device Properties Example</title>
+    <style>
+    a,
+    body{
+    	font-size:64px;	
+    }
+    </style>
+
+	<script src="../js/libraries/appframework.ui.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+    document.addEventListener("intel.xdk.device.ready", onDeviceReadyIntel, false);
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        var element = document.getElementById('debug');
+        element.innerHTML = 'ready';
+        
+    }
+    function onDeviceReadyIntel() {
+        var element = document.getElementById('debug2');
+        element.innerHTML = 'ready';
+        
+    }
+
+    // onError Callback receives a PositionError object
+    //
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    }
+
+    </script>
+  </head>
+  <body>
+    <p id="debug">Device Waiting...</p>
+    <p id="debug2">Intel Waiting...</p>
+    <a href="http://www.google.com">google.com</a>
+    <br>
+    <a href="dev.html">Dev</a>
+  </body>
+</html>
