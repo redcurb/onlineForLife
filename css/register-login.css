@@ -97,6 +97,9 @@
 					background:gray;
 					float:left;
 				}
+				.fieldset-btn a.btn-secondary{
+					margin-top:2px;
+				}
 				.fieldset-btn .btn-primary{
 					background:#c8512a;
 					float:right;
