@@ -22,7 +22,8 @@
 		font-size:16px;
 	}
 		#console{
-			
+			clear:both;
+			margin-bottom:20px;
 		}
 			#console li{
 				
@@ -72,7 +73,31 @@
 					float:right;
 					margin-right:1%;
 				}
-			
+
+				
+				
+				
+	.danger{
+		clear:both;
+		float:left;
+		margin-top:50px;
+		border-top:1px solid gray;
+	}
+		.danger p{
+			border-radius:10px;
+			background:red;
+			width:400px;
+			padding:25px;
+		}
+			.danger p em{
+				font-style:normal;
+				font-weight:bold;
+			}
+		.danger input{
+			clear:both;
+			margin-top:10px;
+		}
+
 	</style>	
 </head>
 <body class="body-ofl body-register-login">
@@ -108,8 +133,18 @@
 		</form>
 
 	</div>
-	
 	<ul id="console"></ul>
+	
+	<div class="danger">
+		<p>
+			<span><em>WARNING:</em><br>
+			Pressing these buttons will erase all stored data for the item selected. This is just here for testing.</span>
+			<br>
+			<input type="submit" id="updates-reset" value="Reset Update Data" />
+			<br>
+		</p>
+		
+	</div>
 	<script src="../js/libraries/firebase.js"></script>
 	<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>	
 
@@ -186,6 +221,12 @@
 			
 		});
 
+		$('#updates-reset').click(function (e) {
+			var dbUrl = 'https://ofl.firebaseio.com/updates';
+			var myDataRef = new Firebase(dbUrl);
+			myDataRef.set({});
+			$('#console').append('<li>ALL events data erased</li>');
+		});
 		$("#getUpdates").on("click", function() {
 			var dbUrl = 'https://ofl.firebaseio.com/updates';
 			var myDataRef = new Firebase(dbUrl);
@@ -200,7 +241,7 @@
 				var output = '';
 				output += 'eventId: ' + eventId + '\n';
 				//console.log(output);
-				$('#console').append('<li>'+eventId+'</li>');
+				$('#console').append('<li>'+eventId+': ' + message.title + '</li>');
 					
 			});
 			

@@ -473,8 +473,8 @@ onlineForLife.Panels = {
 };
 $(function() {
 	onlineForLife.Panels.init();
-	$('#panel-left').click();
-	$('#feed-panel-right').click();
+	//$('#panel-left').click();
+	//$('#feed-panel-right').click();
 });
 
 
