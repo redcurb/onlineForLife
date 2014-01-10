@@ -18,13 +18,26 @@
 	
 	ul.settings-list{
 		margin: 46px 0 0 34px;
+		position: relative;
+		height: 300px;
 	}
 		ul.settings-list li{
 			margin-top:35px;
+			1position:absolute;
 		}
 		ul.settings-list li.first{
 			margin-top:0;
 		}
+		ul.settings-list li.link-settings-push{
+			top:0;
+		}
+		ul.settings-list li.link-settings-ofl{
+			top:65px;
+		}
+		ul.settings-list li.link-settings-privacy{
+			top:160px;
+		}
+		
 			ul.settings-list li span{
 				font-family: Oswald;
 				font-size: 1.5em;
@@ -40,10 +53,40 @@
 				position: relative;
 			}
 		ul.settings-list li a{
-			border:1px solid red;
+			
 		}
 			ul.settings-list li a i.fa{
 				font-size: 1.4em;
 			}
 			
+			
+			.settings-content{
+				overflow:hidden;
+				display:none;
+			}
+			.settings-content.content-open{
 
+			}
+			
+				ul.settings-list li .settings-content span{
+					font-family:arial;
+					letter-spacing:0;
+				}
+
+				.settings-content label{
+					outline:none;
+					margin:13px 10px 0 0;
+					float:left;
+				}
+				.settings-content div.ui-slider-switch.ui-mini{
+					margin-top:10px;
+					float:left;
+					width:75px;
+				}
+			
+			
+			
+			
+			
+			
+			
