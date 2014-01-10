@@ -439,7 +439,6 @@ onlineForLife.Panels = {
 			$('#modalUpdates').dialog({
 				autoOpen:true,
 				open:function(){
-					alert(1);
 					onlineForLife.Panels.toggleScreen('open');
 				},
 				close:function(){
