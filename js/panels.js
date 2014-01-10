@@ -407,16 +407,19 @@ onlineForLife.Panels = {
 			autoOpen: false,
 			resizable:false,
 			close:'none',
-			title:'hello',
-			width:640,
-			height:960,
-			dialogClass:'dialog-updates'
+			width:$(window).width(),
+			height:$(window).height(),
+			dialogClass:'dialog-updates',
+			closeText:'x',
+			corners: false
 		});
 		$('ul.stats-updates li.popup-true').on('click',function(){
-			console.log($(this));
-			var html = $(this).data('popup');
+			console.log($this);
+			var $this = $(this);
+			var html = $this.data('popup');
+			var title = $this.find('.text-update').text();
 			$('#modalUpdates .modal-content').html(html);
-			$('#modalUpdates').dialog("open");
+			$('#modalUpdates').dialog({title:title, autoOpen:true});
 		});
 	},
 
