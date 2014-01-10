@@ -9,25 +9,25 @@
     }
     </style>
 
+	<script src="js/libraries/jquery-1.9.1.min.js"></script>
+
 	<script src="cordova.js"></script>
 	<script src="js/libraries/appframework.ui.min.js"></script>
     <script type="text/javascript" charset="utf-8">
 
     // Wait for device API libraries to load
     //
-    document.addEventListener("deviceready", onDeviceReady, false);
-    document.addEventListener("intel.xdk.device.ready", onDeviceReadyIntel, false);
 
     // device APIs are available
     //
     function onDeviceReady() {
-        var element = document.getElementById('debug');
-        element.innerHTML = 'cordova ready';
+        var element1 = document.getElementById('debug');
+        element1.innerHTML = 'cordova ready';
         
     }
     function onDeviceReadyIntel() {
-        var element = document.getElementById('debug2');
-        element.innerHTML = 'intel ready';
+        var element2 = document.getElementById('debug2');
+        element2.innerHTML = 'intel ready';
         
     }
 
@@ -38,11 +38,27 @@
               'message: ' + error.message + '\n');
     }
 
+	$(function() {
+        var element3 = document.getElementById('debug3');
+        element3.innerHTML = 'dom loaded';
+        var element4 = document.getElementById('debug4');
+        element4.innerHTML = intel;
+        var element5 = document.getElementById('debug5');
+        element5.innerHTML = appmobi;
+        
+	
+		document.addEventListener("deviceready", onDeviceReady, false);
+		document.addEventListener("intel.xdk.device.ready", onDeviceReadyIntel, false);
+	});
+
     </script>
   </head>
   <body>
     <p id="debug">Device Waiting...</p>
     <p id="debug2">Intel Waiting...</p>
+    <p id="debug3">DOM Waiting...</p>
+    <p id="debug4">intel waiting...</p>
+    <p id="debug5">appmobi waiting...</p>
     <a href="http://www.google.com">google.com</a>
     <br>
     <a href="dev.html">Dev</a>
