@@ -350,6 +350,15 @@ onlineForLife.Login = {
 		});
 	},
 	
+	showFirebaseError: function(error){
+		console.log(error);
+		var $error =  $('.error-messages');
+		var $text = $error.find('span');
+		var text = '';
+		$text.text(error);
+		$error.show('slide',{direction: 'down'}, 200);
+	},
+
 	handleFormSubmit: function(){
 		console.log('handleFormSubmit');
 		var $form = $('#form-login');
@@ -363,6 +372,7 @@ onlineForLife.Login = {
 			if (error) {
 				console.log('error');
 				console.log(error);
+				onlineForLife.Register.showFirebaseError(error);
 				return;
 			}
 			if(user){
