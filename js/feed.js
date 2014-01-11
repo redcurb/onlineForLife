@@ -197,7 +197,7 @@ onlineForLife.Feed = {
 			$prayedAll.fadeIn(200);
 			$spinner.fadeOut(200);
 		}
-		$feed.removeClass('status-complete');
+		$feed.removeClass('status-loading').addClass('status-complete');
 		
 	},
 	
@@ -236,6 +236,9 @@ onlineForLife.Feed = {
 				console.log('itemCount',itemCount);
 				console.log('itemBuildCount',itemBuildCount);
 				
+			}
+			if(itemBuildCount<onlineForLife.Feed.showFooterOnCount){
+				onlineForLife.Feed.showFooterOnCount=itemBuildCount;
 			}
 			if(itemBuildCount==0){
 				onlineForLife.Feed.toggleFeedMessage('PRAYED_ALL');

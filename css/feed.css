@@ -72,7 +72,8 @@
 				display:block;
 			}
 				ul.feed li.default-content.spinner i{
-					font-size:48px;
+					font-size:96px;
+					font-size:8em;
 					padding:0;
 				}
 			ul.feed li.feed-item{
