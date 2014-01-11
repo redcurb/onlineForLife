@@ -61,7 +61,7 @@
 			
 			.settings-content{
 				overflow:hidden;
-				display:none;
+				1display:none;
 			}
 			.settings-content.content-open{
 
@@ -83,6 +83,12 @@
 					width:75px;
 				}
 			
+			.settings-content .ui-controlgroup .ui-checkbox .ui-btn{
+				width:400px;	
+			}
+			.settings-content input[name=checkbox-push]{
+				display:none;
+			}
 			
 			
 			

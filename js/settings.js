@@ -8,7 +8,7 @@ onlineForLife.Settings = {
 	
 	setupHandlers: function(){
 		
-		$('.settings-list li').on('click',function(){
+		$('1.settings-list li').on('click',function(){
 			$this = $(this);
 			var $content = $this.find('.settings-content');
 			var isOpen = $content.hasClass('content-open');
@@ -27,6 +27,27 @@ onlineForLife.Settings = {
 			}
 			//$('.mypanel-left h2.logo').animate({'top':'0'}, 300);
 		});
+		
+		$(".checkbox-push input[type='checkbox']").bind( "change", function(event, ui) {
+			var $this = $(this);
+			var val = $this.val();
+			
+			//console.log(val, $('#checkbox-push-none').prop('checked'));
+			if(val=='push-none' && $('#checkbox-push-none').prop('checked')){
+				$('#checkbox-push-daily, #checkbox-push-special, #checkbox-push-life').attr("checked",false).checkboxradio("refresh");
+			}
+			//console.log('daily: ' + $('#checkbox-push-daily').prop('checked'));
+			//console.log('life: ' + $('#checkbox-push-life').prop('checked'));
+			//console.log('special: ' + $('#checkbox-push-special').prop('checked'));
+			//console.log('none: ' + $('#checkbox-push-none').prop('checked'));
+			
+			if($('#checkbox-push-daily').prop('checked') || $('#checkbox-push-life').prop('checked') || $('#checkbox-push-special').prop('checked')){
+				$('#checkbox-push-none').attr("checked",false).checkboxradio("refresh");
+			}
+			
+			//.attr("checked",true).checkboxradio("refresh")
+		});
+		
 		$('.link-settings-ofl').on('click',function(){
 			var url = 'http://www.onlineforlife.org';
 			//window.location.href = 'events.html';

@@ -450,24 +450,18 @@ body.page-status-loading #feed{
     				<i class="fa fa-arrow-circle-right"></i>
 				</div>
 				<div class="settings-content content-closed">
-					<label for="flip-mini">Receive Notifications for all events:</label>
-					<select name="flip-mini" id="flip-mini" data-role="slider" data-mini="true">
-						<option value="no">No</option>
-						<option value="yes" selected>Yes</option>
-					</select>
-
-					<fieldset data-role="controlgroup">
-						<input type="radio" name="radio-choice" id="radio-choice-1" value="choice-1" checked="checked" />
-						<label for="radio-choice-1">Daily Summary</label>
+					<fieldset data-role="controlgroup" class="checkbox-push">
+						<input type="checkbox" name="checkbox-push" id="checkbox-push-daily" value="push-daily" checked="checked" />
+						<label for="checkbox-push-daily">Daily Summary</label>
 				
-						<input type="radio" name="radio-choice" id="radio-choice-2" value="choice-2"  />
-						<label for="radio-choice-2">Every Life Choice</label>
+						<input type="checkbox" name="checkbox-push" id="checkbox-push-life" value="push-life" checked="checked" />
+						<label for="checkbox-push-life">Every Life Choice</label>
 				
-						<input type="radio" name="radio-choice" id="radio-choice-3" value="choice-3"  />
-						<label for="radio-choice-3">Special Updates</label>
+						<input type="checkbox" name="checkbox-push" id="checkbox-push-special" value="push-special" checked="checked" />
+						<label for="checkbox-push-special">Special Updates</label>
 				
-						<input type="radio" name="radio-choice" id="radio-choice-4" value="choice-4"  />
-						<label for="radio-choice-4">None</label>
+						<input type="checkbox" name="checkbox-push" id="checkbox-push-none" value="push-none"  />
+						<label for="checkbox-push-none">None</label>
 					</fieldset>					
 				</div>
     		</li>
