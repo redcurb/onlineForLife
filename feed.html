@@ -174,7 +174,7 @@ body.page-status-loading #feed{
 		<div id="map" style=""></div>
 		
 		<div class="main-refresh">
-			<i class="fa fa-refresh fa-2x"></i>
+			<!--<i class="fa fa-refresh fa-2x"></i>-->
 			<span class="refresh-count">93,432</span>
 			<span class="refresh-label">Prayers Today</span>
 			<span class="refresh-subtext">Please join us in prayer!</span>
@@ -189,6 +189,9 @@ body.page-status-loading #feed{
 		</ul>
 		
 		<ul class="feed status-loading">
+			<li class="default-content spinner"><i class="fa fa-refresh fa-spin"></i></li>
+			<li class="default-content prayed-all"><span>You've already prayed for every available item.</span></li>
+			<li class="default-content no-records"><span>There are no feed items to show at this time. Please try again later.</span></li>
 		</ul>
     </div>
     <div data-theme="a" data-role="footer" data-position="fixed" class="footer-primary" data-tap-toggle="false">
