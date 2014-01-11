@@ -57,6 +57,24 @@
 			width:110%;
 		}
 		
+			ul.feed li.default-content{
+				margin-top:10px;
+				clear:both;
+				position:relative;
+				min-width:594px;
+				padding-left:46px;
+				display:none;
+			}
+			ul.feed li.default-content.spinner{
+				text-align:center;
+			}
+			ul.feed.status-loading li.default-content.spinner{
+				display:block;
+			}
+				ul.feed li.default-content.spinner i{
+					font-size:48px;
+					padding:0;
+				}
 			ul.feed li.feed-item{
 				margin-top:10px;
 				margin-top:0;

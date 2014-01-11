@@ -178,13 +178,73 @@ onlineForLife.Feed = {
 
 	},
 	
+	toggleFeedMessage:function(type){
+		console.log('toggleFeedMessage');
+		var $feed = $('ul.feed');
+		//$feed.removeClass('status-loading').addClass('status-no-updates');
+		var $spinner = $feed.find('li.spinner');
+		var $noRecords = $feed.find('li.no-records');
+		var $prayedAll = $feed.find('li.prayed-all');
+		
+		if(type=='LOADED'){
+			$spinner.fadeOut(200);
+		}
+		if(type=='NO_ITEMS'){
+			$noRecords.fadeIn(200);
+			$spinner.fadeOut(200);
+		}
+		else if(type=='PRAYED_ALL'){
+			$prayedAll.fadeIn(200);
+			$spinner.fadeOut(200);
+		}
+		$feed.removeClass('status-complete');
+		
+	},
+	
 	setupFirebaseFeedItem:function(){
 		//console.log('setupFirebaseFeedItem');
 		var dbUrl = 'https://ofl.firebaseio.com/feed';
 		var myDataRef = new Firebase(dbUrl);
 		
-		//console.log('FEED ITEMS');
-		//console.log(onlineForLife.Feed.itemsPrayedFor);
+		myDataRef.on('value', function(snapshot) {
+			var feedData = snapshot.val();
+			if(feedData === null) {
+				onlineForLife.Feed.toggleFeedMessage('NO_ITEMS');
+			}
+			else{
+				var html = '';
+				var itemCount = 0;
+				var itemBuildCount = 0;
+				$.each(feedData,function(i,feedItem){
+					//console.log(i);
+					itemCount += 1;
+					var messageId = feedItem.id.toString();
+					var buildItem = false;
+					if(onlineForLife.Feed.itemsPrayedFor.indexOf(messageId)<0){
+						buildItem = true;
+					}
+					if(buildItem){
+						itemBuildCount += 1;
+						var newHtml = onlineForLife.Feed.buildFeedItem(feedItem.id, feedItem.state, feedItem.step, feedItem.stateName, 'first');
+						$('ul.feed').prepend(newHtml);
+						
+						onlineForLife.Feed.centerFeedItemText('firebase', $('ul.feed li:first'));
+						onlineForLife.Feed.setupDraggableEach($('ul.feed li:first'));
+					}
+				});
+				onlineForLife.Feed.toggleFeedMessage('LOADED');
+				console.log('itemCount',itemCount);
+				console.log('itemBuildCount',itemBuildCount);
+				
+			}
+			if(itemBuildCount==0){
+				onlineForLife.Feed.toggleFeedMessage('PRAYED_ALL');
+			}
+			
+		});
+
+		/*
+		
 		myDataRef.on('child_added', function(snapshot) {
 			var message = snapshot.val();
 			//console.log(message);
@@ -206,6 +266,7 @@ onlineForLife.Feed = {
 			}
 			//console.log(' ');
 		});
+		*/
 	},
 	
 	setupFirebasePrayers:function(){
