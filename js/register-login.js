@@ -322,11 +322,43 @@ onlineForLife.Login = {
 	init: function(){
 		console.log('login init');
 		onlineForLife.Login.setupAutoLogin();
+		onlineForLife.Login.setupFocus();
 		$('#form-login').on('submit',function(event){
 			event.preventDefault();
 			console.log('login submit clicked');
 			onlineForLife.Login.handleFormSubmit();
 			return false;
+		});
+	},
+	
+	showError: function($form, $error, $input){
+		$form.addClass('form-invalid');
+		$input.addClass('valid-false').removeClass('valid-true');
+		$error.show('slide',{direction: 'right'}, 200);
+	},
+	
+	hideError: function($error, $field){
+		console.log('hideError');
+		$field.removeClass('valid-false');
+		$('.error-messages').hide('slide',{direction: 'up'}, 200);
+		$error.hide('slide',{direction: 'right'}, 200);
+	},
+	
+	setupFocus: function($form, $error, $input){
+		var $form = $('#form-login');
+		var $email = $form.find('#input-login-email');
+		var $password = $form.find('#input-login-password');
+
+		var $errorEmail = $form.find('.error-email');
+		var $errorPassword = $form.find('.error-password');
+
+		$email.on('focus',function(){
+			console.log('email focus');
+			onlineForLife.Login.hideError($errorEmail,$email);
+		});
+		$password.on('focus',function(){
+			console.log('password focus');
+			onlineForLife.Login.hideError($errorPassword,$password);
 		});
 	},
 	
