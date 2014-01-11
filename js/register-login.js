@@ -62,6 +62,15 @@ onlineForLife.Register = {
 		});
 	},
 
+	showFirebaseError: function(error){
+		console.log(error);
+		var $error =  $('.error-messages');
+		var $text = $error.find('span');
+		var text = '';
+		$text.text(error);
+		$error.show('slide',{direction: 'down'}, 200);
+	},
+
 	createUser: function($form){
 		var $firstName = $form.find('#input-register-firstname');
 		var $email = $form.find('#input-register-email');
@@ -77,6 +86,7 @@ onlineForLife.Register = {
 		var auth = new FirebaseSimpleLogin(firebaseUrl, function(error, user) {
 			if (error) {
 				console.log('error');
+				onlineForLife.Register.showFirebaseError(error);
 				return;
 			}
 			if (user) {
@@ -111,6 +121,7 @@ onlineForLife.Register = {
 					} else {
 						console.log('createUser error');
 						console.log(error);
+						onlineForLife.Register.showFirebaseError(error);
 					}
 				});
 			}
@@ -270,6 +281,7 @@ onlineForLife.Register = {
 	hideError: function($error, $field){
 		console.log('hideError');
 		$field.removeClass('valid-false');
+		$('.error-messages').hide('slide',{direction: 'up'}, 200);
 		$error.hide('slide',{direction: 'right'}, 200);
 	},
 	

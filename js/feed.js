@@ -200,6 +200,7 @@ onlineForLife.Feed = {
 			if(buildItem){
 				var newHtml = onlineForLife.Feed.buildFeedItem(message.id, message.state, message.step, message.stateName, 'first');
 				$('ul.feed').prepend(newHtml);
+				
 				onlineForLife.Feed.centerFeedItemText('firebase', $('ul.feed li:first'));
 				onlineForLife.Feed.setupDraggableEach($('ul.feed li:first'));
 			}
