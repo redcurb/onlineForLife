@@ -37,12 +37,19 @@
 		}
 		function gaError(){
 		}
+
+
+		document.addEventListener("deviceready", onDeviceReady, false);
+		document.addEventListener("orientationchange", handleOrientationChange, false);
+
 		function onDeviceReady() {
-			gaPlugin = window.plugins.gaPlugin;
-			gaPlugin.init(gaLoadSuccess, gaLoadError, "UA-46755460-1", 10);
+			alert('device ready');
+		//	gaPlugin = window.plugins.gaPlugin;
+		//	gaPlugin.init(gaLoadSuccess, gaLoadError, "UA-46755460-1", 10);
 		}
 		
-		function _orientationHandler(){
+		function handleOrientationChange(){
+			alert('change');
 			if(event.orientation){
 				  if(event.orientation == 'portrait'){
 				  	onlineForLife.Feed.setupFirebaseFeedItem('orientation','portrait');
@@ -55,7 +62,6 @@
 		
 		
 		
-		$(window).bind('orientationchange', _orientationHandler);
 		
 		
 		

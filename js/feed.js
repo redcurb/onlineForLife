@@ -201,6 +201,10 @@ onlineForLife.Feed = {
 		
 	},
 	
+	checkLayout:function(method){
+		
+	},
+	
 	setupFirebaseFeedItem:function(method){
 		if(method=='orientation'){
 			$('ul.feed').empty().addClass('.status-loading');	

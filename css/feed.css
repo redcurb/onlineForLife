@@ -313,19 +313,53 @@
 		
 		
 @media screen and (orientation:landscape) {
-/* Landscape styles */
-.content-main.ui-content {
-	padding: 1%;
-}
-		ul.feed{
-			margin-left:-1%;
-			width:102%;
-		}
+	/* Landscape styles */
+	
+	.mypanel-left.ui-panel {
+		width: 408px;
+		height:100%;
+		background: yellow;
+		visibility: visible;
+		position: absolute;
+	}
+	.mypanel-right.ui-panel {
+		width: 552px;
+		background: yellow;
+		visibility: visible;
+		z-index: 9999999;
+		position: absolute;
+	}
+	.ui-page .ui-header.header-primary{
+		left: 408px;
+		width: 70%;
+	}
+	.ui-panel-content-wrap{
+		left:408px;
+		position:relative;
+		width:400px;
+	}
+	.content-main.ui-content {
+		padding: 1%;
+	}
+			ul.feed{
+				margin-left:-1%;
+				width:102%;
+			}
+	
+			
+				ul.feed li.feed-item {
+					
+					}
+					
+					
+	.ui-panel-position-left {
+		width: 408px;
+	}
+	.ui-panel-position-right {
+		width: 552px;
+	}
 
-		
-			ul.feed li.feed-item {
 				
-				}
 }
 
 				
