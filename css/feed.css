@@ -312,55 +312,50 @@
 		}
 		
 		
-@media screen and (orientation:landscape) {
-	/* Landscape styles */
-	
-	.mypanel-left.ui-panel {
+	/* Tablet Landscape styles */
+	body.orientation-landscape.platform-tablet .mypanel-left.ui-panel {
 		width: 408px;
 		height:100%;
 		background: yellow;
 		visibility: visible;
 		position: absolute;
 	}
-	.mypanel-right.ui-panel {
+	body.orientation-landscape.platform-tablet.mypanel-right.ui-panel {
 		width: 552px;
 		background: yellow;
 		visibility: visible;
 		z-index: 9999999;
 		position: absolute;
 	}
-	.ui-page .ui-header.header-primary{
+	body.orientation-landscape.platform-tablet.ui-page .ui-header.header-primary{
 		left: 408px;
 		width: 70%;
 	}
-	.ui-panel-content-wrap{
+	body.orientation-landscape.platform-tablet.ui-panel-content-wrap{
 		left:408px;
 		position:relative;
 		width:400px;
 	}
-	.content-main.ui-content {
+	body.orientation-landscape.platform-tablet.content-main.ui-content {
 		padding: 1%;
 	}
-			ul.feed{
+			body.orientation-landscape.platform-tabletul.feed{
 				margin-left:-1%;
 				width:102%;
 			}
 	
 			
-				ul.feed li.feed-item {
+				body.orientation-landscape.platform-tabletul.feed li.feed-item {
 					
 					}
 					
 					
-	.ui-panel-position-left {
+	body.orientation-landscape.platform-tablet.ui-panel-position-left {
 		width: 408px;
 	}
-	.ui-panel-position-right {
+	body.orientation-landscape.platform-tablet.ui-panel-position-right {
 		width: 552px;
 	}
-
-				
-}
 
 				
 				

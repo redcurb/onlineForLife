@@ -57,12 +57,30 @@ onlineForLife.Feed = {
 		//var uiVer = jQuery.ui.version;
 		//$('#debug').append('<li>jQuery.ui.version: ' + uiVer + '</li>');
 		//onlineForLife.Feed.writeDeviceInfo();
+		onlineForLife.Feed.setupPlatform();
+		onlineForLife.Feed.updateUserPrayerCount();
 		onlineForLife.Feed.checkLoginStatus();
 		onlineForLife.Feed.setVersion();
 		onlineForLife.Feed.setupHandlers();
 		onlineForLife.Feed.showRandomStates();
 		//onlineForLife.Feed.setupScrolling();
 		onlineForLife.Feed.updateUserPrayerCount();
+	},
+	
+	setupPlatform: function(){
+		onlineForLife.Feed.setOrientation();
+		onlineForLife.Feed.setDevice();
+	},
+	
+	setOrientation: function(){
+		var orientation = Redcurb.Helpers.getOrientation();
+		$('body').removeClass('orientation-portrait').removeClass('orientation-landscape').addClass('orientation-' + orientation);
+	},
+	
+	setDevice: function(){
+		if(typeof(device)!='undefined'){
+			$('.refresh-subtext').text($('.refresh-subtext').text() + ': ' + device.model);
+		}
 	},
 	
 	checkLoginStatus: function(){
@@ -202,10 +220,6 @@ onlineForLife.Feed = {
 	},
 	
 	setupOrientationChange:function(orientation){
-		var orientationValue='portrait';
-		if(orientation!=0){
-			orientationValue = 'landscape';
-		}
 		$('ul.feed').addClass('.status-loading').find('.default-content.spinner').show().end(0).find('li.feed-item').remove();
 		onlineForLife.Feed.setupFirebaseFeedItem();
 	},

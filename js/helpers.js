@@ -6,7 +6,16 @@ Redcurb.Helpers = {
 		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
 			results = regex.exec(location.search);
 		return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	},
+	
+	getOrientation: function(){
+		var orientationValue='portrait';
+		if(window.orientation!=0){
+			orientationValue = 'landscape';
+		}
+		return orientationValue;
 	}
+
 
 };
 
