@@ -211,7 +211,7 @@ onlineForLife.Feed = {
 			if(feedData === null) {
 				onlineForLife.Feed.toggleFeedMessage('NO_ITEMS');
 			}
-			else if(1=2){
+			else{
 				var html = '';
 				var itemCount = 0;
 				var itemBuildCount = 0;
