@@ -13,82 +13,7 @@
 		<script src="js/libraries/jquery-1.9.1.min.js"></script>
     </head>
     <body>
-    	<ul>
-    	
-
-    		<li><a href="intel.html">intel.html</a></li>
-    		<li><a href="bookmarklet.html">bookmarklet.html</a></li>
-    		<li>&nbsp;</li><li>&nbsp;</li>
-    	
-    		<li><a href="window1.html">window1.html - cordova.js - _blank + _self</a></li><li>&nbsp;</li>
-    		<li><a href="window1a.html">window1a.html - cordova.js - _self</a></li><li>&nbsp;</li>
-    		<li><a href="window1b.html">window1b.html - cordova.js - _system</a></li><li>&nbsp;</li>
-    		<li><a href="window1c.html">window1c.html - cordova.js - _blank</a></li><li>&nbsp;</li>
-    		<li>&nbsp;</li><li>&nbsp;</li>
-
-    		<li><a href="inapp.html">inapp.html</a></li>
-    		<li><a href="inapp2.html">inapp2.html</a></li>
-    		<li><a href="inapp3.html">inapp3.html</a></li>
-    		<li>&nbsp;</li><li>&nbsp;</li>
-
-    		<li><a href="inapp-script.html">inapp-script.html</a></li>
-    		<li><a href="close.html">close.html</a></li>
-    		<li><a href="close2.html">close2.html</a></li>
-    		<li>&nbsp;</li>
-    		<li><a href="http://www.google.com" data-rel="external" data-ajax="false">Google</a></li>
-    		<li><a href="http://www.google.com/" onclick="window.open(this.href,'_system'); return false;">Google - window open</a></li>
-    		<li><a href="http://google.com" data-rel="external">Like this</a></li>
-    		<li><a href="#" data-rel="external" onClick="window.location = 'c4l://safari.html';">Open Safari</a></li>
-    		<li><a href="#" data-rel="external" onClick="window.location = 'c4l://safari';">Open Safari 2</a></li>
-    		<li>&nbsp;</li>
-    		 
-    		
-    		<li><a href="geolocation.html">geolocation.html phonegap + cordova1</a></li>
-    		<li><a href="geolocation2.html">geolocation2.html cordova</a></li>
-    		<li><a href="geolocation3.html">geolocation3.html phonegap</a></li>
-    		<li>&nbsp;</li>
-
-    		<li><a href="safari.html">safari.html</a></li>
-    		<li><a href="safari2.html">safari2.html</a></li>
-    		<li><a href="safari3.html">safari3.html</a></li>
-    		<li>&nbsp;</li>
-    		
-    		<li><a href="salesforce.html">salesforce.html</a></li>
-    		<li><a href="sales.html">sales.html</a></li>
-    		<li><a href="sales2.html">sales2.html</a></li>
-    		<li>&nbsp;</li>
-    		
-    		<li><a href="sms.html">sms.html</a></li>
-    		<li><a href="sms2.html">sms2.html</a></li>
-    		<li>&nbsp;</li>
-    		<li><a href="swipe-swipe.html">swipe-swipe.html</a></li>
-    		<li>&nbsp;</li>
-    		
-    		<li><a href="create-items-remote.html">Create Items Remote</a></li>
-    		
-    		<li>&nbsp;</li>
-    		<li><a href="orientation.html">Orientation</a></li>
-    		<li>&nbsp;</li>
-    		<li><a href="swipe.html">Swipe Tests</a></li>
-    		<li>&nbsp;</li>
-    		<li><a href="feed.html">Feed</a></li>
-    		<li><a href="feed-iphone.html">Feed - iPhone</a></li>
-    		<li><a href="feed-ipad.html">Feed - iPad</a></li>
-    		<li>&nbsp;</li>
-
-    		<li><a href="punch.html">Touch Punch</a></li>
-    		<li><a href="draggable.html">Draggable</a></li>
-    		<li>&nbsp;</li>
-    		
-    		<li><a href="app-browser.html">App Browser</a></li>
-    		<li><a href="browser.html">Browser</a></li>
-    		<li>&nbsp;</li>
-    		<li><a href="device.html">Device Check</a></li>
-    		<li><a href="device2.html">Device Check 2</a></li>
-    		<li><a href="redirect.html">Redirect 1</a></li>
-    		<li><a href="redirect2.html">Redirect 2</a></li>
-    		<li><a href="geolocation.html">Geolocation</a></li>
-    	</ul>
+    	<ul id="links"></ul>
 
         <script type="text/javascript" src="phonegap.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
@@ -98,5 +23,53 @@
         </script>
     <br>
     <a href="index.html">Home</a>
+    
+    
+	<script>
+	window.urls ={ 
+		'device':{
+			"text":"Device Detect",
+			"link":"detect.html"
+		},
+		1:{
+			"text":"Geolocation",
+			"link":"geolocation.html"
+		}
+	};
+	$(function() {
+		var $links = $('#links');
+		var linksHtml = ''
+		$.each(window.urls,function(i,linkData){
+			var href = linkData.link;
+			var text = linkData.text;
+    		linksHtml += '<li><a href="' + href + '">' + text + '</a></li><li>&nbsp;</li>';
+		});
+		console.log(linksHtml);
+		$links.html(linksHtml);
+	
+	
+	 function isPhonegap(){
+	 	return typeof cordova !== 'undefined' || typeof PhoneGap !== 'undefined' || typeof phonegap !== 'undefined';
+	 }  
+	 
+	 function isIOS(){
+	 	return navigator.userAgent.match(/(iPad|iPhone|iPod)/g);
+	 }
+	 
+	 document.addEventListener('deviceready', function(){
+	  // window.device is available only if you include the phonegap package
+	  // http://docs.phonegap.com/en/3.0.0/cordova_device_device.md.html#Device
+	  // Note for ios, you do not need to add anything to the config.xml, just add the plugin
+	  if (isPhonegap() && isIOS() && window.device && parseFloat(window.device.version) >= 7.0) {
+		$('body').addClass('phonegap-ios-7');
+	  }
+	 });
+
+	 
+	 
+	 
+	 
+	});
+	</script>
     </body>
 </html>

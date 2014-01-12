@@ -98,6 +98,14 @@
 			margin-top:10px;
 		}
 
+		
+		
+		.forms-container{
+				
+		}
+			.forms-container form{
+				display:none;
+			}
 	</style>	
 </head>
 <body class="body-ofl body-register-login">
@@ -113,7 +121,15 @@
 	
 	
 	<div id="admin-forms" class="forms-container">
-
+		<select name="list-forms" id="list-forms">
+			<option name="forms-choose" value="forms-choose" selected>Choose Admin Form</option>
+			<option name="forms-updates" value="forms-updates" data-formId="admin-form-updates">Updates Admin</option>
+			<option name="forms-reset-user-prayers" value="forms-reset-user-prayers" data-formId="admin-form-reset-user-prayers">Reset User Prayers</option>
+		</select>
+		<form id="admin-form-reset-user-prayers" data-role="none">
+			<select name="list-reset-user-prayers" id="list-reset-user-prayers"></select>
+			<input type="submit" class="btn-submit" id="reset-user-prayers-submit"/>
+		</form>
 		<form id="admin-form-updates" data-role="none">
 			<h4>Updates Admin Form</h4>
 			<fieldset>
@@ -149,7 +165,67 @@
 	<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>	
 
 	<script>
+		$(function() {
+			$('#list-forms').on('change',function(){
+				var $this = $(this);
+				var formId = $this.find('option:selected').attr('data-formId');
+				var $formToShow = $('#' + formId);
+				$('#admin-forms').find('form').hide();
+				$formToShow.show();
+				console.log('formId',formId);
+			});
+		});
+		
+		window.ofl = {};
+		window.ofl.admin = {
+			populateResetUserPrayersList:function(){
+				window.ofl.admin.getUsers();
+			},
+			
+			resetUserPrayers: function(userId){
+				var dbUrl = 'https://ofl.firebaseio.com/users/' + userId + '/prayers';
+				var myDataRef = new Firebase(dbUrl);
+				myDataRef.set({});
+				console.log('reset');
+				$('#console').append('<li>Prayers for User ID '+userId+' have been reset!</li>');
+			},
+			
+			handleResetUserPrayersFormSubmit: function($form){
+				var $select = $('#list-reset-user-prayers');
+				var userId = $select.find('option:selected').val();
+				window.ofl.admin.resetUserPrayers(userId);
+			},
+			
+			getUsers: function(){
+				var dbUrl = 'https://ofl.firebaseio.com/users';
+				var myDataRef = new Firebase(dbUrl);
+			
+				var selectHtml = '<option name="forms-choose" value="user-reset-choose" selected>Choose User to Reset</option>';
+				myDataRef.once('value', function(snapshot) {
+					var message = snapshot.val();
+					var output = '';
+					$.each(message,function(i,v){
+						console.log(i);
+						var userId = i;
+						selectHtml += '<option name="reset-user-id" value="' + userId + '">' + userId + '</option>';
+					});
+					$('#list-reset-user-prayers').html(selectHtml);
+					console.log('after',selectHtml);
+					
+				});
+			}
+		};		
+
+		$('#admin-form-reset-user-prayers').on('submit',function(event){
+			event.preventDefault();
+			window.ofl.admin.handleResetUserPrayersFormSubmit($(this));
+		});
+
+		
+		window.ofl.admin.populateResetUserPrayersList();
+		
 		var adminInfo = {
+		
 			
 		}
 		var firebaseUrl =  new Firebase('https://ofl.firebaseio.com');
