@@ -49,7 +49,7 @@
 		}
 		
 		function handleOrientationChange(){
-			alert('change');
+			alert('orientation changed: ' + event.orientation);
 			if(event.orientation){
 				  if(event.orientation == 'portrait'){
 				  	onlineForLife.Feed.setupFirebaseFeedItem('orientation','portrait');
