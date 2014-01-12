@@ -6,7 +6,7 @@
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8">
 
-	alert(typeof(cordova));    
+	//alert(typeof(phonegap));    
     // Wait for Cordova to load
     //
     document.addEventListener("deviceready", onDeviceReady, false);
@@ -16,8 +16,8 @@
     function onDeviceReady() {
         // external url
         var ref = window.open(encodeURI('http://apache.org'), '_blank', 'location=yes');
-        // relative document
-        ref = window.open('next.html', '_self');
+        
+        ref = window.open('feed.html', '_self');
     }
 
     </script>

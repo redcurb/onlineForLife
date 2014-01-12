@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+	<script src="js/libraries/jquery-1.9.1.min.js"></script>
+	<script src="js/libraries/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="css/reset-min.css" />
+	<link rel="stylesheet" href="css/libraries/jquery.mobile-1.3.2.min.css" />
+    <link href='css/fonts.css' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/base.css?ver=12.19.1" />
+  </head>
+  <style>
+  	html,body{
+  		background:#00f;
+  		background:#313639;
+  		width:100%;
+  		height:100%;
+	}
+	h1{
+		width:217px;
+		width: 434px;
+		margin:auto;
+	}
+		h1 .icon{
+			background: url(img/logo-ofl-panel.png) no-repeat 0 0;
+			width: 434px;
+			height: 378px;
+			display: block;
+			margin: auto;
+			background-size: 100% auto;
+			bottom:30px;
+			position:absolute;
+		}
+		h1 .loading{
+			font-family: Oswald;
+			font-size: 2.6em;
+			color: #fff;
+			text-align: left;
+			padding: 40px 0 0 125px;
+			display: block;
+		}
+			h1 .loading .loading-dots{
+				
+			}
+  </style>
+  <body class="page-index">
+  	<h1>
+  		<span class="loading">Loading<span class="loading-dots"></span></span>
+  		<i class="icon"></i>
+  		<div id="console">
+  		
+  		</div>
+  	</h1>
+  </body>
+<script>
+	
+		function isPhonegap(){
+			return typeof cordova !== 'undefined' || typeof PhoneGap !== 'undefined' || typeof phonegap !== 'undefined';
+		}  
+		
+		function isIOS(){
+			return navigator.userAgent.match(/(iPad|iPhone|iPod)/g);
+		}
+		
+		document.addEventListener('deviceready', function(){
+			// window.device is available only if you include the phonegap package
+			// http://docs.phonegap.com/en/3.0.0/cordova_device_device.md.html#Device
+			// Note for ios, you do not need to add anything to the config.xml, just add the plugin
+			if (isPhonegap() && isIOS() && window.device && parseFloat(window.device.version) >= 7.0) {
+				$('body').addClass('phonegap-ios-7');
+			}
+		});
+		var output = '';
+		output += 'navigator.userAgent: ' + navigator.userAgent;
+		output += 'window.device: ' + window.device;
+		output += 'window.device.version: ' + window.device.version;
+		output += 'isPhonegap: ' + isPhonegap();
+		output += 'isIOS: ' + isIOS();
+		$('#console').html(output);
+</script>
+</html>
+
