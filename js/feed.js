@@ -219,9 +219,12 @@ onlineForLife.Feed = {
 		
 	},
 	
-	setupOrientationChange:function(orientation){
-		$('ul.feed').addClass('.status-loading').find('.default-content.spinner').show().end(0).find('li.feed-item').remove();
-		onlineForLife.Feed.setupFirebaseFeedItem();
+	setupOrientationChange:function(){
+		var spinnerHtml = '<li class="default-content spinner"><i class="fa fa-refresh fa-spin"></i></li>';
+		$('ul.feed').addClass('status-loading').empty().append(spinnerHtml);
+		setTimeout(function(){
+				onlineForLife.Feed.setupFirebaseFeedItem();
+		}, 1000);
 	},
 	
 	setupFirebaseFeedItem:function(){
@@ -574,7 +577,8 @@ onlineForLife.Feed = {
 		
 		var eventId = $parentLi.data('id');
 		//console.log('eventId: ' + eventId);
-		onlineForLife.Feed.trackUser('prayer', {eventId:eventId});		
+		onlineForLife.Feed.trackUser('prayer', {eventId:eventId});
+		onlineForLife.Feed.itemsPrayedFor.push(eventId.toString());
 		$parentLi.find('.feed-content').animate({left:posLeft},200,function(){
 			setTimeout(function(){
 				$parentLi.addClass('hideFeedItem');

@@ -10,7 +10,6 @@ onlineForLife.Footer = {
 	setupHandlers: function(){
 		//console.log('footer setupHandlers');
 		$('.feed-share-sms').on('click',function(){
-			return false;
 			window.location.href = "sms:6268647084?body=TESTMESSAGE";
 
 		});
