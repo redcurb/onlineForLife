@@ -41,6 +41,24 @@
 			gaPlugin = window.plugins.gaPlugin;
 			gaPlugin.init(gaLoadSuccess, gaLoadError, "UA-46755460-1", 10);
 		}
+		
+		function _orientationHandler(){
+			if(event.orientation){
+				  if(event.orientation == 'portrait'){
+				  	onlineForLife.Feed.setupFirebaseFeedItem('orientation','portrait');
+				  }
+				  else if(event.orientation == 'landscape') {
+				  	onlineForLife.Feed.setupFirebaseFeedItem('orientation','landscape');
+				  }
+			}
+		}
+		
+		
+		
+		$(window).bind('orientationchange', _orientationHandler);
+		
+		
+		
 	</script>
 </head>
 <body class="page-ofl mode-test1 page-status-loading">

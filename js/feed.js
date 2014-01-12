@@ -173,7 +173,7 @@ onlineForLife.Feed = {
 				});
 			}
 			//console.log('AFTER');
-			onlineForLife.Feed.setupFirebaseFeedItem();
+			onlineForLife.Feed.setupFirebaseFeedItem('init');
 		});
 
 	},
@@ -201,7 +201,10 @@ onlineForLife.Feed = {
 		
 	},
 	
-	setupFirebaseFeedItem:function(){
+	setupFirebaseFeedItem:function(method){
+		if(method=='orientation'){
+			$('ul.feed').empty().addClass('.status-loading');	
+		}
 		//console.log('setupFirebaseFeedItem');
 		var dbUrl = 'https://ofl.firebaseio.com/feed';
 		var myDataRef = new Firebase(dbUrl);
