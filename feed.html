@@ -43,21 +43,12 @@
 		document.addEventListener("orientationchange", handleOrientationChange, false);
 
 		function onDeviceReady() {
-			alert('device ready');
 		//	gaPlugin = window.plugins.gaPlugin;
 		//	gaPlugin.init(gaLoadSuccess, gaLoadError, "UA-46755460-1", 10);
 		}
 		
 		function handleOrientationChange(){
-			alert('orientation changed: ' + event.orientation);
-			if(event.orientation){
-				  if(event.orientation == 'portrait'){
-				  	onlineForLife.Feed.setupOrientationChange('portrait');
-				  }
-				  else if(event.orientation == 'landscape') {
-				  	onlineForLife.Feed.setupOrientationChange('landscape');
-				  }
-			}
+			onlineForLife.Feed.setupOrientationChange(window.orientation);
 		}
 		
 		

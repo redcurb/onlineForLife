@@ -50,12 +50,10 @@
   		<div id="console">
   		
   		</div>
-  		<div id="status">
-  			waiting
-  		</div>
   	</h1>
   </body>
 <script>
+	$(function() {
 	
 		function isPhonegap(){
 			return typeof cordova !== 'undefined' || typeof PhoneGap !== 'undefined' || typeof phonegap !== 'undefined';
@@ -64,26 +62,23 @@
 		function isIOS(){
 			return navigator.userAgent.match(/(iPad|iPhone|iPod)/g);
 		}
-
-		document.addEventListener("deviceready", onDeviceReady, false);
-		function onDeviceReady() {
-			var element = document.getElementById('status');
-			element.innerHTML = 'ready';
+		
+		document.addEventListener('deviceready', function(){
 			// window.device is available only if you include the phonegap package
 			// http://docs.phonegap.com/en/3.0.0/cordova_device_device.md.html#Device
 			// Note for ios, you do not need to add anything to the config.xml, just add the plugin
 			if (isPhonegap() && isIOS() && window.device && parseFloat(window.device.version) >= 7.0) {
 				$('body').addClass('phonegap-ios-7');
 			}
-			var output = '';
-			output += 'navigator.userAgent: ' + navigator.userAgent;
-			output += 'window.device: ' + window.device;
-			output += 'window.device.version: ' + window.device.version;
-			output += 'isPhonegap: ' + isPhonegap();
-			output += 'isIOS: ' + isIOS();
-			$('#console').html(output);
-		}
-		
+		});
+		var output = '';
+		output += 'navigator.userAgent: ' + navigator.userAgent;
+		output += 'window.device: ' + window.device;
+		output += 'window.device.version: ' + window.device.version;
+		output += 'isPhonegap: ' + isPhonegap();
+		output += 'isIOS: ' + isIOS();
+		$('#console').html(output);
+	});
 </script>
 </html>
 

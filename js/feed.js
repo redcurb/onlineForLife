@@ -173,7 +173,7 @@ onlineForLife.Feed = {
 				});
 			}
 			//console.log('AFTER');
-			onlineForLife.Feed.setupFirebaseFeedItem('init');
+			onlineForLife.Feed.setupFirebaseFeedItem();
 		});
 
 	},
@@ -202,15 +202,15 @@ onlineForLife.Feed = {
 	},
 	
 	setupOrientationChange:function(orientation){
-		alert('setupOrientationChange');
-		onlineForLife.Feed.setupFirebaseFeedItem('rebuild');
+		var orientationValue='portrait';
+		if(orientation!=0){
+			orientationValue = 'landscape';
+		}
+		$('ul.feed').addClass('.status-loading').find('.default-content.spinner').show().end(0).find('li.feed-item').remove();
+		onlineForLife.Feed.setupFirebaseFeedItem();
 	},
 	
-	setupFirebaseFeedItem:function(method){
-		if(method=='rebuild'){
-			$('ul.feed').empty().addClass('.status-loading');	
-			alert('rebuild');
-		}
+	setupFirebaseFeedItem:function(){
 		//console.log('setupFirebaseFeedItem');
 		var dbUrl = 'https://ofl.firebaseio.com/feed';
 		var myDataRef = new Firebase(dbUrl);
@@ -454,7 +454,7 @@ onlineForLife.Feed = {
 	},
 	
 	setupHandlers: function(){
-		$( ".feed-share" ).on( "click", function(){
+		$( "1.feed-share" ).on( "click", function(){
 			alert($(window).width() + ' x ' + $(window).height());
 		});
 		
