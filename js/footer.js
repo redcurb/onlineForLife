@@ -10,9 +10,8 @@ onlineForLife.Footer = {
 	setupHandlers: function(){
 		//console.log('footer setupHandlers');
 		$('.feed-share-sms').on('click',function(){
-			alert('sms');
 			return false;
-			//window.location.href = "sms:6268647084?body=TESTMESSAGE";
+			window.location.href = "sms:6268647084?body=TESTMESSAGE";
 
 		});
 		$('.feed-share-fb').on('click',function(){
