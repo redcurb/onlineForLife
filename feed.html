@@ -52,10 +52,10 @@
 			alert('orientation changed: ' + event.orientation);
 			if(event.orientation){
 				  if(event.orientation == 'portrait'){
-				  	onlineForLife.Feed.setupFirebaseFeedItem('orientation','portrait');
+				  	onlineForLife.Feed.setupOrientationChange('portrait');
 				  }
 				  else if(event.orientation == 'landscape') {
-				  	onlineForLife.Feed.setupFirebaseFeedItem('orientation','landscape');
+				  	onlineForLife.Feed.setupOrientationChange('landscape');
 				  }
 			}
 		}

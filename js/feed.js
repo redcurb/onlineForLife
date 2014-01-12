@@ -201,13 +201,15 @@ onlineForLife.Feed = {
 		
 	},
 	
-	checkLayout:function(method){
-		
+	setupOrientationChange:function(orientation){
+		alert('setupOrientationChange');
+		onlineForLife.Feed.setupFirebaseFeedItem('rebuild');
 	},
 	
 	setupFirebaseFeedItem:function(method){
-		if(method=='orientation'){
+		if(method=='rebuild'){
 			$('ul.feed').empty().addClass('.status-loading');	
+			alert('rebuild');
 		}
 		//console.log('setupFirebaseFeedItem');
 		var dbUrl = 'https://ofl.firebaseio.com/feed';
