@@ -49,27 +49,34 @@
 				.footer-primary ul li.first{
 					margin-left:0;
 				}
-					.footer-primary ul li i{
-						color:#fff;
-						text-shadow:1px 2px 5px #000;
-						line-height: 1.9em;
-						font-size: 2.1em;
-						line-height: 81px;
-				}
-					.footer-primary ul li.feed-share-twitter i{
-						font-size: 1.8em;
-						line-height: 85px;
+					.footer-primary ul li a{
+						text-decoration:none;
+						top: -4px;
+						position: relative;
+						left: 1px;
 					}
-					.footer-primary ul li.feed-share-sms{
-						
+						.footer-primary ul li i{
+							color:#fff;
+							text-shadow:1px 2px 5px #000;
+							line-height: 1.9em;
+							font-size: 2.1em;
+							line-height: 81px;
 					}
-						.footer-primary ul li.feed-share-sms i{
-							text-transform:uppercase;
-							font-style:normal;
-							font-weight:400;
-							font-size:1.4em;
-							line-height: 79px;
+						.footer-primary ul li.feed-share-twitter i{
+							font-size: 1.8em;
+							line-height: 85px;
 						}
+						.footer-primary ul li.feed-share-sms{
+							
+						}
+							.footer-primary ul li.feed-share-sms i{
+								text-transform:uppercase;
+								font-style:normal;
+								font-weight:400;
+								font-size:1.4em;
+								font-size:0.6em;
+								line-height: 79px;
+							}
 					
 		.footer-primary p{
 			font-size: 1.5em;

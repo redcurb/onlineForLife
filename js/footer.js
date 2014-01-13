@@ -4,13 +4,21 @@ onlineForLife.Footer = {
 	
 	init: function(){
 		//console.log('footer init');
+		onlineForLife.Footer.buildSMSLink();
 		onlineForLife.Footer.setupHandlers();
+	},
+
+	buildSMSLink: function(){
+		var href = 'mailto:?subject=Pray with me&body=Join my list of friends at http://onlineforlife.org/2-1app/share.html?shareId=2313';
+		$('.feed-share-sms a').attr('href',href);
 	},
 
 	setupHandlers: function(){
 		//console.log('footer setupHandlers');
 		$('.feed-share-sms').on('click',function(){
-			window.location.href = "sms:6268647084?body=TESTMESSAGE";
+			var url = "sms:6268647084?body=TESTMESSAGE";
+			url = 'mailto:?subject=Pray with me&body=Join my list of friends at http://onlineforlife.org/2-1app/share.html?shareId=2313';
+			window.location.href = url;
 
 		});
 		$('.feed-share-fb').on('click',function(){
