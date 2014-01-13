@@ -79,10 +79,12 @@ onlineForLife.Panels = {
 	},
 	
 	setupIpad: function(){
-		if($('body').data('device')=='ipad'){
+		if($('body').hasClass('platform-tablet')){
+			var $panelRight = $('#feed-mypanel-right');
 			setTimeout(function() {
-				onlineForLife.Panels.animateArcs();
-			},1000);
+				onlineForLife.Panels.animateArcs($panelRight);
+				onlineForLife.Panels.animateLogo($panelRight);
+			},500);
 		}
 	},
 	

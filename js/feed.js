@@ -46,6 +46,9 @@ onlineForLife.Feed = {
 	tempData:{
 	},
 	
+	deviceStatus:{
+	},
+	
 	init: function(){
 		//console.log('feed init');		
 		$('1.refresh-count').on('click',function(){
@@ -67,8 +70,8 @@ onlineForLife.Feed = {
 		onlineForLife.Feed.updateUserPrayerCount();
 	},
 	
-	setupFeed: function(){
-	},
+	
+	
 	
 	setupPlatform: function(){
 		console.log('setupPlatform');
@@ -78,6 +81,7 @@ onlineForLife.Feed = {
 	setOrientation: function(){
 		var orientation = Redcurb.Helpers.getOrientation();
 		var orientationClass = 'orientation-' + orientation;
+		onlineForLife.Feed.deviceStatus.orientation = orientation;
 		console.log('orientationClass: ' + orientationClass);
 		$('body').removeClass('orientation-portrait').removeClass('orientation-landscape').addClass(orientationClass);
 		onlineForLife.Feed.setDevice();
@@ -87,13 +91,17 @@ onlineForLife.Feed = {
 		console.log('setDevice');
 		var device = {"platform" : "iOS","available" : true,"model" : "iPhone5,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
 		if(typeof(device)!='undefined'){
-			$('.refresh-subtext').text($('.refresh-subtext').text() + ': ' + device.model);
+			//$('.refresh-subtext').text($('.refresh-subtext').text() + ': ' + device.model);
 			var modelName = Redcurb.Helpers.getDeviceInfo(device, 'MODEL_NAME');
 			var platformName = Redcurb.Helpers.getDeviceInfo(device, 'PLATFORM_NAME');
 			var versionText = Redcurb.Helpers.getDeviceInfo(device, 'OS_VERSION');
 			console.log('modelName: ' + modelName);
 			console.log('platformName: ' + platformName);
 			console.log('versionText: ' + versionText);
+			onlineForLife.Feed.deviceStatus.model = modelName;
+			onlineForLife.Feed.deviceStatus.platform = platformName;
+			onlineForLife.Feed.deviceStatus.version = versionText;
+			
 
 			var platformClass = 'platform-' + platformName;
 			var modelClass = 'model-' + modelName;
@@ -105,6 +113,59 @@ onlineForLife.Feed = {
 		}
 	},
 	
+	handleOrientationChange:function(){
+		if(onlineForLife.Feed.deviceStatus.model=='ipad'){
+			if(onlineForLife.Feed.deviceStatus.orientation=='landscape'){
+				onlineForLife.Feed.setupTabletLayout();
+			}
+			else{
+				onlineForLife.Feed.undoTabletLayout();
+			}
+		}
+		else{
+			onlineForLife.Feed.rebuildFeed();
+		}
+	},
+	
+	rebuildFeed: function(){
+		var spinnerHtml = '<li class="default-content spinner"><i class="fa fa-refresh fa-spin"></i></li>';
+		$('ul.feed').addClass('status-loading').empty().append(spinnerHtml);
+		setTimeout(function(){
+				onlineForLife.Feed.setupFirebaseFeedItem();
+		}, 200);
+	},
+
+	setupTabletLayout: function(){
+		$('body').addClass('orientation-landscape platform-tablet');
+		var windowWidth = $(window).width();
+		var leftPanelWidth = $('.mypanel-left.ui-panel').width();
+		var rightPanelWidth = $('.mypanel-right.ui-panel').width();
+		var panelWidth =  leftPanelWidth + rightPanelWidth;
+		var rightScrollWidth = 15;
+		var contentWidth = windowWidth - panelWidth - rightScrollWidth;
+		console.log('windowWidth: ' + windowWidth);
+		console.log('leftPanelWidth: ' + leftPanelWidth);
+		console.log('rightPanelWidth: ' + rightPanelWidth);
+		console.log('panelWidth: ' + panelWidth);
+		console.log('contentWidth: ' + contentWidth);
+		console.log('header-primary' + $('.ui-header.header-primary').width());
+		console.log('.content-main.ui-content' + $('.content-main.ui-content').width());
+		
+		$('.ui-header.header-primary, .content-main.ui-content').css('width',contentWidth);
+		
+		onlineForLife.Panels.setupIpad();
+		onlineForLife.Feed.rebuildFeed();
+		
+	},
+	
+	undoTabletLayout: function(){
+		
+	},
+	
+
+
+
+
 	checkLoginStatus: function(){
 		//console.log('checkLoginStatus');
 		
@@ -239,14 +300,6 @@ onlineForLife.Feed = {
 		}
 		$feed.removeClass('status-loading').addClass('status-complete');
 		
-	},
-	
-	setupOrientationChange:function(){
-		var spinnerHtml = '<li class="default-content spinner"><i class="fa fa-refresh fa-spin"></i></li>';
-		$('ul.feed').addClass('status-loading').empty().append(spinnerHtml);
-		setTimeout(function(){
-				onlineForLife.Feed.setupFirebaseFeedItem();
-		}, 200);
 	},
 	
 	setupFirebaseFeedItem:function(){
