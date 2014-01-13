@@ -2,6 +2,10 @@ var onlineForLife = window.onlineForLife || {}; onlineForLife.Panels = onlineFor
 onlineForLife.Panels = {
 	addFirebaseChild:true,
 	
+	step4Items:{
+		
+	},
+	
 	init: function(){
 		onlineForLife.Panels.setupHandlers();
 		onlineForLife.Panels.setupIpad();

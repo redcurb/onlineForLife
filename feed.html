@@ -540,6 +540,9 @@ $(function() {
 					<ul class="feed-content-container">
 						<li class="feed-content-placeholder feed-content-left" data-direction="right"></li>
 						<li class="feed-content-main" data-direction="none">
+
+						
+						{{#if stateName }}
 						{{#equal step "1" }}
 							<p class="action-text body-step-1">Someone considering abortion in {{city}}, {{stateName}} just contacted a PRC</p>
 						{{/equal}}
@@ -549,6 +552,21 @@ $(function() {
 						{{#equal step "3" }}
 							<p class="action-text body-step-3">Someone considering abortion in {{city}}, {{stateName}} kept her appointment at the PRC</p>
 						{{/equal}}
+						{{/if}}
+						
+						{{#unless stateName }}
+						{{#equal step "1" }}
+							<p class="action-text body-step-1">Someone considering abortion just contacted a PRC</p>
+						{{/equal}}
+						{{#equal step "2" }}
+							<p class="action-text body-step-2">Someone considering abortion just scheduled an appointment with a PRC</p>
+						{{/equal}}
+						{{#equal step "3" }}
+							<p class="action-text body-step-3">Someone considering abortion kept her appointment at the PRC</p>
+						{{/equal}}
+						{{/unless}}
+						
+						
 							<i class="action-step step-{{step}}"></i>
 						</li>
 						<li class="feed-content-placeholder feed-content-right" data-direction="left"></li>

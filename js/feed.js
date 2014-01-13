@@ -307,13 +307,113 @@ onlineForLife.Feed = {
 		
 	},
 	
+	statesData:{
+		"AL":"Alabama",
+		"AK":"Alaska",
+		"AZ":"Arizona",
+		"AR":"Arkansas",
+		"CA":"California",
+		"CO":"Colorado",
+		"CT":"Connecticut",
+		"DE":"Delaware",
+		"FL":"Florida",
+		"GA":"Georgia",
+		"HI":"Hawaii",
+		"ID":"Idaho",
+		"IL":"Illinois",
+		"IN":"Indiana",
+		"IA":"Iowa",
+		"KS":"Kansas",
+		"KY":"Kentucky",
+		"LA":"Louisiana",
+		"ME":"Maine",
+		"MD":"Maryland",
+		"MA":"Massachusetts",
+		"MI":"Michigan",
+		"MN":"Minnesota",
+		"MS":"Mississippi",
+		"MO":"Missouri",
+		"MT":"Montana",
+		"NE":"Nebraska",
+		"NV":"Nevada",
+		"NH":"New Hampshire",
+		"NJ":"New Jersey",
+		"NM":"New Mexico",
+		"NY":"New York",
+		"NC":"North Carolina",
+		"ND":"North Dakota",
+		"OH":"Ohio",
+		"OK":"Oklahoma",
+		"OR":"Oregon",
+		"PA":"Pennsylvania",
+		"RI":"Rhode Island",
+		"SC":"South Carolina",
+		"SD":"South Dakota",
+		"TN":"Tennessee",
+		"TX":"Texas",
+		"UT":"Utah",
+		"VT":"Vermont",
+		"VA":"Virginia",
+		"WA":"Washington",
+		"WV":"West Virginia",
+		"WI":"Wisconsin",
+		"WY":"Wyoming"
+
+	},
+	
+	getStateFriendlyName:function(stateCode){
+		stateName = '';
+		if(typeof(stateCode)!='undefined'){
+			stateName = onlineForLife.Feed.statesData[stateCode]
+		}
+		return stateName;
+	},
+	
+	getCurrentStepData:function(data){
+		var stepNumber = "";
+		if(typeof(data['OFL_Life_Decision_Number'])!='undefined'){
+			stepNumber="4";
+		}
+		else if(data['Appt_Kept']=='Yes'){
+			stepNumber="3";
+		}
+		else if(data['Appt_Made']=='Yes'){
+			stepNumber="2";
+		}
+		else{
+			stepNumber="1";
+		}
+		return stepNumber;
+	},
+	
+	createFeedDataObject:function(data){
+		var oData = {};
+		
+		var stateCode = data.State;
+		var stateName = onlineForLife.Feed.getStateFriendlyName(data.State);
+		var cityName = data.City;
+		var stepNumber = onlineForLife.Feed.getCurrentStepData(data);
+		var listClass = 'first';
+
+		oData.id = data.Id[0];
+		oData.state = stateCode;
+		oData.stateName = stateName;
+		oData.city = cityName;
+		oData.step = stepNumber;
+		oData.liClass = listClass;
+		
+		return oData;
+	},
+	
 	setupFirebaseFeedItem:function(){
 		//console.log('setupFirebaseFeedItem');
 		var dbUrl = 'https://ofl.firebaseio.com/feed';
+		var dbUrl = 'https://ofl.firebaseio.com/feedData';
 		var myDataRef = new Firebase(dbUrl);
-		
-		myDataRef.on('value', function(snapshot) {
+		myDataRef.once('value', function(snapshot) {
 			var feedData = snapshot.val();
+			var feedName = snapshot.name();
+			//console.log('feedName: ' + feedName);
 			if(feedData === null) {
 				onlineForLife.Feed.toggleFeedMessage('NO_ITEMS');
 			}
@@ -323,20 +423,47 @@ onlineForLife.Feed = {
 				var itemBuildCount = 0;
 				$.each(feedData,function(i,feedItem){
 					//console.log(i);
+					//console.log(feedItem.Id);
 					itemCount += 1;
-					var messageId = feedItem.id.toString();
+					var messageId = feedItem.Id.toString();
 					var buildItem = false;
 					if(onlineForLife.Feed.itemsPrayedFor.indexOf(messageId)<0){
 						buildItem = true;
 					}
+					var itemData = onlineForLife.Feed.createFeedDataObject(feedItem);
+					
+					var id = itemData.id;
+					var state = itemData.state;
+					var city = itemData.city;
+					var step = itemData.step;
+					var stateName = itemData.stateName;
+					var liClass = itemData.liClass;
+
+					if(step=="4"){
+						buildItem = false;
+						onlineForLife.Panels.step4Items[id] = feedItem;
+					}
+					/*
+					console.log('itemData: ');
+					console.log(itemData);
+					console.log('id: ' + id);
+					console.log('city: ' + city);
+					console.log('state: ' + state);
+					console.log('stateName: ' + stateName);
+					console.log('step: ' + step);
+					console.log('liClass: ' + liClass);
+					console.log('-------------------');
+					//*/
 					if(buildItem){
 						itemBuildCount += 1;
-						var newHtml = onlineForLife.Feed.buildFeedItem(feedItem.id, feedItem.state, feedItem.step, feedItem.stateName, 'first');
+						var newHtml = onlineForLife.Feed.buildFeedItem(id, city, state, step, stateName, liClass);
 						$('ul.feed').prepend(newHtml);
 						
 						onlineForLife.Feed.centerFeedItemText('firebase', $('ul.feed li:first'));
 						onlineForLife.Feed.setupDraggableEach($('ul.feed li:first'));
 					}
+					/*
+					*/
 				});
 				onlineForLife.Feed.toggleFeedMessage('LOADED');
 				console.log('itemCount',itemCount);
@@ -541,12 +668,11 @@ onlineForLife.Feed = {
 		return bgVersion;
 	},	
 	
-	buildFeedItem: function(itemId, stateCode, step, stateName, liClass){
+	buildFeedItem: function(itemId, city, stateCode, step, stateName, liClass){
 		var source   = $("#template-feed-item").html();
 		var template = Handlebars.compile(source);
 		var BgVersion = onlineForLife.Feed.setBgVersion;
-		var cityName = 'City';
-		var context = {itemId: itemId, stateCode: stateCode, step: step, stateName: stateName, liClass: liClass, BgVersion: BgVersion, city:cityName}
+		var context = {itemId: itemId, city: city, stateCode: stateCode, step: step, stateName: stateName, liClass: liClass, BgVersion: BgVersion}
 		var html = template(context);
 		return html;
 	},

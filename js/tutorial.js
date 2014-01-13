@@ -12,13 +12,13 @@ onlineForLife.Tutorial = {
 		var myDataRef = new Firebase(dbUrl);
 		myDataRef.on('child_added', function(snapshot) {
 			var tutorialData = snapshot.val();
-			console.log(tutorialData);
+			//console.log(tutorialData);
 			var tutorialId = snapshot.name();
 			var tutorialText = tutorialData.text;
 			var tutorialTextAlignment = tutorialData.align;
-			console.log(tutorialId + ' - ' + tutorialText + ' - ' + tutorialTextAlignment);
+			//console.log(tutorialId + ' - ' + tutorialText + ' - ' + tutorialTextAlignment);
 			var itemHtml = onlineForLife.Tutorial.buildTutorialItem(tutorialId, tutorialText, tutorialTextAlignment);
-			console.log(itemHtml);
+			//console.log(itemHtml);
 			$tutorial.append(itemHtml);
 		});
 		
@@ -37,7 +37,7 @@ onlineForLife.Tutorial = {
 			$('#modal-screen').addClass('screen-tutorial').show();
 			$('#content-tutorial').addClass('tutorial-open').removeClass('tutorial-closed');
 			$('.tutorial-item .tutorial-cta').on('click', function(){
-				console.log('cta');
+				//console.log('cta');
 				onlineForLife.Tutorial.handleItemToggle($(this));
 			});
 			$(window).on('scroll',function() {
