@@ -20,6 +20,7 @@
 	<link rel="stylesheet" href="css/feed.css?ver=12.19.1" />
 	<link rel="stylesheet" href="css/events.css?ver=12.19.1" />
 	<link rel="stylesheet" href="css/settings.css?ver=12.19.1" />
+	<link rel="stylesheet" href="css/tutorial.css?ver=12.19.1" />
 
 	<script src="js/libraries/jquery-1.9.1.min.js"></script>
 	<script src="js/libraries/jquery.mobile-1.3.2.min.js"></script>
@@ -501,6 +502,98 @@ body.page-status-loading #feed{
     
     </div>
 </div>
+
+<style>
+#content-tutorial{
+	width:100%;
+	height:100%;
+	display:block;
+	position:absolute;
+	z-index:999999;
+}
+	#content-tutorial .tutorial-item{
+		position:absolute;
+	}
+		#content-tutorial .tutorial-item .tutorial-cta{
+			position: absolute;
+			background: #e75629;
+			width: 80px;
+			height: 80px;
+			line-height: 80px;
+			display: block;
+			border-radius: 40px;
+		}
+		#content-tutorial .tutorial-item .tutorial-cta span{
+			font-style:normal;
+			color:#fff;
+			text-shadow:none;
+			width: 100%;
+			display: block;
+			text-align: center;
+			font-size: 1.8em;
+		}
+		#content-tutorial .tutorial-item .tutorial-text{
+			background:black;
+			padding:3px;
+			font-size:1em;
+			position:absolute;
+			width: 200px;
+		}
+			#content-tutorial .tutorial-item .tutorial-text span{
+				color:#fff;
+				text-shadow:none;
+				display:block;
+				padding:5px;
+			}
+			#content-tutorial .tutorial-item .tutorial-text.align-left span{
+				text-align:left;
+			}
+			#content-tutorial .tutorial-item .tutorial-text.align-right span{
+				text-align:right;
+			}
+			#content-tutorial .tutorial-item .tutorial-text.align-center span{
+				text-align:center;
+			}
+			 
+	
+	#tutorial-1{
+		
+	}
+		#tutorial-1 .tutorial-cta{
+			left: 555px;
+			top: 220px;
+		}
+		#tutorial-1 .tutorial-text{
+			left: 341px;
+			top: 218px;
+		}
+	#tutorial-2{
+	}
+		#tutorial-2 .tutorial-cta{
+			left:240px;
+			top:490px;
+		}
+		#tutorial-2 .tutorial-text{
+left: 180px;
+top: 395px;
+		}
+
+
+
+
+</style>
+<div id="content-tutorial">
+	<div class="tutorial-item" id="tutorial-1">
+		<i class="tutorial-cta"><span>1</span></i>
+		<p class="tutorial-text align-right"><span>See those currently praying for life</span></p>
+	</div>
+	<div class="tutorial-item" id="tutorial-2">
+		<i class="tutorial-cta"><span>2</span></i>
+		<p class="tutorial-text align-center"><span>Number of prayers today</span></p>
+	</div>
+</div>
+
+
 <div data-role="none" id="modal-screen"></div>
 <div data-role="none" id="modalUpdates">
 	<i class="fa fa-times-circle btn-modal-close"></i>
