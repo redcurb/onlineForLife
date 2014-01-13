@@ -224,7 +224,7 @@ onlineForLife.Feed = {
 		$('ul.feed').addClass('status-loading').empty().append(spinnerHtml);
 		setTimeout(function(){
 				onlineForLife.Feed.setupFirebaseFeedItem();
-		}, 1000);
+		}, 200);
 	},
 	
 	setupFirebaseFeedItem:function(){

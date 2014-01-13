@@ -1,6 +1,5 @@
 var onlineForLife = window.onlineForLife || {}; onlineForLife.Auth = onlineForLife.Auth || {}; onlineForLife.Login = onlineForLife.Login || {}; onlineForLife.Login = onlineForLife.Login || {};
 
-
 onlineForLife.Auth = {
 	init: function(){
 		//pagebeforecreate
@@ -13,6 +12,31 @@ onlineForLife.Auth = {
 		//pageshow
 
 		onlineForLife.Auth.checkLoginStatus();
+	},
+	
+	userData: {},
+	
+	handleLoginSuccess: function(method, user){
+		console.log('handleLoginSuccess',user);
+		onlineForLife.Auth.updateUserData(method, user);
+	},
+	
+	goToFeed: function(){
+		document.location="feed.html";
+	},
+	
+	updateUserData: function(method, user){
+		var firebaseUrl =  new Firebase('https://ofl.firebaseio.com/users/' + user.id);
+		var userDataRef =  new Firebase('https://ofl.firebaseio.com/users/' + user.id + '/userInfo');
+		var formData = onlineForLife.Auth.userData;
+		if(method=='REG_SUCCESS'){
+			userDataRef.child('zip').set(formData.zip);
+			userDataRef.child('name').set(formData.name);
+		}
+		if(typeof(device)!='undefined'){
+			userDataRef.child('device').set(device);
+		}
+		document.location="feed.html";
 	},
 	
 	checkLoginStatus: function(){
@@ -29,7 +53,7 @@ onlineForLife.Auth = {
 				// User is already logged in.
 				console.log(user);
 				console.log(user.email);
-				document.location="feed.html";
+				onlineForLife.Auth.handleLoginSuccess('AUTO_LOGGED_IN',user);
 			} else {
 				// User is logged out.
 				console.log('no user');
@@ -72,6 +96,7 @@ onlineForLife.Register = {
 	},
 
 	createUser: function($form){
+		console.log('createUser');
 		var $firstName = $form.find('#input-register-firstname');
 		var $email = $form.find('#input-register-email');
 		var $password = $form.find('#input-register-password');
@@ -93,12 +118,13 @@ onlineForLife.Register = {
 				// User is already logged in.
 				console.log('already logged in');
 				console.log(user);
-				onlineForLife.Register.handleRegSuccess();
+				onlineForLife.Register.handleRegSuccess(user);
 			} else {
 				// User is logged out.
 				auth.createUser(emailVal, passwordVal, function(error,  user) {
 					if (!error) {
 						console.log('user created: ' + user.id);
+						
 						var usersUrl = 'https://ofl.firebaseio.com/users/'+user.id;
 						var usersData = new Firebase(usersUrl);
 		
@@ -108,6 +134,7 @@ onlineForLife.Register = {
 						var userZip = zipVal;
 						var pushData = { id: userId, email: userEmail, name: userName, zip: userZip };
 						usersData.push(pushData);
+						onlineForLife.Auth.userData = pushData;
 						
 						var usersPrayersUrl = 'https://ofl.firebaseio.com/users/'+user.id + '/prayers';
 						var usersPrayersData = new Firebase(usersPrayersUrl);
@@ -128,9 +155,9 @@ onlineForLife.Register = {
 		});
 	},
 	
-	handleRegSuccess: function(auth, email, password){
+	handleRegSuccess: function(user){
 		console.log('handleRegSuccess');
-		document.location = 'feed.html';
+		onlineForLife.Auth.handleLoginSuccess('REG_SUCCESS',user);
 	},
 	
 	handleRegError: function(){
@@ -411,7 +438,7 @@ onlineForLife.Login = {
 				// User is already logged in.
 				console.log('logged in');
 				console.log(user.email);
-				onlineForLife.Login.handleFormSuccess();
+				onlineForLife.Login.handleFormSuccess(user);
 			} else {
 				// User is logged out.
 				console.log('no user');
@@ -426,8 +453,8 @@ onlineForLife.Login = {
 		});
 	},
 	
-	handleFormSuccess: function(){
-		document.location="feed.html";
+	handleFormSuccess: function(user){
+		onlineForLife.Auth.handleLoginSuccess('LOGGED_IN',user);
 	}
 };
 
@@ -443,6 +470,7 @@ onlineForLife.Forgot = {
 		var formOk = true;
 		if(formOk){
 			//document.location="home.html#login";
+			//onlineForLife.Auth.handleLoginSuccess();
 		}
 	}
 };
