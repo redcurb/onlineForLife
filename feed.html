@@ -533,6 +533,26 @@ body.page-status-loading #feed{
 			<i class="tutorial-cta"><span>4</span></i>
 			<p class="tutorial-text align-center"><span>Swipe to show you've prayed</span></p>
 		</div>
+		<div class="tutorial-item" id="tutorial-5">
+			<i class="tutorial-cta"><span>5</span></i>
+			<p class="tutorial-text align-center"><span>Impact of all prayers</span></p>
+		</div>
+		<div class="tutorial-item" id="tutorial-6">
+			<i class="tutorial-cta"><span>6</span></i>
+			<p class="tutorial-text align-center"><span>Customized impact numbers</span></p>
+		</div>
+		<div class="tutorial-item" id="tutorial-7">
+			<i class="tutorial-cta"><span>7</span></i>
+			<p class="tutorial-text align-center"><span>Tap to view the impact of your prayers</span></p>
+		</div>
+		<div class="tutorial-item" id="tutorial-8">
+			<i class="tutorial-cta"><span>8</span></i>
+			<p class="tutorial-text align-center"><span>Tap to view the impact of your network's prayers</span></p>
+		</div>
+		<div class="tutorial-item" id="tutorial-9">
+			<i class="tutorial-cta"><span>9</span></i>
+			<p class="tutorial-text align-center"><span>Your impact feed</span></p>
+		</div>
 	</div>
 </div>
 
@@ -594,6 +614,13 @@ $(function() {
 				<li class="{{#if popup }}popup-true{{/if}}{{#unless popup }}popup-false{{/unless}}" data-popup="{{popup}}">
 					<span class="text-update">{{title}}</span>
 				</li>
+
+</script>
+<script id="template-tutorial-item" type="text/x-handlebars-template">
+		<div class="tutorial-item" id="tutorial-{{id}}">
+			<i class="tutorial-cta"><span>{{id}}</span></i>
+			<p class="tutorial-text align-right"><span>{{text}}</span></p>
+		</div>
 
 </script>
 

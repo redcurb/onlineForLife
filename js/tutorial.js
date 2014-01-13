@@ -1,19 +1,45 @@
 var onlineForLife = window.onlineForLife || {}; onlineForLife.Tutorial = onlineForLife.Tutorial || {};
 onlineForLife.Tutorial = {
 	init: function(){
-		
+		onlineForLife.Tutorial.getTutorialText();
 		onlineForLife.Tutorial.setupHandlers();
+	},
+	
+	getTutorialText: function(){
+		var $tutorial = $('#tutorial-content');
+
+		var dbUrl = 'https://ofl.firebaseio.com/tutorial/text/';
+		var myDataRef = new Firebase(dbUrl);
+		myDataRef.on('child_added', function(snapshot) {
+			var tutorialId = snapshot.name();
+			var tutorialText = snapshot.val();
+			console.log(tutorialId + ' - ' + tutorialText);
+			var itemHtml = onlineForLife.Tutorial.buildTutorialItem(tutorialId, tutorialText);
+			console.log(itemHtml);
+			$tutorial.append(itemHtml);
+		});
+		
+	},
+	
+	buildTutorialItem: function(id, text){
+		var source   = $("#template-tutorial-item").html();
+		var template = Handlebars.compile(source);
+		var context = {id:id, text:text}
+		var html = template(context);
+		return html;
 	},
 	
 	setupHandlers: function(){
 		$('a.tutorial-show').on('click', function(){
 			$('#content-tutorial').addClass('tutorial-open').removeClass('tutorial-closed');
+			$('.tutorial-item .tutorial-cta').on('click', function(){
+				console.log('cta');
+				onlineForLife.Tutorial.handleItemToggle($(this));
+			});
 		});
 		$('a.tutorial-hide').on('click', function(){
 			$('#content-tutorial').addClass('tutorial-closed').removeClass('tutorial-open');
-		});
-		$('.tutorial-item .tutorial-cta').on('click', function(){
-			onlineForLife.Tutorial.handleItemToggle($(this));
+			$('.tutorial-item .tutorial-cta').off('click');
 		});
 	},
 	
