@@ -12,6 +12,20 @@ onlineForLife.Tutorial = {
 		$('a.tutorial-hide').on('click', function(){
 			$('#content-tutorial').addClass('tutorial-closed').removeClass('tutorial-open');
 		});
+		$('.tutorial-item .tutorial-cta').on('click', function(){
+			onlineForLife.Tutorial.handleItemToggle($(this));
+		});
+	},
+	
+	handleItemToggle: function($i){
+		var $item = $i.parents('.tutorial-item');
+		
+		if($item.hasClass('item-open')){
+			$item.removeClass('item-open');
+		}
+		else{
+			$item.addClass('item-open');
+		}
 	}
 	
 

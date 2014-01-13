@@ -60,7 +60,12 @@
 				font-size:1em;
 				position:absolute;
 				width: 200px;
+				display:none;
 			}
+			#content-tutorial .tutorial-item.item-open .tutorial-text{
+				display:block;
+			}
+			
 				#content-tutorial .tutorial-item .tutorial-text span{
 					color:#fff;
 					text-shadow:none;
@@ -104,5 +109,25 @@
 			#tutorial-2 .tutorial-text{
 				left: 180px;
 				top: 395px;
+			}
+		#tutorial-3{
+		}
+			#tutorial-3 .tutorial-cta{
+				left:290px;
+				top:660px;
+			}
+			#tutorial-3 .tutorial-text{
+				left: 380px;
+				top: 655px;
+			}
+		#tutorial-4{
+		}
+			#tutorial-4 .tutorial-cta{
+				left:440px;
+				top:845px;
+			}
+			#tutorial-4 .tutorial-text{
+				left: 225px;
+				top: 845px;
 			}
 
