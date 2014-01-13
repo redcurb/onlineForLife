@@ -341,7 +341,7 @@ onlineForLife.Panels = {
 	},
 	
 	doesPopupContentExist: function(dataHtml){
-		console.log('doesPopupContentExist: ' + dataHtml);
+		//console.log('doesPopupContentExist: ' + dataHtml);
 		var exists = true;
 		if (typeof(dataHtml)=="undefined" || dataHtml==""){
 			exists = false;
@@ -385,14 +385,14 @@ onlineForLife.Panels = {
 						dataHtml = "";
 					}
 					var dataId = updateItem.id;
-					console.log('addPopup: ' + addPopup);
+					//console.log('addPopup: ' + addPopup);
 					//console.log(updateItem);
 					window.popupHtml = dataHtml;
 					var newHtml = onlineForLife.Panels.buildUpdateItem(dataId, dataHtml, dataTitle);
 					html += newHtml;
-					console.log('newHtml');
-					console.log(newHtml);
-					console.log(' ');
+					//console.log('newHtml');
+					//console.log(newHtml);
+					//console.log(' ');
 				});
 				$('ul.stats-updates').html(html).removeClass('status-loading').addClass('status-loaded');
 				/*

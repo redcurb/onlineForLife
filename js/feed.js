@@ -67,19 +67,41 @@ onlineForLife.Feed = {
 		onlineForLife.Feed.updateUserPrayerCount();
 	},
 	
+	setupFeed: function(){
+	},
+	
 	setupPlatform: function(){
+		console.log('setupPlatform');
 		onlineForLife.Feed.setOrientation();
-		onlineForLife.Feed.setDevice();
 	},
 	
 	setOrientation: function(){
 		var orientation = Redcurb.Helpers.getOrientation();
-		$('body').removeClass('orientation-portrait').removeClass('orientation-landscape').addClass('orientation-' + orientation);
+		var orientationClass = 'orientation-' + orientation;
+		console.log('orientationClass: ' + orientationClass);
+		$('body').removeClass('orientation-portrait').removeClass('orientation-landscape').addClass(orientationClass);
+		onlineForLife.Feed.setDevice();
 	},
 	
 	setDevice: function(){
+		console.log('setDevice');
+		var device = {"platform" : "iOS","available" : true,"model" : "iPhone5,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
 		if(typeof(device)!='undefined'){
 			$('.refresh-subtext').text($('.refresh-subtext').text() + ': ' + device.model);
+			var modelName = Redcurb.Helpers.getDeviceInfo(device, 'MODEL_NAME');
+			var platformName = Redcurb.Helpers.getDeviceInfo(device, 'PLATFORM_NAME');
+			var versionText = Redcurb.Helpers.getDeviceInfo(device, 'OS_VERSION');
+			console.log('modelName: ' + modelName);
+			console.log('platformName: ' + platformName);
+			console.log('versionText: ' + versionText);
+
+			var platformClass = 'platform-' + platformName;
+			var modelClass = 'model-' + modelName;
+			var versionClass = 'os-version-' + versionText;
+			console.log('platformClass: ' + platformClass);
+			console.log('modelClass: ' + modelClass);
+			console.log('versionClass: ' + versionClass);
+			$('body').addClass(platformClass).addClass(modelClass).addClass(versionClass);
 		}
 	},
 	
