@@ -504,92 +504,27 @@ body.page-status-loading #feed{
 </div>
 
 <style>
-#content-tutorial{
-	width:100%;
-	height:100%;
-	display:block;
-	position:absolute;
-	z-index:999999;
-}
-	#content-tutorial .tutorial-item{
-		position:absolute;
-	}
-		#content-tutorial .tutorial-item .tutorial-cta{
-			position: absolute;
-			background: #e75629;
-			width: 80px;
-			height: 80px;
-			line-height: 80px;
-			display: block;
-			border-radius: 40px;
-		}
-		#content-tutorial .tutorial-item .tutorial-cta span{
-			font-style:normal;
-			color:#fff;
-			text-shadow:none;
-			width: 100%;
-			display: block;
-			text-align: center;
-			font-size: 1.8em;
-		}
-		#content-tutorial .tutorial-item .tutorial-text{
-			background:black;
-			padding:3px;
-			font-size:1em;
-			position:absolute;
-			width: 200px;
-		}
-			#content-tutorial .tutorial-item .tutorial-text span{
-				color:#fff;
-				text-shadow:none;
-				display:block;
-				padding:5px;
-			}
-			#content-tutorial .tutorial-item .tutorial-text.align-left span{
-				text-align:left;
-			}
-			#content-tutorial .tutorial-item .tutorial-text.align-right span{
-				text-align:right;
-			}
-			#content-tutorial .tutorial-item .tutorial-text.align-center span{
-				text-align:center;
-			}
-			 
-	
-	#tutorial-1{
-		
-	}
-		#tutorial-1 .tutorial-cta{
-			left: 555px;
-			top: 220px;
-		}
-		#tutorial-1 .tutorial-text{
-			left: 341px;
-			top: 218px;
-		}
-	#tutorial-2{
-	}
-		#tutorial-2 .tutorial-cta{
-			left:240px;
-			top:490px;
-		}
-		#tutorial-2 .tutorial-text{
-left: 180px;
-top: 395px;
-		}
-
-
-
 
 </style>
-<div id="content-tutorial">
-	<div class="tutorial-item" id="tutorial-1">
-		<i class="tutorial-cta"><span>1</span></i>
-		<p class="tutorial-text align-right"><span>See those currently praying for life</span></p>
+
+<div id="content-tutorial" class="tutorial-closed">
+	<div class="tutorial-toggle">
+		<a data-role="none" class="tutorial-link tutorial-show">
+			<span class="tutorial-show">Show Tutorial</span>
+		</a>
+		<a data-role="none" class="tutorial-link tutorial-hide">
+			<span class="tutorial-hide">Hide Tutorial</span>
+		</a>
 	</div>
-	<div class="tutorial-item" id="tutorial-2">
-		<i class="tutorial-cta"><span>2</span></i>
-		<p class="tutorial-text align-center"><span>Number of prayers today</span></p>
+	<div id="tutorial-content">
+		<div class="tutorial-item" id="tutorial-1">
+			<i class="tutorial-cta"><span>1</span></i>
+			<p class="tutorial-text align-right"><span>See those currently praying for life</span></p>
+		</div>
+		<div class="tutorial-item" id="tutorial-2">
+			<i class="tutorial-cta"><span>2</span></i>
+			<p class="tutorial-text align-center"><span>Number of prayers today</span></p>
+		</div>
 	</div>
 </div>
 
@@ -690,5 +625,6 @@ $(function() {
 <script type="text/javascript" src="js/feed.js?ver=12.19.1"></script>
 <script type="text/javascript" src="js/events.js?ver=1.0"></script>
 <script type="text/javascript" src="js/settings.js?ver=1.0"></script>
+<script type="text/javascript" src="js/tutorial.js?ver=1.0"></script>
 </body>
 </html>

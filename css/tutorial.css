@@ -1,1 +1,108 @@
+#content-tutorial{
+	width:100%;
+	display:block;
+	position:absolute;
+	z-index:999999;
+}
+#content-tutorial.tutorial-open{
+	height:100%;
+}
+	.tutorial-toggle{
+		position:absolute;
+		top:60px;
+		width:100%;
+	}
+		.tutorial-toggle a{
+			position:absolute;
+			left:225px;
+		}
+		#content-tutorial.tutorial-closed a.tutorial-hide,
+		#content-tutorial.tutorial-open a.tutorial-show{
+			display:none
+		}
+			.tutorial-toggle a span{
+				font-size:0.6em;
+			}
+
+
+
+
+	#content-tutorial.tutorial-open #tutorial-content{
+		display:block;
+	}
+	#tutorial-content{
+		display:none;
+	}
+		#content-tutorial .tutorial-item{
+			position:absolute;
+		}
+			#content-tutorial .tutorial-item .tutorial-cta{
+				position: absolute;
+				background: #e75629;
+				width: 80px;
+				height: 80px;
+				line-height: 80px;
+				display: block;
+				border-radius: 40px;
+			}
+			#content-tutorial .tutorial-item .tutorial-cta span{
+				font-style:normal;
+				color:#fff;
+				text-shadow:none;
+				width: 100%;
+				display: block;
+				text-align: center;
+				font-size: 1.8em;
+			}
+			#content-tutorial .tutorial-item .tutorial-text{
+				background:black;
+				padding:3px;
+				font-size:1em;
+				position:absolute;
+				width: 200px;
+			}
+				#content-tutorial .tutorial-item .tutorial-text span{
+					color:#fff;
+					text-shadow:none;
+					display:block;
+					padding:5px;
+				}
+				#content-tutorial .tutorial-item .tutorial-text.align-left span{
+					text-align:left;
+				}
+				#content-tutorial .tutorial-item .tutorial-text.align-right span{
+					text-align:right;
+				}
+				#content-tutorial .tutorial-item .tutorial-text.align-center span{
+					text-align:center;
+				}
+				 
+		
+				
+				
+				
+				
+				
+				
+		#tutorial-1{
+			
+		}
+			#tutorial-1 .tutorial-cta{
+				left: 555px;
+				top: 230px;
+			}
+			#tutorial-1 .tutorial-text{
+				left: 341px;
+				top: 218px;
+			}
+		#tutorial-2{
+		}
+			#tutorial-2 .tutorial-cta{
+				left:240px;
+				top:490px;
+			}
+			#tutorial-2 .tutorial-text{
+				left: 180px;
+				top: 395px;
+			}
 
