@@ -31,6 +31,7 @@ onlineForLife.Tutorial = {
 	
 	setupHandlers: function(){
 		$('a.tutorial-show').on('click', function(){
+			$('#modal-screen').addClass('screen-tutorial').show();
 			$('#content-tutorial').addClass('tutorial-open').removeClass('tutorial-closed');
 			$('.tutorial-item .tutorial-cta').on('click', function(){
 				console.log('cta');
@@ -38,6 +39,7 @@ onlineForLife.Tutorial = {
 			});
 		});
 		$('a.tutorial-hide').on('click', function(){
+			$('#modal-screen').removeClass('screen-tutorial').hide();
 			$('#content-tutorial').addClass('tutorial-closed').removeClass('tutorial-open');
 			$('.tutorial-item .tutorial-cta').off('click');
 		});

@@ -516,44 +516,7 @@ body.page-status-loading #feed{
 			<span class="tutorial-hide">Hide Tutorial</span>
 		</a>
 	</div>
-	<div id="tutorial-content">
-		<div class="tutorial-item" id="tutorial-1">
-			<i class="tutorial-cta"><span>1</span></i>
-			<p class="tutorial-text align-right"><span>See those currently praying for life</span></p>
-		</div>
-		<div class="tutorial-item" id="tutorial-2">
-			<i class="tutorial-cta"><span>2</span></i>
-			<p class="tutorial-text align-center"><span>Number of prayers today</span></p>
-		</div>
-		<div class="tutorial-item" id="tutorial-3">
-			<i class="tutorial-cta"><span>3</span></i>
-			<p class="tutorial-text align-center"><span>Realtime prayers needed</span></p>
-		</div>
-		<div class="tutorial-item" id="tutorial-4">
-			<i class="tutorial-cta"><span>4</span></i>
-			<p class="tutorial-text align-center"><span>Swipe to show you've prayed</span></p>
-		</div>
-		<div class="tutorial-item" id="tutorial-5">
-			<i class="tutorial-cta"><span>5</span></i>
-			<p class="tutorial-text align-center"><span>Impact of all prayers</span></p>
-		</div>
-		<div class="tutorial-item" id="tutorial-6">
-			<i class="tutorial-cta"><span>6</span></i>
-			<p class="tutorial-text align-center"><span>Customized impact numbers</span></p>
-		</div>
-		<div class="tutorial-item" id="tutorial-7">
-			<i class="tutorial-cta"><span>7</span></i>
-			<p class="tutorial-text align-center"><span>Tap to view the impact of your prayers</span></p>
-		</div>
-		<div class="tutorial-item" id="tutorial-8">
-			<i class="tutorial-cta"><span>8</span></i>
-			<p class="tutorial-text align-center"><span>Tap to view the impact of your network's prayers</span></p>
-		</div>
-		<div class="tutorial-item" id="tutorial-9">
-			<i class="tutorial-cta"><span>9</span></i>
-			<p class="tutorial-text align-center"><span>Your impact feed</span></p>
-		</div>
-	</div>
+	<div id="tutorial-content"></div>
 </div>
 
 
@@ -578,13 +541,13 @@ $(function() {
 						<li class="feed-content-placeholder feed-content-left" data-direction="right"></li>
 						<li class="feed-content-main" data-direction="none">
 						{{#equal step "1" }}
-							<p class="action-text body-step-1">Woman in {{stateName}} just called an OFL agent</p>
+							<p class="action-text body-step-1">Someone considering abortion in {{city}}, {{stateName}} just contacted a PRC</p>
 						{{/equal}}
 						{{#equal step "2" }}
-							<p class="action-text body-step-2">Woman in {{stateName}} just scheduled an appointment with a PRC</p>
+							<p class="action-text body-step-2">Someone considering abortion in {{city}}, {{stateName}} just scheduled an appointment with a PRC</p>
 						{{/equal}}
 						{{#equal step "3" }}
-							<p class="action-text body-step-3">Woman in {{stateName}} kept her appointment</p>
+							<p class="action-text body-step-3">Someone considering abortion in {{city}}, {{stateName}} kept her appointment at the PRC</p>
 						{{/equal}}
 							<i class="action-step step-{{step}}"></i>
 						</li>
@@ -618,7 +581,7 @@ $(function() {
 </script>
 <script id="template-tutorial-item" type="text/x-handlebars-template">
 		<div class="tutorial-item" id="tutorial-{{id}}">
-			<i class="tutorial-cta"><span>{{id}}</span></i>
+			<i class="fa fa-question-circle tutorial-cta"></i>
 			<p class="tutorial-text align-right"><span>{{text}}</span></p>
 		</div>
 

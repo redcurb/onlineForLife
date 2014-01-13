@@ -545,7 +545,8 @@ onlineForLife.Feed = {
 		var source   = $("#template-feed-item").html();
 		var template = Handlebars.compile(source);
 		var BgVersion = onlineForLife.Feed.setBgVersion;
-		var context = {itemId: itemId, stateCode: stateCode, step: step, stateName: stateName, liClass: liClass, BgVersion: BgVersion}
+		var cityName = 'City';
+		var context = {itemId: itemId, stateCode: stateCode, step: step, stateName: stateName, liClass: liClass, BgVersion: BgVersion, city:cityName}
 		var html = template(context);
 		return html;
 	},

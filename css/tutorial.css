@@ -38,12 +38,8 @@
 		}
 			#content-tutorial .tutorial-item .tutorial-cta{
 				position: absolute;
-				background: #e75629;
-				width: 80px;
-				height: 80px;
-				line-height: 80px;
-				display: block;
-				border-radius: 40px;
+				color: #e75629;
+				font-size: 3em;
 			}
 			#content-tutorial .tutorial-item .tutorial-cta span{
 				font-style:normal;
@@ -131,3 +127,6 @@
 				top: 845px;
 			}
 
+#modal-screen.screen-tutorial{
+	background:rgba(255,255,255,0.65)	
+}
