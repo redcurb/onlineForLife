@@ -93,23 +93,28 @@ onlineForLife.Feed = {
 		if(typeof(device)!='undefined'){
 			//$('.refresh-subtext').text($('.refresh-subtext').text() + ': ' + device.model);
 			var modelName = Redcurb.Helpers.getDeviceInfo(device, 'MODEL_NAME');
+			var modelFamilyName = Redcurb.Helpers.getDeviceInfo(device, 'MODEL_FAMILY_NAME');
 			var platformName = Redcurb.Helpers.getDeviceInfo(device, 'PLATFORM_NAME');
 			var versionText = Redcurb.Helpers.getDeviceInfo(device, 'OS_VERSION');
 			console.log('modelName: ' + modelName);
+			console.log('modelFamilyName: ' + modelFamilyName);
 			console.log('platformName: ' + platformName);
 			console.log('versionText: ' + versionText);
 			onlineForLife.Feed.deviceStatus.model = modelName;
+			onlineForLife.Feed.deviceStatus.modelFamily = modelFamilyName;
 			onlineForLife.Feed.deviceStatus.platform = platformName;
 			onlineForLife.Feed.deviceStatus.version = versionText;
 			
 
 			var platformClass = 'platform-' + platformName;
 			var modelClass = 'model-' + modelName;
+			var modelFamilyClass = 'model-family-' + modelFamilyName;
 			var versionClass = 'os-version-' + versionText;
 			console.log('platformClass: ' + platformClass);
 			console.log('modelClass: ' + modelClass);
+			console.log('modelFamilyClass: ' + modelFamilyClass);
 			console.log('versionClass: ' + versionClass);
-			$('body').addClass(platformClass).addClass(modelClass).addClass(versionClass);
+			$('body').addClass(platformClass).addClass(modelFamilyClass).addClass(modelClass).addClass(versionClass);
 		}
 	},
 	

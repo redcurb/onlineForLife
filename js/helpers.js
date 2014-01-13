@@ -19,6 +19,27 @@ Redcurb.Helpers = {
 				value = 'ipad';
 			}
 		}
+		if(type=='MODEL_FAMILY_NAME'){
+			var deviceModel = device.model.toLowerCase();
+			if(deviceModel.indexOf('iphone5c')>=0){
+				value = 'iphone5c';
+			}
+			else if(deviceModel.indexOf('iphone5s')>=0){
+				value = 'iphone5s';
+			}
+			else if(deviceModel.indexOf('iphone5')>=0){
+				value = 'iphone5';
+			}
+			else if(deviceModel.indexOf('iphone4s')>=0){
+				value = 'iphone4s';
+			}
+			else if(deviceModel.indexOf('iphone4')>=0){
+				value = 'iphone4';
+			}
+			else if(deviceModel.indexOf('iPad')>=0){
+				value = 'ipad';
+			}
+		}
 		if(type=='PLATFORM_NAME'){
 			var devicePlatform = device.platform.toLowerCase();
 			if(devicePlatform.indexOf('ios')>=0){

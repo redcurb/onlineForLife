@@ -78,6 +78,10 @@
 					color:#eaedec;
 					margin-top:20px;
 				}
+				body.model-family-iphone5 ul.feed li.default-content.spinner i{
+					margin-top:107px;
+					margin-top:85px;
+				}
 			ul.feed li.feed-item{
 				margin-top:10px;
 				margin-top:0;
