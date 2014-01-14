@@ -3,66 +3,55 @@ onlineForLife.Footer = {
 	version: 1,
 	
 	init: function(){
-		//console.log('footer init');
-		onlineForLife.Footer.buildSMSLink();
-		onlineForLife.Footer.setupHandlers();
+		onlineForLife.Footer.getFooterText();
 	},
+	
+	getFooterText:function(){
+		var dbUrl = 'https://ofl.firebaseio.com/text/footer/';
+		var footerData = new Firebase(dbUrl);
+		onlineForLife.Footer.footerData = {};
+		footerData.once('value', function(footerText) {
+			var footerTextData = footerText.val();
+			onlineForLife.Footer.footerData.text = footerTextData;
+			var emailText = footerTextData.email;
+			onlineForLife.Footer.setupHandlers();
+		});
 
-	buildSMSLink: function(){
-		var href = 'mailto:?subject=Pray with me&body=Join my list of friends at http://onlineforlife.org/2-1app/share.html?shareId=2313';
-		$('.feed-share-sms a').attr('href',href);
 	},
-
+	
 	setupHandlers: function(){
-		//console.log('footer setupHandlers');
-		$('.feed-share-sms').on('click',function(){
-			var url = "sms:6268647084?body=TESTMESSAGE";
-			url = 'mailto:?subject=Pray with me&body=Join my list of friends at http://onlineforlife.org/2-1app/share.html?shareId=2313';
-			window.location.href = url;
+		var shareUrl = onlineForLife.Footer.footerData.text.shareUrl;
+		var userId = onlineForLife.Feed.userData.id;
 
+		$('.feed-share-sms').on('click',function(){
+			var textData = onlineForLife.Footer.footerData.text.email;
+			var timeStamp = new Date().getTime().toString();
+			var shareId = userId + timeStamp;
+			var subjectText = textData.subject;
+			var bodyText = textData.body1;
+			var url = 'mailto:?subject=' + subjectText + '&body=' + bodyText + ' ' + shareUrl + '?shareId='+shareId;
+			window.location.href = url;
 		});
 		$('.feed-share-fb').on('click',function(){
-			var title = 'Online For Life';
-			var description = 'So Every Child Makes Their Mark. Our Mission: Providing comprehensive care to abortion-determined women and men in their deepest time of need.';
-			var imageUrl = 'http://onlineforlife.org/2-1app/olf-logo.png';
-			var userId = onlineForLife.Feed.userData.id;
-			var shareUrl = 'http://onlineforlife.org/2-1app/share.html?shareId='+userId;
-			//https://m.facebook.com/sharer.php?u=http://onlineforlife.org/2-1app/share.html?shareId=2313&_rdr&p=
-			
-			var tempUrl = 'https://m.facebook.com/sharer.php?u=http://onlineforlife.org/2-1app/share.html?shareId=2313&_rdr&p=';
-			var url2 = 'http://m.facebook.com/sharer.php?p[url]=' + tempUrl;
-			var newUrl = 'http://m.facebook.com/sharer.php?u=http://onlineforlife.org/2-1app/share.html?id=' + userId;
-			url = newUrl;
-			console.log(url);
-			
-			//https://m.facebook.com/sharer.php?p%5Btitle%5D=Online+For+Life&p%5Bsummary%5D=
-			//So+Every+Child+Makes+Their+Mark.+Our+Mission%3A+Providing+comprehensive+care+to+abortion-determined+women+and+men+in+their+deepest+time+of+need.&p%5Burl%5D=
-			//http%3A%2F%2Fonlineforlife.org%2F2-1app%2Fshare.html%3FshareId%3D%5Bobject+Object%5D&p%5Bimages%5D%5B0%5D=http%3A%2F%2Fonlineforlife.org%2F2-1app%2Folf-logo.png&_rdr
-			
-			//window.location.href = "https://www.facebook.com/sharer/sharer.php?m2w&u=www.onlineforlife.org/2-1app/share.html?id=2123";
-			//window.location.href = fbLink;
-			
-			
+			var timeStamp = new Date().getTime().toString();
+			var shareId = userId + timeStamp;
+			var url = 'http://m.facebook.com/sharer.php?u=' + shareUrl + '?shareId='+shareId;
 			window.open(url, '_blank', 'location=yes');
 		});
 		$('.feed-share-twitter').on('click',function(){
-			//window.location.href = "https://twitter.com/intent/tweet?text=Sign%20up%20to%20connect%20with%20me%20on%20Online%20For%20Life&url=http%3A%2F%2Fwww.onlineforlife.org/2-1app/share.html?id=2123";
+			var textData = onlineForLife.Footer.footerData.text.twitter;
+			var timeStamp = new Date().getTime().toString();
+			var shareId = userId + timeStamp;
 			var userId = onlineForLife.Feed.userData.id;
-			var shareUrl = encodeURIComponent('http://onlineforlife.org/2-1app/share.html?shareId='+userId);
-			var url = "https://twitter.com/intent/tweet?text=Sign%20up%20to%20connect%20with%20me%20on%20Online%20For%20Life&url=" + shareUrl;
+			var shareUrl = encodeURIComponent(shareUrl + '?shareId='+shareId);
+			var shareText = textData.body1;
+
+			var url = 'https://twitter.com/intent/tweet?text=' + shareText + '&url=' + shareUrl;
 			window.open(url, '_blank', 'location=yes');
 		});
-
-
-		
-		
 	}
-	
-	
-
-
 };
 $(function() {
-	onlineForLife.Footer.init();
+	//onlineForLife.Footer.init();
 });
 

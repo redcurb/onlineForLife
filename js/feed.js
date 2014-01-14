@@ -209,6 +209,7 @@ onlineForLife.Feed = {
 			//console.log('????????????????????User ' + userName + ' has entered the chat');
 			//console.log(userData);
 		});
+		onlineForLife.Footer.init();
 	},
 
 	trackUser:function(event, data, stateCode){
