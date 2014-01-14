@@ -476,7 +476,10 @@ onlineForLife.Feed = {
 			if(itemBuildCount==0){
 				onlineForLife.Feed.toggleFeedMessage('PRAYED_ALL');
 			}
-			
+			setTimeout(function() {
+				onlineForLife.Feed.animatePraySwipe();
+			},5000);
+
 		});
 
 		/*
