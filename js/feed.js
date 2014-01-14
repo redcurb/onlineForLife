@@ -356,6 +356,9 @@ onlineForLife.Feed = {
 		else if(data['Appt_Kept']=='Yes'){
 			stepNumber="3";
 		}
+		else if(data['Appt_Made']=='Referred'){
+			stepNumber="";
+		}
 		else if(data['Appt_Made']=='Yes'){
 			stepNumber="2";
 		}
@@ -418,7 +421,10 @@ onlineForLife.Feed = {
 					var stateName = itemData.stateName;
 					var liClass = itemData.liClass;
 
-					if(step=="4"){
+					if(step==""){
+						buildItem = false;
+					}
+					else if(step=="4"){
 						buildItem = false;
 						onlineForLife.Panels.step4Items[id] = feedItem;
 					}

@@ -26,10 +26,10 @@ onlineForLife.USMap = {
 			},
 			showLabels: false,
 		});
+		$('#map path').off('mouseover');
 	},
 	
 	setupHandlers:function(){
-
 	},
 	
 	toggleState:function(state){
