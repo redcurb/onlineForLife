@@ -16,7 +16,6 @@ onlineForLife.Footer = {
 			var emailText = footerTextData.email;
 			onlineForLife.Footer.setupHandlers();
 		});
-
 	},
 	
 	setupHandlers: function(){

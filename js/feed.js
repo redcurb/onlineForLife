@@ -68,10 +68,18 @@ onlineForLife.Feed = {
 		//onlineForLife.Feed.showRandomStates();
 		//onlineForLife.Feed.setupScrolling();
 		onlineForLife.Feed.updateUserPrayerCount();
+		onlineForLife.Feed.getLinks();
 	},
 	
-	
-	
+	getLinks: function(){
+		var dbUrl = 'https://ofl.firebaseio.com/links';
+		var linksData = new Firebase(dbUrl);
+		onlineForLife.Data = {};
+		linksData.once('value', function(linksText) {
+			var linksTextData = linksText.val();
+			onlineForLife.Data.Links = linksTextData;
+		});
+	},
 	
 	setupPlatform: function(){
 		console.log('setupPlatform');
@@ -209,7 +217,12 @@ onlineForLife.Feed = {
 			//console.log('????????????????????User ' + userName + ' has entered the chat');
 			//console.log(userData);
 		});
+	},
+
+	onFeedLoaded:function(){
+		console.log('onFeedLoaded');
 		onlineForLife.Footer.init();
+		onlineForLife.Settings.init();
 	},
 
 	trackUser:function(event, data, stateCode){
@@ -505,31 +518,7 @@ onlineForLife.Feed = {
 			},5000);
 
 		});
-
-		/*
-		
-		myDataRef.on('child_added', function(snapshot) {
-			var message = snapshot.val();
-			//console.log(message);
-			//displayChatMessage(message.name, message.state, message.step);
-			//console.log('onlineForLife.Feed.addFirebaseChild TRUE');
-			var messageId = message.id.toString();
-			//console.log('messageId: ' + typeof(messageId) + ' - ' + messageId);
-			//console.log('indexOf: ' + onlineForLife.Feed.itemsPrayedFor.indexOf(messageId));
-			var buildItem = false;
-			if(onlineForLife.Feed.itemsPrayedFor.indexOf(messageId)<0){
-				buildItem = true;
-			}
-			if(buildItem){
-				var newHtml = onlineForLife.Feed.buildFeedItem(message.id, message.state, message.step, message.stateName, 'first');
-				$('ul.feed').prepend(newHtml);
-				
-				onlineForLife.Feed.centerFeedItemText('firebase', $('ul.feed li:first'));
-				onlineForLife.Feed.setupDraggableEach($('ul.feed li:first'));
-			}
-			//console.log(' ');
-		});
-		*/
+		onlineForLife.Feed.onFeedLoaded();
 	},
 	
 	setupFirebasePrayers:function(){
@@ -776,9 +765,6 @@ onlineForLife.Feed = {
 			*/
 
 		});
-
-		
-
 	},
 
 	outputFeedWidth: function(){
