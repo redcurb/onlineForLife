@@ -50,23 +50,11 @@ onlineForLife.Feed = {
 	},
 	
 	init: function(){
-		//console.log('feed init');		
-		$('1.refresh-count').on('click',function(){
-			//onlineForLife.Feed.outputFeedWidth();
-			//onlineForLife.Tracking.trackEvent('refresh','click');
-		});
-		
-		//var uiVer = jQuery.ui.version;
-		//var uiVer = jQuery.ui.version;
-		//$('#debug').append('<li>jQuery.ui.version: ' + uiVer + '</li>');
-		//onlineForLife.Feed.writeDeviceInfo();
 		onlineForLife.Feed.setupPlatform();
 		onlineForLife.Feed.updateUserPrayerCount();
 		onlineForLife.Feed.checkLoginStatus();
 		onlineForLife.Feed.setVersion();
 		onlineForLife.Feed.setupHandlers();
-		//onlineForLife.Feed.showRandomStates();
-		//onlineForLife.Feed.setupScrolling();
 		onlineForLife.Feed.updateUserPrayerCount();
 		onlineForLife.Feed.getLinks();
 	},
@@ -175,10 +163,6 @@ onlineForLife.Feed = {
 		
 	},
 	
-
-
-
-
 	checkLoginStatus: function(){
 		console.log('checkLoginStatus');
 		
@@ -214,8 +198,6 @@ onlineForLife.Feed = {
 			var userName = snapshot.name()
 			var userData = snapshot.val();
 			onlineForLife.Feed.userData.userInfo = userData.userInfo;
-			//console.log('????????????????????User ' + userName + ' has entered the chat');
-			//console.log(userData);
 		});
 	},
 
@@ -226,12 +208,10 @@ onlineForLife.Feed = {
 	},
 
 	trackUser:function(event, data, stateCode){
-		//console.log('trackUser',event,data)
 		if(event=='feed-loaded'){
 			
 		}
 		if(event=='prayer'){
-			//console.log('trackUser prayer: ' + eventId);
 			onlineForLife.Feed.trackPrayer(data, stateCode);
 		}
 	},
@@ -259,35 +239,6 @@ onlineForLife.Feed = {
 		
 	},
 
-	writeDeviceInfo:function(){
-		//console.log('writeDeviceInfo');
-		var $info = $('#device-info');
-		var html = '';
-		html += navigator.userAgent + '<br>';
-		html += 'width: ' + $(window).width() + '<br>';
-		html += 'height: ' + $(window).height() + '<br>';
-		$info.append(html);
-		
-		var deviceId = Redcurb.Helpers.getParameterByName('device');
-		//console.log('deviceId:' + deviceId);
-		var deviceUrl = 'https://ofl.firebaseio.com/devices';
-		var deviceData = new Firebase(deviceUrl);
-		var data = {
-			id: deviceId,
-			userAgent: navigator.userAgent
-		}
-		if(Redcurb.Helpers.getParameterByName('reset')=="1"){
-			deviceData.set({});
-		}
-		else if(!Redcurb.Helpers.getParameterByName('device')==""){
-			deviceData.push(data);
-		}
-	},
-	
-	highlightMap:function(){
-		onlineForLife.USMap.toggleState('CA');
-	},
-	
 	setupFirebase:function(){
 		console.log('setupFirebase');
 		onlineForLife.Feed.getPastPrayers();
@@ -300,31 +251,23 @@ onlineForLife.Feed = {
 	},
 	
 	getPastPrayers:function(){
-		//console.log('getPastPrayers');
 		var dbUrl = 'https://ofl.firebaseio.com/users/' + onlineForLife.Feed.userData.id + '/prayers';
 		var myDataRef = new Firebase(dbUrl);
 		
-		//console.log('BEFORE');
 		myDataRef.once('value', function(snapshot) {
 			var prayerId = snapshot.val();
-			//console.log('getPastPrayers VALUE prayerId: ');
-			//console.log(prayerId);
 			if(prayerId!="{}" && prayerId!=null){
 				$.each(prayerId,function(i,v){
-					//console.log(v);
 					onlineForLife.Feed.itemsPrayedFor.push(v.toString());
 				});
 			}
-			//console.log('AFTER');
 			onlineForLife.Feed.setupFirebaseFeedItem();
 		});
-
 	},
 	
 	toggleFeedMessage:function(type){
-		console.log('toggleFeedMessage');
+		//console.log('toggleFeedMessage');
 		var $feed = $('ul.feed');
-		//$feed.removeClass('status-loading').addClass('status-no-updates');
 		var $spinner = $feed.find('li.spinner');
 		var $noRecords = $feed.find('li.no-records');
 		var $prayedAll = $feed.find('li.prayed-all');
@@ -395,7 +338,6 @@ onlineForLife.Feed = {
 		"WV":"West Virginia",
 		"WI":"Wisconsin",
 		"WY":"Wyoming"
-
 	},
 	
 	getStateFriendlyName:function(stateCode){
@@ -480,17 +422,6 @@ onlineForLife.Feed = {
 						buildItem = false;
 						onlineForLife.Panels.step4Items[id] = feedItem;
 					}
-					/*
-					console.log('itemData: ');
-					console.log(itemData);
-					console.log('id: ' + id);
-					console.log('city: ' + city);
-					console.log('state: ' + state);
-					console.log('stateName: ' + stateName);
-					console.log('step: ' + step);
-					console.log('liClass: ' + liClass);
-					console.log('-------------------');
-					//*/
 					if(buildItem){
 						itemBuildCount += 1;
 						var newHtml = onlineForLife.Feed.buildFeedItem(id, city, state, step, stateName, liClass);
@@ -499,8 +430,6 @@ onlineForLife.Feed = {
 						onlineForLife.Feed.centerFeedItemText('firebase', $('ul.feed li:first'));
 						onlineForLife.Feed.setupDraggableEach($('ul.feed li:first'));
 					}
-					/*
-					*/
 				});
 				onlineForLife.Feed.toggleFeedMessage('LOADED');
 				console.log('itemCount',itemCount);
@@ -522,20 +451,14 @@ onlineForLife.Feed = {
 	},
 	
 	setupFirebasePrayers:function(){
-		//console.log('setupFirebasePrayers');
 		var dbUrl = 'https://ofl.firebaseio.com/prayers';
-		var myDataRef = new Firebase(dbUrl);
-		
+		var myDataRef = new Firebase(dbUrl);		
 		myDataRef.on('child_added', function(snapshot) {
 			var message = snapshot.val();
 			var itemName = snapshot.name();
 			window.test = {};
 			window.test.message = snapshot.val();
 			window.test.name = snapshot.name();
-			//console.log('CHILD_ADDED');
-			//console.log(message);
-			//console.log(itemName);
-
 			var stateCode = onlineForLife.Feed.userData.userInfo.state || '';
 			if(onlineForLife.Feed.addFirebaseChild && stateCode !=''){
 				onlineForLife.USMap.toggleState(stateCode);
@@ -552,11 +475,8 @@ onlineForLife.Feed = {
 		else if(paramVersion!=''){
 			version = Redcurb.Helpers.getParameterByName('ver');
 		}
-		//console.log(typeof(version));
 		version = parseInt(version);
-		//console.log(typeof(version));
 		onlineForLife.Feed.version = version;
-		//console.log('v' + version);
 		$('body').addClass('version-' + version);
 	},
 	
@@ -565,7 +485,6 @@ onlineForLife.Feed = {
 		var $logo = $('.stats-logo');
 		var $arcs = $logo.find('.stats-logo-arc');
 		var $textSpans = $impact.find('.impact-step span');
-		
 		$arcs.hide();
 		$textSpans.hide();
 	},
@@ -582,76 +501,23 @@ onlineForLife.Feed = {
 		var $textScheduled = $impact.find('.impact-step.step-scheduled span');
 		var $textVisitedPrc = $impact.find('.impact-step.step-visited-prc span');
 		var $textChoseLife = $impact.find('.impact-step.step-chose-life span');
-		
 		$called.fadeIn(150, function(){
 			$textCalled.fadeIn(150);
-			
 			//step 2
 			$scheduled.fadeIn(150, function(){
 				$textScheduled.fadeIn(150);
-
 				//step 3
 				$visitedPrc.fadeIn(150, function(){
 					$textVisitedPrc.fadeIn(150);
-
 					//step 4
 					$choseLife.fadeIn(150, function(){
 						$textChoseLife.fadeIn(150);
 					});
-
 				});
-
 			});
-			
-			
-			
 		});
-		
 	},
 
-	showRandomStates: function(){
-		//console.log('showRandomStates');
-		var showStatesInterval = setInterval(function(){
-			onlineForLife.USMap.toggleState(onlineForLife.Feed.getRandomState());
-		}, 3000);
-	},
-	
-	getRandomState: function(){
-		var states = onlineForLife.Feed.states;
-		var length = states.length;
-		var lower = 0;
-		var upper = length - 1;
-		var randomState = Math.floor(Math.random() * upper) + 1;
-		//console.log('randomState: ',states[randomState]);
-		return states[randomState];
-	},
-
-	setFeedBackgrounds: function(){
-		var imageData = onlineForLife.Feed.images.feedBg;
-		//console.log(imageData);
-	},
-	
-	
-	getStateName: function(data){
-		
-	},
-	
-	centerAllFeedItemText: function(){
-		//$('#version').text('test version 3');
-		$('ul.feed li').each(function(index,$itemLi){
-			var $this = $(this);
-			onlineForLife.Feed.centerFeedItemText(index, $this);
-		});
-		setTimeout(function() {
-			onlineForLife.Feed.centerFeedItemText(0, $('ul.feed li:eq(0)'));
-		},10);
-
-	},
-
-
-
-
-	
 	centerFeedItemText: function(index, $this){
 		var $text = $this.find('p.action-text');
 		var $icon = $this.find('.action-step');
@@ -663,17 +529,6 @@ onlineForLife.Feed = {
 		marginTop = 7;
 		var totalPadding = (liHeight - textHeight - borderHeight ) / 2;
 		var topPx = totalPadding - marginTop;
-		
-		var output = '';
-		output += 'index: ' + index + '\n';
-		output += 'liHeight: ' + liHeight + '\n';
-		output += 'textHeight: ' + textHeight + '\n';
-		output += 'borderHeight: ' + borderHeight + '\n';
-		output += 'marginTop: ' + marginTop + '\n';
-		output += 'totalPadding: ' + totalPadding + '\n';
-		output += 'topPx: ' + topPx + '\n';
-		output += '\n';
-		//console.log(output);
 		$text.css('top',topPx+'px');
 	},
 	
@@ -714,7 +569,6 @@ onlineForLife.Feed = {
 		var id = $this.find('.feed-content').attr('id');
 		var elementId = '#'+id;
 		var $content = $(elementId).get(0);
-		//console.log('elementId: ' + elementId);
 		new Swipe($content,{
 			startSlide:1,
 			speed: 400, // Speed of prev and next transitions in milliseconds. (default:300)
@@ -722,68 +576,11 @@ onlineForLife.Feed = {
 				var $this = $(elem);
 				var $div = $this.parents('div.feed-content');
 				var direction = $this.data('direction');
-				//$('#test-subtext2 span').append(' C-'+direction);
 				if(direction!='none'){
 					onlineForLife.Feed.handleSwipe($div,direction);
 				}
 			}
 		});
-	},
-
-	setupDraggable: function(){
-		var $feed = $('ul.feed');
-		var $feedItems = $feed.get(0);
-		//console.log('setupDraggable');
-		
-		$('ul.feed li.feed-item').each(function(i,v){
-			var $this = $(this);
-			var id = $this.find('.feed-content').attr('id');
-			var elementId = '#'+id;
-			var $content = $(elementId).get(0);
-			//console.log('elementId: ' + elementId);
-			new Swipe($content,{
-				startSlide:1,
-				speed: 400, // Speed of prev and next transitions in milliseconds. (default:300)
-				callback: function(event, index, elem) {
-					var $this = $(elem);
-					var $div = $this.parents('div.feed-content');
-					var direction = $this.data('direction');
-					//$('#test-subtext2 span').append(' C-'+direction);
-					if(direction!='none'){
-						onlineForLife.Feed.handleSwipe($div,direction);
-					}
-				}
-			});
-			/*
-			var $contentMain = $this.find('.feed-content-main');
-			var contentWidth = $contentMain.width(); 
-			var $actionText = $contentMain.find('.action-text');
-			var textWidth = $actionText.width(); 
-			var $stepText = $contentMain.find('.action-step');
-			var stepWidth = $stepText.width(); 
-			$actionText.append("<br>contentWidth: " + contentWidth + " textWidth: " + textWidth + " stepWidth: " + stepWidth); 
-			*/
-
-		});
-	},
-
-	outputFeedWidth: function(){
-		$('ul.feed li.feed-item').each(function(i,v){
-			var $this = $(this);
-			var id = $this.find('.feed-content').attr('id');
-			var elementId = '#'+id;
-			var $content = $(elementId).get(0);
-
-			
-			var $contentMain = $this.find('.feed-content-main');
-			var contentWidth = $contentMain.width(); 
-			var $actionText = $contentMain.find('.action-text');
-			var textWidth = $actionText.width(); 
-			var $stepText = $contentMain.find('.action-step');
-			var stepWidth = $stepText.width(); 
-			$actionText.append("<br>contentWidth: " + contentWidth + " textWidth: " + textWidth + " stepWidth: " + stepWidth); 
-		});
-
 	},
 
 	handleSwipe: function($this, swipeDir){
@@ -797,11 +594,9 @@ onlineForLife.Feed = {
 			posLeft = '-100%';
 			var animClass = 'swipeRightToLeft';
 		}
-//		$parentLi.find('.feed-content').addClass(animClass);
 		var stateCode = $parentLi.find('.feed-content').data('state');
 		console.log('stateCode: ' + stateCode);
 		var eventId = $parentLi.data('id');
-		//console.log('eventId: ' + eventId);
 		onlineForLife.Feed.trackUser('prayer', {eventId:eventId}, stateCode);
 		onlineForLife.Feed.itemsPrayedFor.push(eventId.toString());
 		$parentLi.find('.feed-content').animate({left:posLeft},200,function(){
@@ -838,9 +633,7 @@ onlineForLife.Feed = {
 		if(onlineForLife.Feed.showNudgeTutorial){
 			var $listItem = $('ul.feed li.feed-item:eq(0)');
 			var $listItemContent = $listItem.find('.feed-content');
-			
 			if(onlineForLife.Feed.nudgeTutorialCount<onlineForLife.Feed.nudgeTutorialMax){
-	
 				$listItem.addClass('show-tutorial');
 				$listItemContent.animate({'left':'-140px'}, 300, function(){
 					$listItemContent.animate({'left':'-110px'}, 200, function(){
@@ -862,14 +655,9 @@ onlineForLife.Feed = {
 				$listItem.removeClass('show-tutorial');
 			}
 		}
-		
-		
-		
 	},
 	
-	
 	handleRefreshMain: function($this){
-		//console.log('handleRefreshMain');
 		var $body = $('body');
 		$body.addClass('feed-loading');
 		var $refreshText = $('p.feed-refresh');
@@ -892,71 +680,11 @@ onlineForLife.Feed = {
 	},
 
 	outOfFeedItemsMain: function(){
-		//console.log('outOfFeedItemsMain: ' + onlineForLife.Feed.fetchCurrent);
 		$( "body" ).addClass('feed-loaded');
 		$( ".main-refresh .fa-refresh" ).remove();
 		var $noMoreText = $('p.no-more-items');
 		$noMoreText.show();
-		
-	},
-
-	setupScrolling:function(){
-		
-		var eventsElement = $('ul.feed');
-		$(window).bind('scrollstart', function () {        
-			//$('.content-main.ui-content').css('background', 'green');
-			var feedLoading = $('body').hasClass('feed-loading') || $('body').hasClass('feed-loaded');
-			if(!feedLoading){
-				if (onlineForLife.Feed.isAtBottom()){
-					//console.log("at bottom");
-					onlineForLife.Feed.handleRefreshMain();
-				}
-			}
-		});
-	
-		$(window).bind('scrollstop', function () {        
-		   //$('.content-main.ui-content').css('background', 'red');
-		   //eventsElement.append('<li><a href="">Stop</a></li>');
-		   //eventsElement.listview('refresh');
-		});
-		
-	},
-	
-	isAtBottom:function(){
-		var totalHeight;
-		var currentScroll;
-		var visibleHeight;
-		
-		if (document.documentElement.scrollTop){
-			currentScroll = document.documentElement.scrollTop;
-		}
-		else{
-			currentScroll = document.body.scrollTop;
-		}
-		
-		totalHeight = $(document).height();
-		visibleHeight = document.documentElement.clientHeight;
-		totalPx = visibleHeight + currentScroll;
-		
-		//console.log(
-		//'total height: ' + totalHeight + ' ' +
-		//'totalPx: ' + totalPx + ' ' +
-		//'visibleHeight : ' + visibleHeight + ' ' +
-		//'currentScroll:' + currentScroll);
-		var isAtBottom = totalHeight <= (totalPx + 200);
-		//console.log('isAtBottom', isAtBottom);
-		return (isAtBottom)
-	},
-
-	handleSwipeThanks: function($this){
-		//console.log('handleSwipe', $this.attr('class'));
-		var $prayerText = $this.find('.action-text em');
-		//$prayerText.text('Thank you for your prayer!');
-		
 	}
-	
-
-
 };
 $(function() {
 	onlineForLife.USMap.init();
