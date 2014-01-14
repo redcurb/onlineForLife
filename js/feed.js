@@ -186,13 +186,28 @@ onlineForLife.Feed = {
 				// User is already logged in.
 				//console.log(user);
 				//console.log(user.id);
-				onlineForLife.Feed.userData.id = user.id;
+				onlineForLife.Feed.setUserData(user);
 				onlineForLife.Feed.setupFirebase();
 			} else {
 				// User is logged out.
 				//console.log('no user');
 				document.location = 'home.html';
 			}
+		});
+	},
+
+	setUserData:function(user){
+		console.log(user);
+		var userId = user.id;
+		onlineForLife.Feed.userData.id = userId;
+		
+		var usersRef = new Firebase('https://ofl.firebaseio.com/users/' + userId);
+		usersRef.once('value', function(snapshot) {
+			var userName = snapshot.name()
+			var userData = snapshot.val();
+			onlineForLife.Feed.userData.userInfo = userData.userInfo;
+			console.log('????????????????????User ' + userName + ' has entered the chat');
+			console.log(userData);
 		});
 	},
 
@@ -226,7 +241,7 @@ onlineForLife.Feed = {
 		
 		var prayersUrl = 'https://ofl.firebaseio.com/prayers/' + eventId;
 		var prayersData = new Firebase(prayersUrl);
-		prayersData.push({ stateCode: stateCode });
+		prayersData.push({ userId: onlineForLife.Feed.userData.id });
 		
 		
 	},
@@ -525,12 +540,14 @@ onlineForLife.Feed = {
 		myDataRef.on('child_added', function(snapshot) {
 			var message = snapshot.val();
 			var itemName = snapshot.name();
+			window.test = {};
+			window.test.message = snapshot.val();
+			window.test.name = snapshot.name();
 			console.log('CHILD_ADDED');
 			console.log(message);
 			console.log(itemName);
-			
-			var stateCode = 'CA';
-			
+
+			var stateCode = onlineForLife.Feed.userData.userInfo.state;
 			if(onlineForLife.Feed.addFirebaseChild){
 				onlineForLife.USMap.toggleState(stateCode);
 			}
@@ -819,7 +836,7 @@ onlineForLife.Feed = {
 		onlineForLife.Feed.updateUserPrayerCount();
 		var state = $this.data('state');
 		//console.log(state);
-		onlineForLife.USMap.toggleState('TX');
+		//onlineForLife.USMap.toggleState('TX');
 	},
 	
 	updateUserPrayerCount: function(){
