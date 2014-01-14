@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+	<script src="js/libraries/jquery-1.9.1.min.js"></script>
+	<script src="js/libraries/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="css/reset-min.css" />
+	<link rel="stylesheet" href="css/libraries/jquery.mobile-1.3.2.min.css" />
+    <link href='css/fonts.css' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/base.css?ver=12.19.1" />
+  </head>
+  <style>
+  	html,body{
+  		background:#00f;
+  		background:#313639;
+  		width:100%;
+  		height:100%;
+	}
+	h1{
+		width:217px;
+		width: 434px;
+		margin:auto;
+	}
+		h1 .icon{
+			background: url(img/logo-ofl-panel.png) no-repeat 0 0;
+			width: 434px;
+			height: 378px;
+			display: block;
+			margin: auto;
+			background-size: 100% auto;
+			bottom:30px;
+			position:absolute;
+		}
+		h1 .loading{
+			font-family: Oswald;
+			font-size: 2.6em;
+			color: #fff;
+			text-align: left;
+			padding: 40px 0 0 125px;
+			display: block;
+		}
+			h1 .loading .loading-dots{
+				
+			}
+  </style>
+  <body class="page-index">
+  	<h1>
+  		<span class="loading">Loading<span class="loading-dots"></span></span>
+  		<i class="icon"></i>
+  		<div id="console">
+  		
+  		</div>
+  		<div id="status">
+  			waiting
+  		</div>
+  	</h1>
+    <br>
+    <a href="dev.html">Dev</a>
+  </body>
+
+        <script src="cordova.js" type="text/javascript"></script>
+        <script src="Plugins/PushPlugin/PushNotification.js"></script>
+        <script src="js/push.js" type="text/javascript"></script>
+        <script>
+        (function() {
+        
+            var server = "http://pushbox.redcurb.ozkaa.com:3000";
+        
+        
+        
+            //make ajax post to the application server to
+            register device
+            //registerDevice
+        
+            var sendTokenToServer = function sendTokenToServer(token) {
+        
+                $.ajax(server + "/register", {
+        
+                    type: "post",
+        
+                    dataType: 'json',
+        
+                    data: JSON.stringify({ //JSON object with token
+                    	and the device platform
+        
+                        token: token,
+        
+                        platform: device.platform
+        
+                    }),
+        
+                    success: function(response) {
+        
+                        console.log("###Successfully
+            registered device.");
+        
+                    }
+        
+                });
+        
+            }
+        
+        
+        
+            //the function adds
+            callbacks for PushPlugin
+        
+            //the function uses global object "pushCallbacks"
+        
+            var addCallback = function addCallback(key, callback) {
+        
+                if (window.pushCallbacks === undefined) {
+        
+                    window.pushCallbacks = {}
+        
+                }
+        
+                window.pushCallbacks[key] = callback;
+        
+            };
+        
+        
+        
+            var pushNotification = window.plugins.pushNotification;
+        
+        
+        
+            var
+            apnSuccessfulRegistration = function(token) {
+        
+                sendTokenToServer(token.toString(16));
+        
+                addCallback('onNotificationAPN', onNotificationAPN);
+        
+            }
+        
+        
+        
+            var apnFailedRegistration = function(error) {
+        
+                alert("Error: " + error.toString());
+        
+            }
+        
+        
+        
+            //the function is a
+            callback when we receive notification from APN
+        
+            var onNotificationAPN = function(e) {
+        
+                //get promotional text
+            from the application server
+        
+        
+        
+                //here we can set a
+            badge manually, or play sounds
+        
+                //for more information about PushPlugin, see
+            https://github.com/phonegap-build/PushPlugin
+        
+            };
+        
+        
+        
+            var deviceReady = function() {
+        
+                if (device.platform == "iOS") {
+        
+                    pushNotification.register(apnSuccessfulRegistration,
+        
+                   
+            apnFailedRegistration, {
+        
+                        "badge": "true",
+        
+                        "sound": "true",
+        
+                        "alert": "true",
+        
+                        "ecb": "pushCallbacks.onNotificationAPN"
+        
+                    });
+                }
+            }
+        
+            document.addEventListener("deviceready", deviceReady, false);
+        
+        }()); 
+      
+For Android
+
+(function() {
+    var server = "http://pushbox.redcurb.ozkaa.com";
+
+    //add promotion text to the paragraph designed for it
+    var addPromotionToDOM = function addPromotionToDOM(promotionText) {
+        $("#promotionParagraph").text(promotionText);
+    }
+
+    //get promotion text from the application server
+    var getPromotionFromServer = function getPromotionFromServer() {
+        console.log('### getting promotion text.');
+        $.ajax(server + "/getPromotion", {
+            type: "post",
+            dataType: 'json'
+        }).done(function(data) {
+            console.log("### got promotion text.");
+            addPromotionToDOM(data.text);
+        });
+    }
+
+    var sendTokenToServer = function sendTokenToServer(token) {
+        //make ajax post to the application server to register device
+        $.ajax(server + "/register", {
+            type: "post",
+            dataType: 'json',
+            data: JSON.stringify({
+                token: token,
+                platform: device.platform
+            }),
+            success: function(response) {
+                //log that the device was registered successfully
+                console.log("###Successfully registered device.");
+            }
+        });
+    }
+
+    var addCallback = function addCallback(key, callback) {
+        if (window.pushCallbacks === undefined) {
+            window.pushCallbacks = {}
+        }
+        window.pushCallbacks[key] = callback;
+    };
+
+    var pushNotification = window.plugins.pushNotification;
+
+    var apnSuccessfulRegistration = function(token) {
+        sendTokenToServer(token.toString(16));
+        addCallback('onNotificationAPN', onNotificationAPN);
+    }
+
+    var apnFailedRegistration = function(error) {
+        alert("Error: " + error.toString());
+    }
+
+    //the function is a callback when a notification from APN is received
+    var onNotificationAPN = function(e) {
+        getPromotionFromServer();
+    };
+
+    //the function is a callback for all GCM events
+    var onNotificationGCM = function onNotificationGCM(e) {
+        switch (e.event) {
+            case 'registered':
+                if (e.regid.length > 0) {
+                    //your GCM push server needs to know the regID before it can push to this device
+                    //you can store the regID for later use here
+                    console.log('###token received');
+                    sendTokenToServer(e.regid);
+                }
+                break;
+            case 'message':
+                getPromotionFromServer();
+                break;
+            case 'error':
+                alert('GCM error = ' + e.msg);
+                break;
+            default:
+                alert('An unknown GCM event has occurred.');
+                break;
+        }
+    }
+
+    var deviceReady = function() {
+        if (device.platform == "iOS") {
+            pushNotification.register(apnSuccessfulRegistration,
+            apnFailedRegistration, {
+                "badge": "true",
+                "sound": "true",
+                "alert": "true",
+                "ecb": "pushCallbacks.onNotificationAPN"
+            });
+
+        } else {
+            //register for GCM
+            pushNotification.register(
+
+            function(id) {
+                console.log("###Successfully sent request for registering with GCM.");
+                //set GCM notification callback
+                addCallback('onNotificationGCM', onNotificationGCM);
+            },
+
+            function(error) {
+                console.log("###Error " + error.toString());
+            }, {
+                "senderID": "",
+                "ecb": "pushCallbacks.onNotificationGCM"
+            });
+        }
+    }
+    document.addEventListener("deviceready", deviceReady, false);
+}()); 
+		
+</script>
+</html>
+

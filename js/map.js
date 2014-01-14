@@ -3,7 +3,7 @@ onlineForLife.USMap = {
 	init: function(){
 		onlineForLife.USMap.setupMap();
 		onlineForLife.USMap.setupHandlers();
-		onlineForLife.USMap.toggleState('CA');
+		onlineForLife.USMap.toggleState('TX');
 	},
 	
 	setupMap:function(){

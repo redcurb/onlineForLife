@@ -65,7 +65,7 @@ onlineForLife.Feed = {
 		onlineForLife.Feed.checkLoginStatus();
 		onlineForLife.Feed.setVersion();
 		onlineForLife.Feed.setupHandlers();
-		onlineForLife.Feed.showRandomStates();
+		//onlineForLife.Feed.showRandomStates();
 		//onlineForLife.Feed.setupScrolling();
 		onlineForLife.Feed.updateUserPrayerCount();
 	},
@@ -172,7 +172,7 @@ onlineForLife.Feed = {
 
 
 	checkLoginStatus: function(){
-		//console.log('checkLoginStatus');
+		console.log('checkLoginStatus');
 		
 		var firebaseUrl =  new Firebase('https://ofl.firebaseio.com');
 		var auth = new FirebaseSimpleLogin(firebaseUrl, function(error, user) {
@@ -182,6 +182,7 @@ onlineForLife.Feed = {
 				return;
 			}
 			if (user) {
+				//console.log('log');
 				// User is already logged in.
 				//console.log(user);
 				//console.log(user.id);
@@ -195,19 +196,21 @@ onlineForLife.Feed = {
 		});
 	},
 
-	trackUser:function(event, data){
+	trackUser:function(event, data, stateCode){
 		//console.log('trackUser',event,data)
 		if(event=='feed-loaded'){
 			
 		}
 		if(event=='prayer'){
-			var eventId = data.eventId;
 			//console.log('trackUser prayer: ' + eventId);
-			onlineForLife.Feed.trackPrayer(eventId);
+			onlineForLife.Feed.trackPrayer(data, stateCode);
 		}
 	},
 
-	trackPrayer:function(eventId){
+	trackPrayer:function(data, stateCode){
+		var eventId = data.eventId;
+		console.log('trackPrayer: ' + stateCode + ' - ' + eventId);
+		console.log(data);
 		var trackingData =  new Firebase('https://ofl.firebaseio.com/tracking');
 		var prayerTrackingData = new Firebase('https://ofl.firebaseio.com/tracking/events/prayers');
 		var timeStamp = new Date().getTime();
@@ -220,6 +223,11 @@ onlineForLife.Feed = {
 		var usersUrl = 'https://ofl.firebaseio.com/users/'+ onlineForLife.Feed.userData.id + '/prayers';
 		var usersData = new Firebase(usersUrl);
 		usersData.push(eventId);
+		
+		var prayersUrl = 'https://ofl.firebaseio.com/prayers/' + eventId;
+		var prayersData = new Firebase(prayersUrl);
+		prayersData.push({ stateCode: stateCode });
+		
 		
 	},
 
@@ -253,6 +261,7 @@ onlineForLife.Feed = {
 	},
 	
 	setupFirebase:function(){
+		console.log('setupFirebase');
 		onlineForLife.Feed.getPastPrayers();
 		onlineForLife.Feed.setupFirebasePrayers();
 		/*setTimeout(function() {
@@ -509,14 +518,21 @@ onlineForLife.Feed = {
 	},
 	
 	setupFirebasePrayers:function(){
-		//console.log('setupFirebasePrayers');
+		console.log('setupFirebasePrayers');
 		var dbUrl = 'https://ofl.firebaseio.com/prayers';
 		var myDataRef = new Firebase(dbUrl);
 		
 		myDataRef.on('child_added', function(snapshot) {
 			var message = snapshot.val();
+			var itemName = snapshot.name();
+			console.log('CHILD_ADDED');
+			console.log(message);
+			console.log(itemName);
+			
+			var stateCode = 'CA';
+			
 			if(onlineForLife.Feed.addFirebaseChild){
-				onlineForLife.USMap.toggleState(message.state);
+				onlineForLife.USMap.toggleState(stateCode);
 			}
 		});
 	},
@@ -768,13 +784,8 @@ onlineForLife.Feed = {
 	},
 
 	handleSwipe: function($this, swipeDir){
-		$('#test-subtext span').text('Swipe Occured...');
-		$('#test-subtext2 span').append('x');
-		//$this.remove();
 		onlineForLife.Feed.showTutorial=false;
 		var $parentLi = $this.parents('li');
-		//$parentLi.addClass('swipe-complete');
-		//console.log('handleSwipe: ' + swipeDir);
 		if(swipeDir=='right'){
 			posLeft = '100%';
 			var animClass = 'swipeLeftToRight';
@@ -784,10 +795,11 @@ onlineForLife.Feed = {
 			var animClass = 'swipeRightToLeft';
 		}
 //		$parentLi.find('.feed-content').addClass(animClass);
-		
+		var stateCode = $parentLi.find('.feed-content').data('state');
+		console.log('stateCode: ' + stateCode);
 		var eventId = $parentLi.data('id');
 		//console.log('eventId: ' + eventId);
-		onlineForLife.Feed.trackUser('prayer', {eventId:eventId});
+		onlineForLife.Feed.trackUser('prayer', {eventId:eventId}, stateCode);
 		onlineForLife.Feed.itemsPrayedFor.push(eventId.toString());
 		$parentLi.find('.feed-content').animate({left:posLeft},200,function(){
 			setTimeout(function(){
