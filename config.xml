@@ -1,12 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.onlineforlife.onlineForLife" version="1.04.37" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.onlineforlife.onlineForLife" version="1.04.38" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Online for Life</name>
-    <description>
-        Online for Life is a compassionate, technology-driven non-profit organization committed to rescuing children and families from abortion.
-    </description>
-    <author email="jon@redcurbsolutions.com" href="http://redcurbsolutions.com">
-        Red Curb
-    </author>
+    <description>Online for Life is a compassionate, technology-driven non-profit organization committed to rescuing children and families from abortion.</description>
+    <author email="jon@redcurbsolutions.com" href="http://redcurbsolutions.com">Red Curb</author>
     <feature name="http://api.phonegap.com/1.0/device" />
     <feature name="http://api.phonegap.com/1.0/geolocation"/>
     <feature name="http://api.phonegap.com/1.0/camera"/>
@@ -24,7 +20,6 @@
 	<feature name="InAppBrowser">
 		<param name="ios-package" value="CDVInAppBrowser" />
 	</feature>
-
     
     <preference name="EnableViewportScale" value="true" />
     
