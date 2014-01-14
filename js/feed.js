@@ -206,8 +206,8 @@ onlineForLife.Feed = {
 			var userName = snapshot.name()
 			var userData = snapshot.val();
 			onlineForLife.Feed.userData.userInfo = userData.userInfo;
-			console.log('????????????????????User ' + userName + ' has entered the chat');
-			console.log(userData);
+			//console.log('????????????????????User ' + userName + ' has entered the chat');
+			//console.log(userData);
 		});
 	},
 
@@ -242,7 +242,6 @@ onlineForLife.Feed = {
 		var prayersUrl = 'https://ofl.firebaseio.com/prayers/' + eventId;
 		var prayersData = new Firebase(prayersUrl);
 		prayersData.push({ userId: onlineForLife.Feed.userData.id });
-		
 		
 	},
 
@@ -547,8 +546,8 @@ onlineForLife.Feed = {
 			console.log(message);
 			console.log(itemName);
 
-			var stateCode = onlineForLife.Feed.userData.userInfo.state;
-			if(onlineForLife.Feed.addFirebaseChild){
+			var stateCode = onlineForLife.Feed.userData.userInfo.state || '';
+			if(onlineForLife.Feed.addFirebaseChild && stateCode !=''){
 				onlineForLife.USMap.toggleState(stateCode);
 			}
 		});
