@@ -12,11 +12,11 @@ onlineForLife.Feed = {
 	
 	addFirebaseChild: true,
 	
-	showTutorial:true,
+	showNudgeTutorial:true,
 	
-	tutorial:0,
+	nudgeTutorialCount:0,
 	
-	tutorialMax:3,
+	nudgeTutorialMax:3,
 	
 	prayersToday: 93432,
 	
@@ -532,7 +532,7 @@ onlineForLife.Feed = {
 	},
 	
 	setupFirebasePrayers:function(){
-		console.log('setupFirebasePrayers');
+		//console.log('setupFirebasePrayers');
 		var dbUrl = 'https://ofl.firebaseio.com/prayers';
 		var myDataRef = new Firebase(dbUrl);
 		
@@ -542,9 +542,9 @@ onlineForLife.Feed = {
 			window.test = {};
 			window.test.message = snapshot.val();
 			window.test.name = snapshot.name();
-			console.log('CHILD_ADDED');
-			console.log(message);
-			console.log(itemName);
+			//console.log('CHILD_ADDED');
+			//console.log(message);
+			//console.log(itemName);
 
 			var stateCode = onlineForLife.Feed.userData.userInfo.state || '';
 			if(onlineForLife.Feed.addFirebaseChild && stateCode !=''){
@@ -800,7 +800,7 @@ onlineForLife.Feed = {
 	},
 
 	handleSwipe: function($this, swipeDir){
-		onlineForLife.Feed.showTutorial=false;
+		onlineForLife.Feed.showNudgeTutorial=false;
 		var $parentLi = $this.parents('li');
 		if(swipeDir=='right'){
 			posLeft = '100%';
@@ -848,11 +848,11 @@ onlineForLife.Feed = {
 	},
 	
 	animatePraySwipe: function(){
-		if(onlineForLife.Feed.showTutorial){
+		if(onlineForLife.Feed.showNudgeTutorial){
 			var $listItem = $('ul.feed li.feed-item:eq(0)');
 			var $listItemContent = $listItem.find('.feed-content');
 			
-			if(onlineForLife.Feed.tutorial<onlineForLife.Feed.tutorialMax){
+			if(onlineForLife.Feed.nudgeTutorialCount<onlineForLife.Feed.nudgeTutorialMax){
 	
 				$listItem.addClass('show-tutorial');
 				$listItemContent.animate({'left':'-140px'}, 300, function(){
@@ -869,7 +869,7 @@ onlineForLife.Feed = {
 						}, 3000);
 					});
 				}, 2500);
-				onlineForLife.Feed.tutorial=onlineForLife.Feed.tutorial+1;
+				onlineForLife.Feed.nudgeTutorialCount=onlineForLife.Feed.nudgeTutorialCount+1;
 			}
 			else{
 				$listItem.removeClass('show-tutorial');

@@ -1,8 +1,11 @@
 #content-tutorial{
 	width:100%;
-	display:block;
+	display:none;
 	position:absolute;
 	z-index:999999;
+}
+#content-tutorial.tutorial-enabled{
+	display:block;
 }
 #content-tutorial.tutorial-open{
 	height:100%;
@@ -58,7 +61,8 @@
 				width: 200px;
 				display:none;
 			}
-			#content-tutorial .tutorial-item.item-open .tutorial-text{
+			#content-tutorial .tutorial-item.item-open .tutorial-text,
+			#content-tutorial .tutorial-item.auto-open-true .tutorial-text{
 				display:block;
 			}
 			
