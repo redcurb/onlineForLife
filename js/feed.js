@@ -132,7 +132,7 @@ onlineForLife.Feed = {
 		var spinnerHtml = '<li class="default-content spinner"><i class="fa fa-refresh fa-spin"></i></li>';
 		$('ul.feed').addClass('status-loading').empty().append(spinnerHtml);
 		setTimeout(function(){
-				onlineForLife.Feed.setupFirebaseFeedItem();
+			onlineForLife.Feed.setupFirebaseFeedItem();
 		}, 200);
 	},
 
@@ -261,7 +261,7 @@ onlineForLife.Feed = {
 					onlineForLife.Feed.itemsPrayedFor.push(v.toString());
 				});
 			}
-			onlineForLife.Feed.setupFirebaseFeedItem();
+			onlineForLife.Feed.getFirebaseFeedData();
 		});
 	},
 	
@@ -274,6 +274,9 @@ onlineForLife.Feed = {
 		
 		if(type=='LOADED'){
 			$spinner.fadeOut(200);
+		}
+		if(type=='LOADING'){
+			$spinner.fadeIn(200);
 		}
 		if(type=='NO_ITEMS'){
 			$noRecords.fadeIn(200);
@@ -369,11 +372,17 @@ onlineForLife.Feed = {
 	},
 	
 	createFeedDataObject:function(data){
+		console.log('??????????????? createFeedDataObject');
 		var oData = {};
 		
-		var stateCode = data.State;
+		//console.log(data.city.toString());
+		//console.log(data.id.toString());
+		//console.log(data.state.toString());
+		//console.log(data.step.toString());
+
+    	var stateCode = data.State.toString();
 		var stateName = onlineForLife.Feed.getStateFriendlyName(data.State);
-		var cityName = data.City;
+		var cityName = data.City.toString();
 		var stepNumber = onlineForLife.Feed.getCurrentStepData(data);
 		var listClass = 'first';
 
@@ -383,76 +392,253 @@ onlineForLife.Feed = {
 		oData.city = cityName;
 		oData.step = stepNumber;
 		oData.liClass = listClass;
-		
+		console.log(oData);
 		return oData;
 	},
 	
-	setupFirebaseFeedItem:function(){
-		//console.log('setupFirebaseFeedItem');
-		var dbUrl = 'https://ofl.firebaseio.com/feed';
+	feedItemsPerLoad:20,
+	
+	getFirebaseFeedData:function(){
+		console.time('feed');
+		console.log('getFirebaseFeedData');
 		var dbUrl = 'https://ofl.firebaseio.com/feedData';
 		var myDataRef = new Firebase(dbUrl);
-		myDataRef.once('value', function(snapshot) {
+		myDataRefQuery = myDataRef;
+		//myDataRefQuery = myDataRef.endAt().limit(100);
+		myDataRefQuery.once('value', function(snapshot) {
 			var feedData = snapshot.val();
-			var feedName = snapshot.name();
-			//console.log('feedName: ' + feedName);
+			onlineForLife.Feed.feedData = feedData;
 			if(feedData === null) {
 				onlineForLife.Feed.toggleFeedMessage('NO_ITEMS');
 			}
 			else{
-				var html = '';
-				var itemCount = 0;
-				var itemBuildCount = 0;
-				$.each(feedData,function(i,feedItem){
-					//console.log(i);
-					//console.log(feedItem.Id);
-					itemCount += 1;
-					var messageId = feedItem.Id.toString();
-					var buildItem = false;
-					if(onlineForLife.Feed.itemsPrayedFor.indexOf(messageId)<0){
-						buildItem = true;
-					}
-					var itemData = onlineForLife.Feed.createFeedDataObject(feedItem);
-					
-					var id = itemData.id;
-					var state = itemData.state;
-					var city = itemData.city;
-					var step = itemData.step;
-					var stateName = itemData.stateName;
-					var liClass = itemData.liClass;
-
-					if(step==""){
-						buildItem = false;
-					}
-					else if(step=="4"){
-						buildItem = false;
-						onlineForLife.Panels.step4Items[id] = feedItem;
-					}
-					if(buildItem){
-						itemBuildCount += 1;
-						var newHtml = onlineForLife.Feed.buildFeedItem(id, city, state, step, stateName, liClass);
-						$('ul.feed').prepend(newHtml);
-						
-						onlineForLife.Feed.centerFeedItemText('firebase', $('ul.feed li:first'));
-						onlineForLife.Feed.setupDraggableEach($('ul.feed li:first'));
-					}
-				});
-				onlineForLife.Feed.toggleFeedMessage('LOADED');
-				console.log('itemCount',itemCount);
-				console.log('itemBuildCount',itemBuildCount);
-				
+				onlineForLife.Feed.setupFeedItemLists();
+				//onlineForLife.Feed.setupFirebaseFeedItem();
 			}
-			if(itemBuildCount<onlineForLife.Feed.showFooterOnCount){
-				onlineForLife.Feed.showFooterOnCount=itemBuildCount;
-			}
-			if(itemBuildCount==0){
-				onlineForLife.Feed.toggleFeedMessage('PRAYED_ALL');
-			}
-			setTimeout(function() {
-				onlineForLife.Feed.animatePraySwipe();
-			},5000);
-
+			console.timeEnd('feed');
 		});
+	},
+	
+	feedItemLists:{
+		currentListItemCount:0,
+		currentListId: 0,
+		current:{
+			lower:0,
+			upper:0
+		},
+		counts:{
+			all:0,
+			prayed:0,
+			toLoad:0
+		},
+		feedSets:{
+			toLoad:{}
+		},
+		all:[],
+		prayed:[],
+		toLoad:[]
+	},
+	
+	buildNextList:function(){
+		onlineForLife.Feed.toggleFeedMessage('LOADING');
+		//onlineForLife.Feed.feedData["-JD3ClXifkAsxYLSC-vX"]
+//		onlineForLife.Feed.toggleFeedMessage('LOADING');
+		var oFeed = onlineForLife.Feed;
+		var currentListId = oFeed.feedItemLists.currentListId;
+		var feedSets = oFeed.feedItemLists.feedSets.toLoad;
+		
+		var setList = onlineForLife.Feed.feedItemLists.feedSets.toLoad[currentListId];
+		var listItemCount = setList.length;
+		console.log('buildNextList: ' + currentListId + ' - ' + listItemCount + ' items');
+		var itemBuildCount = 0;
+		$.each(setList,function(i,v){
+			
+			var feedItemData = onlineForLife.Feed.feedData[v];
+			var messageId = feedItemData.Id.toString();
+			console.log(i + ' - ' + messageId);
+
+			//console.log(i);
+			var itemData = onlineForLife.Feed.createFeedDataObject(feedItemData);
+			
+			var id = itemData.id;
+			var state = itemData.state;
+			var city = itemData.city;
+			var step = itemData.step;
+			var stateName = itemData.stateName;
+			var liClass = itemData.liClass;
+			buildItem = true;
+			
+			if(step==""){
+				buildItem = false;
+			}
+			else if(step=="4"){
+				buildItem = false;
+				onlineForLife.Panels.step4Items[id] = feedItemData;
+			}
+			if(buildItem){
+				itemBuildCount += 1;
+				var newHtml = onlineForLife.Feed.buildFeedItem(id, city, state, step, stateName, liClass);
+				//console.log(newHtml);
+				$('ul.feed').prepend(newHtml);
+				onlineForLife.Feed.setupDraggableEach($('ul.feed li:first'));
+				onlineForLife.Feed.centerFeedItemTextEach('firebase', $('ul.feed li:first'));
+			}
+		});
+		//onlineForLife.Feed.centerFeedItemText();
+		//onlineForLife.Feed.setupDraggable();
+
+		onlineForLife.Feed.toggleFeedMessage('LOADED');
+		onlineForLife.Feed.feedItemLists.currentListItemCount = itemBuildCount;
+			
+		console.timeEnd('buildFeed');
+		if(itemBuildCount<onlineForLife.Feed.showFooterOnCount){
+			onlineForLife.Feed.showFooterOnCount=itemBuildCount;
+		}
+		if(itemBuildCount==0){
+			onlineForLife.Feed.toggleFeedMessage('PRAYED_ALL');
+		}
+
+		oFeed.feedItemLists.currentListId += 1;
+		console.log('DONE');
+	},
+	
+	setupFeedDataSets:function(){
+		var feedItemsPerLoad = onlineForLife.Feed.feedItemsPerLoad;
+		var feedItemLists = onlineForLife.Feed.feedItemLists;
+		var currentIndex = feedItemLists.current;
+		currentIndex.upper = feedItemsPerLoad-1;
+		var toLoadCount = feedItemLists.counts.toLoad;
+		console.log('setupFeedDataSets: ' + feedItemsPerLoad + ' - ' + toLoadCount);
+		var setCount = Math.floor(toLoadCount/feedItemsPerLoad);
+		setCountMod = toLoadCount%feedItemsPerLoad;
+		
+		var toLoadData = feedItemLists.toLoad;
+		if(setCountMod>0){
+			setCount += 1;
+		}
+		console.log('setCount: ' + setCount);
+		console.log('setCountMod: ' + setCountMod);
+		var toLoadIndex = 0;
+		var pageUpper = setCount;
+		for(i=0;i<pageUpper;i++){
+			console.log('List #' + i);
+			feedItemLists.feedSets.toLoad[i] = [];
+			//var 
+			//*
+			for(l=0;l<feedItemsPerLoad;l++){
+				var currentLoadIndex = toLoadIndex;
+				if(currentLoadIndex<toLoadCount){
+					console.log('l: ' + currentLoadIndex);
+					var itemId = feedItemLists.toLoad[currentLoadIndex];
+					//onlineForLife.Feed.feedData
+					feedItemLists.feedSets.toLoad[i].push(itemId);
+					
+					toLoadIndex += 1;
+				}
+			}
+			//*/
+
+		}
+		onlineForLife.Feed.buildNextList();
+	},
+	
+	setupFeedItemLists:function(){
+		var feedItemsPerLoad = onlineForLife.Feed.feedItemsPerLoad;
+		console.log('setupFeedItemLists: ' + feedItemsPerLoad);
+		var feedData = onlineForLife.Feed.feedData;
+		var totalItemsCount = 0;
+		var itemBuildCount = 0;
+		var feedItemLists = onlineForLife.Feed.feedItemLists;
+		$.each(feedData,function(key,feedItem){
+			console.log(key);
+			var messageId = feedItem.Id.toString();
+			var buildItem = false;
+			if(onlineForLife.Feed.itemsPrayedFor.indexOf(messageId)<0){
+				buildItem = true;
+			}
+			feedItemLists.all.push(messageId);
+			if(buildItem){
+				console.log('ok to load: ' + messageId);
+				feedItemLists.toLoad.push(key);
+			}
+			else{
+				console.log('ALREADY PRAYED: ' + messageId);
+				feedItemLists.prayed.push(messageId);
+			}
+		});
+		feedItemLists.counts.all = feedItemLists.all.length;
+		feedItemLists.counts.prayed = feedItemLists.prayed.length;
+		feedItemLists.counts.toLoad = feedItemLists.toLoad.length;
+		onlineForLife.Feed.setupFeedDataSets();
+	},
+	
+	setupFirebaseFeedItem:function(){
+		console.time('buildFeed');
+		console.log('setupFirebaseFeedItem: ' + onlineForLife.Feed.feedItemsPerLoad);
+		//myDataRefQuery = myDataRef.endAt().limit(10);
+			
+		var feedData = onlineForLife.Feed.feedData;
+		
+		
+		
+		var html = '';
+		var totalItemsCount = 0;
+		var itemBuildCount = 0;
+		$.each(feedData,function(i,feedItem){
+			//console.log(i);
+			//console.log(feedItem.Id);
+			totalItemsCount += 1;
+			if(totalItemsCount<onlineForLife.Feed.feedItemsPerLoad){
+				var messageId = feedItem.Id.toString();
+				var buildItem = false;
+				if(onlineForLife.Feed.itemsPrayedFor.indexOf(messageId)<0){
+					buildItem = true;
+				}
+				else{
+					console.log('prayed for: ' + messageId);
+				}
+				var itemData = onlineForLife.Feed.createFeedDataObject(feedItem);
+				
+				var id = itemData.id;
+				var state = itemData.state;
+				var city = itemData.city;
+				var step = itemData.step;
+				var stateName = itemData.stateName;
+				var liClass = itemData.liClass;
+
+				if(step==""){
+					buildItem = false;
+				}
+				else if(step=="4"){
+					buildItem = false;
+					onlineForLife.Panels.step4Items[id] = feedItem;
+				}
+				if(buildItem){
+					itemBuildCount += 1;
+					var newHtml = onlineForLife.Feed.buildFeedItem(id, city, state, step, stateName, liClass);
+					$('ul.feed').prepend(newHtml);
+					
+					onlineForLife.Feed.centerFeedItemTextEach('firebase', $('ul.feed li:first'));
+					onlineForLife.Feed.setupDraggableEach($('ul.feed li:first'));
+				}
+			}
+		});
+		onlineForLife.Feed.toggleFeedMessage('LOADED');
+		console.log('totalItemsCount',totalItemsCount);
+		console.log('itemBuildCount',itemBuildCount);
+			
+		console.timeEnd('buildFeed');
+		if(itemBuildCount<onlineForLife.Feed.showFooterOnCount){
+			onlineForLife.Feed.showFooterOnCount=itemBuildCount;
+		}
+		if(itemBuildCount==0){
+			onlineForLife.Feed.toggleFeedMessage('PRAYED_ALL');
+		}
+		setTimeout(function() {
+			onlineForLife.Feed.animatePraySwipe();
+		},5000);
+
+
 		onlineForLife.Feed.onFeedLoaded();
 	},
 	
@@ -524,7 +710,28 @@ onlineForLife.Feed = {
 		});
 	},
 
-	centerFeedItemText: function(index, $this){
+	centerFeedItemText: function(){
+		var $feed = $('ul.feed');
+		var $items = $feed.find('li.center-text-false');
+		
+		$.each($items,function(i,$li){
+			var $this = $($li);
+			var $text = $this.find('p.action-text');
+			var $icon = $this.find('.action-step');
+			var liHeight = $this.outerHeight();
+			
+			var textHeight = $text.outerHeight();
+			var borderHeight = 1;
+			var marginTop = 10;
+			marginTop = 7;
+			var totalPadding = (liHeight - textHeight - borderHeight ) / 2;
+			var topPx = totalPadding - marginTop;
+			$text.css('top',topPx+'px');
+			$this.removeClass('center-text-false');
+		});
+	},
+	
+	centerFeedItemTextEach: function(index, $this){
 		var $text = $this.find('p.action-text');
 		var $icon = $this.find('.action-step');
 		var liHeight = $this.outerHeight();
@@ -536,6 +743,7 @@ onlineForLife.Feed = {
 		var totalPadding = (liHeight - textHeight - borderHeight ) / 2;
 		var topPx = totalPadding - marginTop;
 		$text.css('top',topPx+'px');
+		$this.removeClass('center-text-false');
 	},
 	
 	setBgVersion: function(){
@@ -570,6 +778,30 @@ onlineForLife.Feed = {
 		
 	},
 
+	setupDraggable: function(){
+		var $feed = $('ul.feed');
+		var $items = $feed.find('li');
+		
+		$.each($items,function(i,$li){
+			var $this = $($li);
+			var id = $this.find('.feed-content').attr('id');
+			var elementId = '#'+id;
+			var $content = $(elementId).get(0);
+			new Swipe($content,{
+				startSlide:1,
+				speed: 400, // Speed of prev and next transitions in milliseconds. (default:300)
+				callback: function(event, index, elem) {
+					var $this = $(elem);
+					var $div = $this.parents('div.feed-content');
+					var direction = $this.data('direction');
+					if(direction!='none'){
+						onlineForLife.Feed.handleSwipe($div,direction);
+					}
+				}
+			});
+		});
+	},
+
 	setupDraggableEach: function($li){
 		var $this = $li;
 		var id = $this.find('.feed-content').attr('id');
@@ -587,6 +819,7 @@ onlineForLife.Feed = {
 				}
 			}
 		});
+		$li.removeClass('drag-setup-false');
 	},
 
 	handleSwipe: function($this, swipeDir){
@@ -658,6 +891,7 @@ onlineForLife.Feed = {
 				onlineForLife.Feed.nudgeTutorialCount=onlineForLife.Feed.nudgeTutorialCount+1;
 			}
 			else{
+				onlineForLife.Feed.showNudgeTutorial=false;
 				$listItem.removeClass('show-tutorial');
 			}
 		}
