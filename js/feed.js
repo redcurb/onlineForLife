@@ -457,6 +457,10 @@ onlineForLife.Feed = {
 		if(currentListId<feedSetCount){
 			onlineForLife.Feed.buildNextList();
 		}
+		else{
+			console.log('handleEmptyFeedList: LAST LIST EMPTY');
+			onlineForLife.Feed.toggleFeedMessage('PRAYED_ALL');
+		}
 	},
 	
 	buildNextList:function(){
