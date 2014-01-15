@@ -55,7 +55,7 @@ onlineForLife.Feed = {
 		onlineForLife.Feed.checkLoginStatus();
 		onlineForLife.Feed.setVersion();
 		onlineForLife.Feed.setupHandlers();
-		onlineForLife.Feed.updateUserPrayerCount();
+		//onlineForLife.Feed.updateUserPrayerCount();
 		onlineForLife.Feed.getLinks();
 	},
 	
@@ -432,11 +432,31 @@ onlineForLife.Feed = {
 			toLoad:0
 		},
 		feedSets:{
+			count:0,
 			toLoad:{}
 		},
 		all:[],
 		prayed:[],
 		toLoad:[]
+	},
+	
+	
+	checkRemainingItems: function(){
+		var currentListItemCount = onlineForLife.Feed.feedItemLists.currentListItemCount;
+		console.log('checkRemainingItems: ' + currentListItemCount);
+		if(currentListItemCount==0){
+			onlineForLife.Feed.handleEmptyFeedList();
+		}
+	},
+	
+	handleEmptyFeedList:function(){
+		var currentListId = onlineForLife.Feed.feedItemLists.currentListId;
+		var feedSetCount = onlineForLife.Feed.feedItemLists.feedSets.count;
+		console.log('handleEmptyFeedList: ' + currentListId);
+		console.log('handleEmptyFeedList: ' + feedSetCount);
+		if(currentListId<feedSetCount){
+			onlineForLife.Feed.buildNextList();
+		}
 	},
 	
 	buildNextList:function(){
@@ -519,6 +539,7 @@ onlineForLife.Feed = {
 		console.log('setCount: ' + setCount);
 		console.log('setCountMod: ' + setCountMod);
 		var toLoadIndex = 0;
+		var feedSetCount = 1;
 		var pageUpper = setCount;
 		for(i=0;i<pageUpper;i++){
 			console.log('List #' + i);
@@ -537,8 +558,9 @@ onlineForLife.Feed = {
 				}
 			}
 			//*/
-
+			feedSetCount += 1;
 		}
+		onlineForLife.Feed.feedItemLists.feedSets.count = feedSetCount;
 		onlineForLife.Feed.buildNextList();
 	},
 	
@@ -858,14 +880,16 @@ onlineForLife.Feed = {
 		//console.log(state);
 		//onlineForLife.USMap.toggleState('TX');
 	},
-	
+
 	updateUserPrayerCount: function(){
+		onlineForLife.Feed.feedItemLists.currentListItemCount = onlineForLife.Feed.feedItemLists.currentListItemCount - 1;
 		var showFooterOnCount = onlineForLife.Feed.showFooterOnCount;
 		var currentCount = onlineForLife.Feed.userPrayersDaily;
 		$('.prayer-count').text(currentCount);
 		if(currentCount==showFooterOnCount){
 			$('.footer-primary').animate({height: "232px"}, 500)
 		}
+		onlineForLife.Feed.checkRemainingItems();
 	},
 	
 	animatePraySwipe: function(){
