@@ -214,9 +214,9 @@ body.page-status-loading #feed{
     	<div class="footer-content">
 			<em class="prayer-count">4</em>
 			<ul class="feed-share-list">
-				<li class="first feed-share-fb"><i class="fa fa-facebook"></i></li>
-				<li class="feed-share-twitter"><i class="fa fa-twitter"></i></li>
-				<li class="feed-share-sms"><a href="#"><i>email</i></a></li>
+				<li class="first feed-share-fb" data-id="facebook"><i class="fa fa-facebook"></i></li>
+				<li class="feed-share-twitter" data-id="twitter"><i class="fa fa-twitter"></i></li>
+				<li class="feed-share-sms" data-id="email"><a href="#"><i>email</i></a></li>
 			</ul>
 			<p>Invite friends to pray with you today</p>
 		</div>
@@ -539,15 +539,13 @@ $(function() {
 });
 </script>
 <script id="template-feed-item" type="text/x-handlebars-template">
-			<li class="feed-item drag-setup-false center-text-false action-step-{{step}} {{liClass}} version-{{BgVersion}}" data-id="{{itemId}}">
+			<li class="feed-item drag-setup-false center-text-false action-step-{{step}} {{liClass}} version-{{BgVersion}}" data-id="{{itemId}}" data-step="{{step}}" data-stateCode="{{stateCode}}" data-stateName="{{stateName}}" data-city="{{city}}" data-table-key="{{key}}">
 				<i class="feed-prayer-confirmation">Prayed!</i>
 				<i class="feed-prayer-instruction"></i>
 				<div class="feed-content" id="content-item-{{itemId}}" data-state="{{stateCode}}" style="overflow:hidden;">
 					<ul class="feed-content-container">
 						<li class="feed-content-placeholder feed-content-left" data-direction="right"></li>
 						<li class="feed-content-main" data-direction="none">
-
-						
 						{{#if stateName }}
 						{{#equal step "1" }}
 							<p class="action-text body-step-1">Someone considering abortion in {{city}}, {{stateName}} just contacted a PRC</p>
