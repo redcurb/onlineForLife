@@ -85,7 +85,6 @@ onlineForLife.Feed = {
 	setDevice: function(){
 		//console.log('setDevice');
 		//var device = {"platform" : "iOS","available" : true,"model" : "iPhone5,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
-		alert(device);
 		if(typeof(device)!='undefined'){
 			//$('.refresh-subtext').text($('.refresh-subtext').text() + ': ' + device.model);
 			var modelName = Redcurb.Helpers.getDeviceInfo(device, 'MODEL_NAME');
@@ -100,6 +99,13 @@ onlineForLife.Feed = {
 			onlineForLife.Feed.deviceStatus.modelFamily = modelFamilyName;
 			onlineForLife.Feed.deviceStatus.platform = platformName;
 			onlineForLife.Feed.deviceStatus.version = versionText;
+			
+			var output = '';
+			output += 'modelName: ' + modelName +'\n';
+			output += 'modelFamilyName: ' + modelFamilyName +'\n';
+			output += 'platformName: ' + platformName +'\n';
+			output += 'versionText: ' + versionText +'\n';
+			
 			
 			var platformClass = 'platform-' + platformName;
 			var modelClass = 'model-' + modelName;
