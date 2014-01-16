@@ -13,6 +13,14 @@ onlineForLife.App = {
 		onlineForLife.App.getConfigData();
 	},	
 
+	onFeedLoaded:function(){
+		console.log('onFeedLoaded');
+		onlineForLife.Tutorial.init();
+		onlineForLife.Footer.init();
+		onlineForLife.Panels.init();
+		onlineForLife.Settings.init();
+	},
+
 	getConfigData: function(){
 		console.log('app getConfigData');
 

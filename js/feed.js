@@ -212,13 +212,6 @@ onlineForLife.Feed = {
 		});
 	},
 
-	onFeedLoaded:function(){
-		console.log('onFeedLoaded');
-		onlineForLife.Footer.init();
-		onlineForLife.Panels.init();
-		onlineForLife.Settings.init();
-	},
-
 	trackUser:function(event, data, stateCode){
 		if(event=='feed-loaded'){
 			
@@ -643,7 +636,7 @@ onlineForLife.Feed = {
 		feedItemLists.counts.prayed = feedItemLists.prayed.length;
 		feedItemLists.counts.toLoad = feedItemLists.toLoad.length;
 		onlineForLife.Feed.setupFeedDataSets();
-		onlineForLife.Feed.onFeedLoaded();
+		onlineForLife.App.onFeedLoaded();
 	},
 	
 	setupFirebaseFeedItem:function(){

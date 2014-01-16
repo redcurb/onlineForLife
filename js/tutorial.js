@@ -45,32 +45,24 @@ onlineForLife.Tutorial = {
 	},
 	
 	setupTutorial: function(){
-		onlineForLife.Tutorial.addToggle();
-		//onlineForLife.Tutorial.getTutorialTextOld();
+		onlineForLife.Tutorial.setupTutorialState();
 		onlineForLife.Tutorial.setupHandlers();
 	},
 	
-	addToggle: function(){
-		$('#content-tutorial').addClass('tutorial-enabled');
-	},
-	
-	getTutorialTextOld: function(){
-		var $tutorial = $('#tutorial-content');
-
-		var dbUrl = 'https://ofl.firebaseio.com/tutorial/text/';
-		var myDataRef = new Firebase(dbUrl);
-		myDataRef.on('child_added', function(snapshot) {
-			var tutorialData = snapshot.val();
-			//console.log(tutorialData);
-			var tutorialId = snapshot.name();
-			var tutorialText = tutorialData.text;
-			var tutorialTextAlignment = tutorialData.align;
-			//console.log(tutorialId + ' - ' + tutorialText + ' - ' + tutorialTextAlignment);
-			var itemHtml = onlineForLife.Tutorial.buildTutorialItem(tutorialId, tutorialText, tutorialTextAlignment);
-			//console.log(itemHtml);
-			$tutorial.append(itemHtml);
-		});
-		
+	setupTutorialState: function(){
+		var tutorialStatus = true;
+		var showNudge = true;
+		var tutorialClass = '';
+		var nudgeClass = '';
+		if(showNudge){
+			nudgeClass = 'show-nudge';
+			onlineForLife.Tutorial.handleTutorialShow();
+		}
+		if(tutorialStatus){
+			tutorialClass = 'tutorial-enabled';
+		}
+		var tutorialClass = tutorialClass + ' ' + nudgeClass;
+		$('#content-tutorial').addClass(tutorialClass);
 	},
 	
 	buildTutorialItem: function(id, text, align, autoOpen){
@@ -81,36 +73,38 @@ onlineForLife.Tutorial = {
 		return html;
 	},
 	
+	handleTutorialShow: function(){
+		$('#modal-screen').addClass('screen-tutorial').show();
+		$('#content-tutorial').addClass('tutorial-open').removeClass('tutorial-closed');
+		$('.tutorial-item .tutorial-cta').on('click', function(){
+			//console.log('cta');
+			onlineForLife.Tutorial.handleItemToggle($(this));
+		});
+		$(window).on('scroll',function() {
+			$('a.tutorial-hide').click();
+		});
+	},
+	
+	handleTutorialHide: function(){
+		$('#modal-screen').removeClass('screen-tutorial').hide();
+		$('#content-tutorial').addClass('tutorial-closed').removeClass('tutorial-open');
+		$('.tutorial-item .tutorial-cta').off('click');
+		$(window).off('scroll');
+	},
+	
 	setupHandlers: function(){
 		$('a.tutorial-show').on('click', function(){
-			$('#modal-screen').addClass('screen-tutorial').show();
-			$('#content-tutorial').addClass('tutorial-open').removeClass('tutorial-closed');
-			$('.tutorial-item .tutorial-cta').on('click', function(){
-				//console.log('cta');
-				onlineForLife.Tutorial.handleItemToggle($(this));
-			});
-			$(window).on('scroll',function() {
-				$('a.tutorial-hide').click();
-			});
+			onlineForLife.Tutorial.handleTutorialShow();
 		});
-		/*
-		$('#content-tutorial').not('.tutorial-item').on('click', function(event){
-			event.stopPropagation();
-		});
-		*/
-		
 		
 		$('a.tutorial-hide').on('click', function(){
-			$('#modal-screen').removeClass('screen-tutorial').hide();
-			$('#content-tutorial').addClass('tutorial-closed').removeClass('tutorial-open');
-			$('.tutorial-item .tutorial-cta').off('click');
-			$(window).off('scroll');
+			onlineForLife.Tutorial.handleTutorialHide();
 		});
 	},
 	
 	handleItemToggle: function($i){
 		var $item = $i.parents('.tutorial-item');
-		
+		$('#content-tutorial').removeClass('show-nudge');
 		if($item.hasClass('item-open')){
 			$item.removeClass('item-open');
 		}
@@ -118,12 +112,9 @@ onlineForLife.Tutorial = {
 			$item.addClass('item-open');
 		}
 	}
-	
-
-
 };
 $(function() {
-	onlineForLife.Tutorial.init();
+	
 });
 
 

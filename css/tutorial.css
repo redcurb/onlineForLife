@@ -27,15 +27,12 @@
 			color:#EAEDEC;
 		}
 		.tutorial-toggle a.tutorial-hide i{
-			
+			color:#e75629;
 		}
 		
 			.tutorial-toggle a i{
 				font-size: 1.5em;
 			}
-
-
-
 
 	#content-tutorial.tutorial-open #tutorial-content{
 		display:block;
@@ -43,13 +40,42 @@
 	#tutorial-content{
 		display:none;
 	}
+	
+		#content-tutorial #tutorial-tap{
+			background:url(../img/tutorial-tap.png) no-repeat 0 0;
+			display:none;
+			position:absolute;
+			left: 360px;
+			top: 135px;
+			width:488px;
+			height:228px;
+			
+			width:244px;
+			height:114px;
+			background-size:100% auto;
+		}
+		#content-tutorial.show-nudge #tutorial-tap{
+			display:block;
+		}
 		#content-tutorial .tutorial-item{
 			position:absolute;
 		}
+		#content-tutorial.tutorial-page-stats .tutorial-item#tutorial-1,
+		#content-tutorial.tutorial-page-stats .tutorial-item#tutorial-2,
+		#content-tutorial.tutorial-page-stats .tutorial-item#tutorial-3,
+		#content-tutorial.tutorial-page-stats .tutorial-item#tutorial-4,
+		#content-tutorial.tutorial-page-feed .tutorial-item#tutorial-5,
+		#content-tutorial.tutorial-page-feed .tutorial-item#tutorial-6,
+		#content-tutorial.tutorial-page-feed .tutorial-item#tutorial-7,
+		#content-tutorial.tutorial-page-feed .tutorial-item#tutorial-8,
+		#content-tutorial.tutorial-page-feed .tutorial-item#tutorial-9{
+			display:none;
+		}
+		
 			#content-tutorial .tutorial-item .tutorial-cta{
 				position: absolute;
 				color: #e75629;
-				font-size: 3em;
+				font-size: 2.5em;
 			}
 			#content-tutorial .tutorial-item .tutorial-cta span{
 				font-style:normal;
@@ -68,8 +94,7 @@
 				width: 200px;
 				display:none;
 			}
-			#content-tutorial .tutorial-item.item-open .tutorial-text,
-			#content-tutorial .tutorial-item.auto-open-true .tutorial-text{
+			#content-tutorial .tutorial-item.item-open .tutorial-text{
 				display:block;
 			}
 			
@@ -91,7 +116,7 @@
 				 
 		
 				
-				
+			
 				
 				
 				
@@ -111,11 +136,11 @@
 		}
 			#tutorial-2 .tutorial-cta{
 				left:240px;
-				top:490px;
+				top:505px;
 			}
 			#tutorial-2 .tutorial-text{
-				left: 180px;
-				top: 395px;
+				left: 165px;
+				top: 410px;
 			}
 		#tutorial-3{
 		}
@@ -124,8 +149,8 @@
 				top:660px;
 			}
 			#tutorial-3 .tutorial-text{
-				left: 380px;
-				top: 655px;
+				left: 355px;
+				top: 640px;
 			}
 		#tutorial-4{
 		}
@@ -137,6 +162,8 @@
 				left: 225px;
 				top: 845px;
 			}
+			
+	
 
 #modal-screen.screen-tutorial{
 	background:rgba(255,255,255,0.65)	
