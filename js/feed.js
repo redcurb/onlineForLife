@@ -717,7 +717,7 @@ onlineForLife.Feed = {
 			window.test.name = snapshot.name();
 			var stateCode = onlineForLife.Feed.userData.userInfo.state || '';
 			if(onlineForLife.Feed.addFirebaseChild && stateCode !=''){
-				onlineForLife.USMap.toggleState(stateCode);
+				//onlineForLife.USMap.toggleState(stateCode);
 			}
 		});
 	},
