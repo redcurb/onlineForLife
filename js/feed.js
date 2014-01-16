@@ -85,7 +85,7 @@ onlineForLife.Feed = {
 	setDevice: function(){
 		//console.log('setDevice');
 		//var device = {"platform" : "iOS","available" : true,"model" : "iPhone5,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
-		var device = {"platform" : "iOS","available" : true,"model" : "iPad5,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
+		//var device = {"platform" : "iOS","available" : true,"model" : "iPad5,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
 		if(typeof(device)!='undefined'){
 			//$('.refresh-subtext').text($('.refresh-subtext').text() + ': ' + device.model);
 			var modelName = Redcurb.Helpers.getDeviceInfo(device, 'MODEL_NAME');
@@ -142,7 +142,8 @@ onlineForLife.Feed = {
 		var spinnerHtml = '<li class="default-content spinner"><i class="fa fa-refresh fa-spin"></i></li>';
 		$('ul.feed').addClass('status-loading').empty().append(spinnerHtml);
 		setTimeout(function(){
-			onlineForLife.Feed.setupFirebaseFeedItem();
+			//onlineForLife.Feed.setupFirebaseFeedItem();
+			onlineForLife.Feed.buildNextList(onlineForLife.Feed.feedItemLists.currentListId);
 		}, 200);
 	},
 
@@ -443,6 +444,7 @@ onlineForLife.Feed = {
 		},
 		currentListItemCount:0,
 		currentListId: 0,
+		nextListId: 0,
 		current:{
 			lower:0,
 			upper:0
@@ -502,17 +504,21 @@ onlineForLife.Feed = {
 		}
 	},
 	
-	buildNextList:function(){
+	buildNextList:function(listOverrideId){
 		onlineForLife.Feed.toggleFeedMessage('LOADING');
 		//onlineForLife.Feed.feedData["-JD3ClXifkAsxYLSC-vX"]
 //		onlineForLife.Feed.toggleFeedMessage('LOADING');
 		var oFeed = onlineForLife.Feed;
-		var currentListId = oFeed.feedItemLists.currentListId;
+		var listId = oFeed.feedItemLists.nextListId;
+		if(typeof(listOverrideId)!='undefined'){
+			listId = oFeed.feedItemLists.currentListId;
+		}
+		
 		var feedSets = oFeed.feedItemLists.feedSets.toLoad;
 		
-		var setList = onlineForLife.Feed.feedItemLists.feedSets.toLoad[currentListId];
+		var setList = onlineForLife.Feed.feedItemLists.feedSets.toLoad[listId];
 		var listItemCount = setList.length;
-		//console.log('buildNextList: ' + currentListId + ' - ' + listItemCount + ' items');
+		//console.log('buildNextList: ' + listId + ' - ' + listItemCount + ' items');
 		var itemBuildCount = 0;
 		$.each(setList,function(i,key){
 			
@@ -563,7 +569,7 @@ onlineForLife.Feed = {
 			onlineForLife.Feed.toggleFeedMessage('PRAYED_ALL');
 		}
 
-		oFeed.feedItemLists.currentListId += 1;
+		oFeed.feedItemLists.nextListId += 1;
 		//console.log('DONE');
 	},
 	

@@ -362,7 +362,7 @@ onlineForLife.Panels = {
 	},
 	
 	setupUpdates: function(){
-		console.clear();
+		//console.clear();
 		console.log('setupUpdates');
 		var updatesUrl = 'https://ofl.firebaseio.com/updates';
 		var updatesData = new Firebase(updatesUrl);
