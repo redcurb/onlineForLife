@@ -204,6 +204,7 @@ onlineForLife.Feed = {
 	onFeedLoaded:function(){
 		console.log('onFeedLoaded');
 		onlineForLife.Footer.init();
+		onlineForLife.Panels.init();
 		onlineForLife.Settings.init();
 	},
 

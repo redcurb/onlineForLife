@@ -3,19 +3,28 @@ onlineForLife.Footer = {
 	version: 1,
 	
 	init: function(){
-		onlineForLife.Footer.getFooterText();
+		onlineForLife.Footer.getText();
+	},
+	
+	getText:function(){
+		var dbUrl = 'https://ofl.firebaseio.com/text/';
+		var textData = new Firebase(dbUrl);
+		onlineForLife.GlobalData = {};
+		textData.once('value', function(textValue) {
+			onlineForLife.GlobalData.Text = textValue.val();
+			onlineForLife.Footer.getFooterText();
+			onlineForLife.Panels.setText();
+		});
 	},
 	
 	getFooterText:function(){
-		var dbUrl = 'https://ofl.firebaseio.com/text/footer/';
-		var footerData = new Firebase(dbUrl);
 		onlineForLife.Footer.footerData = {};
-		footerData.once('value', function(footerText) {
-			var footerTextData = footerText.val();
-			onlineForLife.Footer.footerData.text = footerTextData;
-			var emailText = footerTextData.email;
-			onlineForLife.Footer.setupHandlers();
-		});
+		
+		var footerTextData = onlineForLife.GlobalData.Text.footer;
+		onlineForLife.Footer.footerData.text = footerTextData;
+		var emailText = footerTextData.email;
+		console.log('emailText',emailText);
+		onlineForLife.Footer.setupHandlers();
 	},
 	
 	buildPrayerSet: function(){
@@ -102,6 +111,7 @@ onlineForLife.Footer = {
 	},
 	
 	setupHandlers: function(){
+		console.log('footer handlers');
 		$('ul.feed-share-list li').on('click',function(){
 			var $this = $(this);
 			var linkId = $this.data('id');

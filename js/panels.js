@@ -12,6 +12,13 @@ onlineForLife.Panels = {
 		onlineForLife.Panels.setupUpdates();
 	},
 	
+	setText: function(){
+		var savedCount = onlineForLife.GlobalData.Text.global.savedCount;
+		savedCount = savedCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		console.log('savedCount',savedCount);
+		$('.mypanel-right .section-total-saved span.total-user-count').text(savedCount);
+	},
+	
 	refreshed:false,
 	
 	tempData:{
@@ -410,12 +417,64 @@ onlineForLife.Panels = {
 				}
 				*/
 				console.log('UPDATES AFTER');
-				onlineForLife.Panels.setupUpdatesWindow();
+				onlineForLife.Panels.buildStep4Items();
+				
 			}
 		});
 		console.log(' ');
 	},
 	
+	buildStep4Items: function(){
+		//console.log('buildStep4Items:  ',onlineForLife.Panels.step4Items);
+		var items = onlineForLife.Panels.step4Items;
+		$.each(items,function(index,itemData){
+			console.log('step 4 item',index);
+				
+			var id = itemData.Id.toString();
+			var lifeNumber = itemData.OFL_Life_Decision_Number.toString();
+			var city = itemData.City.toString();
+			var stateCode = itemData.State.toString();
+
+			var stateName = '';
+			if(typeof(stateCode)!='undefined'){
+				stateName = onlineForLife.Feed.statesData[stateCode]
+			}
+			
+			console.log('id: ',id);
+			console.log('lifeNumber: ',lifeNumber);
+			console.log('city: ',city);
+			console.log('stateCode: ',stateCode);
+			console.log('stateName: ',stateName);
+			
+			var step4Text = onlineForLife.Panels.getStep4ItemText(id, lifeNumber, city, stateCode, stateName);
+			var itemHtml = onlineForLife.Panels.buildStep4UpdateItem(id, step4Text);
+			$('ul.stats-updates').prepend(itemHtml);
+			
+		});
+		
+		onlineForLife.Panels.setupUpdatesWindow();
+	},
+	
+	getStep4ItemText: function(id, lifeNumber, city, stateCode, stateName){
+		var textData = onlineForLife.GlobalData.Text.panels.updates;
+		var textA = textData.step4a;
+		var textB = textData.step4b;
+		var textC = textData.step4c;
+		var textVal = textA + lifeNumber + textB + city + textC + stateName;
+		console.log(textVal);
+		return textVal;
+	},
+	
+	buildStep4UpdateItem: function(id, text){
+		console.log('buildStep4UpdateItem');
+		var source   = $("#template-updates-step4-item").html();
+		var template = Handlebars.compile(source);
+		var context = {id: id, text:text}
+		var html = template(context);
+		console.log(html);
+		return html;
+	},
+
 	setupUpdatesWindow: function(){
 		console.log('setupUpdatesWindow');
 		$('#modalUpdates').dialog({
@@ -479,7 +538,7 @@ onlineForLife.Panels = {
 	
 };
 $(function() {
-	onlineForLife.Panels.init();
+	//onlineForLife.Panels.init();
 	//$('#panel-left').click();
 	//$('#feed-panel-right').click();
 });

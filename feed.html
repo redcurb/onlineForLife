@@ -121,7 +121,7 @@ body.page-status-loading #feed{
 		</div>
 		<div class="section-total-saved">
 			<span class="user-count">+157</span>
-			<span class="total-user-count">1,402</span>
+			<span class="total-user-count">0</span>
 			<span class="step-label">Babies Saved</span>
 		</div>
 		<div class="section-your-impact">
@@ -598,6 +598,12 @@ $(function() {
 <script id="template-updates-item" type="text/x-handlebars-template">
 				<li class="{{#if popup }}popup-true{{/if}}{{#unless popup }}popup-false{{/unless}}" data-popup="{{popup}}">
 					<span class="text-update">{{title}}</span>
+				</li>
+
+</script>
+<script id="template-updates-step4-item" type="text/x-handlebars-template">
+				<li class="item-step-4" data-id="{{id}}">
+					<span class="text-update">{{text}}</span>
 				</li>
 
 </script>
