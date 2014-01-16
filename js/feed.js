@@ -105,7 +105,7 @@ onlineForLife.Feed = {
 			output += 'modelFamilyName: ' + modelFamilyName +'\n';
 			output += 'platformName: ' + platformName +'\n';
 			output += 'versionText: ' + versionText +'\n';
-			alert(output);
+			//alert(output);
 			
 			
 			var platformClass = 'platform-' + platformName;
