@@ -1,4 +1,3 @@
-var onlineForLife = window.onlineForLife || {}; onlineForLife.Events = onlineForLife.Events || {};
 onlineForLife.Events = {
 	version: 1,
 

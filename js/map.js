@@ -1,4 +1,3 @@
-var onlineForLife = window.onlineForLife || {}; onlineForLife.USMap = onlineForLife.USMap || {};
 onlineForLife.USMap = {
 	init: function(){
 		onlineForLife.USMap.setupMap();
@@ -7,22 +6,27 @@ onlineForLife.USMap = {
 	},
 	
 	setupMap:function(){
+		var configData = onlineForLife.App.config.feed.map;
+		onlineForLife.USMap.createMap();
+	},
+	
+	createMap:function(){
 		//console.log('setupMap');
 		$('#map').usmap({
 			'stateStyles': {
-				fill: '#EAEDEC', 
-				"stroke-width": 2,
-				'stroke' : '#fff'
+				fill: onlineForLife.App.config.feed.map.fillColor, 
+				"stroke-width": onlineForLife.App.config.feed.map.strokeWidth,
+				'stroke' : onlineForLife.App.config.feed.map.strokeColor
 			},
 			click: function(event, data) {
 				
 			},
   			mouseover: function(event, data) {
 				//event.preventDefault();
-				fill: '#D34923'
+				fill: onlineForLife.App.config.feed.map.highlightColor
 			},
   			'stateHoverStyles': {
-				fill: '#D34923'
+				fill: onlineForLife.App.config.feed.map.highlightColor
 			},
 			showLabels: false,
 		});
@@ -38,18 +42,13 @@ onlineForLife.USMap = {
 		var newCount = currentCount + 1;
 		//console.log('currentCount',currentCount);
 		onlineForLife.Feed.prayersToday = newCount;
-
-
 		//console.log('toggleState: ' + state);
 		$('#map').usmap('trigger', state, 'mouseover');
 		todayCount.text(newCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		setTimeout(function() {
 			$('#map').usmap('trigger', state, 'mouseout');
-		}, 3000);
+		}, onlineForLife.App.config.feed.map.delaySpeed);
 	}
-	
-
-
 };
 $(function() {
 	

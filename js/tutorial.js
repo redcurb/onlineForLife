@@ -1,4 +1,3 @@
-var onlineForLife = window.onlineForLife || {}; onlineForLife.Tutorial = onlineForLife.Tutorial || {};
 onlineForLife.Tutorial = {
 	init: function(){
 		onlineForLife.Tutorial.getTutorialData();

@@ -1,4 +1,3 @@
-var onlineForLife = window.onlineForLife || {}; onlineForLife.Footer = onlineForLife.Footer || {};
 onlineForLife.Footer = {
 	version: 1,
 	

@@ -1,4 +1,3 @@
-var onlineForLife = window.onlineForLife || {}; onlineForLife.Panels = onlineForLife.Panels || {};
 onlineForLife.Panels = {
 	addFirebaseChild:true,
 	

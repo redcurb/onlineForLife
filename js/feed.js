@@ -1,4 +1,3 @@
-var onlineForLife = window.onlineForLife || {}; onlineForLife.Feed = onlineForLife.Feed || {};
 onlineForLife.Feed = {
 	version: 1,
 	
@@ -982,9 +981,4 @@ onlineForLife.Feed = {
 		$noMoreText.show();
 	}
 };
-$(function() {
-	onlineForLife.USMap.init();
-	onlineForLife.Feed.init();
-});
-
 
