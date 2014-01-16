@@ -33,11 +33,24 @@ onlineForLife.App = {
 
 			console.log(onlineForLife.App.config);
 	
-			onlineForLife.App.configReady();
+			onlineForLife.App.getAppData();
 		});
 	},	
 
-	configReady: function(){
+	getAppData: function(){
+		console.log('app getAppData');
+		var dbUrl = 'https://ofl.firebaseio.com/app';
+		var appData = new Firebase(dbUrl);
+		
+		appData.once('value', function(appValue) {
+			onlineForLife.App.AppData = appValue.val();
+			window.AppData = onlineForLife.App.AppData;
+			console.log(onlineForLife.AppData);
+			onlineForLife.App.appDataReady();
+		});
+	},	
+
+	appDataReady: function(){
 		onlineForLife.USMap.init();
 		onlineForLife.Feed.init();
 	}	

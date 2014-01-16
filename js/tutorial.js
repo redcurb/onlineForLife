@@ -1,29 +1,86 @@
 onlineForLife.Tutorial = {
 	init: function(){
-		onlineForLife.Tutorial.getTutorialData();
+		onlineForLife.Tutorial.setupTutorialConfig();
 	},
 	
 	tutorialData:{
 		
 	},
 	
+	setupTutorialConfig: function(){
+		//console.log('setupTutorialConfig');
+		var $tutorial = $('#tutorial-content');
+		var tutorialConfig = AppData.config.tutorial;
+		var tutorialText = AppData.text.tutorial;
+		var showTutorial = tutorialConfig.global.status == 'on';
+		
+		if(showTutorial){
+
+			var itemHtml = '';
+			var autoOpenText = tutorialConfig.global.autoOpenText=="true";
+			
+			//console.log('autoOpenText: ' + autoOpenText);
+			//console.log('tutorialText: ' + tutorialText.items);
+			//console.log('?????????????????????????????????????????????????');
+			$.each(tutorialText.items,function(key,itemData) {
+				if(typeof(itemData)!='undefined'){
+					var tutorialText = itemData.text;
+					var tutorialId = key;
+					var tutorialTextAlignment = itemData.align;
+					//console.log('item ' + tutorialId + ': ' + tutorialTextAlignment + ' - ' + itemData.text);
+					itemHtml += onlineForLife.Tutorial.buildTutorialItem(tutorialId, tutorialText, tutorialTextAlignment, autoOpenText);
+				}
+				//console.log(itemHtml);
+			});
+			$tutorial.append(itemHtml);
+			onlineForLife.Tutorial.setupTutorial();
+			//console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+		}
+		
+		/*
+		tutorialData.child('text').once('value', function(tutorialText) {
+			tutorialText.forEach(function(textSnap) {
+				var textData = textSnap.val();
+				var tutorialId = textSnap.name();
+				var tutorialText = textData.text;
+				var tutorialTextAlignment = textData.align;
+				itemHtml += onlineForLife.Tutorial.buildTutorialItem(tutorialId, tutorialText, tutorialTextAlignment, autoOpenText);
+				//console.log('align: ',tutorialTextAlignment);
+			});
+			//console.log(itemHtml);
+			var $tutorial = $('#tutorial-content');
+			$tutorial.append(itemHtml);
+			onlineForLife.Tutorial.setupTutorial();
+		});
+		
+		//*/
+
+		
+		
+	},
+	
 	getTutorialData: function(){
-		console.log('getTutorialData');
+		
+		//console.log('getTutorialData');
 		var dbUrl = 'https://ofl.firebaseio.com/tutorial/';
 		var tutorialData = new Firebase(dbUrl);
 		var $tutorial = $('#tutorial-content');
 
 		onlineForLife.Tutorial.tutorialData = {};
+		
+		
 		tutorialData.child('config').once('value', function(tutorialConfig) {
 			var configData = tutorialConfig.val();
-			console.log(configData);
+			
+			//console.log('configData');
+			//console.log(configData);
 			onlineForLife.Tutorial.tutorialData.config = configData;
 			var showTutorial = onlineForLife.Tutorial.tutorialData.config.status == 'on';
 			if(showTutorial){
 				tutorialData.child('text').once('value', function(tutorialText) {
 					var itemHtml = '';
 					var autoOpenText = onlineForLife.Tutorial.tutorialData.config.autoOpenText=="true";
-					console.log('autoOpenText: ',autoOpenText);
+					//console.log('autoOpenText: ',autoOpenText);
 					tutorialText.forEach(function(textSnap) {
 						var textData = textSnap.val();
 						var tutorialId = textSnap.name();

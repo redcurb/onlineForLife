@@ -14,7 +14,7 @@ onlineForLife.Panels = {
 	setText: function(){
 		var savedCount = onlineForLife.GlobalData.Text.global.savedCount;
 		savedCount = savedCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		console.log('savedCount',savedCount);
+		//console.log('savedCount',savedCount);
 		$('.mypanel-right .section-total-saved span.total-user-count').text(savedCount);
 	},
 	

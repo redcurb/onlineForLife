@@ -826,7 +826,7 @@ onlineForLife.Feed = {
 			}
 		}
 		onlineForLife.Feed.feedBgVersion = bgVersion;
-		console.log('bgVersion: ' + bgVersion);
+		//console.log('bgVersion: ' + bgVersion);
 		return bgVersion;
 	},	
 	
