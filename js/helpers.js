@@ -15,7 +15,7 @@ Redcurb.Helpers = {
 			if(deviceModel.indexOf('iphone')>=0){
 				value = 'iphone';
 			}
-			else if(deviceModel.indexOf('iPad')>=0){
+			else if(deviceModel.indexOf('ipad')>=0){
 				value = 'ipad';
 			}
 		}
@@ -36,7 +36,7 @@ Redcurb.Helpers = {
 			else if(deviceModel.indexOf('iphone4')>=0){
 				value = 'iphone4';
 			}
-			else if(deviceModel.indexOf('iPad')>=0){
+			else if(deviceModel.indexOf('ipad')>=0){
 				value = 'ipad';
 			}
 		}
