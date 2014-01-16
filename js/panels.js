@@ -389,6 +389,7 @@ onlineForLife.Panels = {
 				$.each(update,function(i,updateItem){
 					var dataHtml = updateItem.html;
 					var dataTitle = updateItem.title;
+					var dataImgUrl = updateItem.imgUrl;
 					console.log('dataHtml',dataHtml);
 					var addPopup = onlineForLife.Panels.doesPopupContentExist(dataHtml);
 					if(addPopup){
@@ -401,7 +402,7 @@ onlineForLife.Panels = {
 					//console.log('addPopup: ' + addPopup);
 					//console.log(updateItem);
 					window.popupHtml = dataHtml;
-					var newHtml = onlineForLife.Panels.buildUpdateItem(dataId, dataHtml, dataTitle);
+					var newHtml = onlineForLife.Panels.buildUpdateItem(dataId, dataHtml, dataTitle, dataImgUrl);
 					html += newHtml;
 					//console.log('newHtml');
 					//console.log(newHtml);
@@ -524,13 +525,13 @@ onlineForLife.Panels = {
 		}
 	},
 
-	buildUpdateItem: function(itemId, popupContent, dataTitle){
+	buildUpdateItem: function(itemId, popupContent, dataTitle, dataImgUrl){
 		//console.log('buildUpdateItem');
 		var source   = $("#template-updates-item").html();
 		var template = Handlebars.compile(source);
 		var id = itemId.toString();
 		//console.log('imgSuffix',imgSuffix);
-		var context = {itemId: itemId, popup: popupContent, title: dataTitle}
+		var context = {itemId: itemId, popup: popupContent, title: dataTitle, imgUrl: dataImgUrl}
 		var html = template(context);
 		//console.log(html);
 		return html;

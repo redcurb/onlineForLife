@@ -597,6 +597,9 @@ $(function() {
 
 <script id="template-updates-item" type="text/x-handlebars-template">
 				<li class="{{#if popup }}popup-true{{/if}}{{#unless popup }}popup-false{{/unless}}" data-popup="{{popup}}">
+					{{#if imgUrl }}
+					<img src="{{imgUrl}}" width="104" height="104" />
+					{{/if}}
 					<span class="text-update">{{title}}</span>
 				</li>
 
