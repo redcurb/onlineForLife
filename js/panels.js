@@ -102,42 +102,75 @@ onlineForLife.Panels = {
 		var $panelRight = $( ".mypanel-right");
 		var $panelLeft = $( ".mypanel-left");
 		var $panels = $( ".mypanel-right, .mypanel-left");
+		/*
 		$panels.on( "panelbeforeopen", function( event, ui ) {
 			var $this = $(this);
 			var $page = $this.parents('.ui-page');
 			$page.addClass('panel-opening');
+			$('body').addClass('panel-opening');
 		} );
 		$panels.on( "panelbeforeclose", function( event, ui ) {
 			var $this = $(this);
 			var $page = $this.parents('.ui-page');
 			$page.addClass('panel-closing');
+			$('body').addClass('panel-closing').removeClass('right-panel-open').removeClass('left-panel-open');
 		} );
+		*/
 		
+		//NOTE:::: some handlers are also assigned in tutorial.js
+		$panelRight.on( "panelbeforeopen", function( event, ui ) {
+			var $this = $(this);
+			var $page = $this.parents('.ui-page');
+			$page.addClass('right-panel-opening panel-opening');
+			$('body').addClass('right-panel-opening panel-opening tutorial-right-panel-opening');
+		} );
 		$panelRight.on( "panelopen", function( event, ui ) {
 			var $panel = $(this);
 			var $page = $panel.parents('.ui-page');
 			$page.removeClass('panel-opening');
+			$('body').removeClass('panel-opening right-panel-opening tutorial-right-panel-opening').addClass('right-panel-open');
 			setTimeout(function() {
 				onlineForLife.Panels.animateArcs($panel);
 			},250);
 		});
+		$panelRight.on( "panelbeforeclose", function( event, ui ) {
+			var $this = $(this);
+			var $page = $this.parents('.ui-page');
+			$page.addClass('right-panel-closing panel-closing');
+			$('body').addClass('right-panel-closing panel-closing tutorial-right-panel-closing');
+		} );
 		$panelRight.on( "panelclose", function( event, ui ) {
 			var $panel = $(this);
 			var $page = $panel.parents('.ui-page');
 			$page.removeClass('panel-closing');
+			$('body').removeClass('panel-closing').removeClass('right-panel-open right-panel-closing tutorial-right-panel-closing');
 			onlineForLife.Panels.hideArcs($panel);
 		});
 
+		$panelLeft.on( "panelbeforeopen", function( event, ui ) {
+			var $this = $(this);
+			var $page = $this.parents('.ui-page');
+			$page.addClass('left-panel-opening panel-opening');
+			$('body').addClass('left-panel-opening panel-opening tutorial-left-panel-opening');
+		} );
 		$panelLeft.on( "panelopen", function( event, ui ) {
 			var $panel = $(this);
 			var $page = $panel.parents('.ui-page');
 			$page.removeClass('panel-opening');
+			$('body').removeClass('panel-opening left-panel-opening tutorial-left-panel-opening').addClass('left-panel-open');
 			onlineForLife.Panels.animateLogo($panel);
 		});
+		$panelLeft.on( "panelbeforeclose", function( event, ui ) {
+			var $this = $(this);
+			var $page = $this.parents('.ui-page');
+			$page.addClass('panel-closing');
+			$('body').addClass('left-panel-closing panel-closing tutorial-left-panel-closing');
+		} );
 		$panelLeft.on( "panelclose", function( event, ui ) {
 			var $panel = $(this);
 			var $page = $panel.parents('.ui-page');
 			$page.removeClass('panel-closing');
+			$('body').removeClass('panel-closing').removeClass('left-panel-open left-panel-closing tutorial-left-panel-closing');
 			onlineForLife.Panels.resetLogo($panel);
 		});
 		

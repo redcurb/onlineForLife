@@ -23,17 +23,98 @@
 		#content-tutorial.tutorial-open a.tutorial-show{
 			display:none
 		}
+		1body.panel-opening #content-tutorial a.tutorial-link,
+		1body.panel-closing #content-tutorial a.tutorial-link{
+			display:none
+		}
+		
 		.tutorial-toggle a.tutorial-show i{
 			color:#EAEDEC;
 		}
 		.tutorial-toggle a.tutorial-hide i{
 			color:#e75629;
 		}
-		
 			.tutorial-toggle a i{
+				text-shadow:none;
 				font-size: 1.5em;
 			}
 
+
+		body.tutorial-right-panel-opening .tutorial-toggle a.tutorial-show i{
+			text-shadow:none;
+			animation: openRight 1s;
+			-webkit-animation: openRight 1s;
+		}
+		body.tutorial-right-panel-open .tutorial-toggle a.tutorial-show i{
+			text-shadow:none;
+		}
+		body.right-panel-open .tutorial-toggle a.tutorial-show i{
+			color: #707e7f;
+		}
+			@keyframes openRight{
+				from {color: #EAEDEC;}
+				to {color: #707e7f;}
+			}
+			
+			@-webkit-keyframes openRight{
+				from {color: #EAEDEC;}
+				to {color: #707e7f;}
+			}
+		body.tutorial-right-panel-closing .tutorial-toggle a.tutorial-show i{
+			animation: closeRight 0.5s;
+			-webkit-animation: closeRight 0.5s;
+		}
+			@keyframes closeRight{
+				from {color: #707e7f;}
+				to {color: #EAEDEC;}
+			}
+			
+			@-webkit-keyframes closeRight{
+				from {color: #707e7f;}
+				to {color: #EAEDEC;}
+			}
+ 		
+		body.tutorial-left-panel-opening .tutorial-toggle a.tutorial-show i{
+			animation: openLeft 0.5s;
+			-webkit-animation: openLeft 0.5s;
+		}
+		body.left-panel-open .tutorial-toggle a.tutorial-show i,
+		body.left-panel-closing .tutorial-toggle a.tutorial-show i{
+			opacity:0;
+		}
+			@keyframes openLeft{
+				from {opacity:1;}
+				to {opacity:0;}
+			}
+			
+			@-webkit-keyframes openLeft{
+				from {opacity:1;}
+				to {opacity:0;}
+			}
+		body.tutorial-left-panel-closing .tutorial-toggle a.tutorial-show i{
+			opacity:0;
+			animation: closeLeft 0.5s;
+			-webkit-animation: closeLeft 0.5s;
+		}
+			@keyframes closeLeft{
+				from {opacity:0;}
+				to {opacity:1;}
+			}
+			
+			@-webkit-keyframes closeLeft{
+				from {opacity:0;}
+				to {opacity:1;}
+			}
+
+		
+		
+		
+		
+		
+		body.right-panel-open .tutorial-toggle a.tutorial-hide i{
+			
+		}
+			
 	#content-tutorial.tutorial-open #tutorial-content{
 		display:block;
 	}

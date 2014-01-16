@@ -36,69 +36,6 @@ onlineForLife.Tutorial = {
 			onlineForLife.Tutorial.setupTutorial();
 			//console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
 		}
-		
-		/*
-		tutorialData.child('text').once('value', function(tutorialText) {
-			tutorialText.forEach(function(textSnap) {
-				var textData = textSnap.val();
-				var tutorialId = textSnap.name();
-				var tutorialText = textData.text;
-				var tutorialTextAlignment = textData.align;
-				itemHtml += onlineForLife.Tutorial.buildTutorialItem(tutorialId, tutorialText, tutorialTextAlignment, autoOpenText);
-				//console.log('align: ',tutorialTextAlignment);
-			});
-			//console.log(itemHtml);
-			var $tutorial = $('#tutorial-content');
-			$tutorial.append(itemHtml);
-			onlineForLife.Tutorial.setupTutorial();
-		});
-		
-		//*/
-
-		
-		
-	},
-	
-	getTutorialData: function(){
-		
-		//console.log('getTutorialData');
-		var dbUrl = 'https://ofl.firebaseio.com/tutorial/';
-		var tutorialData = new Firebase(dbUrl);
-		var $tutorial = $('#tutorial-content');
-
-		onlineForLife.Tutorial.tutorialData = {};
-		
-		
-		tutorialData.child('config').once('value', function(tutorialConfig) {
-			var configData = tutorialConfig.val();
-			
-			//console.log('configData');
-			//console.log(configData);
-			onlineForLife.Tutorial.tutorialData.config = configData;
-			var showTutorial = onlineForLife.Tutorial.tutorialData.config.status == 'on';
-			if(showTutorial){
-				tutorialData.child('text').once('value', function(tutorialText) {
-					var itemHtml = '';
-					var autoOpenText = onlineForLife.Tutorial.tutorialData.config.autoOpenText=="true";
-					//console.log('autoOpenText: ',autoOpenText);
-					tutorialText.forEach(function(textSnap) {
-						var textData = textSnap.val();
-						var tutorialId = textSnap.name();
-						var tutorialText = textData.text;
-						var tutorialTextAlignment = textData.align;
-						itemHtml += onlineForLife.Tutorial.buildTutorialItem(tutorialId, tutorialText, tutorialTextAlignment, autoOpenText);
-						//console.log('align: ',tutorialTextAlignment);
-					});
-					//console.log(itemHtml);
-					var $tutorial = $('#tutorial-content');
-					$tutorial.append(itemHtml);
-					onlineForLife.Tutorial.setupTutorial();
-				});
-			}
-		});
-	},
-	
-	getTutorialText: function(tutorialData){
 	},
 	
 	setupTutorial: function(){
@@ -107,8 +44,8 @@ onlineForLife.Tutorial = {
 	},
 	
 	setupTutorialState: function(){
-		var tutorialStatus = true;
-		var showNudge = true;
+		var tutorialStatus = AppData.config.tutorial.global.status == 'on';
+		var showNudge = AppData.config.tutorial.global.nudge;
 		var tutorialClass = '';
 		var nudgeClass = '';
 		if(showNudge){
@@ -156,6 +93,13 @@ onlineForLife.Tutorial = {
 		
 		$('a.tutorial-hide').on('click', function(){
 			onlineForLife.Tutorial.handleTutorialHide();
+		});
+		var $panelRight = $( ".mypanel-right");
+		$panelRight.on( "panelopen", function( event, ui ) {
+			$('#content-tutorial').removeClass('tutorial-page-feed').addClass('tutorial-page-stats');
+		});
+		$panelRight.on( "panelclose", function( event, ui ) {
+			$('#content-tutorial').addClass('tutorial-page-feed').removeClass('tutorial-page-stats');
 		});
 	},
 	
