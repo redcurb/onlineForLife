@@ -719,7 +719,7 @@ onlineForLife.Feed = {
 	setupFirebasePrayers:function(){
 		var dbUrl = 'https://ofl.firebaseio.com/prayers';
 		var myDataRef = new Firebase(dbUrl);		
-		myDataRef.on('child_added', function(snapshot) {
+		myDataRef.on('child_changed', function(snapshot) {
 			var message = snapshot.val();
 			var itemName = snapshot.name();
 			window.test = {};
@@ -727,7 +727,7 @@ onlineForLife.Feed = {
 			window.test.name = snapshot.name();
 			var stateCode = onlineForLife.Feed.userData.userInfo.state || '';
 			if(onlineForLife.Feed.addFirebaseChild && stateCode !=''){
-				//onlineForLife.USMap.toggleState(stateCode);
+				onlineForLife.USMap.toggleState(stateCode);
 			}
 		});
 	},
