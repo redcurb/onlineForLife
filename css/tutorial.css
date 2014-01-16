@@ -135,6 +135,9 @@
 			height:114px;
 			background-size:100% auto;
 		}
+		body.right-panel-open #content-tutorial #tutorial-tap{
+			display:none;
+		}
 		#content-tutorial.show-nudge #tutorial-tap{
 			display:block;
 		}
@@ -233,19 +236,64 @@
 				left: 355px;
 				top: 640px;
 			}
-		#tutorial-4{
+
+			
+		#tutorial-5{
 		}
-			#tutorial-4 .tutorial-cta{
-				left:440px;
-				top:845px;
+			#tutorial-5 .tutorial-cta{
+				left: 220px;
+				top: 115px;
 			}
-			#tutorial-4 .tutorial-text{
-				left: 225px;
-				top: 845px;
+			#tutorial-5 .tutorial-text{
+				left: 140px;
+				top: 175px;
+			}
+		#tutorial-6{
+		}
+			#tutorial-6 .tutorial-cta{
+				left: 550px;
+				top: 370px;
+			}
+			#tutorial-6 .tutorial-text{
+				left: 335px;
+				top: 355px;
+			}
+		#tutorial-7{
+		}
+			#tutorial-7 .tutorial-cta{
+				left: 70px;
+				top: 565px;
+			}
+			#tutorial-7 .tutorial-text{
+				left: 5px;
+				top: 440px;
+			}
+		#tutorial-8{
+		}
+			#tutorial-8 .tutorial-cta{
+				left: 570px;
+				top: 565px;
+			}
+			#tutorial-8 .tutorial-text{
+				left: 360px;
+				top: 535px;
+			}
+		#tutorial-9{
+		}
+			#tutorial-9 .tutorial-cta{
+				left: 200px;
+				top: 705px;
+			}
+			#tutorial-9 .tutorial-text{
+				left: 255px;
+				top: 708px;
 			}
 			
 	
 
 #modal-screen.screen-tutorial{
 	background:rgba(255,255,255,0.65)	
+}
+body.right-panel-open #modal-screen.screen-tutorial{
+	background:rgba(0,0,0,0.65)	
 }
