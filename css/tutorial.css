@@ -12,7 +12,7 @@
 }
 	.tutorial-toggle{
 		position:absolute;
-		top:60px;
+		top:10px;
 		width:100%;
 	}
 		.tutorial-toggle a{
@@ -23,8 +23,15 @@
 		#content-tutorial.tutorial-open a.tutorial-show{
 			display:none
 		}
-			.tutorial-toggle a span{
-				font-size:0.6em;
+		.tutorial-toggle a.tutorial-show i{
+			color:#EAEDEC;
+		}
+		.tutorial-toggle a.tutorial-hide i{
+			color:#f00;
+		}
+		
+			.tutorial-toggle a i{
+				font-size: 1.5em;
 			}
 
 

@@ -91,24 +91,24 @@
 				min-width:640px;
 				border-bottom:1px solid #d5d8d7;
 				background: #da490a;
-				background:#dd5a15 url(../img/phone-version.jpg?ver=1213) no-repeat 0 0;
+				background:#dd5a15 url(../img/phone-version.jpg) no-repeat 0 0;
 				-1webkit-backface-visibility: hidden;
 				visibility:hidden2;
 			}
 			ul.feed li.feed-item.version-1{
-				background-image:url(../img/phone-version-1.jpg) no-repeat 0 0;
+				background-image:url(../img/phone-version-1.jpg);
 			}
 			ul.feed li.feed-item.version-2{
-				background-image:url(../img/phone-version-2.jpg) no-repeat 0 0;
+				background-image:url(../img/phone-version-2.jpg);
 			}
 			ul.feed li.feed-item.version-3{
-				background-image:url(../img/phone-version-3.jpg) no-repeat 0 0;
+				background-image:url(../img/phone-version-3.jpg);
 			}
 			ul.feed li.feed-item.version-4{
-				background-image:url(../img/phone-version-4.jpg) no-repeat 0 0;
+				background-image:url(../img/phone-version-4.jpg);
 			}
 			ul.feed li.feed-item.version-5{
-				background-image:url(../img/phone-version-5.jpg) no-repeat 0 0;
+				background-image:url(../img/phone-version-5.jpg);
 			}
 			ul.feed li.feed-item.first{
 				margin-top:0;
@@ -317,35 +317,42 @@
 		
 		
 	/* Tablet Landscape styles */
-	body.orientation-landscape.platform-tablet .mypanel-left.ui-panel {
+	body.orientation-landscape.platform-tablet .mypanel-left.ui-panel,
+	body.orientation-landscape.model-ipad .mypanel-left.ui-panel{
 		width: 408px;
 		visibility: visible;
 		position: absolute;
 		z-index: 9999999;
 	}
-	body.orientation-landscape.platform-tablet .mypanel-right.ui-panel {
+	body.orientation-landscape.platform-tablet .mypanel-right.ui-panel,
+	body.orientation-landscape.model-ipad .mypanel-right.ui-panel{
 		width: 552px;
 		visibility: visible;
 		z-index: 9999999;
 		position: absolute;
 	}
-	body.orientation-landscape.platform-tablet .ui-page .ui-header.header-primary{
+	body.orientation-landscape.platform-tablet .ui-page .ui-header.header-primary,
+	body.orientation-landscape.model-ipad .ui-page .ui-header.header-primary{
 		left: 408px;
 	}
-	body.orientation-landscape.platform-tablet .ui-panel-content-wrap{
+	body.orientation-landscape.platform-tablet .ui-panel-content-wrap,
+	body.orientation-landscape.model-ipad .ui-panel-content-wrap{
 		left:408px;
 		position:relative;
 	}
-	body.orientation-landscape.platform-tablet .content-main.ui-content {
+	body.orientation-landscape.platform-tablet .content-main.ui-content,
+	body.orientation-landscape.model-ipad .content-main.ui-content{
 		padding: 1%;
 	}
-			body.orientation-landscape.platform-tablet ul.feed{
+			body.orientation-landscape.platform-tablet ul.feed,
+			body.orientation-landscape.model-ipad ul.feed{
 				margin-left:-1%;
 				width:102%;
 			}
 	
 			
-				body.orientation-landscape.platform-tablet ul.feed li.feed-item {
+				body.orientation-landscape.platform-tablet ul.feed li.feed-item,
+				body.orientation-landscape.model-ipad ul.feed li.feed-item{
 					
 					}
 					

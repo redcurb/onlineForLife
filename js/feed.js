@@ -84,7 +84,7 @@ onlineForLife.Feed = {
 	
 	setDevice: function(){
 		//console.log('setDevice');
-		var device = {"platform" : "iOS","available" : true,"model" : "iPhone5,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
+		//var device = {"platform" : "iOS","available" : true,"model" : "iPhone5,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
 		if(typeof(device)!='undefined'){
 			//$('.refresh-subtext').text($('.refresh-subtext').text() + ': ' + device.model);
 			var modelName = Redcurb.Helpers.getDeviceInfo(device, 'MODEL_NAME');
@@ -100,7 +100,6 @@ onlineForLife.Feed = {
 			onlineForLife.Feed.deviceStatus.platform = platformName;
 			onlineForLife.Feed.deviceStatus.version = versionText;
 			
-
 			var platformClass = 'platform-' + platformName;
 			var modelClass = 'model-' + modelName;
 			var modelFamilyClass = 'model-family-' + modelFamilyName;
@@ -816,6 +815,7 @@ onlineForLife.Feed = {
 			}
 		}
 		onlineForLife.Feed.feedBgVersion = bgVersion;
+		console.log('bgVersion: ' + bgVersion);
 		return bgVersion;
 	},	
 	
