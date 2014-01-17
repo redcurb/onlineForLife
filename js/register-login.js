@@ -523,7 +523,4 @@ onlineForLife.Forgot = {
 };
 
 
-$(function() {
-	onlineForLife.Auth.init();
-});
 
