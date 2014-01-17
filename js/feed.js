@@ -200,7 +200,8 @@ onlineForLife.Feed = {
 		//console.log(user);
 		var userId = user.id;
 		onlineForLife.Feed.userData.id = userId;
-		
+		AppData.UserId = userId;
+		onlineForLife.App.getUserData();
 		var usersRef = new Firebase('https://ofl.firebaseio.com/users/' + userId);
 		usersRef.once('value', function(snapshot) {
 			var userName = snapshot.name()

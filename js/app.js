@@ -7,6 +7,7 @@ onlineForLife.Events = onlineForLife.Events || {};
 onlineForLife.USMap = onlineForLife.USMap || {};
 onlineForLife.Tracking = onlineForLife.Tracking || {};
 onlineForLife.Tutorial = onlineForLife.Tutorial || {};
+onlineForLife.Push = onlineForLife.Push || {};
 onlineForLife.App = {
 	init: function(){
 		console.log('app init');
@@ -18,6 +19,7 @@ onlineForLife.App = {
 		onlineForLife.Tutorial.init();
 		onlineForLife.Footer.init();
 		onlineForLife.Panels.init();
+		onlineForLife.Push.init();
 		onlineForLife.Settings.init();
 		setTimeout(function() {
 			onlineForLife.Feed.animatePraySwipe();
@@ -40,6 +42,20 @@ onlineForLife.App = {
 		});
 	},	
 
+	getUserData: function(){
+		var userId = AppData.UserId;
+		var dbUrl = 'https://ofl.firebaseio.com/users/' + userId;
+		var userDataRef = new Firebase(dbUrl);
+		
+		userDataRef.once('value', function(userData) {
+			console.log('++++++++++++++++++++++++++++++++++++++userDataRef');
+			userDataValue = userData.val();
+			AppData.User = userDataValue;
+			console.log(userDataValue);
+		});
+
+	},	
+
 	getAppData: function(){
 		console.log('app getAppData');
 		var dbUrl = 'https://ofl.firebaseio.com/app';
@@ -56,6 +72,7 @@ onlineForLife.App = {
 	appDataReady: function(){
 		onlineForLife.USMap.init();
 		onlineForLife.Feed.init();
+		
 	}	
 };
 $(function() {
