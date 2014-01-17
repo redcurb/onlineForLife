@@ -241,6 +241,17 @@ onlineForLife.Feed = {
 		var prayersUrl = 'https://ofl.firebaseio.com/prayers/' + eventId;
 		var prayersData = new Firebase(prayersUrl);
 		prayersData.push({ userId: onlineForLife.Feed.userData.id });
+
+		var prayerTotalUrl = 'https://ofl.firebaseio.com/app/text/prayerTotal';
+		var prayerTotalData = new Firebase(prayerTotalUrl);
+		
+		prayerTotalData.once('value', function(prayerTotalValue) {
+			console.log(prayerTotalValue.val());
+			console.log(prayerTotalValue.val());
+			var newValue = prayerTotalValue.val() + 1;
+			console.log('newValue: ' + newValue);
+			prayerTotalData.set(newValue);
+		});
 		
 	},
 
@@ -840,6 +851,7 @@ onlineForLife.Feed = {
 	},
 	
 	setupHandlers: function(){
+		onlineForLife.Feed.setupTotalPrayerCount();
 		$( "1.feed-share" ).on( "click", function(){
 			alert($(window).width() + ' x ' + $(window).height());
 		});
@@ -961,6 +973,17 @@ onlineForLife.Feed = {
 				$listItem.removeClass('show-tutorial');
 			}
 		}
+	},
+	
+	setupTotalPrayerCount:function(){
+		var testUrl = 'https://ofl.firebaseio.com/app/text/prayerTotal';
+		var testData = new Firebase(testUrl);
+		var $totalPrayerCount = $('.main-refresh .refresh-count');
+
+		testData.on('value', function(configValue) {
+			prayerTotal = configValue.val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			$totalPrayerCount.text(prayerTotal);
+		});
 	},
 	
 	handleRefreshMain: function($this){
