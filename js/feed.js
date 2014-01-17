@@ -11,11 +11,8 @@ onlineForLife.Feed = {
 	
 	addFirebaseChild: true,
 	
-	showNudgeTutorial:true,
 	
 	nudgeTutorialCount:0,
-	
-	nudgeTutorialMax:3,
 	
 	prayersToday: 93432,
 	
@@ -566,8 +563,8 @@ onlineForLife.Feed = {
 		onlineForLife.Feed.feedItemLists.currentListItemCount = itemBuildCount;
 			
 		//console.timeEnd('buildFeed');
-		if(itemBuildCount<onlineForLife.Feed.showFooterOnCount){
-			onlineForLife.Feed.showFooterOnCount=itemBuildCount;
+		if(itemBuildCount<AppData.config.feed.footer.showFooterOnCount){
+			AppData.config.feed.footer.showFooterOnCount=itemBuildCount;
 		}
 		if(itemBuildCount==0){
 			onlineForLife.Feed.toggleFeedMessage('PRAYED_ALL');
@@ -706,18 +703,13 @@ onlineForLife.Feed = {
 		//console.log('itemBuildCount',itemBuildCount);
 			
 		//console.timeEnd('buildFeed');
-		if(itemBuildCount<onlineForLife.Feed.showFooterOnCount){
-			onlineForLife.Feed.showFooterOnCount=itemBuildCount;
+		if(itemBuildCount<AppData.config.feed.footer.showFooterOnCount){
+			AppData.config.feed.footer.showFooterOnCount=itemBuildCount;
 		}
 		if(itemBuildCount==0){
 			onlineForLife.Feed.toggleFeedMessage('PRAYED_ALL');
 		}
-		setTimeout(function() {
-			onlineForLife.Feed.animatePraySwipe();
-		},5000);
-
-
-		onlineForLife.Feed.onFeedLoaded();
+		onlineForLife.App.onFeedLoaded();
 	},
 	
 	setupFirebasePrayers:function(){
@@ -903,7 +895,7 @@ onlineForLife.Feed = {
 	},
 
 	handleSwipe: function($this, swipeDir){
-		onlineForLife.Feed.showNudgeTutorial=false;
+		AppData.config.feed.nudge.showNudge=false;
 		var $parentLi = $this.parents('li');
 		if(swipeDir=='right'){
 			posLeft = '100%';
@@ -937,20 +929,20 @@ onlineForLife.Feed = {
 
 	updateUserPrayerCount: function(){
 		onlineForLife.Feed.feedItemLists.currentListItemCount = onlineForLife.Feed.feedItemLists.currentListItemCount - 1;
-		var showFooterOnCount = onlineForLife.Feed.showFooterOnCount;
 		var currentCount = onlineForLife.Feed.userPrayersDaily;
 		$('.prayer-count').text(currentCount);
-		if(currentCount==showFooterOnCount){
+		if(currentCount>=AppData.config.feed.footer.showFooterOnCount){
 			$('.footer-primary').animate({height: "232px"}, 500)
 		}
 		onlineForLife.Feed.checkRemainingItems();
 	},
 	
 	animatePraySwipe: function(){
-		if(onlineForLife.Feed.showNudgeTutorial){
+		console.log('animatePraySwipe');
+		if(AppData.config.feed.nudge.showNudge){
 			var $listItem = $('ul.feed li.feed-item:eq(0)');
 			var $listItemContent = $listItem.find('.feed-content');
-			if(onlineForLife.Feed.nudgeTutorialCount<onlineForLife.Feed.nudgeTutorialMax){
+			if(onlineForLife.Feed.nudgeTutorialCount<AppData.config.feed.nudge.showNudgeCount){
 				$listItem.addClass('show-tutorial');
 				$listItemContent.animate({'left':'-140px'}, 300, function(){
 					$listItemContent.animate({'left':'-110px'}, 200, function(){
@@ -963,13 +955,13 @@ onlineForLife.Feed = {
 					$listItemContent.animate({'left':'0'}, 300, function(){
 						setTimeout(function() {
 							onlineForLife.Feed.animatePraySwipe();
-						}, 3000);
+						}, AppData.config.feed.nudge.nudgeDelayBetween);
 					});
-				}, 2500);
+				}, AppData.config.feed.nudge.nudgeOpenDuration);
 				onlineForLife.Feed.nudgeTutorialCount=onlineForLife.Feed.nudgeTutorialCount+1;
 			}
 			else{
-				onlineForLife.Feed.showNudgeTutorial=false;
+				AppData.config.feed.nudge.showNudge=false;
 				$listItem.removeClass('show-tutorial');
 			}
 		}

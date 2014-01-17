@@ -19,6 +19,9 @@ onlineForLife.App = {
 		onlineForLife.Footer.init();
 		onlineForLife.Panels.init();
 		onlineForLife.Settings.init();
+		setTimeout(function() {
+			onlineForLife.Feed.animatePraySwipe();
+		},AppData.config.feed.nudge.nudgeDelayToStart);
 	},
 
 	getConfigData: function(){
