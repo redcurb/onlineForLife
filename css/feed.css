@@ -368,6 +368,7 @@
 body.model-ipad ul.feed li.feed-item{
 	background-image:url(../img/tablet-version.jpg);
 	background-size: 100% auto;
+	background-size: 100% 100%;
 }
 
 body.model-ipad ul.feed li.feed-item.version-1{
