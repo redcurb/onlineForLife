@@ -65,6 +65,26 @@ Redcurb.Helpers = {
 			orientationValue = 'landscape';
 		}
 		return orientationValue;
+	},
+	
+	getCookie: function(name){
+		var name = name + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0; i<ca.length; i++){
+			var c = ca[i].trim();
+			if (c.indexOf(name)==0){
+				return c.substring(name.length,c.length);
+			}
+		}
+		return "";
+	},
+	
+	setCookie: function(name,value,expiration){
+		console.log('setCookie: ' + name);
+		var d = new Date();
+		d.setTime(d.getTime()+(expiration*24*60*60*1000));
+		var expires = "expires="+d.toGMTString();
+		document.cookie = name + "=" + value + "; " + expires;
 	}
 
 

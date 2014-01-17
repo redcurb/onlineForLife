@@ -134,13 +134,16 @@
 				display:none;
 			}
 				ul.feed li.feed-item .feed-prayer-instruction{
-					right: 45px;
+					right: 5%;
 					position: absolute;
 					top: 21px;
 					width: 66px;
 					height:158px;
 					background:transparent url(../img/pray-then-swipe.png) no-repeat 0 0;
 					display:none;
+				}
+				body.model-iphone ul.feed li.feed-item .feed-prayer-instruction{
+					padding-left:45px;
 				}
 				ul.feed li.feed-item.show-tutorial .feed-prayer-instruction{
 					display:block;
@@ -251,7 +254,7 @@
 						padding:0 10%;
 						font-size:1.3em;
 						padding:12px 10% 0 45px;
-						padding:12px 0px 0 45px;
+						padding:12px 0px 0 5%;
 						width:60%;
 						1background:blue;
 						display:block;
@@ -269,17 +272,23 @@
 						
 						width:460px;
 					}
+					body.model-iphone ul.feed li.feed-item p.action-text{
+						padding-left:45px;
+					}
 					.action-step{
 						display:block;
 						width:112px;
 						height:112px;
 						background:url(../img/feed-steps.jpg) no-repeat 0 0;
 						float:right;
-						right: 42px;
+						right: 5%;
 						position: relative;
 						top: 45px;
 
 						1background:green;
+					}
+					body.model-iphone .action-step{
+						right: 42px;
 					}
 						.action-step.step-2{
 							background-position:0 -112px;

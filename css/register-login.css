@@ -37,6 +37,16 @@
 					input.input-text.valid-false {
 						background: palegoldenrod;
 					}
+					select.input-select {
+						padding:20px 23px 23px;
+						border-radius: 7px;
+						width:524px;
+						border:1px solid #979797;
+						margin-top:24px;
+						font-size: 1.6em;
+						font-weight: 100;
+						letter-spacing:2px;
+					}
 					
 				.fieldset-text{
 					position:relative;

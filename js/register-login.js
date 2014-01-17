@@ -16,8 +16,17 @@ onlineForLife.Auth = {
 	
 	userData: {},
 	
-	handleLoginSuccess: function(method, user){
-		console.log('handleLoginSuccess',user);
+	handleLoginSuccess: function(method, user, token){
+		console.log('handleLoginSuccess: ' + method);
+		console.log(user);
+		console.log('handleLoginSuccess',typeof(user.firebaseAuthToken)=='undefined');
+		if(user.firebaseAuthToken!="" && user.firebaseAuthToken!="undefined" && typeof(user.firebaseAuthToken)=='undefined'){
+			token = user.firebaseAuthToken;
+		}
+		if(token!="" && token!="undefined"){
+			console.log('GOOD TOKEN');
+			Redcurb.Helpers.setCookie('userFirebaseToken',user.firebaseAuthToken,30);
+		}
 		onlineForLife.Auth.updateUserData(method, user);
 	},
 	
@@ -36,7 +45,7 @@ onlineForLife.Auth = {
 		if(typeof(device)!='undefined'){
 			userDataRef.child('device').set(device);
 		}
-		document.location="feed.html";
+		onlineForLife.Auth.goToFeed();
 	},
 	
 	checkLoginStatus: function(){
@@ -53,19 +62,42 @@ onlineForLife.Auth = {
 				// User is already logged in.
 				console.log(user);
 				console.log(user.email);
-				onlineForLife.Auth.handleLoginSuccess('AUTO_LOGGED_IN',user);
+				onlineForLife.Login.init();
+				onlineForLife.Auth.handleLoginSuccess('AUTO_LOGGED_IN',user,"");
 			} else {
 				// User is logged out.
 				console.log('no user');
-				onlineForLife.Register.init();
-				onlineForLife.Login.init();
-				onlineForLife.Forgot.init();
+				onlineForLife.Auth.tryTokenLogin();
 			}
 		});
 		
+	},
 		
 		
+	tryTokenLogin: function(){
+		var token = Redcurb.Helpers.getCookie('userFirebaseToken');
+		var dataRef = new Firebase("https://ofl.firebaseio.com/");
+		console.log('tryTokenLogin: ' + token);
+		// Log me in.
+		if(Redcurb.Helpers.getCookie('userFirebaseToken')=="undefined" || Redcurb.Helpers.getCookie('userFirebaseToken')==""){
+			onlineForLife.Register.init();
+			onlineForLife.Login.init();
+			onlineForLife.Forgot.init();
+		}
+		else{
+			dataRef.auth(token, function(error,user) {
+			  if(error) {
+				console.log("Token Login Failed!", error);
+			  }
+			  else {
+				console.log("Token Login Succeeded! - " + Redcurb.Helpers.getCookie('userFirebaseToken'));
+				console.log(user);	
+				onlineForLife.Auth.handleLoginSuccess('TOKEN_LOGGED_IN',user,token);
+			  }
+			});
+		}
 	}
+	
 };
 
 onlineForLife.Register = {
@@ -101,10 +133,12 @@ onlineForLife.Register = {
 		var $email = $form.find('#input-register-email');
 		var $password = $form.find('#input-register-password');
 		var $zip = $form.find('#input-register-zip');
+		var $state = $form.find('#input-register-state');
 		var firstNameVal = $firstName.val();
 		var emailVal = $email.val();
 		var passwordVal = $password.val();
 		var zipVal = $zip.val();
+		var stateVal = $state.val();
 		
 		
 		var firebaseUrl =  new Firebase('https://ofl.firebaseio.com');
@@ -132,13 +166,24 @@ onlineForLife.Register = {
 						var userEmail = user.email;
 						var userName = firstNameVal;
 						var userZip = zipVal;
-						var pushData = { id: userId, email: userEmail, name: userName, zip: userZip };
-						usersData.push(pushData);
-						onlineForLife.Auth.userData = pushData;
+						var userState = stateVal;
+						var timestamp = new Date().getTime();
+						var timestampVal = timestamp.toString();
+						var deviceData = {"platform" : "", "available" : "", "model" : "", "cordova" : "", "version" : "", "uuid" : ""};
+						var configData = {"push" : { "token" : "", "allowed" : "", "specialUpdates" : "", "none" : "", "UUID" : "", "dailySummary" : "", "everyLifeChoice" : ""}};					
+						var userInfoData = { id: userId, email: userEmail, name: userName, zip: userZip, state: userState };
 						
-						var usersPrayersUrl = 'https://ofl.firebaseio.com/users/'+user.id + '/prayers';
-						var usersPrayersData = new Firebase(usersPrayersUrl);
-						usersPrayersData.push("{}");
+						var userTableData = {};
+						userTableData.id = userId;
+						userTableData.timestamp = timestamp;
+						userTableData.config = configData;
+						userTableData.userInfo = userInfoData;
+						userTableData.userInfo.device = deviceData;
+						usersData.set(userTableData);
+						
+						usersData.child('config').set(configData);
+						usersData.child('userInfo').set(userInfoData);
+						onlineForLife.Auth.userData = userInfoData;
 		
 						auth.login('password', {
 						  email: emailVal,
@@ -157,7 +202,7 @@ onlineForLife.Register = {
 	
 	handleRegSuccess: function(user){
 		console.log('handleRegSuccess');
-		onlineForLife.Auth.handleLoginSuccess('REG_SUCCESS',user);
+		onlineForLife.Auth.handleLoginSuccess('REG_SUCCESS',user,"");
 	},
 	
 	handleRegError: function(){
@@ -438,7 +483,7 @@ onlineForLife.Login = {
 				// User is already logged in.
 				console.log('logged in');
 				console.log(user.email);
-				onlineForLife.Login.handleFormSuccess(user);
+				onlineForLife.Login.handleFormSuccess(user,auth);
 			} else {
 				// User is logged out.
 				console.log('no user');
@@ -453,8 +498,10 @@ onlineForLife.Login = {
 		});
 	},
 	
-	handleFormSuccess: function(user){
-		onlineForLife.Auth.handleLoginSuccess('LOGGED_IN',user);
+	handleFormSuccess: function(user,auth){
+		console.log('handleFormSuccess');
+		console.log(auth);
+		onlineForLife.Auth.handleLoginSuccess('LOGGED_IN',user,"");
 	}
 };
 

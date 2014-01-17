@@ -79,16 +79,31 @@ onlineForLife.Feed = {
 		onlineForLife.Feed.setDevice();
 	},
 	
+	overrideiPad: function(orientation){
+		//	onlineForLife.Feed.overrideiPad('land');
+		window.orientation = 0;
+		if(orientation=='land'){
+			window.orientation = 90;
+		}
+		
+		
+		
+	},
+	
 	setDevice: function(){
 		//console.log('setDevice');
 		//var device = {"platform" : "iOS","available" : true,"model" : "iPhone5,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
 		//var device = {"platform" : "iOS","available" : true,"model" : "iPad5,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
+		//var device = {"platform" : "android","available" : true,"model" : "android,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
+		AppData.device = {};
 		if(typeof(device)!='undefined'){
+			AppData.device = device;
 			//$('.refresh-subtext').text($('.refresh-subtext').text() + ': ' + device.model);
 			var modelName = Redcurb.Helpers.getDeviceInfo(device, 'MODEL_NAME');
 			var modelFamilyName = Redcurb.Helpers.getDeviceInfo(device, 'MODEL_FAMILY_NAME');
 			var platformName = Redcurb.Helpers.getDeviceInfo(device, 'PLATFORM_NAME');
 			var versionText = Redcurb.Helpers.getDeviceInfo(device, 'OS_VERSION');
+			
 			//console.log('modelName: ' + modelName);
 			//console.log('modelFamilyName: ' + modelFamilyName);
 			//console.log('platformName: ' + platformName);
@@ -97,7 +112,7 @@ onlineForLife.Feed = {
 			onlineForLife.Feed.deviceStatus.modelFamily = modelFamilyName;
 			onlineForLife.Feed.deviceStatus.platform = platformName;
 			onlineForLife.Feed.deviceStatus.version = versionText;
-			
+			AppData.device.friendly = onlineForLife.Feed.deviceStatus;
 			var output = '';
 			output += 'modelName: ' + modelName +'\n';
 			output += 'modelFamilyName: ' + modelFamilyName +'\n';
@@ -119,6 +134,13 @@ onlineForLife.Feed = {
 				onlineForLife.Feed.setupTabletLayout();
 			}
 		}
+		else{
+			
+		}
+	},
+	
+	setupDeviceLayout:function(){
+		
 	},
 	
 	handleOrientationChange:function(){
@@ -945,9 +967,19 @@ onlineForLife.Feed = {
 			var $listItemContent = $listItem.find('.feed-content');
 			if(onlineForLife.Feed.nudgeTutorialCount<AppData.config.feed.nudge.showNudgeCount){
 				$listItem.addClass('show-tutorial');
-				$listItemContent.animate({'left':'-140px'}, 300, function(){
-					$listItemContent.animate({'left':'-110px'}, 200, function(){
-						$listItemContent.animate({'left':'-120px'}, 100, function(){
+				var bump1 = '-14%';
+				var bump2 = '-11%';
+				var bump3 = '-12%';
+				if(typeof(AppData.device.friendly)!='undefined'){
+					if(AppData.device.friendly.model=='iphone'){
+						bump1 = '-140px';
+						bump2 = '-110px';
+						bump3 = '-120px';
+					}
+				}
+				$listItemContent.animate({'left':bump1}, 300, function(){
+					$listItemContent.animate({'left':bump2}, 200, function(){
+						$listItemContent.animate({'left':bump3}, 100, function(){
 						});
 					});
 				});

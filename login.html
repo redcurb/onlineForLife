@@ -57,7 +57,10 @@
 		});
 		$("#registerButton").on("click", function() {
 			console.log('reg clicked');
-			var email = 'brianpray4@brian.com';
+			var email = 'brianOFL@radiantbone.com';
+			var timestamp = new Date().getTime();
+			var timestampVal = timestamp.toString();
+			email = 'brian' + timestampVal + '@brian.com';
 			var password = 'password1';
 			auth.createUser(email, password, function(error,  user) {
 				if (!error) {
@@ -74,11 +77,19 @@
 					var userEmail = user.email;
 					var userName = 'brian';
 					var userZip = '91107';
-					var pushData = { id: userId, email: userEmail, name: userName, zip: userZip };
-					usersData.push(pushData);
+					var userState = 'CA';
+					usersData.child('id').set(userId);
+					var deviceData = {"platform" : "", "available" : "", "model" : "", "cordova" : "", "version" : "", "uuid" : ""};
+					var configData = {"push" : { "token" : "", "allowed" : "", "specialUpdates" : "", "none" : "", "UUID" : "", "dailySummary" : "", "everyLifeChoice" : ""}};					
+					var userInfoData = { id: userId, email: userEmail, name: userName, zip: userZip, state: userState };
 
-
-					
+					var userTableData = {};
+					userTableData.id = userId;
+					userTableData.timestamp = timestamp;
+					userTableData.config = configData;
+					userTableData.userInfo = userInfoData;
+					userTableData.userInfo.device = deviceData;
+					usersData.set(userTableData);
 				} else {
 					console.log('error');
 					console.log(error);
@@ -165,3 +176,20 @@
 	<a href="home.html" data-ajax="false">Home</a>
 </body>
 </html>
+
+<!--
+token created 1-19 6:28pm
+var token1 = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjEzOTI1MTc0NjgsInYiOjAsImQiOnsicHJvdmlkZXIiOiJwYXNzd29yZCIsImlkIjoiNjYiLCJ1aWQiOiJzaW1wbGVsb2dpbjo2NiIsImVtYWlsIjoiYnJpYW5vZmxAcmFkaWFudGJvbmUuY29tIiwibWQ1X2hhc2giOiJiM2FiYTM1YTc4NTYxNTg3ZTE3NTBmMTBlY2U2ZDliZiIsInNlc3Npb25LZXkiOiJmMWU3MjI2YWYzZDhjY2QxY2RjMDJhZmJmZmViMjUwNCJ9LCJpYXQiOjEzODk5MjU0Njh9.Gm7aFypaT8THHvIJoZDNnzRrXSyWCe7JK4qiFPsJM9w";
+
+var dataRef = new Firebase("https://ofl.firebaseio.com/");
+// Log me in.
+dataRef.auth(token1, function(error) {
+  if(error) {
+    console.log("Login Failed!", error);
+  } else {
+    console.log("Login Succeeded!");
+  }
+});
+
+
+-->
