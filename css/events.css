@@ -108,4 +108,7 @@ div#events .content-main.ui-content{
 					clear:both;
 					width:590px;
 				}
+					ul.event-calendar li .event-details a{
+						font-size:0.9em;
+					}
 

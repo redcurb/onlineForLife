@@ -16,6 +16,7 @@ onlineForLife.App = {
 
 	onFeedLoaded:function(){
 		console.log('onFeedLoaded');
+		AppData.FeedLoaded=true;
 		onlineForLife.Tutorial.init();
 		onlineForLife.Footer.init();
 		onlineForLife.Panels.init();

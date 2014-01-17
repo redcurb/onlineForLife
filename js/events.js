@@ -11,6 +11,13 @@ onlineForLife.Events = {
 	
 	setupHandlers: function(){
 		//console.log('EVENTS setupHandlers');
+		$('ul.event-calendar li .event-details a').off('click');
+		$('ul.event-calendar li .event-details a').on('click',function(){
+			//e.preventDefault();
+			var href = $(this).attr('href');
+			window.open(href, '_blank', 'location=yes');
+			return false;			
+		})
 		onlineForLife.Events.setupEventItemHandlers();
 	},
 	
@@ -52,6 +59,7 @@ onlineForLife.Events = {
 				var eventEndAmpm = message.endAmpm;
 				var eventLocation = message.location;
 				var eventDescription = message.description;
+				var eventUrl = message.url;
 	
 				var output = '';
 				output += 'eventId: ' + eventId + '\n';
@@ -65,19 +73,20 @@ onlineForLife.Events = {
 				output += 'eventEndMinute: ' + eventEndMinute + '\n';
 				output += 'eventLocation: ' + eventLocation + '\n';
 				output += 'eventDescription: ' + eventDescription + '\n';
+				output += 'eventUrl: ' + eventUrl + '\n';
 				//console.log(output);
 				
-				onlineForLife.Events.buildEventItem(eventId, eventTitle, eventMonth, eventDay, eventYear, eventStartHour, eventStartMinute, eventStartAmpm, eventEndHour, eventEndMinute, eventEndAmpm, eventLocation, eventDescription);
+				onlineForLife.Events.buildEventItem(eventId, eventTitle, eventMonth, eventDay, eventYear, eventStartHour, eventStartMinute, eventStartAmpm, eventEndHour, eventEndMinute, eventEndAmpm, eventLocation, eventDescription, eventUrl);
 			}
 		});
 	},
 
-	buildEventItem: function(eventId, eventTitle, eventMonth, eventDay, eventYear, eventStartHour, eventStartMinute, eventStartAmpm, eventEndHour, eventEndMinute, eventEndAmpm, eventLocation, eventDescription){
+	buildEventItem: function(eventId, eventTitle, eventMonth, eventDay, eventYear, eventStartHour, eventStartMinute, eventStartAmpm, eventEndHour, eventEndMinute, eventEndAmpm, eventLocation, eventDescription, eventUrl){
 		//console.clear();
 		var $calendar = $('ul.event-calendar');
 		var source	= $("#template-event-item").html();
 		var template = Handlebars.compile(source);
-		var context = {eventId: eventId, eventTitle: eventTitle, eventMonth: eventMonth, eventDay: eventDay, eventYear: eventYear, eventStartHour: eventStartHour, eventStartMinute: eventStartMinute, eventStartAmpm: eventStartAmpm, eventEndHour: eventEndHour, eventEndMinute: eventEndMinute, eventEndAmpm: eventEndAmpm, eventLocation: eventLocation, eventDescription: eventDescription};
+		var context = {eventId: eventId, eventTitle: eventTitle, eventMonth: eventMonth, eventDay: eventDay, eventYear: eventYear, eventStartHour: eventStartHour, eventStartMinute: eventStartMinute, eventStartAmpm: eventStartAmpm, eventEndHour: eventEndHour, eventEndMinute: eventEndMinute, eventEndAmpm: eventEndAmpm, eventLocation: eventLocation, eventDescription: eventDescription, eventUrl: eventUrl};
 		var html = template(context);
 		//console.log(html);
 		$calendar.prepend(html);

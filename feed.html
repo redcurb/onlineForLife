@@ -104,13 +104,13 @@ body.page-status-loading #feed{
 				</a>
 			</li>
 			<!--
-			-->
 			<li class="test-link1 nav-settings">
 				<a href="dev.html" data-ajax="false">
 					<i class="fa fa-gear"></i>
 					<span>Dev Links</span>
 				</a>
 			</li>
+			-->
 		</ul>
     </div>
     
@@ -592,7 +592,7 @@ $(function() {
     				<h3>{{eventMonth}} {{eventDay}}, {{eventYear}}</h3>
     				<h6>{{eventStartHour}}:{{eventStartMinute}} {{eventStartAmpm}} - {{eventEndHour}}:{{eventEndMinute}} {{eventEndAmpm}}</h6>
     				<h4>{{eventLocation}}</h4>
-    				<p>{{eventDescription}}</p>
+    				<p>{{eventDescription}} <br><a href="{{eventUrl}}">{{eventUrl}}</a></p>
     			</div>
     		</li> 
 </script>

@@ -158,12 +158,15 @@ onlineForLife.Feed = {
 	},
 	
 	rebuildFeed: function(){
-		var spinnerHtml = '<li class="default-content spinner"><i class="fa fa-refresh fa-spin"></i></li>';
-		$('ul.feed').addClass('status-loading').empty().append(spinnerHtml);
-		setTimeout(function(){
-			//onlineForLife.Feed.setupFirebaseFeedItem();
-			onlineForLife.Feed.buildNextList(onlineForLife.Feed.feedItemLists.currentListId);
-		}, 200);
+		console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%rebuildFeed');
+		if(AppData.FeedLoaded){
+			var spinnerHtml = '<li class="default-content spinner"><i class="fa fa-refresh fa-spin"></i></li>';
+			$('ul.feed').addClass('status-loading').empty().append(spinnerHtml);
+			setTimeout(function(){
+				//onlineForLife.Feed.setupFirebaseFeedItem();
+				onlineForLife.Feed.buildNextList(onlineForLife.Feed.feedItemLists.currentListId);
+			}, 200);
+		}
 	},
 
 	setupTabletLayout: function(){
@@ -554,10 +557,10 @@ onlineForLife.Feed = {
 	handleEmptyFeedList:function(){
 		var currentListId = onlineForLife.Feed.feedItemLists.currentListId;
 		var feedSetCount = onlineForLife.Feed.feedItemLists.feedSets.count;
-		//console.log('handleEmptyFeedList: ' + currentListId);
-		//console.log('handleEmptyFeedList: ' + feedSetCount);
+		console.log('handleEmptyFeedList: ' + currentListId);
+		console.log('handleEmptyFeedList: ' + feedSetCount);
 		if(currentListId<feedSetCount){
-			onlineForLife.Feed.buildNextList();
+			//onlineForLife.Feed.buildNextList();
 		}
 		else{
 			//console.log('handleEmptyFeedList: LAST LIST EMPTY');
@@ -566,6 +569,7 @@ onlineForLife.Feed = {
 	},
 	
 	buildNextList:function(listOverrideId){
+		console.log('99999999999999999999999 buildNextList');
 		onlineForLife.Feed.toggleFeedMessage('LOADING');
 		//onlineForLife.Feed.feedData["-JD3ClXifkAsxYLSC-vX"]
 //		onlineForLife.Feed.toggleFeedMessage('LOADING');
@@ -578,7 +582,9 @@ onlineForLife.Feed = {
 		var feedSets = oFeed.feedItemLists.feedSets.toLoad;
 		
 		var setList = onlineForLife.Feed.feedItemLists.feedSets.toLoad[listId];
-		var listItemCount = setList.length;
+		console.log('<<<<<<<<<<<<<<<<<<setList');
+		//console.log(onlineForLife.Feed.feedItemLists.feedSets.toLoad[0]);
+		//var listItemCount = setList.length;
 		//console.log('buildNextList: ' + listId + ' - ' + listItemCount + ' items');
 		var itemBuildCount = 0;
 		$.each(setList,function(i,key){

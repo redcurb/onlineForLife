@@ -14,6 +14,10 @@ onlineForLife.Tutorial = {
 		var tutorialText = AppData.text.tutorial;
 		var showTutorial = tutorialConfig.global.status == 'on';
 		
+		if(AppData.device.friendly.model!='iphone'){
+			showTutorial=false;
+		}
+		
 		if(showTutorial){
 
 			var itemHtml = '';
