@@ -3,7 +3,43 @@ onlineForLife.Settings = {
 	version: 1,
 
 	init: function(){
+		console.log('settings init');
+		onlineForLife.Settings.setSavedSettings();
 		onlineForLife.Settings.setupHandlers();
+	},
+	
+	setSavedSettings: function(){
+		console.log('++++++++++++++++++++++++++++++ setSavedSettings');
+		console.log(AppData.User.config.push);
+		
+		var $daily= $('#checkbox-push-daily');
+		var $life = $('#checkbox-push-life');
+		var $special = $('#checkbox-push-special');
+		var $none = $('#checkbox-push-none');
+		
+		$daily.attr("checked",AppData.User.config.push.dailySummary);
+		$life.attr("checked",AppData.User.config.push.everyLifeChoice);
+		$special.attr("checked",AppData.User.config.push.specialUpdates);
+		$none.attr("checked",AppData.User.config.push.none);
+		
+		
+	},
+	
+	setSavedSettingsOnSettingsPage: function(){
+		console.log('++++++++++++++++++++++++++++++ setSavedSettings');
+		console.log(AppData.User.config.push);
+		
+		var $daily= $('#checkbox-push-daily');
+		var $life = $('#checkbox-push-life');
+		var $special = $('#checkbox-push-special');
+		var $none = $('#checkbox-push-none');
+		
+		$daily.attr("checked",AppData.User.config.push.dailySummary).checkboxradio("refresh");
+		$life.attr("checked",AppData.User.config.push.everyLifeChoice).checkboxradio("refresh");
+		$special.attr("checked",AppData.User.config.push.specialUpdates).checkboxradio("refresh");
+		$none.attr("checked",AppData.User.config.push.none).checkboxradio("refresh");
+		
+		
 	},
 	
 	getSelectedValues: function(){
