@@ -9,6 +9,7 @@ onlineForLife.Panels = {
 		onlineForLife.Panels.setupHandlers();
 		onlineForLife.Panels.setupIpad();
 		onlineForLife.Panels.setupUpdates();
+		onlineForLife.Panels.setupStatsData();
 	},
 	
 	setText: function(){
@@ -89,6 +90,18 @@ onlineForLife.Panels = {
 	},
 	
 	setupStatsData: function(){
+		onlineForLife.Panels.loadStatsDataFromFb();
+	},
+	
+	loadStatsDataFromFb: function(){
+		var userPrayerUrl = 'https://ofl.firebaseio.com/users/'+ AppData.UserId + '/prayers';
+		var userPrayerDataRef = new Firebase(userPrayerUrl);
+		userPrayerDataRef.once('value', function(userPrayerData) {
+			console.log('loadStatsDataFromFb');
+			userPrayerDataVal = userPrayerData.val();
+			console.log(userPrayerDataVal);
+			
+		});
 	},
 	
 	setupIpad: function(){

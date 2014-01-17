@@ -260,23 +260,30 @@ onlineForLife.Feed = {
 		
 		var stepIdVal = 'step' + data.step;
 		var stepRef = userPrayerData.child(stepIdVal);
+		var allStepsRef = userPrayerData.child('allSteps');
+		
+		var currentUserPrayerCountTotal = 0;
+		allStepsRef.once('value', function(allStepsData) {
+			allStepsDataVal = allStepsData.val();
+
+			var newUserPrayerCountTotal = 1;
+			if(allStepsDataVal !== null) {
+				newUserPrayerCountTotal = allStepsDataVal.userPrayerCount+1;
+			}
+			allStepsRef.child('userPrayerCount').set(newUserPrayerCountTotal);
+		});
+		
 		
 		var currentUserPrayerCount = 0;
 		stepRef.once('value', function(stepData) {
-			console.log('stepIdVal ' + stepIdVal + ': ' + stepData.val());
 			stepDataVal = stepData.val();
-			console.log(stepDataVal);
-			if(stepDataVal === null) {
+			var newUserPrayerCount = 1;
+			if(stepDataVal !== null) {
 				console.log('NO data object');
-				newUserPrayerCount = 1;
+				newUserPrayerCount = stepDataVal.userPrayerCount + 1;
 			}
-			else{
-				console.log('data object EXISTS');
-				currentUserPrayerCount = stepDataVal.userPrayerCount;
-				newUserPrayerCount = currentUserPrayerCount+1;
-			}
-			userPrayerData.child(stepIdVal).child('events').push(eventId);
-			userPrayerData.child(stepIdVal).child('userPrayerCount').set(newUserPrayerCount);
+			stepRef.child('events').push(eventId);
+			stepRef.child('userPrayerCount').set(newUserPrayerCount);
 		});
 		
 		//userPrayerData.child(stepIdVal).child('events').push(eventId);
