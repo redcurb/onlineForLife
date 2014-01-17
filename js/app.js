@@ -10,7 +10,6 @@ onlineForLife.Tutorial = onlineForLife.Tutorial || {};
 onlineForLife.Push = onlineForLife.Push || {};
 onlineForLife.App = {
 	init: function(){
-		alert('app init LOCAL');
 		console.log('app init');
 		onlineForLife.App.getConfigData();
 	},	
