@@ -9,13 +9,21 @@
   <body>
     <p id="deviceProperties">Loading device properties...</p>
 
-
+    <a href="#" onClick="getWidth();">getWidth()</a>
+    <br>
+    <a href="#" onClick="getHeight();">getHeight()</a>
+    
     <br>
     <a href="dev.html">Dev</a>
     <br>
     <a href="index.html">Home</a>
     <script type="text/javascript" charset="utf-8">
-    	alert($(window).width());
+    	function getWidth(){
+    		alert($(window).width());
+		}
+    	function getHeight(){
+    		alert($(window).height());
+		}
     </script>
   </body>
 </html>
