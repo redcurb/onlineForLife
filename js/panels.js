@@ -88,6 +88,9 @@ onlineForLife.Panels = {
 		$textSpans.hide();
 	},
 	
+	setupStatsData: function(){
+	},
+	
 	setupIpad: function(){
 		if($('body').hasClass('platform-tablet')){
 			var $panelRight = $('#feed-mypanel-right');
@@ -396,7 +399,7 @@ onlineForLife.Panels = {
 	
 	setupUpdates: function(){
 		//console.clear();
-		console.log('setupUpdates');
+		//console.log('setupUpdates');
 		var updatesUrl = 'https://ofl.firebaseio.com/updates';
 		var updatesData = new Firebase(updatesUrl);
 		var $updates = $('ul.stats-updates');
@@ -412,9 +415,9 @@ onlineForLife.Panels = {
 				$spinner.fadeOut(200);
 			}
 			else{
-				console.log('================setupUpdates VALUE update: ');
-				console.log(update);
-				console.log(' ');
+				//console.log('================setupUpdates VALUE update: ');
+				//console.log(update);
+				//console.log(' ');
 	
 				var html = '';
 				
@@ -422,7 +425,7 @@ onlineForLife.Panels = {
 					var dataHtml = updateItem.html;
 					var dataTitle = updateItem.title;
 					var dataImgUrl = updateItem.imgUrl;
-					console.log('dataHtml',dataHtml);
+					//console.log('dataHtml',dataHtml);
 					var addPopup = onlineForLife.Panels.doesPopupContentExist(dataHtml);
 					if(addPopup){
 						dataHtml = dataHtml.substr(0, (dataHtml.length)-1).slice(1);
@@ -444,24 +447,24 @@ onlineForLife.Panels = {
 				/*
 				if(prayerId!="{}" && prayerId!=null){
 					$.each(prayerId,function(i,v){
-						console.log(v);
+						//console.log(v);
 						onlineForLife.Feed.itemsPrayedFor.push(v.toString());
 					});
 				}
 				*/
-				console.log('UPDATES AFTER');
+				//console.log('UPDATES AFTER');
 				onlineForLife.Panels.buildStep4Items();
 				
 			}
 		});
-		console.log(' ');
+		//console.log(' ');
 	},
 	
 	buildStep4Items: function(){
 		//console.log('buildStep4Items:  ',onlineForLife.Panels.step4Items);
 		var items = onlineForLife.Panels.step4Items;
 		$.each(items,function(index,itemData){
-			console.log('step 4 item',index);
+			//console.log('step 4 item',index);
 				
 			var id = itemData.Id.toString();
 			var lifeNumber = itemData.OFL_Life_Decision_Number.toString();
@@ -473,11 +476,11 @@ onlineForLife.Panels = {
 				stateName = onlineForLife.Feed.statesData[stateCode]
 			}
 			
-			console.log('id: ',id);
-			console.log('lifeNumber: ',lifeNumber);
-			console.log('city: ',city);
-			console.log('stateCode: ',stateCode);
-			console.log('stateName: ',stateName);
+			//console.log('id: ',id);
+			//console.log('lifeNumber: ',lifeNumber);
+			//console.log('city: ',city);
+			//console.log('stateCode: ',stateCode);
+			//console.log('stateName: ',stateName);
 			
 			var step4Text = onlineForLife.Panels.getStep4ItemText(id, lifeNumber, city, stateCode, stateName);
 			var itemHtml = onlineForLife.Panels.buildStep4UpdateItem(id, step4Text);
@@ -494,22 +497,22 @@ onlineForLife.Panels = {
 		var textB = textData.step4b;
 		var textC = textData.step4c;
 		var textVal = textA + lifeNumber + textB + city + textC + stateName;
-		console.log(textVal);
+		//console.log(textVal);
 		return textVal;
 	},
 	
 	buildStep4UpdateItem: function(id, text){
-		console.log('buildStep4UpdateItem');
+		//console.log('buildStep4UpdateItem');
 		var source   = $("#template-updates-step4-item").html();
 		var template = Handlebars.compile(source);
 		var context = {id: id, text:text}
 		var html = template(context);
-		console.log(html);
+		//console.log(html);
 		return html;
 	},
 
 	setupUpdatesWindow: function(){
-		console.log('setupUpdatesWindow');
+		//console.log('setupUpdatesWindow');
 		$('#modalUpdates').dialog({
 			autoOpen: false,
 			resizable:false,
@@ -526,7 +529,7 @@ onlineForLife.Panels = {
 		});
 		$('ul.stats-updates li.popup-true').on('click',function(){
 			var $this = $(this);
-			console.log($this);
+			//console.log($this);
 			var html = $this.data('popup');
 			var modalWidth = $(window).width()*.9;
 			var modalHeight = $(window).height()*.9;

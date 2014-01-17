@@ -200,7 +200,7 @@ onlineForLife.Feed = {
 		var auth = new FirebaseSimpleLogin(firebaseUrl, function(error, user) {
 			if (error) {
 				//console.log('error');
-				console.log(error);
+				//console.log(error);
 				return;
 			}
 			if (user) {
@@ -243,8 +243,8 @@ onlineForLife.Feed = {
 
 	trackPrayer:function(data, stateCode){
 		var eventId = data.eventId;
-		//console.log('trackPrayer: ' + stateCode + ' - ' + eventId);
-		//console.log(data);
+		console.log('trackPrayer: ' + stateCode + ' - ' + eventId);
+		console.log(data);
 		var trackingData =  new Firebase('https://ofl.firebaseio.com/tracking');
 		var prayerTrackingData = new Firebase('https://ofl.firebaseio.com/tracking/events/prayers');
 		var timeStamp = new Date().getTime();
@@ -254,22 +254,52 @@ onlineForLife.Feed = {
 		var feedItemTrackingData = new Firebase('https://ofl.firebaseio.com/tracking/events/feedItems/' + eventId);
 		feedItemTrackingData.push({trackingId:trackingId, timestamp: timeStamp, userId: onlineForLife.Feed.userData.id});
 		
-		var usersUrl = 'https://ofl.firebaseio.com/users/'+ onlineForLife.Feed.userData.id + '/prayers';
-		var usersData = new Firebase(usersUrl);
-		usersData.push(eventId);
+		var userPrayerUrl = 'https://ofl.firebaseio.com/users/'+ onlineForLife.Feed.userData.id + '/prayers';
+		var userPrayerData = new Firebase(userPrayerUrl);
+		userPrayerData.push(eventId);
+		
+		var stepIdVal = 'step' + data.step;
+		var stepRef = userPrayerData.child(stepIdVal);
+		
+		var currentUserPrayerCount = 0;
+		stepRef.once('value', function(stepData) {
+			console.log('stepIdVal ' + stepIdVal + ': ' + stepData.val());
+			stepDataVal = stepData.val();
+			console.log(stepDataVal);
+			if(stepDataVal === null) {
+				console.log('NO data object');
+				newUserPrayerCount = 1;
+			}
+			else{
+				console.log('data object EXISTS');
+				currentUserPrayerCount = stepDataVal.userPrayerCount;
+				newUserPrayerCount = currentUserPrayerCount+1;
+			}
+			userPrayerData.child(stepIdVal).child('events').push(eventId);
+			userPrayerData.child(stepIdVal).child('userPrayerCount').set(newUserPrayerCount);
+		});
+		
+		//userPrayerData.child(stepIdVal).child('events').push(eventId);
+		
+		
+		
+		console.log('currentUserPrayerCount this Step: ' + currentUserPrayerCount);
+		//userPrayerData.child(stepIdVal).child('userPrayerCount').set(1);
+		
+		
 		
 		var prayersUrl = 'https://ofl.firebaseio.com/prayers/' + eventId;
 		var prayersData = new Firebase(prayersUrl);
 		prayersData.push({ userId: onlineForLife.Feed.userData.id });
 
+		
+		
+		
 		var prayerTotalUrl = 'https://ofl.firebaseio.com/app/text/prayerTotal';
 		var prayerTotalData = new Firebase(prayerTotalUrl);
 		
 		prayerTotalData.once('value', function(prayerTotalValue) {
-			console.log(prayerTotalValue.val());
-			console.log(prayerTotalValue.val());
 			var newValue = prayerTotalValue.val() + 1;
-			console.log('newValue: ' + newValue);
 			prayerTotalData.set(newValue);
 		});
 		
@@ -280,7 +310,7 @@ onlineForLife.Feed = {
 		onlineForLife.Feed.getPastPrayers();
 		onlineForLife.Feed.setupFirebasePrayers();
 		/*setTimeout(function() {
-			console.log('addFirebaseChild TRUE');
+			//console.log('addFirebaseChild TRUE');
 			onlineForLife.Feed.addFirebaseChild = true;
 		},5000);
 		*/
@@ -488,7 +518,7 @@ onlineForLife.Feed = {
 	},
 	
 	updatePrayerSet: function(tableKey){
-		console.log(tableKey);
+		//console.log(tableKey);
 		var city = tableKey.city;
 		var id = tableKey.id;
 		var stateCode = tableKey.statecode;
@@ -930,10 +960,15 @@ onlineForLife.Feed = {
 		}
 		var tableKey = $parentLi.data();
 		var stateCode = $parentLi.find('.feed-content').data('state');
+		var stepNumber = $parentLi.data('step');
 		//console.log('stateCode: ' + stateCode);
 		//console.log('tableKey: ' + tableKey);
 		var eventId = $parentLi.data('id');
-		onlineForLife.Feed.trackUser('prayer', {eventId:eventId}, stateCode);
+		var trackData = {};
+		trackData.eventId = eventId;
+		trackData.step = stepNumber;
+		
+		onlineForLife.Feed.trackUser('prayer', trackData, stateCode);
 		onlineForLife.Feed.itemsPrayedFor.push(eventId.toString());
 		$parentLi.find('.feed-content').animate({left:posLeft},200,function(){
 			setTimeout(function(){
@@ -961,7 +996,7 @@ onlineForLife.Feed = {
 	},
 	
 	animatePraySwipe: function(){
-		console.log('animatePraySwipe');
+		//console.log('animatePraySwipe');
 		if(AppData.config.feed.nudge.showNudge){
 			var $listItem = $('ul.feed li.feed-item:eq(0)');
 			var $listItemContent = $listItem.find('.feed-content');

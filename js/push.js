@@ -1,19 +1,19 @@
 onlineForLife.Push = {
 	init: function(){
-		console.log('push init');
+		//console.log('push init');
 		onlineForLife.Push.getCurrentSettings();
 	},
 
 	getCurrentSettings: function(){
-		console.log('push getCurrent');
+		//console.log('push getCurrent');
 		var pushData = AppData.User.config.push;
-		console.log(pushData);
+		//console.log(pushData);
 	},
 
 	updatePushSettingsToFirebase: function(){
-		console.log('updatePushSettingsToFirebase');
+		//console.log('updatePushSettingsToFirebase');
 		var data = AppData.User.config.push.settingsData;
-		console.log(data);
+		//console.log(data);
 		var pushDataUrl = 'https://ofl.firebaseio.com/users/' + AppData.User.id + '/config/push';
 		var pushDataRef = new Firebase(pushDataUrl);
 		var settingsData = AppData.User.config.push.settingsData;

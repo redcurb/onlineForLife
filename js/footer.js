@@ -22,7 +22,7 @@ onlineForLife.Footer = {
 		var footerTextData = onlineForLife.GlobalData.Text.footer;
 		onlineForLife.Footer.footerData.text = footerTextData;
 		var emailText = footerTextData.email;
-		console.log('emailText',emailText);
+		//console.log('emailText',emailText);
 		onlineForLife.Footer.setupHandlers();
 	},
 	
@@ -32,14 +32,14 @@ onlineForLife.Footer = {
 	},
 	
 	resetPrayerSet: function(){
-		console.log('resetPrayerSet');
+		//console.log('resetPrayerSet');
 		
 	},
 	
 	pushPrayerSetData: function(userId, shareId){
-		console.log('pushPrayerSetData: ' + userId + ' - ' + shareId);
+		//console.log('pushPrayerSetData: ' + userId + ' - ' + shareId);
 		var prayers = onlineForLife.Feed.feedItemLists.prayerSets.prayers;
-		console.log(prayers);
+		//console.log(prayers);
 		
 		var prayersUrl = 'https://ofl.firebaseio.com/prayersets/' + shareId;
 		var prayerData = new Firebase(prayersUrl);
@@ -48,7 +48,7 @@ onlineForLife.Footer = {
 	},
 	
 	handleShare: function(linkId){
-		console.log('handleShare: ' + linkId);
+		//console.log('handleShare: ' + linkId);
 		var shareUrl = onlineForLife.Footer.footerData.text.shareUrl;
 		var userId = onlineForLife.Feed.userData.id;
 		var timeStamp = new Date().getTime().toString();
@@ -73,7 +73,7 @@ onlineForLife.Footer = {
 			var subjectText = textData.subject;
 			var bodyText = textData.body1;
 			var url = 'mailto:?subject=' + subjectText + '&body=' + bodyText + ' ' + shareUrl + '?shareId='+shareId;
-			console.log('email: ' + url);
+			//console.log('email: ' + url);
 			window.location.href = url;
 		}
 		
@@ -110,11 +110,11 @@ onlineForLife.Footer = {
 	},
 	
 	setupHandlers: function(){
-		console.log('footer handlers');
+		//console.log('footer handlers');
 		$('ul.feed-share-list li').on('click',function(){
 			var $this = $(this);
 			var linkId = $this.data('id');
-			console.log('linkId: ' + linkId);
+			//console.log('linkId: ' + linkId);
 			onlineForLife.Footer.handleShare(linkId);
 		});
 	}
