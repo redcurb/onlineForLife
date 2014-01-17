@@ -17,12 +17,12 @@
     // PhoneGap is loaded and it is now safe to make calls PhoneGap methods
     //
     function onDeviceReady() {
-        document.addEventListener("offline", onOffline, false);
-    }
-
-    // Handle the offline event
-    //
-    function onOffline() {
+        document.addEventListener("offline", function(){
+        	alert("You're offline")
+		}, false);
+        document.addEventListener("online", function(){
+        	alert("You're online")
+		}, false);
     }
 
     </script>
