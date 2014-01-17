@@ -262,17 +262,6 @@ onlineForLife.Feed = {
 		var stepRef = userPrayerData.child(stepIdVal);
 		var allStepsRef = userPrayerData.child('allSteps');
 		
-		var currentUserPrayerCountTotal = 0;
-		allStepsRef.once('value', function(allStepsData) {
-			allStepsDataVal = allStepsData.val();
-
-			var newUserPrayerCountTotal = 1;
-			if(allStepsDataVal !== null) {
-				newUserPrayerCountTotal = allStepsDataVal.userPrayerCount+1;
-			}
-			allStepsRef.child('userPrayerCount').set(newUserPrayerCountTotal);
-		});
-		
 		
 		var currentUserPrayerCount = 0;
 		stepRef.once('value', function(stepData) {
@@ -284,6 +273,17 @@ onlineForLife.Feed = {
 			}
 			stepRef.child('events').push(eventId);
 			stepRef.child('userPrayerCount').set(newUserPrayerCount);
+		});
+		
+		var currentUserPrayerCountTotal = 0;
+		allStepsRef.once('value', function(allStepsData) {
+			allStepsDataVal = allStepsData.val();
+
+			var newUserPrayerCountTotal = 1;
+			if(allStepsDataVal !== null) {
+				newUserPrayerCountTotal = allStepsDataVal.userPrayerCount+1;
+			}
+			allStepsRef.child('userPrayerCount').set(newUserPrayerCountTotal);
 		});
 		
 		//userPrayerData.child(stepIdVal).child('events').push(eventId);

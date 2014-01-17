@@ -90,17 +90,79 @@ onlineForLife.Panels = {
 	},
 	
 	setupStatsData: function(){
-		onlineForLife.Panels.loadStatsDataFromFb();
+		onlineForLife.Panels.loadStatsDataFromFb('init');
 	},
 	
-	loadStatsDataFromFb: function(){
+	loadStatsDataFromFb: function(method){
+		console.log('loadStatsDataFromFb: ' + method);
 		var userPrayerUrl = 'https://ofl.firebaseio.com/users/'+ AppData.UserId + '/prayers';
 		var userPrayerDataRef = new Firebase(userPrayerUrl);
 		userPrayerDataRef.once('value', function(userPrayerData) {
-			console.log('loadStatsDataFromFb');
+			console.log('userPrayerData');
 			userPrayerDataVal = userPrayerData.val();
 			console.log(userPrayerDataVal);
-			
+			AppData.UserPrayers = userPrayerDataVal;
+			onlineForLife.Panels.onDataUpdatedFromFb(method);
+		});
+	},
+	
+	onDataUpdatedFromFb: function(method){
+		if(method=='init'){
+			onlineForLife.Panels.addStatsDataListener();
+			onlineForLife.Panels.addDataToStatsPanel();
+		}
+		else if(method=='change'){
+			onlineForLife.Panels.addDataToStatsPanel();
+		}
+	},
+	
+	addDataToStatsPanel: function(){
+		console.log('addDataToStatsPanel: ' + AppData.UserPrayers.step1.userPrayerCount);
+		if(typeof(AppData.UserPrayers.step1)!= "undefined"){
+			if(typeof(AppData.UserPrayers.step1.userPrayerCount)!= "undefined"){
+				var userPrayersStep1 = AppData.UserPrayers.step1.userPrayerCount;
+			}
+		}
+		else{var userPrayersStep1 = 0;}
+		if(typeof(AppData.UserPrayers.step2)!= "undefined"){
+			if(typeof(AppData.UserPrayers.step2.userPrayerCount)!= "undefined"){
+				var userPrayersStep2 = AppData.UserPrayers.step2.userPrayerCount;
+			}
+		}
+		else{var userPrayersStep2 = 0;}
+		if(typeof(AppData.UserPrayers.step3)!= "undefined"){
+			if(typeof(AppData.UserPrayers.step3.userPrayerCount)!= "undefined"){
+				var userPrayersStep3 = AppData.UserPrayers.step3.userPrayerCount;
+			}
+		}
+		else{var userPrayersStep3 = 0;}
+		if(typeof(AppData.UserPrayers.step4)!= "undefined"){
+			if(typeof(AppData.UserPrayers.step4.userPrayerCount)!= "undefined"){
+				var userPrayersStep4 = AppData.UserPrayers.step4.userPrayerCount;
+			}
+		}
+		else{var userPrayersStep4 = 0;}
+		userPrayersStep1 = userPrayersStep1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		console.log('userPrayersStep1: ' + userPrayersStep1);
+		console.log('userPrayersStep2: ' + userPrayersStep2);
+		console.log('userPrayersStep3: ' + userPrayersStep3);
+		console.log('userPrayersStep4: ' + userPrayersStep4);
+		var $yourImpact = $('.section-your-impact');
+		var $step1 = $yourImpact.find('.step-called');
+		var $step2 = $yourImpact.find('.step-scheduled');
+		var $step3 = $yourImpact.find('.step-visited-prc');
+		var $step4 = $yourImpact.find('.step-chose-life');
+		$step1.find('.total-user-count').text(userPrayersStep1);
+		$step2.find('.total-user-count').text(userPrayersStep2);
+		$step3.find('.total-user-count').text(userPrayersStep3);
+		$step4.find('.total-user-count').text(userPrayersStep4);
+	},
+	
+	addStatsDataListener: function(){
+		var userPrayerUrl = 'https://ofl.firebaseio.com/users/'+ AppData.UserId + '/prayers';
+		var userPrayerDataRef = new Firebase(userPrayerUrl);
+		userPrayerDataRef.child('allSteps').on('child_changed', function(userPrayerData) {
+			onlineForLife.Panels.loadStatsDataFromFb('change');
 		});
 	},
 	
