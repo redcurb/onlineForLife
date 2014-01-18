@@ -19,6 +19,19 @@
     function onDeviceReady() {
         var element = document.getElementById('geolocation');
         element.innerHTML = 'DEVICE IS READY<br />';
+        
+        var element4 = document.getElementById('network');
+        element4.innerHTML = 'connection' + navigator.network.connection.type + '<br />';
+        
+        
+        document.addEventListener("offline", function(){
+	        var element2 = document.getElementById('offline');
+        	element.innerHTML = "You're offline")
+		}, false);
+        document.addEventListener("online", function(){
+        	var element3 = document.getElementById('online');
+        	element.innerHTML = "You're online")
+		}, false);
     }
     function onError(error) {
         alert('code: '    + error.code    + '\n' +
@@ -29,6 +42,9 @@
   </head>
   <body>
     <p id="geolocation">waiting to load...</p>
+    <p id="network">waiting offline...</p>
+    <p id="offline">waiting offline...</p>
+    <p id="online">waiting online...</p>
     
     <br>
     <a href="dev.html">Dev</a>
