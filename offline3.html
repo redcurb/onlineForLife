@@ -1,29 +1,47 @@
-<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-<script type="text/javascript" charset="utf-8">
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Device Properties Example</title>
 
-// Wait for PhoneGap to load
-// 
-document.addEventListener("deviceready", onDeviceReady, false);
+		<link rel="stylesheet" href="css/reset-min.css" />
+		<link rel="stylesheet" href="css/libraries/jquery.mobile-1.3.2.min.css" />
+		<link rel="stylesheet" href="css/base.css" />
 
-// PhoneGap is loaded and it is now safe to make calls PhoneGap methods
-//
-function onDeviceReady() {
-    checkConnection();
-}
+    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+    <script type="text/javascript" charset="utf-8">
 
-function checkConnection() {
-    var networkState = navigator.network.connection.type;
+	document.addEventListener("deviceready", onDeviceReady, false);
+	function onDeviceReady() {
+		alert('ready');
+		checkConnection();
+	}
+	
+	function checkConnection() {
+		var networkState = navigator.network.connection.type;
+	
+		var states = {};
+		states[Connection.UNKNOWN]  = 'Unknown connection';
+		states[Connection.ETHERNET] = 'Ethernet connection';
+		states[Connection.WIFI]     = 'WiFi connection';
+		states[Connection.CELL_2G]  = 'Cell 2G connection';
+		states[Connection.CELL_3G]  = 'Cell 3G connection';
+		states[Connection.CELL_4G]  = 'Cell 4G connection';
+		states[Connection.NONE]     = 'No network connection';
+	
+		alert('Connection type: ' + states[networkState]);
+	}
 
-    var states = {};
-    states[Connection.UNKNOWN]  = 'Unknown connection';
-    states[Connection.ETHERNET] = 'Ethernet connection';
-    states[Connection.WIFI]     = 'WiFi connection';
-    states[Connection.CELL_2G]  = 'Cell 2G connection';
-    states[Connection.CELL_3G]  = 'Cell 3G connection';
-    states[Connection.CELL_4G]  = 'Cell 4G connection';
-    states[Connection.NONE]     = 'No network connection';
+    // onError Callback receives a PositionError object
+    //
+    </script>
+  </head>
+  <body>
+    <p id="geolocation">Finding geolocation...</p>
+    
+    <br>
+    <a href="dev.html">Dev</a>
+    <br>
+    <a href="index.html">Home</a>
+  </body>
+</html>
 
-    alert('Connection type: ' + states[networkState]);
-}
-
-</script>
