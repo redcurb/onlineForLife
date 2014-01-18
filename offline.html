@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PhoneGap Device Ready Example</title>
+    <title>Device Properties Example</title>
 
-    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+		<link rel="stylesheet" href="css/reset-min.css" />
+		<link rel="stylesheet" href="css/libraries/jquery.mobile-1.3.2.min.css" />
+		<link rel="stylesheet" href="css/base.css" />
+
+    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
     <script type="text/javascript" charset="utf-8">
 
-    // Call onDeviceReady when PhoneGap is loaded.
+    // Wait for device API libraries to load
     //
-    // At this point, the document has loaded but phonegap-1.0.0.js has not.
-    // When PhoneGap is loaded and talking with the native device,
-    // it will call the event `deviceready`.
-    // 
     document.addEventListener("deviceready", onDeviceReady, false);
 
-    // PhoneGap is loaded and it is now safe to make calls PhoneGap methods
+    // device APIs are available
     //
     function onDeviceReady() {
-    	console.log("device Ready: " + navigator.network.connection.type)
-        document.addEventListener("offline", function(){
-        	alert("You're offline")
-		}, false);
-        document.addEventListener("online", function(){
-        	alert("You're online")
-		}, false);
+        var element = document.getElementById('geolocation');
+        element.innerHTML = 'DEVICE IS READY<br />';
+    }
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
     }
 
     </script>
   </head>
   <body>
+    <p id="geolocation">waiting to load...</p>
+    
     <br>
     <a href="dev.html">Dev</a>
     <br>
