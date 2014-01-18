@@ -20,7 +20,7 @@
 	var server = "http://pushbox.redcurb.ozkaa.com:3000";
 	//make ajax post to the application server to register device
 	var sendTokenToServer = function sendTokenToServer(token) {
-		$.ajax(server + "/register", {
+		$.ajax(server + "/registerDevice", {
 			type: "post",
 			dataType: 'json',
 			data: JSON.stringify({ //JSON object with token and the device platform
