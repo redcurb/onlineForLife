@@ -10,7 +10,20 @@ onlineForLife.Auth = {
 		//pageremove
 		//pagehide
 		//pageshow
-
+		onlineForLife.Auth.setupPage();
+	},
+	
+	setupPage: function(){
+		onlineForLife.Auth.checkPageParam();
+	},
+	
+	checkPageParam: function(){
+		var testVal = Redcurb.Helpers.getParameterByName('test');
+		if(testVal=="true"){
+			onlineForLife.Auth.test = true;
+			$('body').addClass('test-mode-enabled');
+		}
+		
 		onlineForLife.Auth.checkLoginStatus();
 	},
 	
@@ -31,7 +44,11 @@ onlineForLife.Auth = {
 	},
 	
 	goToFeed: function(){
-		document.location="feed.html";
+		var paramString = '';
+		if(onlineForLife.Auth.test){
+			paramString = '?test=true';
+		}
+		document.location="feed.html" + paramString;
 	},
 	
 	updateUserData: function(method, user){
@@ -521,6 +538,3 @@ onlineForLife.Forgot = {
 		}
 	}
 };
-
-
-

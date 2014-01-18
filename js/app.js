@@ -65,7 +65,7 @@ onlineForLife.App = {
 		appData.once('value', function(appValue) {
 			onlineForLife.App.AppData = appValue.val();
 			window.AppData = onlineForLife.App.AppData;
-			console.log(onlineForLife.AppData);
+			//console.log(onlineForLife.App.AppData);
 			onlineForLife.App.appDataReady();
 		});
 	},	

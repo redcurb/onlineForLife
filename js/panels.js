@@ -589,10 +589,15 @@ onlineForLife.Panels = {
 	setupUpdatesWindow: function(){
 		//console.log('setupUpdatesWindow');
 		$('#modalUpdates').dialog({
-			autoOpen: false,
+			autoOpen:false,
+			open:function(){
+				onlineForLife.Panels.toggleScreen('open');
+			},
+			close:function(){
+				onlineForLife.Panels.toggleScreen('close');
+			},
 			resizable:false,
 			draggable:false,
-			close:'none',
 			dialogClass:'dialog-updates',
 			closeText:'x',
 			corners: false,
@@ -611,18 +616,12 @@ onlineForLife.Panels = {
 			$('#modalUpdates .modal-title').text($this.find('.text-update').text());
 			$('#modalUpdates .modal-content').html(html);
 			$('#modalUpdates .modal-content').find('a').attr('data-ajax',false).attr('data-role','none');
-			$('#modalUpdates').dialog("open");
 			$('#modalUpdates').dialog({
-				autoOpen:true,
-				open:function(){
-					onlineForLife.Panels.toggleScreen('open');
-				},
-				close:function(){
-					onlineForLife.Panels.toggleScreen('close');
-				},
 				width:modalWidth,
 				height:modalHeight
 			});
+			$('#modalUpdates').dialog("open");
+
 		});
 	},
 

@@ -46,6 +46,50 @@ onlineForLife.Feed = {
 	},
 	
 	init: function(){
+		onlineForLife.Feed.setupPage();
+	},
+	
+	setupBodyPage: function(){
+		$('body').removeClass('page-feed').removeClass('page-events').removeClass('page-settings');
+		if($.mobile.activePage.is('#feed')){
+			$('body').addClass('page-feed');
+		}
+		else if($.mobile.activePage.is('#events')){
+			$('body').addClass('page-events');
+		}
+		else if($.mobile.activePage.is('#settings')){
+			$('body').addClass('page-settings');
+		}
+	},
+	
+	setupPage: function(){
+		onlineForLife.Feed.setupBodyPage();
+		onlineForLife.Feed.checkPageParam();
+		$(document).on("pagechange", function(e, data) {
+			console.log($(data.toPage).attr('id') + ' - ');
+			console.log($.mobile.activePage);
+			onlineForLife.Feed.setupBodyPage();
+		});
+	},
+	
+	checkPageParam: function(){
+		var testVal = Redcurb.Helpers.getParameterByName('test');
+		if(testVal=="true"){
+			onlineForLife.Feed.testMode = true;
+			$('body').addClass('test-mode-enabled');
+		}
+		var modelVal = Redcurb.Helpers.getParameterByName('model');
+		if(modelVal!=""){
+			modelVal = modelVal.toLowerCase();
+			console.log('BBBBBBBBBBBBBBBBBBBBBBBBB ' + modelVal);
+			console.log(AppData.device);
+			AppData.device = AppData.device || {friendly: {model:modelVal} };
+			console.log(AppData.device);
+			console.log(AppData.device.friendly);
+			console.log(AppData.device.friendly.model);
+			console.log('BBBBBBBBBBBBBBBBBBBBBBBBB ' + modelVal);
+		}
+		
 		onlineForLife.Feed.setupPlatform();
 		onlineForLife.Feed.updateUserPrayerCount();
 		onlineForLife.Feed.checkLoginStatus();
@@ -85,17 +129,15 @@ onlineForLife.Feed = {
 		if(orientation=='land'){
 			window.orientation = 90;
 		}
-		
-		
-		
 	},
 	
 	setDevice: function(){
 		//console.log('setDevice');
-		//var device = {"platform" : "iOS","available" : true,"model" : "iPhone5,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
+		if(onlineForLife.Feed.testMode){
+			var device = {"platform" : "iOS","available" : true,"model" : "iPhone5,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
+		}
 		//var device = {"platform" : "iOS","available" : true,"model" : "iPad5,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
 		//var device = {"platform" : "android","available" : true,"model" : "android,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
-		AppData.device = {};
 		if(typeof(device)!='undefined'){
 			AppData.device = device;
 			//$('.refresh-subtext').text($('.refresh-subtext').text() + ': ' + device.model);
