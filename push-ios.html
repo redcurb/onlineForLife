@@ -9,7 +9,9 @@
 	<link href='css/fonts.css' rel='stylesheet' type='text/css'>
 </head>
 <body class="page-index">
-	<div id="debug">waiting</div>
+	<ul id="debug">
+		<li>Debug Info</li>
+	</ul>
     <br>
     <a href="dev.html">Dev</a>
 </body>
@@ -33,9 +35,10 @@
 			}
 		});
 	}
-
+	//$debug = $('#debug');
 	//the function adds callbacks for PushPlugin
 	//the function uses global object "pushCallbacks"
+	//$debug.append('<li>' + 'sss' + '</li>');
 	var addCallback = function addCallback(key, callback) {
 		if (window.pushCallbacks === undefined) {
 			window.pushCallbacks = {}
@@ -57,7 +60,7 @@
 	var onNotificationAPN = function(e) {
 		if( navigator.notification )
 		{
-		 	navigator.notification.alert(e.body, null, 'Online4Life, 'Close');
+		 	navigator.notification.alert(e.body, null, 'Online4Life', 'Close');
 		} else {
 			alert( e.body );
 		}
