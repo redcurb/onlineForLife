@@ -20,6 +20,7 @@
 <script>
 (function() {
 	var server = "http://cpptl.co:3000";
+	$debug = $('#debug');
 	//make ajax post to the application server to register device
 	var sendTokenToServer = function sendTokenToServer(token) {
 		$.ajax(server + "/registerDevice", {
@@ -31,14 +32,13 @@
                 project_id: 'rc-ofl'
 			}),
 			success: function(response) {
+				$debug.append('<li>Successfully registered device: ' + token + '</li>');
 				console.log("###Successfully registered device.");
 			}
 		});
 	}
-	//$debug = $('#debug');
 	//the function adds callbacks for PushPlugin
 	//the function uses global object "pushCallbacks"
-	//$debug.append('<li>' + 'sss' + '</li>');
 	var addCallback = function addCallback(key, callback) {
 		if (window.pushCallbacks === undefined) {
 			window.pushCallbacks = {}
@@ -64,7 +64,7 @@
 		} else {
 			alert( e.body );
 		}
-    	};
+	};
 
 	var deviceReady = function() {
         var element = document.getElementById('debug');
