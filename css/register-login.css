@@ -153,3 +153,8 @@
 					#register-dev{
 						display:none;
 					}
+					body.test-mode-enabled #login-brian,
+					body.test-mode-enabled #login-jon,
+					body.test-mode-enabled #register-dev{
+						display:block;
+					}

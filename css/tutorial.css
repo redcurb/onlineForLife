@@ -7,6 +7,10 @@
 #content-tutorial.tutorial-enabled{
 	display:block;
 }
+body.page-events #content-tutorial,
+body.page-settings #content-tutorial{
+	display:none;
+}
 #content-tutorial.tutorial-open{
 	height:100%;
 }
