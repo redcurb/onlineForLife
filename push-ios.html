@@ -52,15 +52,16 @@ h1{
 <script src="js/plugins/PushNotification.js"></script>
 <script>
 (function() {
-	var server = "http://pushbox.redcurb.ozkaa.com:3000";
+	var server = "http://cpptl.co:3000";
 	//make ajax post to the application server to register device
 	var sendTokenToServer = function sendTokenToServer(token) {
-		$.ajax(server + "/register", {
+		$.ajax(server + "/registerDevice", {
 			type: "post",
 			dataType: 'json',
 			data: JSON.stringify({ //JSON object with token and the device platform
 				token: token,
-				platform: device.platform
+				platform: 'IOS',
+                project_id: 'rc-ofl'
 			}),
 			success: function(response) {
 				console.log("###Successfully registered device.");
@@ -89,11 +90,13 @@ h1{
 
 	//the function is a callback when we receive notification from APN
 	var onNotificationAPN = function(e) {
-
-	//get promotional text from the application server
-	//here we can set a badge manually, or play sounds
-	//for more information about PushPlugin, see https://github.com/phonegap-build/PushPlugin
-	};
+		if( navigator.notification )
+		{		 
+			navigator.notification.alert( e.body, null, 'Online4Life', 'Close');
+		} else {
+			alert( e.body );
+		}
+    };
 
 	var deviceReady = function() {
         var element = document.getElementById('debug');
@@ -105,7 +108,7 @@ h1{
 				"badge": "true",
 				"sound": "true",
 				"alert": "true",
-				"ecb": "pushCallbacks.onNotificationAPN"
+				"ecb": "onNotificationAPN"
 			});
 		}
 	}
