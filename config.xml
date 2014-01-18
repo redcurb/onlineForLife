@@ -1,6 +1,6 @@
  <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.redcurb.Online4Life" version="1.05" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Online for Life</name>
+    <name>Online For Life</name>
     <description>Online for Life is a compassionate, technology-driven non-profit organization committed to rescuing children and families from abortion.</description>
     <author email="jon@redcurbsolutions.com" href="http://redcurbsolutions.com">Red Curb</author>
     <feature name="http://api.phonegap.com/1.0/device" />
