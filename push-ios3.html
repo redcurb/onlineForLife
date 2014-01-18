@@ -9,8 +9,9 @@
 	<link href='css/fonts.css' rel='stylesheet' type='text/css'>
 </head>
 <body class="page-index">
-	<div id="debug">waiting</div>
-    <br>
+	<ul id="debug">
+		<li>Debug Info</li>
+	</ul>
     <a href="dev.html">Dev</a>
 </body>
 
@@ -18,6 +19,7 @@
 <script>
 (function() {
 	var server = "http://pushbox.redcurb.ozkaa.com:3000";
+	$debug = $('#debug');
 	//make ajax post to the application server to register device
 	var sendTokenToServer = function sendTokenToServer(token) {
 		$.ajax(server + "/registerDevice", {
@@ -29,6 +31,7 @@
                 project_id: 'rc-ofl'
 			}),
 			success: function(response) {
+				$debug.append('<li>Successfully registered device: ' + token + '</li>');
 				console.log("###Successfully registered device.");
 			}
 		});
