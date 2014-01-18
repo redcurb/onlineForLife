@@ -147,3 +147,9 @@
 						float:left;
 					}
 
+					
+					#login-brian,
+					#login-jon,
+					#register-dev{
+						display:none;
+					}
