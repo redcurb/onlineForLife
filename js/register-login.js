@@ -44,9 +44,9 @@ onlineForLife.Auth = {
 	},
 	
 	goToFeed: function(){
-		var paramString = '';
+		var paramString = '?userId=' + onlineForLife.Auth.userId;
 		if(onlineForLife.Auth.test){
-			paramString = '?test=true';
+			paramString = paramString + '&test=true';
 		}
 		document.location="feed.html" + paramString;
 	},
@@ -179,6 +179,7 @@ onlineForLife.Register = {
 						var usersUrl = 'https://ofl.firebaseio.com/users/'+user.id;
 						var usersData = new Firebase(usersUrl);
 		
+						onlineForLife.Auth.userId = user.id;
 						var userId = user.id;
 						var userEmail = user.email;
 						var userName = firstNameVal;
@@ -500,6 +501,7 @@ onlineForLife.Login = {
 				// User is already logged in.
 				console.log('logged in');
 				console.log(user.email);
+				onlineForLife.Auth.userId = user.id;
 				onlineForLife.Login.handleFormSuccess(user,auth);
 			} else {
 				// User is logged out.

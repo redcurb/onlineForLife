@@ -135,6 +135,7 @@ onlineForLife.Feed = {
 		//console.log('setDevice');
 		if(onlineForLife.Feed.testMode){
 			var device = {"platform" : "iOS","available" : true,"model" : "iPhone5,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
+			//var device = {"platform" : "android","available" : true,"model" : "galaxy3,1","cordova" : "3.0.0","version" : "12.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
 		}
 		//var device = {"platform" : "iOS","available" : true,"model" : "iPad5,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
 		//var device = {"platform" : "android","available" : true,"model" : "android,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
@@ -243,11 +244,13 @@ onlineForLife.Feed = {
 		var firebaseUrl =  new Firebase('https://ofl.firebaseio.com');
 		var auth = new FirebaseSimpleLogin(firebaseUrl, function(error, user) {
 			if (error) {
+				alert(error);
 				//console.log('error');
 				//console.log(error);
 				return;
 			}
 			if (user) {
+				alert('logged in');
 				//console.log('log');
 				// User is already logged in.
 				//console.log(user);
@@ -255,16 +258,19 @@ onlineForLife.Feed = {
 				onlineForLife.Feed.setUserData(user);
 				onlineForLife.Feed.setupFirebase();
 			} else {
+				//alert('else');
 				// User is logged out.
 				//console.log('no user');
-				document.location = 'home.html';
+				//document.location = 'home.html';
+				onlineForLife.Feed.setUserData();
+				onlineForLife.Feed.setupFirebase();
 			}
 		});
 	},
 
 	setUserData:function(user){
 		//console.log(user);
-		var userId = user.id;
+		var userId = Redcurb.Helpers.getParameterByName('userId');
 		onlineForLife.Feed.userData.id = userId;
 		AppData.UserId = userId;
 		onlineForLife.App.getUserData();
