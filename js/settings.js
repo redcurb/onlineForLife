@@ -3,14 +3,14 @@ onlineForLife.Settings = {
 	version: 1,
 
 	init: function(){
-		console.log('settings init');
+		//console.log('settings init');
 		onlineForLife.Settings.setSavedSettings();
 		onlineForLife.Settings.setupHandlers();
 	},
 	
 	setSavedSettings: function(){
-		console.log('++++++++++++++++++++++++++++++ setSavedSettings');
-		console.log(AppData.User.config.push);
+		//console.log('++++++++++++++++++++++++++++++ setSavedSettings');
+		//console.log(AppData.User.config.push);
 		
 		var $daily= $('#checkbox-push-daily');
 		var $life = $('#checkbox-push-life');
@@ -26,8 +26,8 @@ onlineForLife.Settings = {
 	},
 	
 	setSavedSettingsOnSettingsPage: function(){
-		console.log('++++++++++++++++++++++++++++++ setSavedSettings');
-		console.log(AppData.User.config.push);
+		//console.log('++++++++++++++++++++++++++++++ setSavedSettings');
+		//console.log(AppData.User.config.push);
 		
 		var $daily= $('#checkbox-push-daily');
 		var $life = $('#checkbox-push-life');
@@ -65,11 +65,11 @@ onlineForLife.Settings = {
 			var val = $this.val();
 			
 			/*
-			console.log(val, $('#checkbox-push-none').prop('checked'));
-			console.log('daily: ' + $('#checkbox-push-daily').prop('checked'));
-			console.log('life: ' + $('#checkbox-push-life').prop('checked'));
-			console.log('special: ' + $('#checkbox-push-special').prop('checked'));
-			console.log('none: ' + $('#checkbox-push-none').prop('checked'));
+			//console.log(val, $('#checkbox-push-none').prop('checked'));
+			//console.log('daily: ' + $('#checkbox-push-daily').prop('checked'));
+			//console.log('life: ' + $('#checkbox-push-life').prop('checked'));
+			//console.log('special: ' + $('#checkbox-push-special').prop('checked'));
+			//console.log('none: ' + $('#checkbox-push-none').prop('checked'));
 			//*/
 			if(val=='push-none' && $('#checkbox-push-none').prop('checked')){
 				$('#checkbox-push-daily, #checkbox-push-special, #checkbox-push-life').attr("checked",false).checkboxradio("refresh");

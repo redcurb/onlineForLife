@@ -10,12 +10,12 @@ onlineForLife.Tutorial = onlineForLife.Tutorial || {};
 onlineForLife.Push = onlineForLife.Push || {};
 onlineForLife.App = {
 	init: function(){
-		console.log('app init');
+		//console.log('app init');
 		onlineForLife.App.getConfigData();
 	},	
 
 	onFeedLoaded:function(){
-		console.log('onFeedLoaded');
+		//console.log('onFeedLoaded');
 		AppData.FeedLoaded=true;
 		onlineForLife.Tutorial.init();
 		onlineForLife.Footer.init();
@@ -25,10 +25,11 @@ onlineForLife.App = {
 		setTimeout(function() {
 			onlineForLife.Feed.animatePraySwipe();
 		},AppData.config.feed.nudge.nudgeDelayToStart);
+		onlineForLife.Feed.setupFeedItemLookup();
 	},
 
 	getConfigData: function(){
-		console.log('app getConfigData');
+		//console.log('app getConfigData');
 
 
 		var dbUrl = 'https://ofl.firebaseio.com/app/config';
@@ -37,7 +38,7 @@ onlineForLife.App = {
 		configData.once('value', function(configValue) {
 			onlineForLife.App.config = configValue.val();
 
-			console.log(onlineForLife.App.config);
+			//console.log(onlineForLife.App.config);
 	
 			onlineForLife.App.getAppData();
 		});
@@ -49,16 +50,16 @@ onlineForLife.App = {
 		var userDataRef = new Firebase(dbUrl);
 		
 		userDataRef.once('value', function(userData) {
-			console.log('++++++++++++++++++++++++++++++++++++++userDataRef');
+			//console.log('++++++++++++++++++++++++++++++++++++++userDataRef');
 			userDataValue = userData.val();
 			AppData.User = userDataValue;
-			console.log(userDataValue);
+			//console.log(userDataValue);
 		});
 
 	},	
 
 	getAppData: function(){
-		console.log('app getAppData');
+		//console.log('app getAppData');
 		var dbUrl = 'https://ofl.firebaseio.com/app';
 		var appData = new Firebase(dbUrl);
 		

@@ -98,9 +98,9 @@ onlineForLife.Panels = {
 		var userPrayerUrl = 'https://ofl.firebaseio.com/users/'+ AppData.UserId + '/prayers';
 		var userPrayerDataRef = new Firebase(userPrayerUrl);
 		userPrayerDataRef.once('value', function(userPrayerData) {
-			console.log('userPrayerData');
+			//console.log('userPrayerData');
 			userPrayerDataVal = userPrayerData.val();
-			console.log(userPrayerDataVal);
+			//console.log(userPrayerDataVal);
 			AppData.UserPrayers = userPrayerDataVal;
 			onlineForLife.Panels.onDataUpdatedFromFb(method);
 		});
@@ -117,7 +117,7 @@ onlineForLife.Panels = {
 	},
 	
 	addDataToStatsPanel: function(){
-		console.log('addDataToStatsPanel: ' + AppData.UserPrayers.step1.userPrayerCount);
+		//console.log('addDataToStatsPanel: ' + AppData.UserPrayers.step1.userPrayerCount);
 		if(typeof(AppData.UserPrayers.step1)!= "undefined"){
 			if(typeof(AppData.UserPrayers.step1.userPrayerCount)!= "undefined"){
 				var userPrayersStep1 = AppData.UserPrayers.step1.userPrayerCount;
@@ -143,10 +143,10 @@ onlineForLife.Panels = {
 		}
 		else{var userPrayersStep4 = 0;}
 		userPrayersStep1 = userPrayersStep1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		console.log('userPrayersStep1: ' + userPrayersStep1);
-		console.log('userPrayersStep2: ' + userPrayersStep2);
-		console.log('userPrayersStep3: ' + userPrayersStep3);
-		console.log('userPrayersStep4: ' + userPrayersStep4);
+		//console.log('userPrayersStep1: ' + userPrayersStep1);
+		//console.log('userPrayersStep2: ' + userPrayersStep2);
+		//console.log('userPrayersStep3: ' + userPrayersStep3);
+		//console.log('userPrayersStep4: ' + userPrayersStep4);
 		var $yourImpact = $('.section-your-impact');
 		var $step1 = $yourImpact.find('.step-called');
 		var $step2 = $yourImpact.find('.step-scheduled');
@@ -258,6 +258,8 @@ onlineForLife.Panels = {
 			onlineForLife.Panels.handleRefreshStats($panel);
 		});
 
+		/*
+		TODO:Enable once friends data are in
 		$( ".mypanel-right .toggle-stats li a" ).on( "click", function(){
 			var $this = $(this);
 			var $panel = $(this).parents('.mypanel-right');
@@ -267,6 +269,7 @@ onlineForLife.Panels = {
 			$li.addClass('selected');
 			onlineForLife.Panels.handleFriendsToggle(type,$panel);
 		});
+		*/
 	},
 	
 	animateLogo: function($panel){
@@ -321,7 +324,7 @@ onlineForLife.Panels = {
 	},
 	
 	handleRefreshStats: function($panel){
-		//console.log('handleRefreshStats');
+		alert('handleRefreshStats');
 		onlineForLife.Panels.toggleStatsRefresh('start');
 		var data = onlineForLife.Panels.tempData.stats;
 		var userData = data.refresh;

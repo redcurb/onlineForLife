@@ -66,8 +66,8 @@ onlineForLife.Feed = {
 		onlineForLife.Feed.setupBodyPage();
 		onlineForLife.Feed.checkPageParam();
 		$(document).on("pagechange", function(e, data) {
-			console.log($(data.toPage).attr('id') + ' - ');
-			console.log($.mobile.activePage);
+			//console.log($(data.toPage).attr('id') + ' - ');
+			//console.log($.mobile.activePage);
 			onlineForLife.Feed.setupBodyPage();
 		});
 	},
@@ -81,13 +81,13 @@ onlineForLife.Feed = {
 		var modelVal = Redcurb.Helpers.getParameterByName('model');
 		if(modelVal!=""){
 			modelVal = modelVal.toLowerCase();
-			console.log('BBBBBBBBBBBBBBBBBBBBBBBBB ' + modelVal);
-			console.log(AppData.device);
+			//console.log('BBBBBBBBBBBBBBBBBBBBBBBBB ' + modelVal);
+			//console.log(AppData.device);
 			AppData.device = AppData.device || {friendly: {model:modelVal} };
-			console.log(AppData.device);
-			console.log(AppData.device.friendly);
-			console.log(AppData.device.friendly.model);
-			console.log('BBBBBBBBBBBBBBBBBBBBBBBBB ' + modelVal);
+			//console.log(AppData.device);
+			//console.log(AppData.device.friendly);
+			//console.log(AppData.device.friendly.model);
+			//console.log('BBBBBBBBBBBBBBBBBBBBBBBBB ' + modelVal);
 		}
 		
 		onlineForLife.Feed.setupPlatform();
@@ -200,12 +200,11 @@ onlineForLife.Feed = {
 	},
 	
 	rebuildFeed: function(){
-		console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%rebuildFeed');
+		//console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%rebuildFeed');
 		if(AppData.FeedLoaded){
 			var spinnerHtml = '<li class="default-content spinner"><i class="fa fa-refresh fa-spin"></i></li>';
 			$('ul.feed').addClass('status-loading').empty().append(spinnerHtml);
 			setTimeout(function(){
-				//onlineForLife.Feed.setupFirebaseFeedItem();
 				onlineForLife.Feed.buildNextList(onlineForLife.Feed.feedItemLists.currentListId);
 			}, 200);
 		}
@@ -288,8 +287,8 @@ onlineForLife.Feed = {
 
 	trackPrayer:function(data, stateCode){
 		var eventId = data.eventId;
-		console.log('trackPrayer: ' + stateCode + ' - ' + eventId);
-		console.log(data);
+		//console.log('trackPrayer: ' + stateCode + ' - ' + eventId);
+		//console.log(data);
 		var trackingData =  new Firebase('https://ofl.firebaseio.com/tracking');
 		var prayerTrackingData = new Firebase('https://ofl.firebaseio.com/tracking/events/prayers');
 		var timeStamp = new Date().getTime();
@@ -313,7 +312,7 @@ onlineForLife.Feed = {
 			stepDataVal = stepData.val();
 			var newUserPrayerCount = 1;
 			if(stepDataVal !== null) {
-				console.log('NO data object');
+				//console.log('NO data object');
 				newUserPrayerCount = stepDataVal.userPrayerCount + 1;
 			}
 			stepRef.child('events').push(eventId);
@@ -335,7 +334,7 @@ onlineForLife.Feed = {
 		
 		
 		
-		console.log('currentUserPrayerCount this Step: ' + currentUserPrayerCount);
+		//console.log('currentUserPrayerCount this Step: ' + currentUserPrayerCount);
 		//userPrayerData.child(stepIdVal).child('userPrayerCount').set(1);
 		
 		
@@ -533,12 +532,12 @@ onlineForLife.Feed = {
 		myDataRefQuery.once('value', function(snapshot) {
 			var feedData = snapshot.val();
 			onlineForLife.Feed.feedData = feedData;
+			onlineForLife.Feed.feedDataSteps = {};
 			if(feedData === null) {
 				onlineForLife.Feed.toggleFeedMessage('NO_ITEMS');
 			}
 			else{
 				onlineForLife.Feed.setupFeedItemLists();
-				//onlineForLife.Feed.setupFirebaseFeedItem();
 			}
 			//console.timeEnd('feed');
 		});
@@ -599,8 +598,8 @@ onlineForLife.Feed = {
 	handleEmptyFeedList:function(){
 		var currentListId = onlineForLife.Feed.feedItemLists.currentListId;
 		var feedSetCount = onlineForLife.Feed.feedItemLists.feedSets.count;
-		console.log('handleEmptyFeedList: ' + currentListId);
-		console.log('handleEmptyFeedList: ' + feedSetCount);
+		//console.log('handleEmptyFeedList: ' + currentListId);
+		//console.log('handleEmptyFeedList: ' + feedSetCount);
 		if(currentListId<feedSetCount){
 			//onlineForLife.Feed.buildNextList();
 		}
@@ -611,10 +610,7 @@ onlineForLife.Feed = {
 	},
 	
 	buildNextList:function(listOverrideId){
-		console.log('99999999999999999999999 buildNextList');
 		onlineForLife.Feed.toggleFeedMessage('LOADING');
-		//onlineForLife.Feed.feedData["-JD3ClXifkAsxYLSC-vX"]
-//		onlineForLife.Feed.toggleFeedMessage('LOADING');
 		var oFeed = onlineForLife.Feed;
 		var listId = oFeed.feedItemLists.nextListId;
 		if(typeof(listOverrideId)!='undefined'){
@@ -624,20 +620,11 @@ onlineForLife.Feed = {
 		var feedSets = oFeed.feedItemLists.feedSets.toLoad;
 		
 		var setList = onlineForLife.Feed.feedItemLists.feedSets.toLoad[listId];
-		console.log('<<<<<<<<<<<<<<<<<<setList');
-		//console.log(onlineForLife.Feed.feedItemLists.feedSets.toLoad[0]);
-		//var listItemCount = setList.length;
-		//console.log('buildNextList: ' + listId + ' - ' + listItemCount + ' items');
 		var itemBuildCount = 0;
 		$.each(setList,function(i,key){
 			
 			var feedItemData = onlineForLife.Feed.feedData[key];
 			var messageId = feedItemData.Id.toString();
-			//console.log(i + ' - ' + messageId);
-			//console.log('key: ' + key);
-			//console.log('????????????????????');
-
-			//console.log(i);
 			var itemData = onlineForLife.Feed.createFeedDataObject(feedItemData);
 			
 			var id = itemData.id;
@@ -651,7 +638,7 @@ onlineForLife.Feed = {
 			if(step=="" || state==""){
 				buildItem = false;
 			}
-			else if(step=="4"){
+			if(step=="4"){
 				buildItem = false;
 				onlineForLife.Panels.step4Items[id] = feedItemData;
 			}
@@ -752,71 +739,6 @@ onlineForLife.Feed = {
 		feedItemLists.counts.prayed = feedItemLists.prayed.length;
 		feedItemLists.counts.toLoad = feedItemLists.toLoad.length;
 		onlineForLife.Feed.setupFeedDataSets();
-		onlineForLife.App.onFeedLoaded();
-	},
-	
-	setupFirebaseFeedItem:function(){
-		//console.time('buildFeed');
-		//console.log('setupFirebaseFeedItem: ' + onlineForLife.Feed.feedItemsPerLoad);
-		//myDataRefQuery = myDataRef.endAt().limit(10);
-			
-		var feedData = onlineForLife.Feed.feedData;
-		
-		
-		
-		var html = '';
-		var totalItemsCount = 0;
-		var itemBuildCount = 0;
-		$.each(feedData,function(i,feedItem){
-			//console.log(i);
-			//console.log(feedItem.Id);
-			totalItemsCount += 1;
-			if(totalItemsCount<onlineForLife.Feed.feedItemsPerLoad){
-				var messageId = feedItem.Id.toString();
-				var buildItem = false;
-				if(onlineForLife.Feed.itemsPrayedFor.indexOf(messageId)<0){
-					buildItem = true;
-				}
-				else{
-					//console.log('prayed for: ' + messageId);
-				}
-				var itemData = onlineForLife.Feed.createFeedDataObject(feedItem);
-				
-				var id = itemData.id;
-				var state = itemData.state;
-				var city = itemData.city;
-				var step = itemData.step;
-				var stateName = itemData.stateName;
-				var liClass = itemData.liClass;
-
-				if(step==""){
-					buildItem = false;
-				}
-				else if(step=="4"){
-					buildItem = false;
-					onlineForLife.Panels.step4Items[id] = feedItem;
-				}
-				if(buildItem){
-					itemBuildCount += 1;
-					var newHtml = onlineForLife.Feed.buildFeedItem(id, city, state, step, stateName, liClass);
-					$('ul.feed').prepend(newHtml);
-					
-					onlineForLife.Feed.centerFeedItemTextEach('firebase', $('ul.feed li:first'));
-					onlineForLife.Feed.setupDraggableEach($('ul.feed li:first'));
-				}
-			}
-		});
-		onlineForLife.Feed.toggleFeedMessage('LOADED');
-		//console.log('totalItemsCount',totalItemsCount);
-		//console.log('itemBuildCount',itemBuildCount);
-			
-		//console.timeEnd('buildFeed');
-		if(itemBuildCount<AppData.config.feed.footer.showFooterOnCount){
-			AppData.config.feed.footer.showFooterOnCount=itemBuildCount;
-		}
-		if(itemBuildCount==0){
-			onlineForLife.Feed.toggleFeedMessage('PRAYED_ALL');
-		}
 		onlineForLife.App.onFeedLoaded();
 	},
 	
@@ -1128,6 +1050,209 @@ onlineForLife.Feed = {
 		$( ".main-refresh .fa-refresh" ).remove();
 		var $noMoreText = $('p.no-more-items');
 		$noMoreText.show();
+	},
+
+	getCurrentPrayerEvents: function(){
+		//console.log('------------------------- getCurrentPrayerEvents');
+		var userPrayersUrl = 'https://ofl.firebaseio.com/users/' + AppData.UserId + '/prayers/';
+		var userPrayersRef = new Firebase(userPrayersUrl);
+		onlineForLife.Feed.feedDataLists.fbPastPrayers = {};
+		var step1Ref = userPrayersRef.child('step1');
+		var step2Ref = userPrayersRef.child('step2');
+		var step3Ref = userPrayersRef.child('step3');
+		var step4Ref = userPrayersRef.child('step4');
+		step1Ref.once('value', function(step1DataSet) {
+			var step1 = step1DataSet.val();
+			//console.log('$$$$$$$$$$$$$$$$$$$$$$$ step1Ref');
+			//console.log(step1);
+			var step1Data = onlineForLife.Feed.feedDataLists.fbPastPrayers.step1 = step1;
+			if(step1Data==null){
+				step1Data = {};
+			}
+			if(typeof(step1Data.progressCount)=='undefined'){
+				step1Data.progressCount = 0;
+			}
+			step2Ref.once('value', function(step2DataSet) {
+				var step2 = step2DataSet.val();
+				//console.log(step2);
+				var step2Data = onlineForLife.Feed.feedDataLists.fbPastPrayers.step2 = step2;
+				if(step2Data==null){
+					step2Data = {};
+				}
+				if(typeof(step2Data.progressCount)=='undefined'){
+					step2Data.progressCount = 0;
+				}
+				step3Ref.once('value', function(step3DataSet) {
+					var step3 = step3DataSet.val();
+					//console.log(step3);
+					var step3Data = onlineForLife.Feed.feedDataLists.fbPastPrayers.step3 = step3;
+					if(step3Data==null){
+						step3Data = {};
+					}
+					if(typeof(step3Data.progressCount)=='undefined'){
+						step3Data.progressCount = 0;
+					}
+					step4Ref.once('value', function(step4DataSet) {
+						var step4 = step4DataSet.val();
+						//console.log(step4);
+						var step4Data = onlineForLife.Feed.feedDataLists.fbPastPrayers.step4 = step4;
+						if(step4Data==null){
+							step4Data = {};
+						}
+						if(typeof(step4Data.progressCount)=='undefined'){
+							step4Data.progressCount = 0;
+						}
+						//console.log('------------------------- getCurrentPrayerEvents END');
+						onlineForLife.Feed.findProgress();
+					});
+				});
+			});
+		});
+	},
+
+	updateGrayText: function(){
+		var $scheduledUser = $('.mypanel-right .section-your-impact .step-scheduled .user-count');
+		var $visitedPrcUser = $('.mypanel-right .section-your-impact .step-visited-prc .user-count');
+		var $chooseLifeUser = $('.mypanel-right .section-your-impact .step-chose-life .user-count');
+		var scheduledProgressCount = onlineForLife.Feed.feedDataLists.progressItems.step2.progressCount;
+		var visitedProgressCount = onlineForLife.Feed.feedDataLists.progressItems.step3.progressCount;
+		var chooseLifeProgressCount = onlineForLife.Feed.feedDataLists.progressItems.step4.progressCount;
+		if(scheduledProgressCount>0){
+			$scheduledUser.html('+' + scheduledProgressCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		}
+		else{
+			$scheduledUser.html('&nbsp;');
+		}
+		if(visitedProgressCount>0){
+			$visitedPrcUser.html('+' + visitedProgressCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		}
+		else{
+			$visitedPrcUser.html('&nbsp;');
+		}
+		if(chooseLifeProgressCount>0){
+			$chooseLifeUser.html('+' + chooseLifeProgressCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		}
+		else{
+			$chooseLifeUser.html('&nbsp;');
+		}
+	},
+	
+	findProgress: function(){
+		//console.log('------------------------- findProgress');
+		var step1ProgressData = onlineForLife.Feed.feedDataLists.progressItems.step1;
+		var step1PastPrayerData = onlineForLife.Feed.feedDataLists.fbPastPrayers.step1;
+		if(onlineForLife.Feed.feedDataLists.fbPastPrayers.step1==null){
+			onlineForLife.Feed.feedDataLists.fbPastPrayers.step1 = { events:{} };
+		}
+		var step1PastPrayerEventData = onlineForLife.Feed.feedDataLists.fbPastPrayers.step1.events;
+
+		var step2ProgressData = onlineForLife.Feed.feedDataLists.progressItems.step2;
+		var step2PastPrayerData = onlineForLife.Feed.feedDataLists.fbPastPrayers.step2;
+		if(onlineForLife.Feed.feedDataLists.fbPastPrayers.step2==null){
+			onlineForLife.Feed.feedDataLists.fbPastPrayers.step2 = { events:{} };
+		}
+		var step2PastPrayerEventData = onlineForLife.Feed.feedDataLists.fbPastPrayers.step2.events;
+		onlineForLife.Feed.feedDataLists.progressItems.step2.progressCount = 0;
+		
+		var step3ProgressData = onlineForLife.Feed.feedDataLists.progressItems.step3;
+		var step3PastPrayerData = onlineForLife.Feed.feedDataLists.fbPastPrayers.step3;
+		if(onlineForLife.Feed.feedDataLists.fbPastPrayers.step3==null){
+			onlineForLife.Feed.feedDataLists.fbPastPrayers.step3 = { events:{} };
+		}
+		var step3PastPrayerEventData = onlineForLife.Feed.feedDataLists.fbPastPrayers.step3.events;
+		onlineForLife.Feed.feedDataLists.progressItems.step3.progressCount = 0;
+
+		var step4ProgressData = onlineForLife.Feed.feedDataLists.progressItems.step4;
+		var step4PastPrayerData = onlineForLife.Feed.feedDataLists.fbPastPrayers.step4;
+		if(onlineForLife.Feed.feedDataLists.fbPastPrayers.step4==null){
+			onlineForLife.Feed.feedDataLists.fbPastPrayers.step4 = { events:{} };
+		}
+		var step4PastPrayerEventData = onlineForLife.Feed.feedDataLists.fbPastPrayers.step4.events;
+		onlineForLife.Feed.feedDataLists.progressItems.step4.progressCount = 0;
+		
+		//console.log('------------------------- findProgress step2ProgressData.byKeyId BEGIN');
+		$.each(step2ProgressData.byKeyId,function(key,data){
+			//console.log(key + ': ' + data);
+			if(typeof(step1PastPrayerEventData[key])!='undefined'){
+				//console.log('PPPPRRRRROOOOOGGGGRRRREEEESSSSSSSS STEP 2');
+				onlineForLife.Feed.feedDataLists.progressItems.step2.progressCount = onlineForLife.Feed.feedDataLists.progressItems.step2.progressCount + 1;
+			}
+		});
+		//console.log('------------------------- findProgress step2ProgressData.byKeyId END');
+		
+		//console.log('------------------------- findProgress step3ProgressData.byKeyId BEGIN');
+		$.each(step3ProgressData.byKeyId,function(key,data){
+			//console.log(key + ': ' + data);
+			if(typeof(step2PastPrayerEventData[key])!='undefined'){
+				//console.log('PPPPRRRRROOOOOGGGGRRRREEEESSSSSSSS STEP 3');
+				onlineForLife.Feed.feedDataLists.progressItems.step3.progressCount = onlineForLife.Feed.feedDataLists.progressItems.step3.progressCount + 1;
+			}
+		});
+		//console.log('------------------------- findProgress step3ProgressData.byKeyId END');
+		
+		//console.log('------------------------- findProgress step4ProgressData.byKeyId BEGIN');
+		$.each(step4ProgressData.byKeyId,function(key,data){
+			//console.log(key + ': ' + data);
+			if(typeof(step3PastPrayerEventData[key])!='undefined'){
+				//console.log('PPPPRRRRROOOOOGGGGRRRREEEESSSSSSSS STEP 4');
+				onlineForLife.Feed.feedDataLists.progressItems.step4.progressCount = onlineForLife.Feed.feedDataLists.progressItems.step4.progressCount + 1;
+			}
+		});
+		//console.log('------------------------- findProgress step4ProgressData.byKeyId END');
+		//console.log('------------------------- findProgress END');
+		onlineForLife.Feed.updateGrayText();
+	},
+
+	setProgressCountData: function(){
+		
+	},
+
+	setupFeedItemMultiples: function(){
+		//console.log('setupFeedItemMultiples');
+		var progressItems = onlineForLife.Feed.feedDataLists.progressItems.all;
+		var feedData = onlineForLife.Feed.feedData;
+		$.each(progressItems,function(key,data){
+			//console.log(key + ': ' + data);
+			//onlineForLife.Feed.feedDataLists.progressItems.all[key] = 'aaa';
+			
+			$.each(data,function(dataKey,dataData){
+					
+				var feedData = onlineForLife.Feed.feedData[dataData];
+				//console.log(feedData);
+				var stepNumber = onlineForLife.Feed.getCurrentStepData(feedData);
+				var stepString = 'step' + stepNumber;
+				onlineForLife.Feed.feedDataLists.progressItems[stepString]['byEventId'][key] = dataData;
+				onlineForLife.Feed.feedDataLists.progressItems[stepString]['byKeyId'][dataData] = key;
+				//console.log('stepNumber: ' + stepNumber);
+				//console.log('===========================');
+			});
+		});
+		onlineForLife.Feed.getCurrentPrayerEvents();
+	},
+
+	setupFeedItemLookup: function(){
+		//console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%% setupFeedItemLookup BEGIN');
+		var feedData = onlineForLife.Feed.feedData;
+		var feedDataLists = onlineForLife.Feed.feedDataLists = {};
+		var itemLookup = feedDataLists.itemLookup = {};
+		var progressItems = feedDataLists.progressItems = {all:{},step1:{ byKeyId:{},byEventId:{} },step2:{ byKeyId:{},byEventId:{} },step3:{ byKeyId:{},byEventId:{} },step4:{ byKeyId:{},byEventId:{} }};
+		onlineForLife.Feed.feedData['-JCxdiONjhcec7uMxqxD'].Id = ['a0LF000000CwLjSMAV']
+		$.each(feedData,function(key,data){
+			var indexId = data.Id.toString();
+			if(typeof(itemLookup[indexId])=='undefined'){
+				itemLookup[indexId] = [key];
+			}
+			else{
+				itemLookup[indexId].push(key);
+				if(typeof(progressItems.all[indexId])=='undefined'){
+					progressItems.all[indexId] = [key];
+				}
+				else{
+					progressItems.all[indexId].push(key);
+				}
+			}
+		});
+		onlineForLife.Feed.setupFeedItemMultiples();
 	}
 };
 
