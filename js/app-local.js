@@ -1,4 +1,5 @@
 $(function() {
+		/*
 	function checkConnection(){
 		if(window.navigator.onLine){
 			console.log('has connection');
@@ -13,5 +14,7 @@ $(function() {
 		}
 	}
 	checkConnection();
+	*/
+	onlineForLife.Auth.init();
 });
 
