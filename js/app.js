@@ -39,8 +39,8 @@ onlineForLife.App = {
 			onlineForLife.App.config = configValue.val();
 
 			//console.log(onlineForLife.App.config);
-	
 			onlineForLife.App.getAppData();
+			
 		});
 	},	
 
@@ -62,7 +62,6 @@ onlineForLife.App = {
 		//console.log('app getAppData');
 		var dbUrl = 'https://ofl.firebaseio.com/app';
 		var appData = new Firebase(dbUrl);
-		
 		appData.once('value', function(appValue) {
 			onlineForLife.App.AppData = appValue.val();
 			window.AppData = onlineForLife.App.AppData;

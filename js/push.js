@@ -1,12 +1,12 @@
 onlineForLife.Push = {
 	init: function(){
 		//console.log('push init');
-		onlineForLife.Push.getCurrentSettings();
+		//onlineForLife.Push.getCurrentSettings();
 	},
 
 	getCurrentSettings: function(){
 		//console.log('push getCurrent');
-		var pushData = AppData.User.config.push;
+//		var pushData = AppData.User.config.push;
 		//console.log(pushData);
 	},
 

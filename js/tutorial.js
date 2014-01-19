@@ -13,6 +13,9 @@ onlineForLife.Tutorial = {
 		var tutorialConfig = AppData.config.tutorial;
 		var tutorialText = AppData.text.tutorial;
 		var showTutorial = tutorialConfig.global.status == 'on';
+		AppData.device = AppData.device || {};
+		AppData.device.friendly = AppData.device.friendly || {};
+		AppData.device.friendly.model = AppData.device.friendly.model || {};
 		
 		if(AppData.device.friendly.model!='iphone'){
 			showTutorial=false;

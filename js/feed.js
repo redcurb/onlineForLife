@@ -45,6 +45,10 @@ onlineForLife.Feed = {
 	deviceStatus:{
 	},
 	
+	onDeviceReady:{
+
+	},
+	
 	init: function(){
 		onlineForLife.Feed.setupPage();
 	},
@@ -132,6 +136,7 @@ onlineForLife.Feed = {
 	},
 	
 	setDevice: function(){
+		//alert(device);
 		//console.log('setDevice');
 		if(onlineForLife.Feed.testMode){
 			var device = {"platform" : "iOS","available" : true,"model" : "iPhone5,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
@@ -244,13 +249,11 @@ onlineForLife.Feed = {
 		var firebaseUrl =  new Firebase('https://ofl.firebaseio.com');
 		var auth = new FirebaseSimpleLogin(firebaseUrl, function(error, user) {
 			if (error) {
-				alert(error);
 				//console.log('error');
 				//console.log(error);
 				return;
 			}
 			if (user) {
-				alert('logged in');
 				//console.log('log');
 				// User is already logged in.
 				//console.log(user);
