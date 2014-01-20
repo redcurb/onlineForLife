@@ -1,3 +1,192 @@
 ul.event-calendar li .event-title p.event-description {
 	
 }
+
+/*	register-login.css	*/
+					body.test-mode-enabled #login-brian,
+					body.test-mode-enabled #login-jon,
+					body.test-mode-enabled #register-dev{
+						display:block;
+					}
+/*	feed.css	*/
+				body.model-iphone ul.feed li.feed-item .feed-prayer-instruction{
+					right:45px;
+				}
+
+				
+
+
+/*	panels.css	*/
+.dialog-updates{
+	z-index: 999999;
+}
+.mypanel-right .section-refresh{
+	visibility:hidden;
+	display:none;
+}
+.toggle-stats{
+	width:200px;
+}
+	.toggle-stats ul{
+		width:100%;
+		border-radius: 3px;
+	}
+		.toggle-stats ul li{
+			width:100%;	
+		}
+		.toggle-stats ul li.friends-impact{
+			display:none;	
+		}
+.mypanel-right .section-total-saved span.user-count{
+	visibility:hidden;
+}	
+/*	tutorial.css	*/
+body.page-events #content-tutorial,
+body.page-settings #content-tutorial{
+	display:none;
+}
+
+
+
+
+
+
+					#register-dev,
+					#login-brian{
+						1display:block;
+					}
+
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+	/* Tablet Landscape styles */
+	body.orientation-landscape.platform-tablet .mypanel-left.ui-panel,
+	body.orientation-landscape.model-ipad .mypanel-left.ui-panel{
+		width: 408px;
+		visibility: visible;
+		position: absolute;
+		z-index: 9999999;
+	}
+	body.orientation-landscape.platform-tablet .mypanel-right.ui-panel,
+	body.orientation-landscape.model-ipad .mypanel-right.ui-panel{
+		width: 552px;
+		visibility: visible;
+		z-index: 9999999;
+		position: absolute;
+	}
+	body.orientation-landscape.platform-tablet .ui-page .ui-header.header-primary,
+	body.orientation-landscape.model-ipad .ui-page .ui-header.header-primary{
+		left: 408px;
+	}
+	body.orientation-landscape.platform-tablet .ui-panel-content-wrap,
+	body.orientation-landscape.model-ipad .ui-panel-content-wrap{
+		left:408px;
+		position:relative;
+	}
+	body.orientation-landscape.platform-tablet .content-main.ui-content,
+	body.orientation-landscape.model-ipad .content-main.ui-content{
+		padding: 1%;
+		padding:15px;
+	}
+			body.orientation-landscape.platform-tablet ul.feed,
+			body.orientation-landscape.model-ipad ul.feed{
+				margin-left:-1%;
+				width:102%;
+				
+				margin-left:-2%;
+				width:102%;
+				
+				margin-left:-8%;
+				width:110%;
+				
+				
+			}
+	
+			
+				body.orientation-landscape.platform-tablet ul.feed li.feed-item,
+				body.orientation-landscape.model-ipad ul.feed li.feed-item{
+					
+					}
+					
+body.model-ipad ul.feed li.feed-item,
+body.orientation-landscape.platform-tablet ul.feed li.feed-item{
+	background-image:url(../img/tablet-version.jpg);
+	background-size: 100% 100%;
+	overflow:hidden;
+	background-size: 100% auto;
+}
+
+body.model-ipad ul.feed li.feed-item.version-1,
+body.orientation-landscape.platform-tablet ul.feed li.feed-item.version-1{
+	background-image:url(../img/tablet-version-1.jpg);
+}
+body.model-ipad ul.feed li.feed-item.version-2,
+body.orientation-landscape.platform-tablet ul.feed li.feed-item.version-2{
+	background-image:url(../img/tablet-version-2.jpg);
+}
+body.model-ipad ul.feed li.feed-item.version-3,
+body.orientation-landscape.platform-tablet ul.feed li.feed-item.version-3{
+	background-image:url(../img/tablet-version-3.jpg);
+}
+body.model-ipad ul.feed li.feed-item.version-4,
+body.orientation-landscape.platform-tablet ul.feed li.feed-item.version-4{
+	background-image:url(../img/tablet-version-4.jpg);
+}
+body.model-ipad ul.feed li.feed-item.version-5,
+body.orientation-landscape.platform-tablet ul.feed li.feed-item.version-5{
+	background-image:url(../img/tablet-version-5.jpg);
+}
+
+					
+			#tutorial-5 .tutorial-cta{
+				top: 70px;
+			}
+			#tutorial-5 .tutorial-text{
+				top: 135px;
+			}
+			#tutorial-6 .tutorial-cta{
+				top: 275px;
+			}
+			#tutorial-6 .tutorial-text{
+				top: 260px;
+			}
+			#tutorial-7 .tutorial-cta{
+				left:200px;
+				top: 470px;
+			}
+			#tutorial-7 .tutorial-text{
+				left:125px;
+				top: 345px;
+			}
+			#tutorial-8 .tutorial-cta{
+				top: 470px;
+			}
+			#tutorial-8 .tutorial-text{
+				top: 440px;
+			}
+			#tutorial-9 .tutorial-cta{
+				top: 610px;
+			}
+			#tutorial-9 .tutorial-text{
+				top: 613px;
+			}
+#tutorial-8{
+	display:none	
+}

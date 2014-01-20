@@ -369,28 +369,34 @@
 					
 					}
 					
-body.model-ipad ul.feed li.feed-item{
+body.model-ipad ul.feed li.feed-item,
+body.orientation-landscape.platform-tablet ul.feed li.feed-item{
 	background-image:url(../img/tablet-version.jpg);
 	background-size: 100% 100%;
 	overflow:hidden;
 	background-size: 100% auto;
 }
 
-body.model-ipad ul.feed li.feed-item.version-1{
+body.model-ipad ul.feed li.feed-item.version-1,
+body.orientation-landscape.platform-tablet ul.feed li.feed-item.version-1{
 	background-image:url(../img/tablet-version-1.jpg);
 }
-body.model-ipad ul.feed li.feed-item.version-2{
+body.model-ipad ul.feed li.feed-item.version-2,
+body.orientation-landscape.platform-tablet ul.feed li.feed-item.version-2{
 	background-image:url(../img/tablet-version-2.jpg);
 }
-body.model-ipad ul.feed li.feed-item.version-3{
+body.model-ipad ul.feed li.feed-item.version-3,
+body.orientation-landscape.platform-tablet ul.feed li.feed-item.version-3{
 	background-image:url(../img/tablet-version-3.jpg);
 }
-body.model-ipad ul.feed li.feed-item.version-4{
+body.model-ipad ul.feed li.feed-item.version-4,
+body.orientation-landscape.platform-tablet ul.feed li.feed-item.version-4{
 	background-image:url(../img/tablet-version-4.jpg);
 }
-body.model-ipad ul.feed li.feed-item.version-5{
+body.model-ipad ul.feed li.feed-item.version-5,
+body.orientation-landscape.platform-tablet ul.feed li.feed-item.version-5{
 	background-image:url(../img/tablet-version-5.jpg);
 }
 
 					
-					
+

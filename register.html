@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=0.5, maximum-scale=1.0, user-scalable=no;"/>
+	
+	<link rel="stylesheet" href="css/reset-min.css" />
+	<link rel="stylesheet" href="css/libraries/jquery.mobile-1.3.2.min.css" />
+    <link rel="stylesheet" href="css/fonts.css">
+	<link rel="stylesheet" href="css/font-awesome.css">
+	<link rel="stylesheet" href="css/base.css?ver=12.19.1" />
+	<link rel="stylesheet" href="css/register-login.css?ver=12.19.1" />
+	<link rel="stylesheet" href="http://onlineforlife.org/2-1app/app/css/override.css" />
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+	<script src="js/libraries/jquery-1.9.1.min.js"></script>
+	<script src="js/libraries/jquery.mobile-1.3.2.min.js"></script>
+	<script src="js/libraries/jquery-ui.min.js"></script>
+	
+	<script>
+		var gaPlugin;
+		function gaLoadSuccess(){
+			gaPlugin.trackEvent( gaSuccess, gaError, "Button", "Click", "event only", 1);
+		}
+		function gaLoadError(){
+		}
+		function gaSuccess(){
+			
+		}
+		function gaError(){
+		}
+		function onDeviceReady() {
+			gaPlugin = window.plugins.gaPlugin;
+			gaPlugin.init(gaLoadSuccess, gaLoadError, "UA-46755460-1", 10);
+		}
+	</script>
+</head>
+<body class="body-ofl body-register-login">
+	<div data-role="page" id="registration" data-page="registration" class="page-register-login page-register">
+		<h3><i class="logo-main"></i></h3>
+		<form id="form-registration" data-ajax="false" novalidate class="form-register-login form-register" autocomplete="off">
+			<p class="error-messages"><i class="fa fa-exclamation-triangle"></i><span></span></p>
+			<div class="fieldset fieldset-text">
+				<input value="" id="input-register-firstname" name="input-register-firstname" type="text" placeholder="First Name" required pattern="^[A-Za-z]{2}$" data-role="none" class="input-text first" title="First Name must be at least 2 letters" data-validate="true" />
+				<input value="" id="input-register-email" name="input-register-email" type="email" placeholder="Email" required data-role="none" class="input-text" data-validate="true" />
+				<input value="" id="input-register-password" name="input-register-password" type="password" placeholder="Password (6-12 characters)" required data-role="none" class="input-text" pattern=".{6,12}" maxlength="12" title="Password must be 6 and 12 characters" data-validate="true" />
+				<input value="" id="input-register-zip" name="input-register-zip" type="number" placeholder="ZIP Code" required data-role="none" class="input-text" pattern="[0-9]*" maxlength="5" title="Please enter 5 digits only" data-validate="true" />
+				<select id="input-register-state" name="input-register-state" data-role="none" class="input-select"> 
+					<option value="AL">Alabama</option>
+					<option value="AK">Alaska</option>
+					<option value="AZ">Arizona</option>
+					<option value="AR">Arkansas</option>
+					<option value="CA">California</option>
+					<option value="CO">Colorado</option>
+					<option value="CT">Connecticut</option>
+					<option value="DE">Delaware</option>
+					<option value="FL">Florida</option>
+					<option value="GA">Georgia</option>
+					<option value="HI">Hawaii</option>
+					<option value="ID">Idaho</option>
+					<option value="IL">Illinois</option>
+					<option value="IN">Indiana</option>
+					<option value="IA">Iowa</option>
+					<option value="KS">Kansas</option>
+					<option value="KY">Kentucky</option>
+					<option value="LA">Louisiana</option>
+					<option value="ME">Maine</option>
+					<option value="MD">Maryland</option>
+					<option value="MA">Massachusetts</option>
+					<option value="MI">Michigan</option>
+					<option value="MN">Minnesota</option>
+					<option value="MS">Mississippi</option>
+					<option value="MO">Missouri</option>
+					<option value="MT">Montana</option>
+					<option value="NE">Nebraska</option>
+					<option value="NV">Nevada</option>
+					<option value="NH">New Hampshire</option>
+					<option value="NJ">New Jersey</option>
+					<option value="NM">New Mexico</option>
+					<option value="NY">New York</option>
+					<option value="NC">North Carolina</option>
+					<option value="ND">North Dakota</option>
+					<option value="OH">Ohio</option>
+					<option value="OK">Oklahoma</option>
+					<option value="OR">Oregon</option>
+					<option value="PA">Pennsylvania</option>
+					<option value="RI">Rhode Island</option>
+					<option value="SC">South Carolina</option>
+					<option value="SD">South Dakota</option>
+					<option value="TN">Tennessee</option>
+					<option value="TX">Texas</option>
+					<option value="UT">Utah</option>
+					<option value="VT">Vermont</option>
+					<option value="VA">Virginia</option>
+					<option value="WA">Washington</option>
+					<option value="WV">West Virginia</option>
+					<option value="WI">Wisconsin</option>
+					<option value="WY">Wyoming</option>
+				</select>
+
+		
+				<i class="input-error error-firstname error-1"><i class="fa fa-exclamation-circle"></i><span>Name should only container letters</span></i>
+				<i class="input-error error-firstname error-2"><i class="fa fa-exclamation-circle"></i><span>Name needs to be at least 2 characters</span></i>
+				<i class="input-error error-email"><i class="fa fa-exclamation-circle"></i><span>Please enter a standard email address</span></i>
+				<i class="input-error error-password"><i class="fa fa-exclamation-circle"></i><span>Password should be 6-12 characters</span></i>
+				<i class="input-error error-zip"><i class="fa fa-exclamation-circle"></i><span>ZIP Code must be 5 digits</span></i>
+			</div>
+			<div class="fieldset fieldset-btn">
+				<a href="#login" class="btn btn-secondary" data-role="none">Login</a>
+				<button type="submit" class="btn btn-primary" data-role="none">Register</button>
+				<a href="dev.html" class="btn btn-secondary" data-role="none" data-ajax="false" id="register-dev">Dev</a>
+			</div>
+		</form>
+	</div>
+	
+	<div data-role="page" id="login" data-page="login" class="page-register-login page-login">
+		<h3><i class="logo-main"></i></h3>
+		<form id="form-login" novalidate class="form-register-login">
+			<p class="error-messages"><i class="fa fa-exclamation-triangle"></i><span></span></p>
+			<div class="fieldset fieldset-text">
+				<input type="email" id="input-login-email" placeholder="Email" required data-role="none" class="input-text first" />
+				<input type="password" id="input-login-password" placeholder="Password" required data-role="none" class="input-text" pattern=".{6,12}" maxlength="12" title="Password must be 6 and 12 characters" />
+				<i class="input-error error-email"><i class="fa fa-exclamation-circle"></i><span>Please enter your email address</span></i>
+				<i class="input-error error-password"><i class="fa fa-exclamation-circle"></i><span>Please enter your password</span></i>
+			</div>
+			<div class="fieldset fieldset-btn">
+				<!--
+				<div class="fieldset-col fieldset-col-1">
+					<a href="#forgot" class="link link-secondary" data-role="none">Forgot Password</a>
+					<a href="#registration" class="link link-secondary" data-role="none">Register</a>
+				</div>
+				-->
+				<a href="#registration" class="btn btn-secondary" data-role="none">Register</a>
+				<button type="submit" class="btn btn-primary" data-role="none">Login</button>
+				<button type="submit" class="btn btn-primary" data-role="none" id="login-brian">Login Bypass</button>
+				<button type="submit" class="btn btn-primary" data-role="none" id="login-jon">Login Jon</button>
+				<!--
+				<a href="feed.html" data-ajax="false" class="btn btn-primary" data-role="none">Login Bypass</a>
+				<a href="login.html" data-ajax="false" class="btn btn-primary" data-role="none">Login Test</a>
+				-->
+			</div>
+		</form>
+	</div>
+	
+	<div data-role="page" id="forgot" data-page="login" class="page-register-login page-forgot">
+		<h3><i class="logo-main"></i></h3>
+		<form id="form-forgot" novalidate>
+			<div class="fieldset fieldset-text">
+				<input type="email" placeholder="Email" required data-role="none" class="input-text first" />
+			</div>
+			<div class="fieldset fieldset-btn">
+				<div class="fieldset-col fieldset-col-1">
+					<a href="#login" class="link link-secondary" data-role="none">Login</a>
+				</div>
+				<button type="submit" class="btn btn-primary" data-role="none">Request Password</button>
+			</div>
+		</form>
+	</div>
+	<script src="js/libraries/firebase.js"></script>
+	<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>	
+	
+	<script src="js/libraries/raphael.js"></script>
+	<script src="js/libraries/handlebars-v1.1.2.js"></script>
+	<script src="js/libraries/handlebars.helpers.js"></script>
+	
+	<script src="js/app-local.js"></script>
+	<script type="text/javascript" src="http://onlineforlife.org/2-1app/app/js/helpers.js?ver=12.19.1"></script>
+	<script type="text/javascript" src="http://onlineforlife.org/2-1app/app/js/tracking.js?ver=12.19.1"></script>
+	<script type="text/javascript" src="http://onlineforlife.org/2-1app/app/js/register-login.js?ver=12.19.1"></script>
+	<script type="text/javascript" src="http://onlineforlife.org/2-1app/app/js/push.js?ver=12.19.1"></script>
+</body>
+</html>

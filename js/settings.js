@@ -4,7 +4,7 @@ onlineForLife.Settings = {
 
 	init: function(){
 		//console.log('settings init');
-		onlineForLife.Settings.setSavedSettings();
+		onlineForLife.Settings.setSavedSettingsOnSettingsPage();
 		onlineForLife.Settings.setupHandlers();
 	},
 	

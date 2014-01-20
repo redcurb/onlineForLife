@@ -8,6 +8,24 @@ Redcurb.Helpers = {
 		return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 	},
 	
+	getDeviceInfoObject: function(device){
+		alert('getDeviceInfoObject');
+		alert(device);
+		var deviceData = {};
+		
+		
+		var modelName = 'aaa';
+		var modelFamilyName = 'aaa';
+		var platformName = 'aaa';
+		var versionText = 'aaa';
+		
+		deviceData.modelName = modelName;
+		deviceData.modelFamilyName = modelFamilyName;
+		deviceData.platformName = platformName;
+		deviceData.versionText = versionText;
+		return deviceData;
+	},
+	
 	getDeviceInfo: function(device,type){
 		value = 'other';
 		if(type=='MODEL_NAME'){

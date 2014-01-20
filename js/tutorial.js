@@ -8,7 +8,7 @@ onlineForLife.Tutorial = {
 	},
 	
 	setupTutorialConfig: function(){
-		//console.log('setupTutorialConfig');
+		console.log('setupTutorialConfig');
 		var $tutorial = $('#tutorial-content');
 		var tutorialConfig = AppData.config.tutorial;
 		var tutorialText = AppData.text.tutorial;
@@ -17,7 +17,7 @@ onlineForLife.Tutorial = {
 		AppData.device.friendly = AppData.device.friendly || {};
 		AppData.device.friendly.model = AppData.device.friendly.model || {};
 		
-		if(AppData.device.friendly.model!='iphone'){
+		if(AppData.device.friendly.model!='iphone' || $('body').hasClass('platform-tablet')){
 			showTutorial=false;
 		}
 		

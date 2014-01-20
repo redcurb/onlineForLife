@@ -67,13 +67,31 @@ onlineForLife.Feed = {
 	},
 	
 	setupPage: function(){
+		console.log('setupPage');
 		onlineForLife.Feed.setupBodyPage();
 		onlineForLife.Feed.checkPageParam();
+		onlineForLife.Feed.setupWidescreenLayout();
 		$(document).on("pagechange", function(e, data) {
 			//console.log($(data.toPage).attr('id') + ' - ');
 			//console.log($.mobile.activePage);
 			onlineForLife.Feed.setupBodyPage();
 		});
+	},
+	
+	setupWidescreenLayout: function(){
+		var windowWidth = $(window).width();
+		var panelWidthLeft = 408;
+		var panelWidthRight = 552;
+		var minContentWidth = 600;
+		var totalNeeded = panelWidthLeft + panelWidthRight + minContentWidth;
+		console.log('totalNeeded: ' + totalNeeded);
+		console.log('windowWidth: ' + windowWidth);
+		if(windowWidth>totalNeeded){
+			onlineForLife.Feed.setupTabletLayout();
+		}
+		
+		
+		//$('body').addClass(bodyClass);
 	},
 	
 	checkPageParam: function(){
@@ -147,6 +165,11 @@ onlineForLife.Feed = {
 		if(typeof(device)!='undefined'){
 			AppData.device = device;
 			//$('.refresh-subtext').text($('.refresh-subtext').text() + ': ' + device.model);
+			
+			var deviceData = Redcurb.Helpers.getDeviceInfoObject(device);
+			console.log('{{{{{{{{{{{{{{{{{{{{{{ deviceData');
+			console.log(deviceData);
+			
 			var modelName = Redcurb.Helpers.getDeviceInfo(device, 'MODEL_NAME');
 			var modelFamilyName = Redcurb.Helpers.getDeviceInfo(device, 'MODEL_FAMILY_NAME');
 			var platformName = Redcurb.Helpers.getDeviceInfo(device, 'PLATFORM_NAME');
@@ -218,12 +241,15 @@ onlineForLife.Feed = {
 
 	setupTabletLayout: function(){
 		$('body').addClass('orientation-landscape platform-tablet');
+		$('.section-total-saved .total-user-count').html('&nbsp;');
 		var windowWidth = $(window).width();
 		var leftPanelWidth = $('.mypanel-left.ui-panel').width();
 		var rightPanelWidth = $('.mypanel-right.ui-panel').width();
 		var panelWidth =  leftPanelWidth + rightPanelWidth;
 		var rightScrollWidth = 15;
 		var contentWidth = windowWidth - panelWidth - rightScrollWidth;
+		
+		
 		//console.log('windowWidth: ' + windowWidth);
 		//console.log('leftPanelWidth: ' + leftPanelWidth);
 		//console.log('rightPanelWidth: ' + rightPanelWidth);
@@ -232,11 +258,24 @@ onlineForLife.Feed = {
 		//console.log('header-primary' + $('.ui-header.header-primary').width());
 		//console.log('.content-main.ui-content' + $('.content-main.ui-content').width());
 		
-		$('.ui-header.header-primary, .content-main.ui-content').css('width',contentWidth);
-		
+		$('.ui-header.header-primary, .content-main.ui-content').css('width',contentWidth).data('width',contentWidth);
+		onlineForLife.Feed.setupFeedItemWidth(contentWidth);
 		onlineForLife.Panels.setupIpad();
 		onlineForLife.Feed.rebuildFeed();
 		
+	},
+	
+	setupFeedItemWidth: function(contentWidth){
+		var listPaddingWidth = (30);
+		var listWidth = (contentWidth + listPaddingWidth);
+		var listMarginLeft = -listPaddingWidth/2;
+		
+		console.log('contentWidth: ' + contentWidth);
+		console.log('listPaddingWidth: ' + listPaddingWidth);
+		console.log('listWidth: ' + listWidth);
+		console.log('listMarginLeft: ' + listMarginLeft);
+		cssData = {width:listWidth+'px',marginLeft:listMarginLeft+'px'};
+		$('ul.feed').css(cssData);
 	},
 	
 	undoTabletLayout: function(){
@@ -998,6 +1037,9 @@ onlineForLife.Feed = {
 						bump3 = '-120px';
 					}
 				}
+						bump1 = '-150px';
+						bump2 = '-120px';
+						bump3 = '-130px';
 				$listItemContent.animate({'left':bump1}, 300, function(){
 					$listItemContent.animate({'left':bump2}, 200, function(){
 						$listItemContent.animate({'left':bump3}, 100, function(){
