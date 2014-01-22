@@ -12,11 +12,22 @@ onlineForLife.Panels = {
 		onlineForLife.Panels.setupStatsData();
 	},
 	
-	setText: function(){
+	setTextOld: function(){
 		var savedCount = onlineForLife.GlobalData.Text.global.savedCount;
 		savedCount = savedCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		//console.log('savedCount',savedCount);
 		$('.mypanel-right .section-total-saved span.total-user-count').text(savedCount);
+	},
+	
+	setText: function(){
+		var dbUrl = 'https://ofl.firebaseio.com/app/text/counts/totalBabiesSaved/total';
+		var textData = new Firebase(dbUrl);
+		textData.on('value', function(snapshot) {
+			var savedCount = snapshot.val();
+			onlineForLife.GlobalData.Text.global.savedCount = savedCount;
+			savedCount = savedCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			$('.mypanel-right .section-total-saved span.total-user-count').text(savedCount);
+		});
 	},
 	
 	refreshed:false,
@@ -98,10 +109,13 @@ onlineForLife.Panels = {
 		var userPrayerUrl = 'https://ofl.firebaseio.com/users/'+ AppData.UserId + '/prayers';
 		var userPrayerDataRef = new Firebase(userPrayerUrl);
 		userPrayerDataRef.once('value', function(userPrayerData) {
-			//console.log('userPrayerData');
 			userPrayerDataVal = userPrayerData.val();
-			//console.log(userPrayerDataVal);
-			AppData.UserPrayers = userPrayerDataVal;
+			if(userPrayerDataVal==null){
+				AppData.UserPrayers = {};
+			}
+			else{
+				AppData.UserPrayers = userPrayerDataVal;
+			}
 			onlineForLife.Panels.onDataUpdatedFromFb(method);
 		});
 	},

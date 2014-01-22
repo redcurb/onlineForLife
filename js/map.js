@@ -36,7 +36,7 @@ onlineForLife.USMap = {
 	},
 	
 	toggleState:function(state){
-		console.log('toggleState: ' + state);
+		//console.log('toggleState: ' + state);
 		$('#map').usmap('trigger', state, 'mouseover');
 		setTimeout(function() {
 			$('#map').usmap('trigger', state, 'mouseout');

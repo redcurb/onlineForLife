@@ -1,4 +1,8 @@
 onlineForLife.Feed = {
+	init: function(){
+		onlineForLife.Feed.setupPage();
+	},
+	
 	version: 1,
 	
 	userData: {
@@ -49,10 +53,6 @@ onlineForLife.Feed = {
 
 	},
 	
-	init: function(){
-		onlineForLife.Feed.setupPage();
-	},
-	
 	setupBodyPage: function(){
 		$('body').removeClass('page-feed').removeClass('page-events').removeClass('page-settings');
 		if($.mobile.activePage.is('#feed')){
@@ -67,7 +67,7 @@ onlineForLife.Feed = {
 	},
 	
 	setupPage: function(){
-		console.log('setupPage');
+		//console.log('setupPage');
 		onlineForLife.Feed.setupBodyPage();
 		onlineForLife.Feed.checkPageParam();
 		onlineForLife.Feed.setupWidescreenLayout();
@@ -84,8 +84,8 @@ onlineForLife.Feed = {
 		var panelWidthRight = 552;
 		var minContentWidth = 600;
 		var totalNeeded = panelWidthLeft + panelWidthRight + minContentWidth;
-		console.log('totalNeeded: ' + totalNeeded);
-		console.log('windowWidth: ' + windowWidth);
+		//console.log('totalNeeded: ' + totalNeeded);
+		//console.log('windowWidth: ' + windowWidth);
 		if(windowWidth>totalNeeded){
 			onlineForLife.Feed.setupTabletLayout();
 		}
@@ -157,59 +157,40 @@ onlineForLife.Feed = {
 		//alert(device);
 		//console.log('setDevice');
 		if(onlineForLife.Feed.testMode){
-			var device = {"platform" : "iOS","available" : true,"model" : "iPhone5,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
+			//var device = {"platform" : "iOS","available" : true,"model" : "iPhone5,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
 			//var device = {"platform" : "android","available" : true,"model" : "galaxy3,1","cordova" : "3.0.0","version" : "12.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
 		}
 		//var device = {"platform" : "iOS","available" : true,"model" : "iPad5,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
 		//var device = {"platform" : "android","available" : true,"model" : "android,1","cordova" : "3.0.0","version" : "7.0.3","uuid" : "3B96DA31-CD1B-45C9-8A1B-D9E72192B1FC"};
+		var deviceDataInfo = '';
+		AppData.device = {};
 		if(typeof(device)!='undefined'){
 			AppData.device = device;
-			//$('.refresh-subtext').text($('.refresh-subtext').text() + ': ' + device.model);
-			
-			var deviceData = Redcurb.Helpers.getDeviceInfoObject(device);
-			console.log('{{{{{{{{{{{{{{{{{{{{{{ deviceData');
-			console.log(deviceData);
-			
-			var modelName = Redcurb.Helpers.getDeviceInfo(device, 'MODEL_NAME');
-			var modelFamilyName = Redcurb.Helpers.getDeviceInfo(device, 'MODEL_FAMILY_NAME');
-			var platformName = Redcurb.Helpers.getDeviceInfo(device, 'PLATFORM_NAME');
-			var versionText = Redcurb.Helpers.getDeviceInfo(device, 'OS_VERSION');
-			
-			//console.log('modelName: ' + modelName);
-			//console.log('modelFamilyName: ' + modelFamilyName);
-			//console.log('platformName: ' + platformName);
-			//console.log('versionText: ' + versionText);
-			onlineForLife.Feed.deviceStatus.model = modelName;
-			onlineForLife.Feed.deviceStatus.modelFamily = modelFamilyName;
-			onlineForLife.Feed.deviceStatus.platform = platformName;
-			onlineForLife.Feed.deviceStatus.version = versionText;
-			AppData.device.friendly = onlineForLife.Feed.deviceStatus;
-			var output = '';
-			output += 'modelName: ' + modelName +'\n';
-			output += 'modelFamilyName: ' + modelFamilyName +'\n';
-			output += 'platformName: ' + platformName +'\n';
-			output += 'versionText: ' + versionText +'\n';
-			//alert(output);
-			
-			
-			var platformClass = 'platform-' + platformName;
-			var modelClass = 'model-' + modelName;
-			var modelFamilyClass = 'model-family-' + modelFamilyName;
-			var versionClass = 'os-version-' + versionText;
-			//console.log('platformClass: ' + platformClass);
-			//console.log('modelClass: ' + modelClass);
-			//console.log('modelFamilyClass: ' + modelFamilyClass);
-			//console.log('versionClass: ' + versionClass);
-			$('body').addClass(platformClass).addClass(modelFamilyClass).addClass(modelClass).addClass(versionClass);
-			if(modelName=='ipad'){
-				onlineForLife.Feed.setupTabletLayout();
-			}
 		}
-		else{
-			
+		var deviceData = Redcurb.Helpers.getDeviceInfoObject(deviceDataInfo);
+		//console.log('deviceData: ' + deviceData);
+		//console.log(deviceData);
+		
+		var modelName = deviceData.modelName;
+		var modelFamilyName = deviceData.modelFamilyName;
+		var platformName = deviceData.platformName;
+		var versionText = deviceData.versionText;
+		
+		
+		onlineForLife.Feed.deviceStatus.model = modelName;
+		onlineForLife.Feed.deviceStatus.modelFamily = modelFamilyName;
+		onlineForLife.Feed.deviceStatus.platform = platformName;
+		onlineForLife.Feed.deviceStatus.version = versionText;
+		AppData.device.friendly = onlineForLife.Feed.deviceStatus;
+		var platformClass = 'platform-' + platformName;
+		var modelClass = 'model-' + modelName;
+		var modelFamilyClass = 'model-family-' + modelFamilyName;
+		var versionClass = 'os-version-' + versionText;
+		$('body').addClass(platformClass).addClass(modelFamilyClass).addClass(modelClass).addClass(versionClass);
+		if(modelName=='ipad'){
+			onlineForLife.Feed.setupTabletLayout();
 		}
-	},
-	
+	},	
 	setupDeviceLayout:function(){
 		
 	},
@@ -394,7 +375,7 @@ onlineForLife.Feed = {
 		
 		
 		
-		var prayerTotalUrl = 'https://ofl.firebaseio.com/app/text/prayerTotal';
+		var prayerTotalUrl = 'https://ofl.firebaseio.com/app/text/dailyPrayerTotal/total';
 		var prayerTotalData = new Firebase(prayerTotalUrl);
 		
 		prayerTotalData.once('value', function(prayerTotalValue) {
@@ -1064,7 +1045,7 @@ onlineForLife.Feed = {
 	},
 	
 	setupTotalPrayerCount:function(){
-		var testUrl = 'https://ofl.firebaseio.com/app/text/prayerTotal';
+		var testUrl = 'https://ofl.firebaseio.com/app/text/dailyPrayerTotal/total';
 		var testData = new Firebase(testUrl);
 		var $totalPrayerCount = $('.main-refresh .refresh-count');
 

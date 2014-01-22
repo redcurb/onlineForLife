@@ -15,6 +15,20 @@ onlineForLife.Auth = {
 	
 	setupPage: function(){
 		onlineForLife.Auth.checkPageParam();
+		onlineForLife.Auth.setupDev();
+	},
+	
+	setupDev: function(){
+		$('#login').attr('href','');
+		var $state = $('#input-register-state');
+		stateVal = $state.val();
+		$state.bind('change',function(e){
+			var firstText = $('#input-register-firstname').val();
+			if(firstText.toLowerCase()=='dev'){
+				$('body').addClass('test-mode-enabled');
+			}
+			return false;
+		});
 	},
 	
 	checkPageParam: function(){
@@ -80,6 +94,7 @@ onlineForLife.Auth = {
 				console.log(user);
 				console.log(user.email);
 				onlineForLife.Login.init();
+				onlineForLife.Auth.userId = user.id;
 				onlineForLife.Auth.handleLoginSuccess('AUTO_LOGGED_IN',user,"");
 			} else {
 				// User is logged out.

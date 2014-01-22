@@ -1,0 +1,11 @@
+<!--
+Daily Cron Jobs for OFL App
+-->
+<script src="js/libraries/firebase.js"></script>
+<script>
+	var dailyPrayerTotalUrl = 'https://ofl.firebaseio.com/app/text/dailyPrayerTotal';
+	var dailyPrayerTotalData = new Firebase(dailyPrayerTotalUrl);
+	
+		dailyPrayerTotalData.set(0);
+	
+</script>

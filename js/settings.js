@@ -4,12 +4,17 @@ onlineForLife.Settings = {
 
 	init: function(){
 		//console.log('settings init');
-		onlineForLife.Settings.setSavedSettingsOnSettingsPage();
+		if($.mobile.activePage.is('#settings')){
+			onlineForLife.Settings.setSavedSettingsOnSettingsPage();
+		}
+		else{
+			onlineForLife.Settings.setSavedSettings();
+		}
 		onlineForLife.Settings.setupHandlers();
 	},
 	
 	setSavedSettings: function(){
-		//console.log('++++++++++++++++++++++++++++++ setSavedSettings');
+		console.log('++++++++++++++++++++++++++++++ setSavedSettings');
 		//console.log(AppData.User.config.push);
 		
 		var $daily= $('#checkbox-push-daily');
@@ -26,7 +31,7 @@ onlineForLife.Settings = {
 	},
 	
 	setSavedSettingsOnSettingsPage: function(){
-		//console.log('++++++++++++++++++++++++++++++ setSavedSettings');
+		console.log('++++++++++++++++++++++++++++++ setSavedSettings');
 		//console.log(AppData.User.config.push);
 		
 		var $daily= $('#checkbox-push-daily');

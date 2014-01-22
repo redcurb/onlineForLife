@@ -8,21 +8,143 @@ Redcurb.Helpers = {
 		return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 	},
 	
+	setupDev: function(){
+		var isDev = false;
+		if(AppData.UserId==1){
+			Redcurb.Helpers.createDevItems();
+		}
+	},
+	
+	createDevNavItems: function(){
+		var $nav = $('.nav-primary');
+		var html = '';
+		html += '<li class="test-link1 nav-settings"><a href="dev.html" data-ajax="false"><i class="fa fa-gear"></i><span>Dev Links</span></a></li>';
+		html += '<li class="test-link1 nav-settings"><a href="#" data-ajax="false" id="dev-navigator"><i class="fa fa-gear"></i><span>Show Navigator</span></a></li>';
+		$nav.append(html);
+	},
+	
+	showNavigatorInfo: function(){
+		var $device = $('ul#device-info');
+
+		var navigatorInfoHtml = '';
+		navigatorInfoHtml += '<li>NAVIGATOR INFO</li>';
+		navigatorInfoHtml += '<li>--------------------------------------</li>';
+		$.each(navigator,function(key,value){
+			navigatorInfoHtml += '<li>' + key + ': ' + value + '</li>';
+		});
+		navigatorInfoHtml += '<li>=====================================</li>';
+		navigatorInfoHtml += '<li>&nbsp;</li>';
+		$device.append(navigatorInfoHtml);
+		
+		$('#dev-navigator').on('click',function(){
+			if($device.is(':visible')){
+				$device.hide();
+			}
+			else{
+				$device.show();
+			}
+		});
+	},
+	
+	createDevItems: function(){
+		Redcurb.Helpers.createDevNavItems();
+		Redcurb.Helpers.showNavigatorInfo();
+
+		
+	},
+	
+	setupConsoleItem: function(){
+		
+	},
+	
+	createConsoleItem: function(text,data){
+		
+	},
+	
+	getNavigatorData: function(){
+		$.each(navigator,function(key, value){
+			console.log(key + ': ' + value);
+		});
+	},
+	
 	getDeviceInfoObject: function(device){
-		alert('getDeviceInfoObject');
-		alert(device);
+		console.log('getDeviceInfoObject');
+		console.log(device);
 		var deviceData = {};
 		
 		
-		var modelName = 'aaa';
-		var modelFamilyName = 'aaa';
-		var platformName = 'aaa';
-		var versionText = 'aaa';
+		var modelName = '';
+		var modelFamilyName = '';
+		var platformName = '';
+		var versionText = '';
+		
+		if(device==''){
+			deviceModel = null;
+			modelFamilyName = null;
+			devicePlatform = null;
+			if(navigator.platform.indexOf("iPod") != -1){
+				modelName = 'ipad';
+				modelFamilyName = 'ipad';
+				platformName = 'ios';
+			}
+			if(navigator.platform.indexOf("iPhone") != -1){
+				modelName = 'iphone';
+				modelFamilyName = 'iphone';
+				platformName = 'ios';
+			}
+			versionText = null;
+		}
+		else{
+			modelName = null;
+			modelFamilyName = null;
+			platformName = null;
+			versionText = null;
+			
+			//GET MODEL & FAMILY
+			var deviceModel = device.model.toLowerCase();
+			if(deviceModel.indexOf('iphone')>=0){
+				modelName = 'iphone';
+			}
+			else if(deviceModelVal.indexOf('ipad')>=0){
+				modelName = 'ipad';
+			}
+			modelFamilyName = deviceModel;
+
+			//GET PLATFORM
+			var devicePlatform = device.platform.toLowerCase();
+			if(devicePlatform.indexOf('ios')>=0){
+				platformName = 'ios';
+			}
+			else if(devicePlatformVal.indexOf('android')>=0){
+				platformName = 'android';
+			}
+			
+			
+		}
+		//SAMPLE CODE ios = /iphone|ipod|ipad/.test( userAgent );
+		// http://theiphonewiki.com/wiki/Models
 		
 		deviceData.modelName = modelName;
 		deviceData.modelFamilyName = modelFamilyName;
 		deviceData.platformName = platformName;
 		deviceData.versionText = versionText;
+
+		var $device = $('ul#device-info');
+
+		var deviceInfoHtml = '';
+		
+		deviceInfoHtml += '<li>DEVICE INFO</li>';
+		deviceInfoHtml += '<li>--------------------------------------</li>';
+		deviceInfoHtml += '<li>modelName: ' + modelName + '</li>';
+		deviceInfoHtml += '<li>modelFamilyName: ' + modelFamilyName + '</li>';
+		deviceInfoHtml += '<li>platformName: ' + platformName + '</li>';
+		deviceInfoHtml += '<li>versionText: ' + versionText + '</li>';
+		deviceInfoHtml += '<li>=====================================</li>';
+		deviceInfoHtml += '<li>&nbsp;</li>';
+		
+		$device.prepend(deviceInfoHtml);
+
+		
 		return deviceData;
 	},
 	

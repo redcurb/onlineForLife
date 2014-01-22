@@ -12,10 +12,21 @@ onlineForLife.App = {
 	init: function(){
 		//console.log('app init');
 		onlineForLife.App.getConfigData();
+		onlineForLife.App.runOverrides();
 	},	
 
+	runOverrides: function(){
+		//console.log('app init');
+		//onlineForLife.App.getConfigData();
+		//$totalPrayers = $('.main-refresh .refresh-label');
+		//$totalPrayers.text('Total Prayers').css('visibility','visible');
+	},	
+	
+	
+	
 	onFeedLoaded:function(){
 		//console.log('onFeedLoaded');
+		Redcurb.Helpers.setupDev();
 		AppData.FeedLoaded=true;
 		onlineForLife.Tutorial.init();
 		onlineForLife.Footer.init();
