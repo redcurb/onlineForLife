@@ -22,16 +22,26 @@ onlineForLife.Settings = {
 		var $special = $('#checkbox-push-special');
 		var $none = $('#checkbox-push-none');
 		
-		$daily.attr("checked",AppData.User.config.push.dailySummary);
-		$life.attr("checked",AppData.User.config.push.everyLifeChoice);
-		$special.attr("checked",AppData.User.config.push.specialUpdates);
-		$none.attr("checked",AppData.User.config.push.none);
+		var pushSettings = AppData.User.config.push;
+		$daily.attr("checked",pushSettings.dailySummary);
+		$life.attr("checked",pushSettings.everyLifeChoice);
+		$special.attr("checked",pushSettings.specialUpdates);
+		$none.attr("checked",pushSettings.none);
+		if(pushSettings.dailySummary=='' && pushSettings.everyLifeChoice=='' && pushSettings.specialUpdates=='' && pushSettings.none==''){
+			$daily.attr("checked",true);
+			$life.attr("checked",false);
+			$special.attr("checked",true);
+			$none.attr("checked",false);
+		}
 		
+	},
+	
+	setDefaultPushSettings: function(){
 		
 	},
 	
 	setSavedSettingsOnSettingsPage: function(){
-		console.log('++++++++++++++++++++++++++++++ setSavedSettings');
+		console.log('++++++++++++++++++++++++++++++ setSavedSettingsOnSettingsPage');
 		//console.log(AppData.User.config.push);
 		
 		var $daily= $('#checkbox-push-daily');
@@ -39,11 +49,17 @@ onlineForLife.Settings = {
 		var $special = $('#checkbox-push-special');
 		var $none = $('#checkbox-push-none');
 		
-		$daily.attr("checked",AppData.User.config.push.dailySummary).checkboxradio("refresh");
-		$life.attr("checked",AppData.User.config.push.everyLifeChoice).checkboxradio("refresh");
-		$special.attr("checked",AppData.User.config.push.specialUpdates).checkboxradio("refresh");
-		$none.attr("checked",AppData.User.config.push.none).checkboxradio("refresh");
-		
+		var pushSettings = AppData.User.config.push;
+		$daily.attr("checked",pushSettings.dailySummary).checkboxradio("refresh");
+		$life.attr("checked",pushSettings.everyLifeChoice).checkboxradio("refresh");
+		$special.attr("checked",pushSettings.specialUpdates).checkboxradio("refresh");
+		$none.attr("checked",pushSettings.none).checkboxradio("refresh");
+		if(pushSettings.dailySummary=='' && pushSettings.everyLifeChoice=='' && pushSettings.specialUpdates=='' && pushSettings.none==''){
+			$daily.attr("checked",true).checkboxradio("refresh");
+			$life.attr("checked",false).checkboxradio("refresh");
+			$special.attr("checked",true).checkboxradio("refresh");
+			$none.attr("checked",false).checkboxradio("refresh");
+		}
 		
 	},
 	

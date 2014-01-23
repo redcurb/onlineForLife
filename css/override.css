@@ -191,5 +191,9 @@ body.orientation-landscape.platform-tablet ul.feed li.feed-item.version-5{
 	display:none	
 }
 
+.tutorial-page-stats .tutorial-toggle a{
+	left:155px;	
+}
+
 
 

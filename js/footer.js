@@ -62,16 +62,13 @@ onlineForLife.Footer = {
 			var textData = onlineForLife.Footer.footerData.text.twitter;
 			var shareText = textData.body1;
 			var url = 'https://twitter.com/intent/tweet?text=' + shareText + '&url=' + shareUrl + '?shareId='+shareId;;
-			alert(url);
 			window.open(url, '_blank', 'location=yes');
 		}
 		else if(linkId=='facebook'){
 			var url = 'http://m.facebook.com/sharer.php?u=' + shareUrl + '?shareId='+shareId;
-			alert(url);
 			window.open(url, '_blank', 'location=yes');
 		}
 		else if(linkId=='email'){
-			alert(url);
 			var textData = onlineForLife.Footer.footerData.text.email;
 			var subjectText = textData.subject;
 			var bodyText = textData.body1;

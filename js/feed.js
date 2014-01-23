@@ -63,6 +63,7 @@ onlineForLife.Feed = {
 		}
 		else if($.mobile.activePage.is('#settings')){
 			$('body').addClass('page-settings');
+			onlineForLife.Settings.setSavedSettingsOnSettingsPage();
 		}
 	},
 	
@@ -1244,19 +1245,14 @@ onlineForLife.Feed = {
 		var progressItems = onlineForLife.Feed.feedDataLists.progressItems.all;
 		var feedData = onlineForLife.Feed.feedData;
 		$.each(progressItems,function(key,data){
-			//console.log(key + ': ' + data);
-			//onlineForLife.Feed.feedDataLists.progressItems.all[key] = 'aaa';
-			
 			$.each(data,function(dataKey,dataData){
-					
 				var feedData = onlineForLife.Feed.feedData[dataData];
-				//console.log(feedData);
 				var stepNumber = onlineForLife.Feed.getCurrentStepData(feedData);
-				var stepString = 'step' + stepNumber;
-				onlineForLife.Feed.feedDataLists.progressItems[stepString]['byEventId'][key] = dataData;
-				onlineForLife.Feed.feedDataLists.progressItems[stepString]['byKeyId'][dataData] = key;
-				//console.log('stepNumber: ' + stepNumber);
-				//console.log('===========================');
+				if(stepNumber!=''){
+					var stepString = 'step' + stepNumber;
+					onlineForLife.Feed.feedDataLists.progressItems[stepString]['byEventId'][key] = dataData;
+					onlineForLife.Feed.feedDataLists.progressItems[stepString]['byKeyId'][dataData] = key;
+				}
 			});
 		});
 		onlineForLife.Feed.getCurrentPrayerEvents();

@@ -20,7 +20,6 @@ onlineForLife.Tutorial = {
 		if(AppData.device.friendly.model!='iphone' || $('body').hasClass('platform-tablet')){
 			showTutorial=false;
 		}
-		
 		if(showTutorial){
 
 			var itemHtml = '';
