@@ -11,6 +11,7 @@ onlineForLife.Push = onlineForLife.Push || {};
 onlineForLife.App = {
 	init: function(){
 		//console.log('app init');
+		Redcurb.Helpers.createPrototypeItems();
 		onlineForLife.App.getConfigData();
 		onlineForLife.App.runOverrides();
 	},	

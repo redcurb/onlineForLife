@@ -105,7 +105,7 @@ onlineForLife.Panels = {
 	},
 	
 	loadStatsDataFromFb: function(method){
-		console.log('loadStatsDataFromFb: ' + method);
+		//console.log('loadStatsDataFromFb: ' + method);
 		var userPrayerUrl = 'https://ofl.firebaseio.com/users/'+ AppData.UserId + '/prayers';
 		var userPrayerDataRef = new Firebase(userPrayerUrl);
 		userPrayerDataRef.once('value', function(userPrayerData) {
@@ -212,7 +212,9 @@ onlineForLife.Panels = {
 		//NOTE:::: some handlers are also assigned in tutorial.js
 		$panelRight.on( "panelbeforeopen", function( event, ui ) {
 			var $this = $(this);
+			var $panel = $(this);
 			var $page = $this.parents('.ui-page');
+			onlineForLife.Panels.setupSavedBabiesAnimation($panel);
 			$page.addClass('right-panel-opening panel-opening');
 			$('body').addClass('right-panel-opening panel-opening tutorial-right-panel-opening');
 		} );
@@ -237,6 +239,7 @@ onlineForLife.Panels = {
 			$page.removeClass('panel-closing');
 			$('body').removeClass('panel-closing').removeClass('right-panel-open right-panel-closing tutorial-right-panel-closing');
 			onlineForLife.Panels.hideArcs($panel);
+			onlineForLife.Panels.resetSavedBabiesCount($panel);
 		});
 
 		$panelLeft.on( "panelbeforeopen", function( event, ui ) {
@@ -545,14 +548,58 @@ onlineForLife.Panels = {
 				}
 				*/
 				//console.log('UPDATES AFTER');
-				onlineForLife.Panels.buildStep4Items();
 				
 			}
+			onlineForLife.Panels.buildStep4Items();
 		});
 		//console.log(' ');
 	},
 	
 	buildStep4Items: function(){
+		console.log('buildStep4Items');
+		var dbUrl = 'https://ofl.firebaseio.com/app/text/counts/totalBabiesSaved';
+		var dataRef = new Firebase(dbUrl);
+		dataRef.once('value', function(totalBabiesData) {
+			var totalBabies = totalBabiesData.val();
+			console.log('totalBabies');
+			console.log(totalBabies);
+			var $updates = $('ul.stats-updates');
+			var $spinner = $updates.find('li.spinner');
+			var $noRecords = $updates.find('li.no-records');
+			$noRecords.fadeOut(100);
+			$spinner.fadeOut(100);
+			$.each(totalBabies,function(key,babySaved){
+				if(typeof(babySaved.OFL_Life_Decision_Number)!='undefined'){
+					console.log('babySaved id: ' + key);
+					console.log('babySaved #: ' + babySaved.OFL_Life_Decision_Number);
+					var id = babySaved.Id;
+					var lifeNumber = babySaved.OFL_Life_Decision_Number;
+					var city = babySaved.City;
+					var stateCode = babySaved.StateCode;
+					var stateName = babySaved.StateName;
+					
+					stateName = onlineForLife.Panels.convertStateNameCase(stateName);
+					
+					console.log('id: ',id);
+					console.log('lifeNumber: ',lifeNumber);
+					console.log('city: ',city);
+					console.log('stateName: ',stateName);
+					
+					var step4Text = onlineForLife.Panels.getStep4ItemText(id, lifeNumber, city, stateCode, stateName);
+					var itemHtml = onlineForLife.Panels.buildStep4UpdateItem(id, step4Text);
+					$('ul.stats-updates').prepend(itemHtml);
+				}
+			});
+		});
+		
+	},
+	
+	convertStateNameCase: function(stateName){
+		var stateName = stateName.toProperCase();
+		return stateName;
+	},
+	
+	buildStep4ItemsOld: function(){
 		//console.log('buildStep4Items:  ',onlineForLife.Panels.step4Items);
 		var items = onlineForLife.Panels.step4Items;
 		$.each(items,function(index,itemData){
@@ -603,6 +650,43 @@ onlineForLife.Panels = {
 		return html;
 	},
 
+	resetSavedBabiesCount: function($panel){
+		if(AppData.config.stats.totalBabiesSaved.animateCount){
+			var $total = $panel.find('.section-total-saved .total-user-count');
+			$total.text(0);
+		}
+	},
+
+	setupSavedBabiesAnimation: function($panel){
+		if(AppData.config.stats.totalBabiesSaved.animateCount){
+			var savedCount = onlineForLife.GlobalData.Text.global.savedCount;
+			onlineForLife.Panels.resetSavedBabiesCount($panel);
+			setTimeout(function() {
+				onlineForLife.Panels.animateSavedBabies(0,savedCount,10,$panel);
+			},100);
+		}
+	},
+	
+	animateSavedBabies: function(current,max,step,$panel){
+		//console.log('animateSavedBabies c: ' + current + ', m: ' + max);
+		onlineForLife.Panels.animateItem(current,max,step,$panel);
+	},
+	
+	animateItem: function(current,max,step,$panel){
+		//console.log('animateItem c: ' + current + ', m: ' + max);
+		var next = current + step;
+		if(next>max){
+			next=max;
+		}
+		var $total = $panel.find('.section-total-saved .total-user-count');
+		$total.text(current.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		if(current<max){
+			setTimeout(function() {
+				onlineForLife.Panels.animateSavedBabies(next,max,step,$panel);
+			},0);
+		}
+	},
+	
 	setupUpdatesWindow: function(){
 		//console.log('setupUpdatesWindow');
 		$('#modalUpdates').dialog({

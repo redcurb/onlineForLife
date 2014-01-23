@@ -15,6 +15,13 @@ Redcurb.Helpers = {
 		}
 	},
 	
+	createPrototypeItems: function(){
+		String.prototype.toProperCase = function(){
+		  return this.toLowerCase().replace(/^(.)|\s(.)/g, 
+			  function($1) { return $1.toUpperCase(); });
+		}
+	},
+	
 	createDevNavItems: function(){
 		var $nav = $('.nav-primary');
 		var html = '';
@@ -68,8 +75,8 @@ Redcurb.Helpers = {
 	},
 	
 	getDeviceInfoObject: function(device){
-		console.log('getDeviceInfoObject');
-		console.log(device);
+		//console.log('getDeviceInfoObject');
+		//console.log(device);
 		var deviceData = {};
 		
 		

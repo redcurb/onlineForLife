@@ -8,7 +8,7 @@ onlineForLife.Tutorial = {
 	},
 	
 	setupTutorialConfig: function(){
-		console.log('setupTutorialConfig');
+		//console.log('setupTutorialConfig');
 		var $tutorial = $('#tutorial-content');
 		var tutorialConfig = AppData.config.tutorial;
 		var tutorialText = AppData.text.tutorial;

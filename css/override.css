@@ -197,3 +197,23 @@ body.orientation-landscape.platform-tablet ul.feed li.feed-item.version-5{
 
 
 
+
+/*register*/
+#form-login .fieldset-btn .fieldset-col-1{
+	float:right;
+	width: 100%;
+}
+	#form-login .fieldset-btn .fieldset-col-1 a{
+		float:right;
+		margin:10px 5px 0 0;
+	}
+#forgot .fieldset-btn .fieldset-col-1{
+	display:none;
+}
+	#forgot .fieldset-btn .btn-primary{
+		padding:9px 35px 12px;
+	}
+	#forgot .fieldset-btn .btn-secondary{
+		padding:9px 35px 12px;
+	}
+

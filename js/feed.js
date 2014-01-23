@@ -656,7 +656,6 @@ onlineForLife.Feed = {
 			var feedItemData = onlineForLife.Feed.feedData[key];
 			var messageId = feedItemData.Id.toString();
 			var itemData = onlineForLife.Feed.createFeedDataObject(feedItemData);
-			
 			var id = itemData.id;
 			var state = itemData.state;
 			var city = itemData.city;
@@ -1096,8 +1095,6 @@ onlineForLife.Feed = {
 		var step4Ref = userPrayersRef.child('step4');
 		step1Ref.once('value', function(step1DataSet) {
 			var step1 = step1DataSet.val();
-			//console.log('$$$$$$$$$$$$$$$$$$$$$$$ step1Ref');
-			//console.log(step1);
 			var step1Data = onlineForLife.Feed.feedDataLists.fbPastPrayers.step1 = step1;
 			if(step1Data==null){
 				step1Data = {};

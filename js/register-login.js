@@ -37,8 +37,24 @@ onlineForLife.Auth = {
 			onlineForLife.Auth.test = true;
 			$('body').addClass('test-mode-enabled');
 		}
-		
+		onlineForLife.Auth.setupOverrides();
 		onlineForLife.Auth.checkLoginStatus();
+	},
+	
+	setupOverrides: function(){
+		//onlineForLife.Auth.setupOverrideForgot();
+	},
+	
+	setupOverrideForgot: function(){
+		var $loginBtnFieldset = $('#form-login .fieldset-btn');
+		var loginFormForgotHtml = '<div class="fieldset-col fieldset-col-1"><a href="#forgot" class="link link-secondary" data-role="none">Forgot Password</a></div>';
+		$loginBtnFieldset.append(loginFormForgotHtml);
+		
+		var $forgotBtnFieldset = $('#forgot .fieldset-btn');
+		var $forgotPrimary = $forgotBtnFieldset.find('.btn-primary');
+		$forgotPrimary.text('Reset Password');
+		var forgotFormLoginHtml = '<a href="#login" class="btn btn-secondary" data-role="none">Login</a>';
+		$forgotBtnFieldset.prepend(forgotFormLoginHtml);
 	},
 	
 	userData: {},
@@ -114,7 +130,6 @@ onlineForLife.Auth = {
 		if(Redcurb.Helpers.getCookie('userFirebaseToken')=="undefined" || Redcurb.Helpers.getCookie('userFirebaseToken')==""){
 			onlineForLife.Register.init();
 			onlineForLife.Login.init();
-			onlineForLife.Forgot.init();
 		}
 		else{
 			dataRef.auth(token, function(error,user) {
@@ -286,6 +301,7 @@ onlineForLife.Register = {
 		var regexZip = /.{5,5}/;
 
 		var $errorFirstName1 = $form.find('.error-firstname.error-1');
+		$errorFirstName1.text('Name should only contain letters');
 		var $errorFirstName2 = $form.find('.error-firstname.error-2');
 		var $errorEmail = $form.find('.error-email');
 		var $errorPassword = $form.find('.error-password');
@@ -428,6 +444,7 @@ onlineForLife.Login = {
 		console.log('login init');
 		onlineForLife.Login.setupAutoLogin();
 		onlineForLife.Login.setupFocus();
+		onlineForLife.Forgot.init();
 		$('#form-login').on('submit',function(event){
 			event.preventDefault();
 			console.log('login submit clicked');
@@ -541,15 +558,56 @@ onlineForLife.Login = {
 
 onlineForLife.Forgot = {
 	init: function(){
-		$('#form-forgot').on('submit',function(e){
+		$('#forgot').on('submit',function(e){
 			e.preventDefault();
 			onlineForLife.Forgot.handleFormSubmit();
+			return false;
 		});
 	},
 	
 	handleFormSubmit: function(){
 		var formOk = true;
+		//formOk = false;
+		$form = $('#form-forgot');
+		var $email = $form.find('.input-text');
+		$email.val('pinky@brian.com');
+		var emailVal = $email.val();
+		console.log('emailVal: ' + emailVal);
 		if(formOk){
+			var firebaseUrl =  new Firebase('https://ofl.firebaseio.com');
+			var auth = new FirebaseSimpleLogin(firebaseUrl, function(error, user) {
+				if (error) {
+					console.log('error');
+					console.log(error);
+					return;
+				}
+				if (user) {
+					// User is already logged in.
+					console.log('User is already logged in.');
+					console.log(user);
+					console.log(user.email);
+
+					this.sendPasswordResetEmail('aaa', function(error, success) {
+					  if (error) {
+						console.log('Password reset ERROR');
+					  }
+					  if (!error) {
+						console.log('Password reset email sent successfully');
+					  }
+					});
+
+				} else {
+					// User is logged out.
+					console.log('no user');
+				}
+			});
+			/*
+			auth.sendPasswordResetEmail(emailVal, function(error, success) {
+			  if (!error) {
+				console.log('Password reset email sent successfully');
+			  }
+			});
+			*/
 			//document.location="home.html#login";
 			//onlineForLife.Auth.handleLoginSuccess();
 		}
