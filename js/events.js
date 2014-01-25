@@ -84,7 +84,7 @@ onlineForLife.Events = {
 	buildEventItem: function(eventId, eventTitle, eventMonth, eventDay, eventYear, eventStartHour, eventStartMinute, eventStartAmpm, eventEndHour, eventEndMinute, eventEndAmpm, eventLocation, eventDescription, eventUrl){
 		//console.clear();
 		var $calendar = $('ul.event-calendar');
-		var source	= $("#template-event-item").html();
+		var source	= $("#template-event-item-ajax").html();
 		var template = Handlebars.compile(source);
 		var context = {eventId: eventId, eventTitle: eventTitle, eventMonth: eventMonth, eventDay: eventDay, eventYear: eventYear, eventStartHour: eventStartHour, eventStartMinute: eventStartMinute, eventStartAmpm: eventStartAmpm, eventEndHour: eventEndHour, eventEndMinute: eventEndMinute, eventEndAmpm: eventEndAmpm, eventLocation: eventLocation, eventDescription: eventDescription, eventUrl: eventUrl};
 		var html = template(context);

@@ -20,7 +20,7 @@ onlineForLife.Tutorial = {
 		if(AppData.device.friendly.model!='iphone' || $('body').hasClass('platform-tablet')){
 			showTutorial=false;
 		}
-		if(showTutorial){
+		if(1==1){
 
 			var itemHtml = '';
 			var autoOpenText = tutorialConfig.global.autoOpenText=="true";
@@ -66,7 +66,7 @@ onlineForLife.Tutorial = {
 	},
 	
 	buildTutorialItem: function(id, text, align, autoOpen){
-		var source   = $("#template-tutorial-item").html();
+		var source   = $("#template-tutorial-item-ajax").html();
 		var template = Handlebars.compile(source);
 		var context = {id:id, text:text, align: align, autoOpen: autoOpen}
 		var html = template(context);

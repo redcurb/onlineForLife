@@ -556,13 +556,13 @@ onlineForLife.Panels = {
 	},
 	
 	buildStep4Items: function(){
-		console.log('buildStep4Items');
+		//console.log('buildStep4Items');
 		var dbUrl = 'https://ofl.firebaseio.com/app/text/counts/totalBabiesSaved';
 		var dataRef = new Firebase(dbUrl);
 		dataRef.once('value', function(totalBabiesData) {
 			var totalBabies = totalBabiesData.val();
-			console.log('totalBabies');
-			console.log(totalBabies);
+			//console.log('totalBabies');
+			//console.log(totalBabies);
 			var $updates = $('ul.stats-updates');
 			var $spinner = $updates.find('li.spinner');
 			var $noRecords = $updates.find('li.no-records');
@@ -570,8 +570,8 @@ onlineForLife.Panels = {
 			$spinner.fadeOut(100);
 			$.each(totalBabies,function(key,babySaved){
 				if(typeof(babySaved.OFL_Life_Decision_Number)!='undefined'){
-					console.log('babySaved id: ' + key);
-					console.log('babySaved #: ' + babySaved.OFL_Life_Decision_Number);
+					//console.log('babySaved id: ' + key);
+					//console.log('babySaved #: ' + babySaved.OFL_Life_Decision_Number);
 					var id = babySaved.Id;
 					var lifeNumber = babySaved.OFL_Life_Decision_Number;
 					var city = babySaved.City;
@@ -580,10 +580,10 @@ onlineForLife.Panels = {
 					
 					stateName = onlineForLife.Panels.convertStateNameCase(stateName);
 					
-					console.log('id: ',id);
-					console.log('lifeNumber: ',lifeNumber);
-					console.log('city: ',city);
-					console.log('stateName: ',stateName);
+					//console.log('id: ',id);
+					//console.log('lifeNumber: ',lifeNumber);
+					//console.log('city: ',city);
+					//console.log('stateName: ',stateName);
 					
 					var step4Text = onlineForLife.Panels.getStep4ItemText(id, lifeNumber, city, stateCode, stateName);
 					var itemHtml = onlineForLife.Panels.buildStep4UpdateItem(id, step4Text);
@@ -642,7 +642,7 @@ onlineForLife.Panels = {
 	
 	buildStep4UpdateItem: function(id, text){
 		//console.log('buildStep4UpdateItem');
-		var source   = $("#template-updates-step4-item").html();
+		var source   = $("#template-updates-step4-item-ajax").html();
 		var template = Handlebars.compile(source);
 		var context = {id: id, text:text}
 		var html = template(context);
@@ -737,7 +737,7 @@ onlineForLife.Panels = {
 
 	buildUpdateItem: function(itemId, popupContent, dataTitle, dataImgUrl){
 		//console.log('buildUpdateItem');
-		var source   = $("#template-updates-item").html();
+		var source   = $("#template-updates-item-ajax").html();
 		var template = Handlebars.compile(source);
 		var id = itemId.toString();
 		//console.log('imgSuffix',imgSuffix);

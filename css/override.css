@@ -217,3 +217,54 @@ body.orientation-landscape.platform-tablet ul.feed li.feed-item.version-5{
 		padding:9px 35px 12px;
 	}
 
+	
+	
+	
+	
+.fieldset-btn .btn-primary{
+	position:relative;
+}	
+	.fieldset-btn .btn-primary i{
+		position: absolute;
+		right: 17px;
+		top: 21px;
+		color: #fff;
+		display:none;
+	}	
+	#form-registration.submitting .fieldset-btn .btn-primary i,
+	#form-login.submitting .fieldset-btn .btn-primary i{
+		display:block;
+	}	
+
+	
+	
+.footer-primary p{
+	text-shadow: 1px 1px 1px #fff;
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+/*MEDIA QUERIES*/
+ul.feed li.feed-item {
+	background-size: 100% auto;
+}	
+#map {
+	padding-left: 0;
+	width: 100%;
+	text-align: center;
+}	
+
+
+.mypanel-left .ui-panel-inner{
+	
+}
+::-webkit-scrollbar {
+    display: none;
+}

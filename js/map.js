@@ -6,11 +6,12 @@ onlineForLife.USMap = {
 	
 	setupMap:function(){
 		var configData = onlineForLife.App.config.feed.map;
+
 		onlineForLife.USMap.createMap();
 	},
 	
 	createMap:function(){
-		//console.log('setupMap');
+		console.log('setupMap');
 		$('#map').usmap({
 			'stateStyles': {
 				fill: onlineForLife.App.config.feed.map.fillColor, 
