@@ -1,6 +1,7 @@
 onlineForLife.Feed = {
 	init: function(){
 		onlineForLife.Feed.setupPage();
+		onlineForLife.Feed.setupListeners();
 	},
 	
 	version: 1,
@@ -53,6 +54,33 @@ onlineForLife.Feed = {
 
 	},
 	
+	setupListeners: function(){
+		onlineForLife.Feed.resize = {};
+		onlineForLife.Feed.resize.rtime = new Date(1, 1, 2000, 12,00,00);
+		onlineForLife.Feed.resize.timeout = false;
+		onlineForLife.Feed.resize.delta = 200;
+		$( window ).resize(function() {
+			console.log("Handler for .resize() called: " + onlineForLife.Feed.resize.rtime);
+			onlineForLife.Feed.resize.rtime = new Date();
+			console.log("NEW TIME: " + onlineForLife.Feed.resize.rtime);
+			if (onlineForLife.Feed.resize.timeout === false) {
+				console.log('timeout === false');
+				onlineForLife.Feed.resize.timeout = true;
+				setTimeout(onlineForLife.Feed.resizeend, onlineForLife.Feed.delta);
+			}
+			console.log("   ");
+		});
+	},
+	
+	resizeend: function(){
+		console.log('resizeend');
+		if (new Date() - onlineForLife.Feed.rtime < onlineForLife.Feed.delta) {
+			setTimeout(onlineForLife.Feed.resizeend, onlineForLife.Feed.delta);
+		} else {
+			onlineForLife.Feed.timeout = false;
+			console.log('Done resizing');
+		}               
+	},
 	setupBodyPage: function(){
 		$('body').removeClass('page-feed').removeClass('page-events').removeClass('page-settings');
 		if($.mobile.activePage.is('#feed')){
@@ -215,6 +243,10 @@ onlineForLife.Feed = {
 	
 	handleOrientationChange:function(){
 	},
+	
+	handleResize:function(){
+		onlineForLife.Feed.rebuildFeed();
+	},	
 	
 	rebuildFeed: function(){
 		//console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%rebuildFeed');

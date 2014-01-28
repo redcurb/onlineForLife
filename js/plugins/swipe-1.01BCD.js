@@ -47,7 +47,7 @@ window.Swipe = function(element, options) {
     this.element.addEventListener('msTransitionEnd', this, false);
     this.element.addEventListener('oTransitionEnd', this, false);
     this.element.addEventListener('transitionend', this, false);
-    //window.addEventListener('resize', this, false);
+    window.addEventListener('resize', this, false);
   }
 
 };
@@ -70,7 +70,7 @@ Swipe.prototype = {
 
     // determine width of each slide
     this.width = Math.ceil(("getBoundingClientRect" in this.container) ? this.container.getBoundingClientRect().width : this.container.offsetWidth);
-    console.log('Swipe SETUP Width: ' + this.width);
+    console.log('Swipe SETUP Width');
 
     // Fix width for Android WebView (i.e. PhoneGap) 
     if (this.width === 0 && typeof window.getComputedStyle === 'function') {

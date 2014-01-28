@@ -19,10 +19,28 @@ onlineForLife.App = {
 	},	
 
 	runOverrides: function(){
+		onlineForLife.App.updateSwipePlugin();
 		//console.log('app init');
 		//onlineForLife.App.getConfigData();
 		//$totalPrayers = $('.main-refresh .refresh-label');
 		//$totalPrayers.text('Total Prayers').css('visibility','visible');
+	},
+	
+	updateSwipePlugin:function(id,html){
+		console.log('updateSwipePlugin');
+		Swipe.prototype.handleEvent = function(e) {
+			switch (e.type) {
+				case 'touchstart': this.onTouchStart(e); break;
+				case 'touchmove': this.onTouchMove(e); break;
+				case 'touchcancel' :
+				case 'touchend': this.onTouchEnd(e); break;
+				case 'webkitTransitionEnd':
+				case 'msTransitionEnd':
+				case 'oTransitionEnd':
+				case 'transitionend': this.transitionEnd(e); break;
+				case 'resize': return false; break;
+			}
+		}
 	},
 	
 	createTemplates:function(id,html){		
@@ -143,3 +161,4 @@ onlineForLife.Templates = {
 		}
 	}
 }
+

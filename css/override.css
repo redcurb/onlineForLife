@@ -328,6 +328,7 @@ ul.feed li.feed-item {
 	}
 	ul.feed li.feed-item{
 		width: 320px;
+		min-width: 320px;
 		height: 100px;
 		background-size: auto 100%;	
 	}
@@ -374,8 +375,10 @@ ul.feed li.feed-item {
 		height: 79px;
 		background-size: auto 100%;
 		
-		right: auto;
+		right: inherit;
 		left: 280px;
+		right: 5px;
+		left: inherit;
 	}
 	ul.feed li.feed-item .feed-content ul li{
 		width:328px;	
@@ -394,6 +397,7 @@ ul.feed li.feed-item {
 			top:25px;
 			background-size:100% auto;
 			right:10px;
+			right:15px;
 			position: absolute;
 			width: 56px;
 			height: 56px;
@@ -655,4 +659,16 @@ ul.feed li.feed-item {
 	
 }
 
-
+@media (max-width: 630px) {
+	ul.feed li.feed-item.first{
+		width:100%;
+		min-width:100%;
+	}
+	ul.feed li.feed-item .feed-content {
+		width: 100%;
+	}
+	ul.feed li.feed-item .feed-content ul li {
+		width: 328px;
+		width: 100%;
+	}
+}
