@@ -980,6 +980,7 @@ onlineForLife.Feed = {
 	},
 
 	handleSwipe: function($this, swipeDir){
+		console.log('SWIPED: '+swipeDir);
 		AppData.config.feed.nudge.showNudge=false;
 		var $parentLi = $this.parents('li');
 		if(swipeDir=='right'){
@@ -1023,6 +1024,9 @@ onlineForLife.Feed = {
 		$('.prayer-count').text(currentCount);
 		var footerHeight = 232;
 		footerHeight = 182;
+		if($(window).width()<640){
+			footerHeight = 122;
+		}
 		footerHeight += 'px';
 		if(currentCount>=AppData.config.feed.footer.showFooterOnCount){
 			$('.footer-primary').animate({height: footerHeight}, 500)
@@ -1040,6 +1044,7 @@ onlineForLife.Feed = {
 				var bump1 = '-14%';
 				var bump2 = '-11%';
 				var bump3 = '-12%';
+
 				if(typeof(AppData.device.friendly)!='undefined'){
 					if(AppData.device.friendly.model=='iphone'){
 						bump1 = '-140px';
@@ -1047,9 +1052,14 @@ onlineForLife.Feed = {
 						bump3 = '-120px';
 					}
 				}
-						bump1 = '-150px';
-						bump2 = '-120px';
-						bump3 = '-130px';
+				bump1 = '-150px';
+				bump2 = '-120px';
+				bump3 = '-130px';
+				if($(window).width()<640){
+					bump1 = '-55px';
+					bump2 = '-35px';
+					bump3 = '-45px';
+				}
 				$listItemContent.animate({'left':bump1}, 300, function(){
 					$listItemContent.animate({'left':bump2}, 200, function(){
 						$listItemContent.animate({'left':bump3}, 100, function(){
@@ -1074,11 +1084,11 @@ onlineForLife.Feed = {
 	},
 	
 	setupTotalPrayerCount:function(){
-		var testUrl = 'https://ofl.firebaseio.com/app/text/dailyPrayerTotal/total';
-		var testData = new Firebase(testUrl);
+		var prayerTotalUrl = 'https://ofl.firebaseio.com/app/text/dailyPrayerTotal/total';
+		var prayerTotalData = new Firebase(prayerTotalUrl);
 		var $totalPrayerCount = $('.main-refresh .refresh-count');
 
-		testData.on('value', function(configValue) {
+		prayerTotalData.on('value', function(configValue) {
 			prayerTotal = configValue.val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			$totalPrayerCount.text(prayerTotal);
 		});
