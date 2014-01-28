@@ -8,7 +8,9 @@
 
 window.Swipe = function(element, options) {
 
-  // return immediately if element doesn't exist
+
+	console.log('Swipe Initialized');	
+// return immediately if element doesn't exist
   if (!element) return null;
 
   var _this = this;
@@ -45,7 +47,7 @@ window.Swipe = function(element, options) {
     this.element.addEventListener('msTransitionEnd', this, false);
     this.element.addEventListener('oTransitionEnd', this, false);
     this.element.addEventListener('transitionend', this, false);
-    window.addEventListener('resize', this, false);
+    //window.addEventListener('resize', this, false);
   }
 
 };
@@ -59,10 +61,16 @@ Swipe.prototype = {
     this.length = this.slides.length;
 
     // return immediately if their are less than two slides
-    if (this.length < 2) return null;
+    if (this.length < 2){
+    	return null;
+    }
+    else{
+    	console.log('SWIPE SLIDE COUNT: ' + this.length);
+    }
 
     // determine width of each slide
     this.width = Math.ceil(("getBoundingClientRect" in this.container) ? this.container.getBoundingClientRect().width : this.container.offsetWidth);
+    console.log('Swipe SETUP Width: ' + this.width);
 
     // Fix width for Android WebView (i.e. PhoneGap) 
     if (this.width === 0 && typeof window.getComputedStyle === 'function') {
