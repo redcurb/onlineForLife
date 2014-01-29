@@ -227,7 +227,11 @@ Redcurb.Helpers = {
 	},
 	
 	setCookie: function(name,value,expiration){
+		console.log('==========================================================');
 		console.log('setCookie: ' + name);
+		console.log(value);
+		console.log('setCookie: ' + expiration);
+		console.log('==========================================================');
 		var d = new Date();
 		d.setTime(d.getTime()+(expiration*24*60*60*1000));
 		var expires = "expires="+d.toGMTString();

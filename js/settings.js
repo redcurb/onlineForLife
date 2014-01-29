@@ -3,6 +3,10 @@ onlineForLife.Settings = {
 	version: 1,
 
 	init: function(){
+		onlineForLife.Settings.setupOverrides();
+	},
+	
+	initPostOverrides: function(){
 		//console.log('settings init');
 		if($.mobile.activePage.is('#settings')){
 			onlineForLife.Settings.setSavedSettingsOnSettingsPage();
@@ -11,6 +15,13 @@ onlineForLife.Settings = {
 			onlineForLife.Settings.setSavedSettings();
 		}
 		onlineForLife.Settings.setupHandlers();
+
+	},
+	
+	setupOverrides: function(){
+		var logoutHtml = '<li class="link-settings-logout" data-event-id="3"><span>Log Out</span><i class="fa fa-arrow-circle-right"></i></li>';
+		$('ul.settings-list').append(logoutHtml);
+		onlineForLife.Settings.initPostOverrides();
 	},
 	
 	setSavedSettings: function(){
@@ -80,6 +91,19 @@ onlineForLife.Settings = {
 		onlineForLife.Push.updatePushSettingsToFirebase();
 	},
 	
+	handleLogout: function(){
+		console.log('handleLogout');
+		var firebaseUrl =  new Firebase('https://ofl.firebaseio.com');
+		var auth = new FirebaseSimpleLogin(firebaseUrl, function(error, user) {});
+		auth.logout();
+		Redcurb.Helpers.setCookie('userFirebaseToken','',30);
+		Redcurb.Helpers.setCookie('userFirebaseLoggedOut','true',30);
+		var indexUrl = "home.html";
+		setTimeout(function(){
+			document.location=indexUrl;
+		}, 1000);
+	},
+	
 	setupHandlers: function(){
 		$(".checkbox-push input[type='checkbox']").bind( "change", function(event, ui) {
 			var $this = $(this);
@@ -102,30 +126,33 @@ onlineForLife.Settings = {
 			onlineForLife.Settings.getSelectedValues();
 		});
 		
-		$('.link-settings-ofl').on('click',function(){
+		$('.link-settings-ofl span,.link-settings-ofl i').on('click',function(){
 			var url = onlineForLife.Data.Links.settings.ofl;
 			myURL = encodeURI(url);
 			window.open(url, '_blank', 'location=yes'); 
 		});
-		$('.link-settings-privacy').on('click',function(){
+		$('.link-settings-privacy span,.link-settings-privacy i').on('click',function(){
 			var url = onlineForLife.Data.Links.settings.privacy;
 			myURL = encodeURI(url);
 			window.open(url, '_blank', 'location=yes'); 
 			
 		});
 		
-		$('.link-settings-terms').on('click',function(){
+		$('.link-settings-terms span,.link-settings-terms i').on('click',function(){
 			var url = onlineForLife.Data.Links.settings.terms;
 			myURL = encodeURI(url);
 			window.open(url, '_blank', 'location=yes'); 
 			
 		});
 
-		$('.link-settings-contact').on('click',function(){
+		$('.link-settings-logout span,.link-settings-logout i').on('click',function(){
+			onlineForLife.Settings.handleLogout();
+		});
+
+		$('.link-settings-contact span,.link-settings-contact i').on('click',function(){
 			var url = onlineForLife.Data.Links.settings.contact;
 			myURL = encodeURI(url);
 			window.open(url, '_blank', 'location=yes'); 
-			
 		});
 	},
 };

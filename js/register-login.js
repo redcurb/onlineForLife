@@ -58,9 +58,13 @@ onlineForLife.Auth = {
 	
 	checkPageParam: function(){
 		var testVal = Redcurb.Helpers.getParameterByName('test');
+		var feedBypassVal = Redcurb.Helpers.getParameterByName('feedBypass');
 		if(testVal=="true"){
 			onlineForLife.Auth.test = true;
 			$('body').addClass('test-mode-enabled');
+		}
+		if(feedBypassVal=="true"){
+			onlineForLife.Auth.feedBypass = true;
 		}
 		onlineForLife.Overrides.init();
 	},
@@ -80,15 +84,9 @@ onlineForLife.Auth = {
 	userData: {},
 	
 	handleLoginSuccess: function(method, user, token){
-		//console.log('handleLoginSuccess: ' + method);
-		//console.log(user);
-		//console.log('handleLoginSuccess',typeof(user.firebaseAuthToken)=='undefined');
-		if(user.firebaseAuthToken!="" && user.firebaseAuthToken!="undefined" && typeof(user.firebaseAuthToken)=='undefined'){
-			token = user.firebaseAuthToken;
-		}
 		if(token!="" && token!="undefined"){
-			//console.log('GOOD TOKEN');
-			Redcurb.Helpers.setCookie('userFirebaseToken',user.firebaseAuthToken,30);
+			console.log('GOOD TOKEN');
+			Redcurb.Helpers.setCookie('userFirebaseToken',token,30);
 		}
 		onlineForLife.Auth.updateUserData(method, user);
 	},
@@ -98,10 +96,15 @@ onlineForLife.Auth = {
 		if(onlineForLife.Auth.test){
 			paramString = paramString + '&test=true';
 		}
-		document.location="feed.html" + paramString;
+		var feedUrl = "feed.html" + paramString;
+		console.log('goToFeed: ' + feedUrl);
+		if(!onlineForLife.Auth.feedBypass){
+			document.location=feedUrl;
+		}
 	},
 	
 	updateUserData: function(method, user){
+		//console.log('updateUserData: ' + method);
 		var firebaseUrl =  new Firebase('https://ofl.firebaseio.com/users/' + user.id);
 		var userDataRef =  new Firebase('https://ofl.firebaseio.com/users/' + user.id + '/userInfo');
 		var formData = onlineForLife.Auth.userData;
@@ -116,6 +119,7 @@ onlineForLife.Auth = {
 	},
 	
 	checkLoginStatus: function(){
+		//console.log('+++++++++++ AUTH checkLoginStatus: ' + Redcurb.Helpers.getCookie('userFirebaseToken'));
 		var loggedIn = false;
 		
 		var firebaseUrl =  new Firebase('https://ofl.firebaseio.com');
@@ -126,15 +130,14 @@ onlineForLife.Auth = {
 				return;
 			}
 			if (user) {
-				// User is already logged in.
-				//console.log(user);
+				console.log("AUTH checkLoginStatus: User is already logged in");
+				console.log(user);
 				//console.log(user.email);
 				onlineForLife.Login.init();
 				onlineForLife.Auth.userId = user.id;
-				onlineForLife.Auth.handleLoginSuccess('AUTO_LOGGED_IN',user,"");
+				onlineForLife.Auth.handleLoginSuccess('AUTO_LOGGED_IN',user,user.firebaseAuthToken);
 			} else {
-				// User is logged out.
-				//console.log('no user');
+				console.log("AUTH checkLoginStatus: User is logged out.");
 				onlineForLife.Auth.tryTokenLogin();
 			}
 		});
@@ -143,22 +146,33 @@ onlineForLife.Auth = {
 		
 		
 	tryTokenLogin: function(){
+		console.log('+++++++++++ tryTokenLogin: ');
 		var token = Redcurb.Helpers.getCookie('userFirebaseToken');
 		var dataRef = new Firebase("https://ofl.firebaseio.com/");
 		//console.log('tryTokenLogin: ' + token);
 		// Log me in.
 		if(Redcurb.Helpers.getCookie('userFirebaseToken')=="undefined" || Redcurb.Helpers.getCookie('userFirebaseToken')==""){
+			console.log('+++++++++++ tryTokenLogin: NO COOKIE TOKEN' );
+			
+			if(Redcurb.Helpers.getCookie('userFirebaseLoggedOut')=="true"){
+				console.log('user logged out');
+				$.mobile.changePage( "#login", { transition: "none"} );
+			}
+			
 			onlineForLife.Register.init();
 			onlineForLife.Login.init();
 		}
 		else{
+			console.log('+++++++++++ tryTokenLogin: COOKIE TOKEN Exists' );
 			dataRef.auth(token, function(error,user) {
 			  if(error) {
-				//console.log("Token Login Failed!", error);
+				console.log("Token Login Failed!", error);
 			  }
 			  else {
-				//console.log("Token Login Succeeded! - " + Redcurb.Helpers.getCookie('userFirebaseToken'));
-				//console.log(user);	
+				console.log("Token Login Succeeded! - " );
+				console.log('user');
+				console.log(user);
+				onlineForLife.Auth.userId = user.auth.id;
 				onlineForLife.Auth.handleLoginSuccess('TOKEN_LOGGED_IN',user,token);
 			  }
 			});
@@ -175,7 +189,7 @@ onlineForLife.Register = {
 	},
 	
 	init: function(){
-		//console.log('reg init');		
+		//console.log('reg init');
 		onlineForLife.Register.setupFocus();
 		onlineForLife.Register.setupForm();
 		var $form = $('#form-registration');
@@ -271,7 +285,7 @@ onlineForLife.Register = {
 	
 	handleRegSuccess: function(user){
 		//console.log('handleRegSuccess');
-		onlineForLife.Auth.handleLoginSuccess('REG_SUCCESS',user,"");
+		onlineForLife.Auth.handleLoginSuccess('REG_SUCCESS',user,user.firebaseAuthToken);
 	},
 	
 	handleRegError: function(){
@@ -471,7 +485,7 @@ onlineForLife.Register = {
 	
 	getStatesData: function($form){
 		onlineForLife.Register.emptyStateList();
-		console.log('getStatesData');
+		//console.log('getStatesData');
 		onlineForLife.Register.states = {};
 		var dbUrl = 'https://ofl.firebaseio.com/data/states';
 		var dataRef = new Firebase(dbUrl);
@@ -482,7 +496,7 @@ onlineForLife.Register = {
 	},
 	
 	getZIPDigitData: function($form){
-		console.log('getZIPDigitData');
+		//console.log('getZIPDigitData');
 		onlineForLife.Register.setupZIPCode($form);
 		onlineForLife.Register.zipCodesByDigit = {};
 		var dbUrl = 'https://ofl.firebaseio.com/data/zipCodesByDigit';
@@ -494,11 +508,11 @@ onlineForLife.Register = {
 	},
 	
 	setupZIPCode: function($form){
-		console.log('setupZIP');
+		//console.log('setupZIP');
 		var $zip = $form.find('#input-register-zip');
 		$zip.off('keyup');
 		$zip.on('keyup',function() {
-			console.log('Handler for .keyup() called.');
+			//console.log('Handler for .keyup() called.');
 			onlineForLife.Register.handleZIPKeyup($zip);
 		});
 		var $errorZip2Html = '<i class="input-error error-zip error2"><i class="fa fa-exclamation-circle"></i><span>Please enter a valid ZIP Code</span></i>';
@@ -522,7 +536,7 @@ onlineForLife.Register = {
 	},
 	
 	setStateByFullZIP: function(zipVal){
-		console.log('setStateByFullZIP');
+		//console.log('setStateByFullZIP');
 		var dbUrl = 'https://ofl.firebaseio.com/data/zipcodes/'+zipVal;
 		var dataRef = new Firebase(dbUrl);
 		var $list = $('#input-register-state');
@@ -530,7 +544,7 @@ onlineForLife.Register = {
 		dataRef.once('value', function(snapshot) {
 			var stateCode = snapshot.val();
 			if(stateCode===null){
-				console.log('no zip found');
+				//console.log('no zip found');
 				onlineForLife.Register.handleZIPNotFound();
 			}
 			else{
@@ -560,8 +574,8 @@ onlineForLife.Register = {
 		var $form = $('#form-registration');
 		var zipVal = $zip.val();
 		var zipLength = zipVal.length;
-		console.log('zipVal: ' + zipVal);
-		console.log('zipLength: ' + zipLength);
+		//console.log('zipVal: ' + zipVal);
+		//console.log('zipLength: ' + zipLength);
 		if(zipLength==0){
 			onlineForLife.Register.emptyStateList();
 		}
@@ -583,7 +597,7 @@ onlineForLife.Login = {
 		onlineForLife.Forgot.init();
 		$('#form-login').on('submit',function(event){
 			event.preventDefault();
-			//console.log('login submit clicked');
+			//console.log('login form submitted');
 			onlineForLife.Login.handleFormSubmit();
 			return false;
 		});
@@ -670,8 +684,9 @@ onlineForLife.Login = {
 			if(user){
 				// User is already logged in.
 				//console.log('logged in');
-				//console.log(user.email);
+				//console.log(user.firebaseAuthToken);
 				onlineForLife.Auth.userId = user.id;
+				Redcurb.Helpers.setCookie('userFirebaseToken',user.firebaseAuthToken,30);
 				onlineForLife.Login.handleFormSuccess(user,auth);
 			} else {
 				// User is logged out.
@@ -690,7 +705,7 @@ onlineForLife.Login = {
 	handleFormSuccess: function(user,auth){
 		//console.log('handleFormSuccess');
 		//console.log(auth);
-		onlineForLife.Auth.handleLoginSuccess('LOGGED_IN',user,"");
+		onlineForLife.Auth.handleLoginSuccess('LOGGED_IN',user,user.firebaseAuthToken);
 	}
 };
 

@@ -8,9 +8,60 @@ ul.event-calendar li .event-title p.event-description {
 					body.test-mode-enabled #register-dev{
 						display:block;
 					}
+					1select.input-select{
+						-webkit-appearance: none;
+						-webkit-appearance: menulist;
+						
+						background:none;
+						background-color:#fff;
+						background-color:#f0f;
+						padding:30px 20px;
+						height:100px;
+					}
 					select.input-select.list-empty{
 						color:#a9a9a9;
 					}
+					
+					
+					
+					
+					.ui-select {
+						display: block;
+						position: relative;
+						margin: 5px 0 0 0;
+					}
+					.ui-btn {
+						display: block;
+						text-align: center;
+						cursor: pointer;
+						position: relative;
+						margin: .5em 0;
+						padding: 0;
+					}
+					.ui-select .ui-btn {
+						opacity: 1;
+						border-radius: 3px;
+						font-size: 20px;
+					}
+					.ui-select .ui-btn-icon-right .ui-btn-inner, .ui-select .ui-li-has-count .ui-btn-inner {
+						padding: 20px 23px 23px;
+					}
+					.ui-select .ui-btn-text {
+						text-overflow: ellipsis;
+						text-align: left;
+						font-family: Oswald;
+						font-weight: 100;
+						color: gray;
+						font-size: 2.6em;
+						letter-spacing: 2px;
+					}
+
+
+					
+					
+					
+					
+					
 /*	feed.css	*/
 				body.model-iphone ul.feed li.feed-item .feed-prayer-instruction{
 					right:45px;
@@ -43,6 +94,15 @@ ul.event-calendar li .event-title p.event-description {
 .mypanel-right .section-total-saved span.user-count{
 	visibility:hidden;
 }	
+
+
+
+ul.settings-list {
+	margin-bottom:30px;
+}
+
+
+
 /*	tutorial.css	*/
 body.page-events #content-tutorial,
 body.page-settings #content-tutorial{
@@ -694,6 +754,14 @@ ul.feed li.feed-item {
 }
 
 
-ul.feed li.feed-item p.action-text{
-	1background:yellow;
+
+
+ul.settings-list li{
+	background: green;
+}
+ul.settings-list li span{
+	background: yellow;
+}
+ul.settings-list li i.fa {
+	background: purple;
 }
