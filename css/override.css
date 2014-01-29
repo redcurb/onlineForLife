@@ -19,7 +19,9 @@ ul.event-calendar li .event-title p.event-description {
 						height:100px;
 					}
 					select.input-select.list-empty{
-						color:#a9a9a9;
+						1color:#a9a9a9;
+						2color:red;
+						color:#595959;
 					}
 					
 					
@@ -754,14 +756,3 @@ ul.feed li.feed-item {
 }
 
 
-
-
-ul.settings-list li{
-	background: green;
-}
-ul.settings-list li span{
-	background: yellow;
-}
-ul.settings-list li i.fa {
-	background: purple;
-}
