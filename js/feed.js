@@ -151,9 +151,13 @@ onlineForLife.Feed = {
 					console.log('UNDO TABLET')
 					onlineForLife.Feed.undoTabletLayout();
 				}
+				else{
+					onlineForLife.Feed.rebuildFeed();
+				}
 			}
 			else{
 				console.log('IS NOT TABLET LAYOUT')
+				onlineForLife.Feed.rebuildFeed();
 			}
 		}
 		//console.log('++++++++++++++++++++++');
@@ -163,6 +167,7 @@ onlineForLife.Feed = {
 	},
 	
 	setupMapLayout: function(contentWidth){
+		console.log('setupMapLayout');
 		var $map = $('#map');
 		var mapWidth = contentWidth;
 		var mapMultiplier1 = 0.6774193548387097;
@@ -285,7 +290,7 @@ onlineForLife.Feed = {
 	},	
 	
 	rebuildFeed: function(){
-		//console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%rebuildFeed');
+		console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%rebuildFeed');
 		if(AppData.FeedLoaded){
 			var spinnerHtml = '<li class="default-content spinner"><i class="fa fa-refresh fa-spin"></i></li>';
 			$('ul.feed').addClass('status-loading').empty().append(spinnerHtml);
