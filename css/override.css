@@ -8,6 +8,9 @@ ul.event-calendar li .event-title p.event-description {
 					body.test-mode-enabled #register-dev{
 						display:block;
 					}
+					select.input-select.list-empty{
+						color:#a9a9a9;
+					}
 /*	feed.css	*/
 				body.model-iphone ul.feed li.feed-item .feed-prayer-instruction{
 					right:45px;
