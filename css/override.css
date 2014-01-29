@@ -313,9 +313,6 @@ ul.feed li.feed-item {
 		right: 3px;
 		top: 11px;
 	}
-	
-	
-	
 	.header-primary .header-links span{
 		font-size:0.4em;	
 	}
@@ -338,6 +335,8 @@ ul.feed li.feed-item {
 	}
 	ul.feed li.feed-item.first{
 		border-top:0;	
+		width:100%;
+		min-width:100%;
 	}
 	ul.feed li.feed-item.version-2 {
 		background-image: url(../img/phone-320-version-2.jpg);
@@ -368,6 +367,7 @@ ul.feed li.feed-item {
 	}
 	ul.feed li.feed-item .feed-content{
 		width:320px;
+		width:100%;
 	}
 	ul.feed li.feed-item .feed-prayer-instruction{
 		top: 10px;
@@ -382,6 +382,7 @@ ul.feed li.feed-item {
 	}
 	ul.feed li.feed-item .feed-content ul li{
 		width:328px;	
+		width: 100%;
 	}
 	ul.feed li.feed-item .feed-content ul li.feed-content-main {
 		height: 100px;
@@ -494,31 +495,17 @@ ul.feed li.feed-item {
 				left:1px;
 				top: 1px;
 			}
-
-
-			
-			
-			
-			
-			
-			
-			
 			.header-primary.ui-header-fixed .ui-btn-left, .header-primary a#panel-left{
 				width: 100px;
 			}
 			.header-primary.ui-header-fixed .ui-btn-right, .header-primary a.panel-right{
 				width: 130px;
 			}
-			
-
-
 			.mypanel-left h2.logo {
 				width: 108px;
 				height: 94px;
-				margin: 20px 0 0 46px;
 				margin: 20px 0 0 56px;
 				background-size:100% auto;
-				top: -260px;
 			}
 			ul.nav-primary{
 				margin-top:27px;
@@ -553,11 +540,6 @@ ul.feed li.feed-item {
 					top: 5px;
 					margin: 12px 0 5px;
 				}
-
-
-
-
-
 			
 			.ui-panel {
 				width: 222px;
@@ -660,15 +642,55 @@ ul.feed li.feed-item {
 }
 
 @media (max-width: 630px) {
-	ul.feed li.feed-item.first{
-		width:100%;
-		min-width:100%;
+	#map{
+		height:426.77419354838713px;	
 	}
-	ul.feed li.feed-item .feed-content {
-		width: 100%;
+	ul.feed li.feed-item .feed-prayer-instruction{
+		right: 18px;
 	}
-	ul.feed li.feed-item .feed-content ul li {
-		width: 328px;
-		width: 100%;
+	ul.feed li.feed-item p.action-text{
+		width:540px;
+		font-size: 1.5em;
+		line-height: 1.5em;
 	}
+	.action-step {
+		right: 25px;
+	}
+}
+@media (max-width: 480px) {
+	#map{
+		height:325.16129032258067px;	
+	}
+	ul.feed li.feed-item .feed-prayer-instruction{
+		right: 10px;
+	}
+	ul.feed li.feed-item p.action-text{
+		width:390px;
+		font-size: 1.3em;
+		line-height: 1.3em;
+	}
+	.action-step {
+		right: 15px;
+	}
+}
+@media (max-width: 320px) {
+	#map{
+		height:216.77419354838713px;	
+	}
+	ul.feed li.feed-item .feed-prayer-instruction{
+		right: 5px;
+	}
+	ul.feed li.feed-item p.action-text{
+		width:235px;
+		font-size: 1.1em;
+		line-height: 1.2em;
+	}
+	.action-step {
+		right: 5px;
+	}
+}
+
+
+ul.feed li.feed-item p.action-text{
+	1background:yellow;
 }

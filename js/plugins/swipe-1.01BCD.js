@@ -9,7 +9,7 @@
 window.Swipe = function(element, options) {
 
 
-	console.log('Swipe Initialized');	
+	//console.log('Swipe Initialized');	
 // return immediately if element doesn't exist
   if (!element) return null;
 
@@ -65,12 +65,12 @@ Swipe.prototype = {
     	return null;
     }
     else{
-    	console.log('SWIPE SLIDE COUNT: ' + this.length);
+    	//console.log('SWIPE SLIDE COUNT: ' + this.length);
     }
 
     // determine width of each slide
     this.width = Math.ceil(("getBoundingClientRect" in this.container) ? this.container.getBoundingClientRect().width : this.container.offsetWidth);
-    console.log('Swipe SETUP Width');
+    //console.log('Swipe SETUP Width');
 
     // Fix width for Android WebView (i.e. PhoneGap) 
     if (this.width === 0 && typeof window.getComputedStyle === 'function') {

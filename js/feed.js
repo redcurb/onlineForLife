@@ -55,31 +55,52 @@ onlineForLife.Feed = {
 	},
 	
 	setupListeners: function(){
+		/*
 		onlineForLife.Feed.resize = {};
-		onlineForLife.Feed.resize.rtime = new Date(1, 1, 2000, 12,00,00);
+		var rtime = onlineForLife.Feed.resize.rtime = new Date().getTime();
 		onlineForLife.Feed.resize.timeout = false;
-		onlineForLife.Feed.resize.delta = 200;
+		var delta = onlineForLife.Feed.resize.delta = 200;
+		var delay = onlineForLife.Feed.resize.delay = 500;
+		*/
 		$( window ).resize(function() {
-			console.log("Handler for .resize() called: " + onlineForLife.Feed.resize.rtime);
-			onlineForLife.Feed.resize.rtime = new Date();
-			console.log("NEW TIME: " + onlineForLife.Feed.resize.rtime);
-			if (onlineForLife.Feed.resize.timeout === false) {
-				console.log('timeout === false');
+			onlineForLife.Feed.handleResize('resize');
+			/*
+			var ctime = new Date().getTime();
+			console.log("RESIZE START: " + ctime);
+			window.resize=true;
+			//if (onlineForLife.Feed.resize.timeout === false) {
 				onlineForLife.Feed.resize.timeout = true;
-				setTimeout(onlineForLife.Feed.resizeend, onlineForLife.Feed.delta);
-			}
-			console.log("   ");
+				setTimeout(function(){
+				//	onlineForLife.Feed.resizeend(11,delay);
+				}, delay);
+			//}
+
+
+			setTimeout(function(){
+				window.resize=false;
+			}, 5000);
+			*/
 		});
 	},
 	
-	resizeend: function(){
-		console.log('resizeend');
-		if (new Date() - onlineForLife.Feed.rtime < onlineForLife.Feed.delta) {
-			setTimeout(onlineForLife.Feed.resizeend, onlineForLife.Feed.delta);
+	resizeend: function(type,delay){
+		var newTime = new Date().getTime();
+		var rtime = onlineForLife.Feed.resize.rtime;
+		var delta = onlineForLife.Feed.resize.delta;
+		console.log('resizeend: ' + type);
+		console.log('rtime: ' + rtime);
+		console.log('newTime: ' + newTime);
+		if ( ((newTime - rtime) < delta) && window.resize) {
+			console.log('IF');
+			setTimeout(function(){
+				onlineForLife.Feed.resizeend(22,delay);
+			}, delay);
 		} else {
+			console.log('ELSE');
 			onlineForLife.Feed.timeout = false;
-			console.log('Done resizing');
+			console.log('RESIZE END');
 		}               
+		console.log("   ");
 	},
 	setupBodyPage: function(){
 		$('body').removeClass('page-feed').removeClass('page-events').removeClass('page-settings');
@@ -99,7 +120,7 @@ onlineForLife.Feed = {
 		//console.log('setupPage');
 		onlineForLife.Feed.setupBodyPage();
 		onlineForLife.Feed.checkPageParam();
-		onlineForLife.Feed.setupWidescreenLayout();
+		onlineForLife.Feed.setupWidescreenLayout('setup');
 		$(document).on("pagechange", function(e, data) {
 			//console.log($(data.toPage).attr('id') + ' - ');
 			//console.log($.mobile.activePage);
@@ -107,19 +128,33 @@ onlineForLife.Feed = {
 		});
 	},
 	
-	setupWidescreenLayout: function(){
+	setupWidescreenLayout: function(type){
+		console.log('setupWidescreenLayout: ' + type);
 		var windowWidth = $(window).width();
 		var panelWidthLeft = 408;
 		var panelWidthRight = 552;
 		var minContentWidth = 600;
 		var totalNeeded = panelWidthLeft + panelWidthRight + minContentWidth;
-		//console.log('totalNeeded: ' + totalNeeded);
-		//console.log('windowWidth: ' + windowWidth);
-		if(windowWidth>totalNeeded){
+		console.log('totalNeeded: ' + totalNeeded);
+		console.log('windowWidth: ' + windowWidth);
+		if(windowWidth>=totalNeeded){
 			onlineForLife.Feed.setupTabletLayout();
 		}
 		else{
 			onlineForLife.Feed.setupMapLayout($(window).width());
+			
+		}
+		if(type=='resize'){
+			if($('body').hasClass('platform-tablet')){
+				console.log('IS TABLET LAYOUT')
+				if(windowWidth<totalNeeded){
+					console.log('UNDO TABLET')
+					onlineForLife.Feed.undoTabletLayout();
+				}
+			}
+			else{
+				console.log('IS NOT TABLET LAYOUT')
+			}
 		}
 		//console.log('++++++++++++++++++++++');
 		
@@ -242,10 +277,11 @@ onlineForLife.Feed = {
 	},
 	
 	handleOrientationChange:function(){
+		alert('handleOrientationChange');
 	},
 	
-	handleResize:function(){
-		onlineForLife.Feed.rebuildFeed();
+	handleResize:function(type){
+		onlineForLife.Feed.setupWidescreenLayout(type);
 	},	
 	
 	rebuildFeed: function(){
@@ -299,6 +335,14 @@ onlineForLife.Feed = {
 		
 	},
 	
+	undoTabletLayout: function(){
+		console.log('++++++++++++++++ undoTabletLayout');
+		$('body').removeClass('orientation-landscape').removeClass('platform-tablet');
+		$('.section-total-saved .total-user-count').html('&nbsp;');
+
+		onlineForLife.Feed.rebuildFeed();
+	},
+	
 	setupFeedItemWidth: function(contentWidth){
 		var listPaddingWidth = (30);
 		var listWidth = (contentWidth + listPaddingWidth);
@@ -310,10 +354,6 @@ onlineForLife.Feed = {
 		//console.log('listMarginLeft: ' + listMarginLeft);
 		cssData = {width:listWidth+'px',marginLeft:listMarginLeft+'px'};
 		$('ul.feed').css(cssData);
-	},
-	
-	undoTabletLayout: function(){
-		
 	},
 	
 	checkLoginStatus: function(){
@@ -1056,7 +1096,7 @@ onlineForLife.Feed = {
 		$('.prayer-count').text(currentCount);
 		var footerHeight = 232;
 		footerHeight = 182;
-		if($(window).width()<640){
+		if($(window).width()<631){
 			footerHeight = 122;
 		}
 		footerHeight += 'px';
@@ -1087,10 +1127,20 @@ onlineForLife.Feed = {
 				bump1 = '-150px';
 				bump2 = '-120px';
 				bump3 = '-130px';
-				if($(window).width()<640){
+				if($(window).width()<=320){
+					bump1 = '-50px';
+					bump2 = '-30px';
+					bump3 = '-40px';
+				}
+				else if($(window).width()<=480){
 					bump1 = '-55px';
 					bump2 = '-35px';
 					bump3 = '-45px';
+				}
+				else if($(window).width()<=630){
+					bump1 = '-65px';
+					bump2 = '-45px';
+					bump3 = '-55px';
 				}
 				$listItemContent.animate({'left':bump1}, 300, function(){
 					$listItemContent.animate({'left':bump2}, 200, function(){
