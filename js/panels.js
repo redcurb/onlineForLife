@@ -492,25 +492,34 @@ onlineForLife.Panels = {
 		return exists
 	},
 	
+	buildDefaultList: function(){
+		console.log('buildDefaultList');
+		var $list = $('ul.stats-updates').addClass('status-loading');
+		var defaultHtml = '<li class="default-content spinner"><i class="fa fa-refresh fa-spin"></i></li><li class="default-content no-records"><span class="text-update">There are no updates to show at this time. Please try again later.</span></li>';
+		$list.html(defaultHtml);
+	},
+	
 	setupUpdates: function(){
 		//console.clear();
-		//console.log('setupUpdates');
+		console.log('setupUpdates');
+		onlineForLife.Panels.buildDefaultList();
+		console.log('setupUpdates');
 		var updatesUrl = 'https://ofl.firebaseio.com/updates';
 		var updatesData = new Firebase(updatesUrl);
 		var $updates = $('ul.stats-updates');
 		updatesData.once('value', function(snapshot) {
 			var update = snapshot.val();
 			if(update === null) {
+				console.log('null');
 				var $updates = $('ul.stats-updates');
 				//$updates.removeClass('status-loading').addClass('status-no-updates');
 				var $spinner = $updates.find('li.spinner');
 				var $noRecords = $updates.find('li.no-records');
-				var $updates = $('ul.stats-updates');
 				$noRecords.fadeIn(200);
 				$spinner.fadeOut(200);
 			}
 			else{
-				//console.log('================setupUpdates VALUE update: ');
+				console.log('================setupUpdates VALUE update: ');
 				//console.log(update);
 				//console.log(' ');
 	

@@ -129,14 +129,14 @@ onlineForLife.Feed = {
 	},
 	
 	setupWidescreenLayout: function(type){
-		console.log('setupWidescreenLayout: ' + type);
+		//console.log('setupWidescreenLayout: ' + type);
 		var windowWidth = $(window).width();
 		var panelWidthLeft = 408;
 		var panelWidthRight = 552;
 		var minContentWidth = 600;
 		var totalNeeded = panelWidthLeft + panelWidthRight + minContentWidth;
-		console.log('totalNeeded: ' + totalNeeded);
-		console.log('windowWidth: ' + windowWidth);
+		//console.log('totalNeeded: ' + totalNeeded);
+		//console.log('windowWidth: ' + windowWidth);
 		if(windowWidth>=totalNeeded){
 			onlineForLife.Feed.setupTabletLayout();
 		}
@@ -146,9 +146,9 @@ onlineForLife.Feed = {
 		}
 		if(type=='resize'){
 			if($('body').hasClass('platform-tablet')){
-				console.log('IS TABLET LAYOUT')
+				//console.log('IS TABLET LAYOUT')
 				if(windowWidth<totalNeeded){
-					console.log('UNDO TABLET')
+					//console.log('UNDO TABLET')
 					onlineForLife.Feed.undoTabletLayout();
 				}
 				else{
@@ -156,7 +156,7 @@ onlineForLife.Feed = {
 				}
 			}
 			else{
-				console.log('IS NOT TABLET LAYOUT')
+				//console.log('IS NOT TABLET LAYOUT')
 				onlineForLife.Feed.rebuildFeed();
 			}
 		}
@@ -730,7 +730,7 @@ onlineForLife.Feed = {
 		//console.log('handleEmptyFeedList: ' + currentListId);
 		//console.log('handleEmptyFeedList: ' + feedSetCount);
 		if(currentListId<feedSetCount){
-			//onlineForLife.Feed.buildNextList();
+			onlineForLife.Feed.buildNextList();
 		}
 		else{
 			//console.log('handleEmptyFeedList: LAST LIST EMPTY');
