@@ -2,10 +2,20 @@ var onlineForLife = window.onlineForLife || {}; onlineForLife.Auth = onlineForLi
 
 onlineForLife.Overrides = {
 	init: function(){
+		onlineForLife.Overrides.modifyDomItems();
 		onlineForLife.Overrides.setupSpinners();
 		onlineForLife.Auth.checkLoginStatus();
 	},
 	
+
+	modifyDomItems: function(){
+		var firstNameHtml = '<i class="input-error error-firstname error-3"><i class="fa fa-exclamation-circle"></i><span>Please enter your first name only</span></i>';
+		$('#form-registration .fieldset-text').append(firstNameHtml);
+		$('#form-registration .error-firstname.error-1 span').text('First Name should only contain letters');
+		$('#form-registration .error-firstname.error-2 span').text('First Name should be at least 2 characters');
+		
+	},
+
 	setupSpinners: function(){
 		onlineForLife.Overrides.setupSpinnersReg();
 		onlineForLife.Overrides.setupSpinnersLogin();
@@ -337,8 +347,8 @@ onlineForLife.Register = {
 		var regexZip = /.{5,5}/;
 
 		var $errorFirstName1 = $form.find('.error-firstname.error-1');
-		$errorFirstName1.text('Name should only contain letters');
 		var $errorFirstName2 = $form.find('.error-firstname.error-2');
+		var $errorFirstName3 = $form.find('.error-firstname.error-3');
 		var $errorEmail = $form.find('.error-email');
 		var $errorPassword = $form.find('.error-password');
 		var $errorZip = $form.find('.error-zip:first');
@@ -349,7 +359,10 @@ onlineForLife.Register = {
 			if(!regexFirstName.test(fieldValue) || fieldValue.length<2){
 				//console.log('first name incorrect');
 				formValid = false;
-				if(!regexFirstName.test(fieldValue)){
+				if(fieldValue.indexOf(' ')>-1){
+					onlineForLife.Register.showError($form, $errorFirstName3, $this);
+				}
+				else if(!regexFirstName.test(fieldValue)){
 					onlineForLife.Register.showError($form, $errorFirstName1, $this);
 				}
 				else if(fieldValue.length<2){
@@ -452,16 +465,14 @@ onlineForLife.Register = {
 		var $password = $form.find('#input-register-password');
 		var $zip = $form.find('#input-register-zip');
 
-		var $errorFirstName1 = $form.find('.error-firstname.error-1');
-		var $errorFirstName2 = $form.find('.error-firstname.error-2');
+		var $errorsFirstName = $form.find('.error-firstname');
 		var $errorEmail = $form.find('.error-email');
 		var $errorPassword = $form.find('.error-password');
 		var $errorZip = $form.find('.error-zip');
 
 		$firstName.on('focus',function(){
 			//console.log('firstName focus');
-			onlineForLife.Register.hideError($errorFirstName1, $firstName);
-			onlineForLife.Register.hideError($errorFirstName2, $firstName);
+			onlineForLife.Register.hideError($errorsFirstName, $firstName);
 		});
 		$email.on('focus',function(){
 			//console.log('email focus');

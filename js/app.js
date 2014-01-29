@@ -75,9 +75,7 @@ onlineForLife.App = {
 		onlineForLife.Panels.init();
 		onlineForLife.Push.init();
 		onlineForLife.Settings.init();
-		setTimeout(function() {
-			onlineForLife.Feed.animatePraySwipe();
-		},AppData.config.feed.nudge.nudgeDelayToStart);
+		onlineForLife.Feed.onFeedLoaded();
 		onlineForLife.Feed.setupFeedItemLookup();
 	},
 
@@ -138,7 +136,7 @@ onlineForLife.Templates = {
 	feed:{
 		feedItem:{
 			id:'template-feed-item-ajax',
-			html:'<li class="AJAX-TEMPLATE feed-item drag-setup-false center-text-false action-step-{{step}} {{liClass}} version-{{BgVersion}}" data-id="{{itemId}}" data-step="{{step}}" data-stateCode="{{stateCode}}" data-stateName="{{stateName}}" data-city="{{city}}" data-table-key="{{key}}"><i class="feed-prayer-confirmation">Prayed!</i><i class="feed-prayer-instruction"></i><div class="feed-content" id="content-item-{{itemId}}" data-state="{{stateCode}}" style="overflow:hidden;"><ul class="feed-content-container"><li class="feed-content-placeholder feed-content-left" data-direction="right"></li><li class="feed-content-main" data-direction="none">{{#if stateName }}{{#equal step "1" }}<p class="action-text body-step-1">Someone considering abortion in {{city}}, {{stateName}} just contacted a PRC</p>{{/equal}}{{#equal step "2" }}<p class="action-text body-step-2">Someone considering abortion in {{city}}, {{stateName}} just scheduled an appointment with a PRC</p>{{/equal}}{{#equal step "3" }}<p class="action-text body-step-3">Someone considering abortion in {{city}}, {{stateName}} kept her appointment at the PRC</p>{{/equal}}{{/if}}<i class="action-step step-{{step}}"></i></li><li class="feed-content-placeholder feed-content-right" data-direction="left"></li></ul></div></li>'
+			html:'<li class="feed-item drag-setup-false center-text-false action-step-{{step}} {{liClass}} version-{{BgVersion}}" data-id="{{itemId}}" data-step="{{step}}" data-stateCode="{{stateCode}}" data-stateName="{{stateName}}" data-city="{{city}}" data-table-key="{{key}}"><i class="feed-prayer-confirmation">Prayed!</i><i class="feed-prayer-instruction"></i><div class="feed-content" id="content-item-{{itemId}}" data-state="{{stateCode}}" style="overflow:hidden;"><ul class="feed-content-container"><li class="feed-content-placeholder feed-content-left" data-direction="right"></li><li class="feed-content-main" data-direction="none">{{#if stateName }}{{#equal step "1" }}<p class="action-text body-step-1">Someone considering abortion in {{city}}, {{stateName}} just contacted a PRC</p>{{/equal}}{{#equal step "2" }}<p class="action-text body-step-2">Someone considering abortion in {{city}}, {{stateName}} just scheduled an appointment with a PRC</p>{{/equal}}{{#equal step "3" }}<p class="action-text body-step-3">Someone considering abortion in {{city}}, {{stateName}} kept her appointment at the PRC</p>{{/equal}}{{/if}}<i class="action-step step-{{step}}"></i></li><li class="feed-content-placeholder feed-content-right" data-direction="left"></li></ul></div></li>'
 		},
 		tutorialItem:{
 			id:'template-tutorial-item-ajax',

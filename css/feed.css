@@ -169,9 +169,6 @@
 				}
 
 
-				body.1version-1 ul.feed li.feed-item .feed-prayer-confirmation{
-					display:none;
-				}
 				ul.feed li.feed-item{
 					min-height:0;
 				}
@@ -181,11 +178,7 @@
 				
 				}
 				
-				body.1version-3 ul.feed li.feed-item.swipe-complete .feed-prayer-confirmation{
-					top:10px;
-				}
-				
-				ul.feed li.feed-item .feed-content{
+			ul.feed li.feed-item .feed-content{
 					position:relative;
 					overflow:hidden;
 					background:#fff;

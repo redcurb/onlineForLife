@@ -599,6 +599,7 @@ onlineForLife.Panels = {
 					$('ul.stats-updates').prepend(itemHtml);
 				}
 			});
+			$('ul.stats-updates').removeClass('status-loading').addClass('status-loaded');
 		});
 		
 	},
