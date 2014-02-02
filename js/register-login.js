@@ -13,7 +13,8 @@ onlineForLife.Overrides = {
 		$('#form-registration .fieldset-text').append(firstNameHtml);
 		$('#form-registration .error-firstname.error-1 span').text('First Name should only contain letters');
 		$('#form-registration .error-firstname.error-2 span').text('First Name should be at least 2 characters');
-		
+		var $zip = $('#input-register-zip');
+		$zip.get(0).type='tel';
 	},
 
 	setupSpinners: function(){
@@ -61,6 +62,7 @@ onlineForLife.Auth = {
 			var firstText = $('#input-register-firstname').val();
 			if(firstText.toLowerCase()=='dev'){
 				$('body').addClass('test-mode-enabled');
+				onlineForLife.Push.setupPush();
 			}
 			return false;
 		});

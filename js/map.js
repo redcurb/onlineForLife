@@ -1,20 +1,22 @@
 onlineForLife.USMap = {
 	init: function(){
-		onlineForLife.USMap.setupMap();
-		onlineForLife.USMap.setupHandlers();
+		var $map = $('#map');
+		if($('body').hasClass('platform-tablet')){
+			//$map = $('#map-tablet');	
+		}
+		onlineForLife.USMap.setupMap($map);
 	},
 	
-	setupMap:function(){
+	setupMap:function($map){
 		var configData = onlineForLife.App.config.feed.map;
 
-		onlineForLife.USMap.createMap();
+		onlineForLife.USMap.createMap($map);
 	},
 	
-	createMap:function(){
-		console.log('setupMap');
-		$('#map').usmap({
+	createMap:function($map){
+		$map.usmap({
 			'stateStyles': {
-				fill: onlineForLife.App.config.feed.map.fillColor, 
+				fill: onlineForLife.App.config.feed.map.fillColor,
 				"stroke-width": onlineForLife.App.config.feed.map.strokeWidth,
 				'stroke' : onlineForLife.App.config.feed.map.strokeColor
 			},
@@ -30,17 +32,14 @@ onlineForLife.USMap = {
 			},
 			showLabels: false,
 		});
-		$('#map path').off('mouseover');
-	},
-	
-	setupHandlers:function(){
+		$map.find('path').off('mouseover');
 	},
 	
 	toggleState:function(state){
 		//console.log('toggleState: ' + state);
-		$('#map').usmap('trigger', state, 'mouseover');
+		$('#map,#map-tablet').usmap('trigger', state, 'mouseover');
 		setTimeout(function() {
-			$('#map').usmap('trigger', state, 'mouseout');
+			$('#map,#map-tablet').usmap('trigger', state, 'mouseout');
 		}, onlineForLife.App.config.feed.map.delaySpeed);
 	}
 };

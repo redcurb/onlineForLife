@@ -68,7 +68,9 @@ ul.event-calendar li .event-title p.event-description {
 				body.model-iphone ul.feed li.feed-item .feed-prayer-instruction{
 					right:45px;
 				}
-
+ul.feed li.default-content{
+	width:80%;	
+}
 				
 
 
@@ -159,6 +161,13 @@ body.page-settings #content-tutorial{
 	body.orientation-landscape.platform-tablet .ui-page .ui-header.header-primary,
 	body.orientation-landscape.model-ipad .ui-page .ui-header.header-primary{
 		left: 408px;
+	}
+	body.orientation-landscape.platform-tablet .ui-page .ui-header.header-primary{
+		display:none;
+	}
+	body.orientation-landscape.platform-tablet .content-main{
+		top: -70px;
+		position: relative;
 	}
 	body.orientation-landscape.platform-tablet .ui-panel-content-wrap,
 	body.orientation-landscape.model-ipad .ui-panel-content-wrap{
@@ -476,7 +485,6 @@ ul.feed li.feed-item {
 		.footer-primary em.prayer-count{
 			width: 90px;
 			margin: 0 0 0 16px;
-			background: black;
 		}
 
 		.footer-primary ul.feed-share-list{

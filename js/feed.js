@@ -73,7 +73,6 @@ onlineForLife.Feed = {
 	},
 	
 	setupMapLayout: function(contentWidth){
-		console.log('setupMapLayout');
 		var $map = $('#map');
 		var mapWidth = contentWidth;
 		var mapMultiplier1 = 0.6774193548387097;
@@ -122,18 +121,15 @@ onlineForLife.Feed = {
 	},
 	
 	setOrientation: function(){
-		console.log('>>>>>>>>>>>>>>>> setOrientation');
 		var orientation = Redcurb.Helpers.getOrientation();
 		var orientationClass = 'orientation-' + orientation;
 		onlineForLife.Feed.deviceStatus = {};
 		onlineForLife.Feed.deviceStatus.orientation = orientation;
-		//console.log('orientationClass: ' + orientationClass);
 		$('body').removeClass('orientation-portrait').removeClass('orientation-landscape').addClass(orientationClass);
 		onlineForLife.Feed.setDevice();
 	},
 	
 	overrideiPad: function(orientation){
-		//	onlineForLife.Feed.overrideiPad('land');
 		window.orientation = 0;
 		if(orientation=='land'){
 			window.orientation = 90;
@@ -189,6 +185,7 @@ onlineForLife.Feed = {
 	},
 
 	setupTabletLayout: function(){
+		console.log('}}}}}}}}}}}}}}}} setupTabletLayout');
 		$('body').addClass('orientation-landscape platform-tablet');
 		$('.section-total-saved .total-user-count').html('&nbsp;');
 		var windowWidth = $(window).width();
@@ -220,8 +217,8 @@ onlineForLife.Feed = {
 		//console.log('header-primary' + $('.ui-header.header-primary').width());
 		//console.log('.content-main.ui-content' + $('.content-main.ui-content').width());
 		
-		$('.ui-header.header-primary').css('width',headerWidth).data('width',headerWidth);
-		$('.content-main.ui-content').css('width',contentWidth).data('width',contentWidth);
+		$('.ui-header.header-primary,.header-primary').css('width',headerWidth).data('width',headerWidth);
+		$('.content-main.ui-content,.content-main').css('width',contentWidth).data('width',contentWidth);
 		onlineForLife.Feed.setupFeedItemWidth(contentWidth);
 		onlineForLife.Panels.setupIpad();
 		onlineForLife.Feed.rebuildFeed();
@@ -233,6 +230,12 @@ onlineForLife.Feed = {
 		$('body').removeClass('orientation-landscape').removeClass('platform-tablet');
 		$('.section-total-saved .total-user-count').html('&nbsp;');
 
+		
+		$('.ui-header.header-primary,.header-primary').css('width','inherit').data('width','inherit');
+		$('.content-main.ui-content,.content-main').css('width','inherit').data('width','inherit');
+
+		
+		
 		onlineForLife.Feed.rebuildFeed();
 	},
 	
@@ -588,15 +591,10 @@ onlineForLife.Feed = {
 	handleEmptyFeedList:function(){
 		var currentListId = onlineForLife.Feed.feedItemLists.currentListId;
 		var feedSetCount = onlineForLife.Feed.feedItemLists.feedSets.count;
-		console.log('???????????????????? handleEmptyFeedList');
-		console.log('currentListId: ' + currentListId);
-		console.log('feedSetCount: ' + feedSetCount);
 		if(currentListId<feedSetCount){
-			console.log('???????????????????? handleEmptyFeedList buildNextList');
 			onlineForLife.Feed.buildNextList();
 		}
 		else{
-			console.log('???????????????????? handleEmptyFeedList: LAST LIST EMPTY');
 			onlineForLife.Feed.toggleFeedMessage('PRAYED_ALL');
 		}
 	},
@@ -704,13 +702,11 @@ onlineForLife.Feed = {
 	},
 
 	setupFeedDataSets:function(){
-		console.log('???????????????????????? setupFeedDataSets');
 		var feedItemsPerLoad = onlineForLife.Feed.feedItemsPerLoad;
 		var feedItemLists = onlineForLife.Feed.feedItemLists;
 		var currentIndex = feedItemLists.current;
 		currentIndex.upper = feedItemsPerLoad-1;
 		var toLoadCount = feedItemLists.counts.toLoad;
-		//console.log('setupFeedDataSets: ' + feedItemsPerLoad + ' - ' + toLoadCount);
 		var setCount = Math.floor(toLoadCount/feedItemsPerLoad);
 		setCountMod = toLoadCount%feedItemsPerLoad;
 		
@@ -718,28 +714,19 @@ onlineForLife.Feed = {
 		if(setCountMod>0){
 			setCount += 1;
 		}
-		//console.log('setCount: ' + setCount);
-		//console.log('setCountMod: ' + setCountMod);
 		var toLoadIndex = 0;
 		var feedSetCount = 1;
 		var pageUpper = setCount;
 		for(i=0;i<pageUpper;i++){
-			//console.log('List #' + i);
 			feedItemLists.feedSets.toLoad[i] = [];
-			//var 
-			//*
 			for(l=0;l<feedItemsPerLoad;l++){
 				var currentLoadIndex = toLoadIndex;
 				if(currentLoadIndex<toLoadCount){
-					//console.log('l: ' + currentLoadIndex);
 					var itemId = feedItemLists.toLoad[currentLoadIndex];
-					//onlineForLife.Feed.feedData
 					feedItemLists.feedSets.toLoad[i].push(itemId);
-					
 					toLoadIndex += 1;
 				}
 			}
-			//*/
 			feedSetCount += 1;
 		}
 		onlineForLife.Feed.feedItemLists.feedSets.count = feedSetCount;
@@ -748,7 +735,6 @@ onlineForLife.Feed = {
 	
 	setupFeedItemLists:function(){
 		var feedItemsPerLoad = onlineForLife.Feed.feedItemsPerLoad;
-		console.log('setupFeedItemLists: ' + feedItemsPerLoad);
 		var feedData = onlineForLife.Feed.feedData;
 		var totalItemsCount = 0;
 		var itemBuildCount = 0;
@@ -958,9 +944,7 @@ onlineForLife.Feed = {
 	},
 	
 	animatePraySwipe: function(){
-		console.log('animatePraySwipe');
 		var nudgeCount = AppData.config.feed.nudge.nudgeCount || 0;
-		console.log('nudgeCount: ' + nudgeCount);
 		if(AppData.config.feed.nudge.showNudge){
 			var $listItem = $('ul.feed li.feed-item:eq(0)');
 			var $listItemContent = $listItem.find('.feed-content');

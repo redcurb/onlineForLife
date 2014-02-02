@@ -20,14 +20,18 @@ onlineForLife.App = {
 
 	runOverrides: function(){
 		onlineForLife.App.updateSwipePlugin();
+		//onlineForLife.App.addTabletMap();
 		//console.log('app init');
 		//onlineForLife.App.getConfigData();
 		//$totalPrayers = $('.main-refresh .refresh-label');
 		//$totalPrayers.text('Total Prayers').css('visibility','visible');
 	},
 	
+	addTabletMap:function(){
+		$('#feed .content-main.ui-content').prepend('<div id="map-tablet"></div>');
+	},
+	
 	updateSwipePlugin:function(id,html){
-		console.log('updateSwipePlugin');
 		Swipe.prototype.handleEvent = function(e) {
 			switch (e.type) {
 				case 'touchstart': this.onTouchStart(e); break;
@@ -77,6 +81,10 @@ onlineForLife.App = {
 		onlineForLife.Settings.init();
 		onlineForLife.Feed.onFeedLoaded();
 		onlineForLife.Feed.setupFeedItemLookup();
+		if($.mobile.activePage.is('#feed') && AppData.config.push.enabled){
+			onlineForLife.Push.setupPush();
+		}
+		
 	},
 
 	getConfigData: function(){
@@ -122,7 +130,6 @@ onlineForLife.App = {
 	},	
 
 	appDataReady: function(){
-		console.log('appDataReady');
 		//onlineForLife.USMap.init();
 		onlineForLife.Feed.init();
 		

@@ -465,7 +465,6 @@ onlineForLife.Panels = {
 	},
 	
 	setupUpdatesOld: function(){
-		//console.log('setupUpdates');
 		var updatesUrl = 'https://ofl.firebaseio.com/updates';
 		var updatesData = new Firebase(updatesUrl);
 		
@@ -501,16 +500,13 @@ onlineForLife.Panels = {
 	
 	setupUpdates: function(){
 		//console.clear();
-		console.log('setupUpdates');
 		onlineForLife.Panels.buildDefaultList();
-		console.log('setupUpdates');
 		var updatesUrl = 'https://ofl.firebaseio.com/updates';
 		var updatesData = new Firebase(updatesUrl);
 		var $updates = $('ul.stats-updates');
 		updatesData.once('value', function(snapshot) {
 			var update = snapshot.val();
 			if(update === null) {
-				console.log('null');
 				var $updates = $('ul.stats-updates');
 				//$updates.removeClass('status-loading').addClass('status-no-updates');
 				var $spinner = $updates.find('li.spinner');
@@ -565,40 +561,40 @@ onlineForLife.Panels = {
 	},
 	
 	buildStep4Items: function(){
-		//console.log('buildStep4Items');
 		var dbUrl = 'https://ofl.firebaseio.com/app/text/counts/totalBabiesSaved';
 		var dataRef = new Firebase(dbUrl);
+		AppData.SavedBabies = {lifeNumbers:[],data:{ByLifeNumber:{}}};
 		dataRef.once('value', function(totalBabiesData) {
 			var totalBabies = totalBabiesData.val();
-			//console.log('totalBabies');
-			//console.log(totalBabies);
-			var $updates = $('ul.stats-updates');
+			var $updates = $('#feed-mypanel-right ul.stats-updates');
 			var $spinner = $updates.find('li.spinner');
 			var $noRecords = $updates.find('li.no-records');
 			$noRecords.fadeOut(100);
 			$spinner.fadeOut(100);
 			$.each(totalBabies,function(key,babySaved){
 				if(typeof(babySaved.OFL_Life_Decision_Number)!='undefined'){
-					//console.log('babySaved id: ' + key);
-					//console.log('babySaved #: ' + babySaved.OFL_Life_Decision_Number);
 					var id = babySaved.Id;
 					var lifeNumber = babySaved.OFL_Life_Decision_Number;
-					var city = babySaved.City;
-					var stateCode = babySaved.StateCode;
-					var stateName = babySaved.StateName;
-					
-					stateName = onlineForLife.Panels.convertStateNameCase(stateName);
-					
-					//console.log('id: ',id);
-					//console.log('lifeNumber: ',lifeNumber);
-					//console.log('city: ',city);
-					//console.log('stateName: ',stateName);
-					
-					var step4Text = onlineForLife.Panels.getStep4ItemText(id, lifeNumber, city, stateCode, stateName);
-					var itemHtml = onlineForLife.Panels.buildStep4UpdateItem(id, step4Text);
-					$('ul.stats-updates').prepend(itemHtml);
+					AppData.SavedBabies.lifeNumbers.push(lifeNumber);
+					AppData.SavedBabies.data[lifeNumber] = babySaved;
 				}
 			});
+			AppData.SavedBabies.lifeNumbers.sort();
+			$.each(AppData.SavedBabies.lifeNumbers,function(index,value){
+				var babySaved = AppData.SavedBabies.data[value];
+				var id = babySaved.Id;
+				var lifeNumber = babySaved.OFL_Life_Decision_Number;
+				var city = babySaved.City;
+				var stateCode = babySaved.StateCode;
+				var stateName = babySaved.StateName;
+				stateName = onlineForLife.Panels.convertStateNameCase(stateName);
+				var step4Text = onlineForLife.Panels.getStep4ItemText(id, lifeNumber, city, stateCode, stateName);
+				var itemHtml = onlineForLife.Panels.buildStep4UpdateItem(id, step4Text);
+				$('#feed-mypanel-right ul.stats-updates').prepend(itemHtml);
+				$('#feed-mypanel-right ul.stats-updates .default-content').remove();
+			});
+			var listHtml = $('#feed-mypanel-right ul.stats-updates').html();
+			$('#settings-mypanel-right ul.stats-updates,#events-mypanel-right ul.stats-updates').html(listHtml);
 			$('ul.stats-updates').removeClass('status-loading').addClass('status-loaded');
 		});
 		
@@ -698,7 +694,6 @@ onlineForLife.Panels = {
 	},
 	
 	setupUpdatesWindow: function(){
-		//console.log('setupUpdatesWindow');
 		$('#modalUpdates').dialog({
 			autoOpen:false,
 			open:function(){
