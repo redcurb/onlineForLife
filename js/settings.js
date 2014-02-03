@@ -87,6 +87,10 @@ onlineForLife.Settings = {
 		pushSettingsData.specialUpdates = specialValue;
 		pushSettingsData.none = noneValue;
 
+		AppData.User.config.push.dailySummary = dailyValue;
+		AppData.User.config.push.everyLifeChoice = lifeValue;
+		AppData.User.config.push.specialUpdates = specialValue;
+		
 		AppData.User.config.push.settingsData = pushSettingsData;
 		onlineForLife.Push.updatePushSettingsToFirebase();
 	},

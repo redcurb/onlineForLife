@@ -31,6 +31,12 @@ onlineForLife.App = {
 		$('#feed .content-main.ui-content').prepend('<div id="map-tablet"></div>');
 	},
 	
+	isDevUser:function(array){
+		var returnVal = array.indexOf(parseInt(AppData.UserId))>=0;
+		console.log('isDevUser returnVal: ' + returnVal);
+		return returnVal;
+	},
+	
 	updateSwipePlugin:function(id,html){
 		Swipe.prototype.handleEvent = function(e) {
 			switch (e.type) {
@@ -81,7 +87,7 @@ onlineForLife.App = {
 		onlineForLife.Settings.init();
 		onlineForLife.Feed.onFeedLoaded();
 		onlineForLife.Feed.setupFeedItemLookup();
-		if($.mobile.activePage.is('#feed') && AppData.config.push.enabled){
+		if($.mobile.activePage.is('#feed')){
 			onlineForLife.Push.setupPush();
 		}
 		

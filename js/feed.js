@@ -603,12 +603,13 @@ onlineForLife.Feed = {
 		onlineForLife.Feed.toggleFeedMessage('LOADING');
 		var oFeed = onlineForLife.Feed;
 		var listId = oFeed.feedItemLists.nextListId;
+		var currentListId = oFeed.feedItemLists.currentListId;
 		if(typeof(listOverrideId)!='undefined'){
-			listId = oFeed.feedItemLists.currentListId;
+			//listId = oFeed.feedItemLists.currentListId;
+			listId = listOverrideId;
 		}
-		
+		oFeed.feedItemLists.currentListId = listId;
 		var feedSets = oFeed.feedItemLists.feedSets.toLoad;
-		
 		var setList = onlineForLife.Feed.feedItemLists.feedSets.toLoad[listId];
 		var itemBuildCount = 0;
 		onlineForLife.Feed.ListHtml = '';
@@ -649,11 +650,17 @@ onlineForLife.Feed = {
 		if(itemBuildCount<AppData.config.feed.footer.showFooterOnCount){
 			AppData.config.feed.footer.showFooterOnCount=itemBuildCount;
 		}
-		if(itemBuildCount==0){
-			onlineForLife.Feed.toggleFeedMessage('PRAYED_ALL');
-		}
-
 		oFeed.feedItemLists.nextListId += 1;
+
+
+		if(itemBuildCount==0){
+			if(currentListId!=oFeed.feedItemLists.nextListId){
+				onlineForLife.Feed.buildNextList(oFeed.feedItemLists.nextListId);
+			}
+			else{
+				onlineForLife.Feed.toggleFeedMessage('PRAYED_ALL');
+			}
+		}
 		//console.log('DONE');
 	},
 
