@@ -265,17 +265,22 @@ $fb->set ( $todoPath, $one );
 	$debugText .= "tweetMessage: $tweetMessage\n";
 	$debugText .= "$twitterDev\n";
 	
+	if($lifeNumber > $totalBabiesSavedCurrent){
+		$fb->set ( $todoPathTotal, intval($lifeNumber) );
+		$reply = $cb->statuses_update($params2);
 	
-if($lifeNumber > $totalBabiesSavedCurrent){
-	$fb->set ( $todoPathTotal, intval($lifeNumber) );
-
-	$reply = $cb->statuses_update($params2);
-}
-
-
-$outputFile = fopen ( "capturedData-babySaved.txt", "a" );
-fwrite ( $outputFile, $debugText . PHP_EOL );
-fclose ( $outputFile );
+		// Send to API
+		//$tweetMessage
+		if( ! file_get_contents( 'http://cpptl.co/apps/pushmaster/Ofl/lifechoice?api_key=rc1298731872189723ofl&ofl&number='.$lifeNumber.'&city='.$cityName.'&state=' . $stateNameProper ) ){
+			$debugText .= "Failed to delivery Push\n";
+		}
+		else {
+			$debugText .= "Push Delivered";
+		}
+	}
+	
+	
+	$outputFile = fopen ( "capturedData-babySaved.txt", "a" );
+	fwrite ( $outputFile, $debugText . PHP_EOL );
+	fclose ( $outputFile );
 ?>
-
-
