@@ -17,37 +17,39 @@ ob_start();
 $capturedData = fopen('php://input', 'rb');
 $content = fread($capturedData,5000);
 
-
 $rcXML = simplexml_load_string($content);
 
 #die( $rcXML );
 
 $one = array ( 
-'CreatedDate' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')
-                                                ->Body->children('http://soap.sforce.com/2005/09/outbound')->notifications->Notification
-                                                ->sObject->children('urn:sobject.enterprise.soap.sforce.com')->CreatedDate,
-'Appt_Date' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')->Body->children('http://soap.sforce.com/2005/09/outbound')
-->notifications->Notification->sObject->children('urn:sobject.enterprise.soap.sforce.com')->Appt_Date__c,
-'Appt_Kept' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')->Body->children('http://soap.sforce.com/2005/09/outbound')
-->notifications->Notification->sObject->children('urn:sobject.enterprise.soap.sforce.com')->Appt_Kept__c,
-'Appt_Made' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')->Body->children('http://soap.sforce.com/2005/09/outbound')
-->notifications->Notification->sObject->children('urn:sobject.enterprise.soap.sforce.com')->Appt_Made__c,
-'Chose_Life' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')->Body->children('http://soap.sforce.com/2005/09/outbound')
-->notifications->Notification->sObject->children('urn:sobject.enterprise.soap.sforce.com')->Chose_Life__c,
-'City' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')->Body->children('http://soap.sforce.com/2005/09/outbound')
-->notifications->Notification->sObject->children('urn:sobject.enterprise.soap.sforce.com')->App_PRC_Impact_City__c,
-'Id' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')->Body->children('http://soap.sforce.com/2005/09/outbound')
-->notifications->Notification->sObject->children('urn:sobject.enterprise.soap.sforce.com')->Id,
-'Initial_Contact_Date' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')->Body
-->children('http://soap.sforce.com/2005/09/outbound')->notifications->Notification->sObject->children('urn:sobject.enterprise.soap.sforce.com')
-->Initial_Contact_Date__c,
-'OFL_Life_Decision_Number' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')->Body
-->children('http://soap.sforce.com/2005/09/outbound')->notifications->Notification->sObject->children('urn:sobject.enterprise.soap.sforce.com')
-->OFL_Life_Decision_Number__c,
-'PRC_Id' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')->Body->children('http://soap.sforce.com/2005/09/outbound')
-->notifications->Notification->sObject->children('urn:sobject.enterprise.soap.sforce.com')->PRC__c,
-'State' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')->Body->children('http://soap.sforce.com/2005/09/outbound')
-->notifications->Notification->sObject->children('urn:sobject.enterprise.soap.sforce.com')->App_PRC_Impact_State__c );
+	'CreatedDate' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')
+													->Body->children('http://soap.sforce.com/2005/09/outbound')->notifications->Notification
+													->sObject->children('urn:sobject.enterprise.soap.sforce.com')->CreatedDate,
+	'Appt_Date' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')->Body->children('http://soap.sforce.com/2005/09/outbound')
+	->notifications->Notification->sObject->children('urn:sobject.enterprise.soap.sforce.com')->Appt_Date__c,
+	'Appt_Kept' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')->Body->children('http://soap.sforce.com/2005/09/outbound')
+	->notifications->Notification->sObject->children('urn:sobject.enterprise.soap.sforce.com')->Appt_Kept__c,
+	'Appt_Made' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')->Body->children('http://soap.sforce.com/2005/09/outbound')
+	->notifications->Notification->sObject->children('urn:sobject.enterprise.soap.sforce.com')->Appt_Made__c,
+	'Chose_Life' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')->Body->children('http://soap.sforce.com/2005/09/outbound')
+	->notifications->Notification->sObject->children('urn:sobject.enterprise.soap.sforce.com')->Chose_Life__c,
+	'City' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')->Body->children('http://soap.sforce.com/2005/09/outbound')
+	->notifications->Notification->sObject->children('urn:sobject.enterprise.soap.sforce.com')->App_PRC_Impact_City__c,
+	'Id' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')->Body->children('http://soap.sforce.com/2005/09/outbound')
+	->notifications->Notification->sObject->children('urn:sobject.enterprise.soap.sforce.com')->Id,
+	'Initial_Contact_Date' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')->Body
+	->children('http://soap.sforce.com/2005/09/outbound')->notifications->Notification->sObject->children('urn:sobject.enterprise.soap.sforce.com')
+	->Initial_Contact_Date__c,
+	'OFL_Life_Decision_Number' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')->Body
+	->children('http://soap.sforce.com/2005/09/outbound')->notifications->Notification->sObject->children('urn:sobject.enterprise.soap.sforce.com')
+	->OFL_Life_Decision_Number__c,
+	'PRC_Id' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')->Body->children('http://soap.sforce.com/2005/09/outbound')
+	->notifications->Notification->sObject->children('urn:sobject.enterprise.soap.sforce.com')->PRC__c,
+	'State' => $rcXML->children('http://schemas.xmlsoap.org/soap/envelope/')->Body->children('http://soap.sforce.com/2005/09/outbound')
+	->notifications->Notification->sObject->children('urn:sobject.enterprise.soap.sforce.com')->App_PRC_Impact_State__c
+);
+
+
 
 require_once 'firebaseLib.php';
 $url = 'https://ofl.firebaseio.com/';
@@ -122,6 +124,72 @@ $us_state_abbrevs_names = array(
 	'AA'=>'ARMED FORCES AMERICA (EXCEPT CANADA)',
 	'AP'=>'ARMED FORCES PACIFIC'
 );
+$us_state_abbrevs_names_proper = array (
+	'AL' => 'Alabama',
+	'AK' => 'Alaska',
+	'AS' => 'American Samoa',
+	'AZ' => 'Arizona',
+	'AR' => 'Arkansas',
+	'CA' => 'California',
+	'CO' => 'Colorado',
+	'CT' => 'Connecticut',
+	'DE' => 'Delaware',
+	'DC' => 'District of Columbia',
+	'FM' => 'Federated States of Micronesia',
+	'FL' => 'Florida',
+	'GA' => 'Georgia',
+	'GU' => 'Guam Gu',
+	'HI' => 'Hawaii',
+	'ID' => 'Idaho',
+	'IL' => 'Illinois',
+	'IN' => 'Indiana',
+	'IA' => 'Iowa',
+	'KS' => 'Kansas',
+	'KY' => 'Kentucky',
+	'LA' => 'Louisiana',
+	'ME' => 'Maine',
+	'MH' => 'Marshall Islands',
+	'MD' => 'Maryland',
+	'MA' => 'Massachusetts',
+	'MI' => 'Michigan',
+	'MN' => 'Minnesota',
+	'MS' => 'Mississippi',
+	'MO' => 'Missouri',
+	'MT' => 'Montana',
+	'NE' => 'Nebraska',
+	'NV' => 'Nevada',
+	'NH' => 'New Hampshire',
+	'NJ' => 'New Jersey',
+	'NM' => 'New Mexico',
+	'NY' => 'New York',
+	'NC' => 'North Carolina',
+	'ND' => 'North Dakota',
+	'MP' => 'Northern Mariana Islands',
+	'OH' => 'Ohio',
+	'OK' => 'Oklahoma',
+	'OR' => 'Oregon',
+	'PW' => 'Palau',
+	'PA' => 'Pennsylvania',
+	'PR' => 'Puerto Rico',
+	'RI' => 'Rhode Island',
+	'SC' => 'South Carolina',
+	'SD' => 'South Dakota',
+	'TN' => 'Tennessee',
+	'TX' => 'Texas',
+	'UT' => 'Utah',
+	'VT' => 'Vermont',
+	'VI' => 'Virgin Islands',
+	'VA' => 'Virginia',
+	'WA' => 'Washington',
+	'WV' => 'West Virginia',
+	'WI' => 'Wisconsin',
+	'WY' => 'Wyoming',
+	'WI' => 'Wisconsin',
+	'WY' => 'Wyoming',
+	'AE' => 'Armed Forces Africa \ Canada \ Europe \ Middle East',
+	'AA' => 'Armed Forces America (Except Canada)',
+	'AP' => 'Armed Forces Pacific'
+);
 
 // Debug Data Stream
 $debugText = "";
@@ -136,7 +204,7 @@ $debugText .= "\n";
 $currentSavedCountUrl = 'https://ofl.firebaseio.com/';
 $currentSavedCountToken = 'wWHtRZLdybxVBALNg6VP6gOzUSibWeYFVVrOIlC0';
 $currentSavedCountFb = new fireBase($currentSavedCountUrl, $currentSavedCountToken);
-$currentSavedCountPath = '/text/global/savedCount';
+$currentSavedCountPath = '/app/text/counts/totalBabiesSaved/total';
 $currentSavedCount = $currentSavedCountFb->get($currentSavedCountPath);
 	
 $debugText .= "currentSavedCountPath: ".$currentSavedCountPath;
@@ -152,15 +220,20 @@ if( $one['OFL_Life_Decision_Number'] > '' ){
 	$url = 'https://ofl.firebaseio.com/';
 	$token = 'wWHtRZLdybxVBALNg6VP6gOzUSibWeYFVVrOIlC0';
 	$fb = new fireBase($url, $token);
-	$todoPath = '/text/global/savedCount';
+	$todoPath = '/app/text/counts/totalBabiesSaved/total';
 	$response = $fb->get($todoPath);
 	#printf("Result: %s\n", $response);
 	if( $response > $one["OFL_Life_Decision_Number"] ){
 		$fb = new fireBase($url, $token);
-		$todoPath = '/text/global/savedCount';
+		$todoPath = '/app/text/counts/totalBabiesSaved/total';
 		$response = $fb->set($todoPath, $one["OFL_Life_Decision_Number"] );
 	}
 }
+
+$cityName = $one['City'];
+$state = $one['State'];
+$stateName = $us_state_abbrevs_names["$state"];
+$stateNameProper = $us_state_abbrevs_names_proper["$state"];
 
 if( $one['Appt_Kept'] == 'Yes' ) $step = '3';
 if( $one['Appt_Made'] == 'Referred' ) $step = '';
@@ -168,15 +241,16 @@ if( $one['Appt_Made'] == 'Yes' ) $step = '2';
 
 #if( $step > '' )
 #{
-	$state = $one['State'];
 
 	// Send the data off
-	$two = array( 'state' => $one['State'],
-			  'step' => $step,
-				  'stateName' => $us_state_abbrevs_names["$state"],
-			  'city' => $one['City'],
-			  'lifeNumber' => $one['OFL_Life_Decision_Number'],
-			  'id' => $one['Id'] ); 
+	$two = array(
+		'state' => $one['State'],
+		'step' => $step,
+		'stateName' => $us_state_abbrevs_names["$state"],
+		'city' => $one['City'],
+		'lifeNumber' => $one['OFL_Life_Decision_Number'],
+		'id' => $one['Id']
+	); 
 
 	// Fire off - https://ofl.firebaseio.com/feedJSON
 	$fb = new fireBase($url, $token);
@@ -188,10 +262,10 @@ if( $one['Appt_Made'] == 'Yes' ) $step = '2';
 	//twitter output
 	if($step!='' && $step != '4'){
 		require_once('codebird.php');
-		$apiKey = "EL1BKtfVFP4Scg89tfrWw";
-		$apiSecret = "Rch0sOh2aUqUQcdQ4u3xHCfv4asdYoiftXJkuhbM";
-		$accessToken = "1666727516-cwtU8FIeOpzexCwIQg5n26r7xVwdt2cHW7xJUyB";
-		$accessTokenSecret = "3IF5wMXI4T9sNKON8YzWZuKfwD7BPCrUsygftRiONMyZm";
+		$apiKey = "lSBqbCYivjVcVGF54Ah2tA";
+		$apiSecret = "gUKopBziWPNPGUSapSEcxiP1nhTeyOJwQ5pvSKE";
+		$accessToken = "1666727516-Rkhh7AYxX7FDb0jiilbKhTDf12ZRL3KwPg3m0qq";
+		$accessTokenSecret = "IuUgnco9bXzmZ5EBXIBa3UQjsubxI32ubF95fen9gqwnA";
 	
 		if($step=='1'){
 			$tweetMessage = "Someone considering abortion in $cityName, $stateNameProper just contacted a PRC";
