@@ -17,6 +17,7 @@ ob_start ();
 $capturedData = fopen ( 'php://input', 'rb' );
 $content = fread ( $capturedData, 5000 );
 
+
 $date = new DateTime();
 $timestampString = $date->format('Y-m-d H:i:s');
 $timestampMS = $date->format('U');
@@ -168,6 +169,7 @@ $us_state_abbrevs_names_proper = array (
 	'AP' => 'Armed Forces Pacific'
 );
 
+$debugText = "";
 
 		
 $lifeNumber = intval($lifeNumber);
@@ -203,11 +205,17 @@ $todoPathTotal = '/app/text/counts/totalBabiesSaved/total';
 $totalBabiesSavedCurrent = intval($fb->get ( $todoPathTotal ) );
 
 
+$debugText .= "todoPath: ".$todoPath;
+$debugText .= "\n";
+$debugText .= "todoPathTotal: ".$todoPathTotal;
+$debugText .= "\n";
+$debugText .= "totalBabiesSavedCurrent: ".$totalBabiesSavedCurrent;
+$debugText .= "\n";
 
 
 
 // Debug Data Stream
-$debugText = "totalBabiesSavedCurrent: ".$totalBabiesSavedCurrent;
+$debugText .= "totalBabiesSavedCurrent: ".$totalBabiesSavedCurrent;
 $debugText .= "\n";
 $debugText .= "gettype(lifeNumber): ".gettype($lifeNumber);
 $debugText .= "\n";
@@ -266,6 +274,7 @@ $fb->set ( $todoPath, $one );
 	$debugText .= "$twitterDev\n";
 	
 	if($lifeNumber > $totalBabiesSavedCurrent){
+		//set most current saved baby total in firebase
 		$fb->set ( $todoPathTotal, intval($lifeNumber) );
 		$reply = $cb->statuses_update($params2);
 	
@@ -279,6 +288,7 @@ $fb->set ( $todoPath, $one );
 		}
 	}
 	
+	fclose($capturedData);
 	
 	$outputFile = fopen ( "capturedData-babySaved.txt", "a" );
 	fwrite ( $outputFile, $debugText . PHP_EOL );
