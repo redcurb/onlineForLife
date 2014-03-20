@@ -99,11 +99,9 @@ onlineForLife.Settings = {
 		console.log('handleLogout');
 		var firebaseUrl =  new Firebase('https://ofl.firebaseio.com');
 		var auth = new FirebaseSimpleLogin(firebaseUrl, function(error, user) {});
-		var userEmail = AppData.User.userInfo.email || '';
 		auth.logout();
 		Redcurb.Helpers.setCookie('userFirebaseToken','',30);
-		Redcurb.Helpers.setCookie('userFirebaseLoggedOut','true',365);
-		Redcurb.Helpers.setCookie('userEmail',userEmail,365);
+		Redcurb.Helpers.setCookie('userFirebaseLoggedOut','true',30);
 		var indexUrl = "home.html";
 		setTimeout(function(){
 			document.location=indexUrl;

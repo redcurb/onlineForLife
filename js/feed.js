@@ -1,4 +1,6 @@
 onlineForLife.Feed = {
+	scriptVersion:23,
+	
 	init: function(){
 		onlineForLife.Feed.setupPage();
 	},
@@ -297,7 +299,28 @@ onlineForLife.Feed = {
 		var trackingData =  new Firebase('https://ofl.firebaseio.com/tracking');
 		var prayerTrackingData = new Firebase('https://ofl.firebaseio.com/tracking/events/prayers');
 		var timeStamp = new Date().getTime();
-		var trackingId = prayerTrackingData.push({itemId: eventId, timestamp: timeStamp, userId: onlineForLife.Feed.userData.id}).name();
+		
+		var date = new Date();
+		var month = date.getMonth() + 1;//zero-based
+		var day = date.getDate();
+		var year = date.getFullYear();
+		
+		console.log('date: ' + date);
+		console.log('month: ' + month);
+		console.log('day: ' + day);
+		console.log('year: ' + year);
+		
+		var prayerData = {itemId: eventId, timestamp: timeStamp, userId: onlineForLife.Feed.userData.id};
+		var prayerTrackingDataByDay = new Firebase('https://ofl.firebaseio.com/tracking/events/prayersByDay/' + year + '/' + month + '/' + day + '/prayers');
+		var prayerTrackingDataByDayTotal = new Firebase('https://ofl.firebaseio.com/tracking/events/prayersByDay/' + year + '/' + month + '/' + day + '/total');
+		
+		var trackingId = prayerTrackingData.push(prayerData).name();
+		prayerTrackingDataByDay.push(prayerData).name();
+		prayerTrackingDataByDayTotal.transaction(function(current_value) {
+			return current_value + 1;
+		});
+		
+		
 		//console.log('trackingId: ' + trackingId);
 		
 		var feedItemTrackingData = new Firebase('https://ofl.firebaseio.com/tracking/events/feedItems/' + eventId);
@@ -346,12 +369,18 @@ onlineForLife.Feed = {
 		
 		
 		
-		var prayerTotalUrl = 'https://ofl.firebaseio.com/app/text/dailyPrayerTotal/total';
+		var dailyPrayerTotalUrl = 'https://ofl.firebaseio.com/app/text/dailyPrayerTotal/total';
+		var dailyPrayerTotalData = new Firebase(dailyPrayerTotalUrl);
+		
+		dailyPrayerTotalData.transaction(function(current_value) {
+			return current_value + 1;
+		});
+		
+		var prayerTotalUrl = 'https://ofl.firebaseio.com/app/text/totalPrayers/count';
 		var prayerTotalData = new Firebase(prayerTotalUrl);
 		
-		prayerTotalData.once('value', function(prayerTotalValue) {
-			var newValue = prayerTotalValue.val() + 1;
-			prayerTotalData.set(newValue);
+		prayerTotalData.transaction(function(current_value) {
+			return current_value + 1;
 		});
 		
 	},
@@ -783,8 +812,14 @@ onlineForLife.Feed = {
 				var id = prayerData.id;
 				var userId = prayerData.userId;
 				var stateCode = prayerData.userState;
+				
 				if(typeof(stateCode)!='undefined' && stateCode !=''){
-					onlineForLife.USMap.toggleState(stateCode);
+					if(stateCode =='OTHER'){
+						
+					}
+					else{
+						onlineForLife.USMap.toggleState(stateCode);
+					}
 				}
 			}
 		});

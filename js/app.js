@@ -12,7 +12,7 @@ onlineForLife.Push = onlineForLife.Push || {};
 onlineForLife.App = {
 	init: function(){
 		//console.log('app init');
-		Redcurb.Helpers.createPrototypeItems();
+		Redcurb.Helpers.init();
 		onlineForLife.App.getConfigData();
 		onlineForLife.App.createTemplates();
 		onlineForLife.App.runOverrides();
@@ -33,7 +33,7 @@ onlineForLife.App = {
 	
 	isDevUser:function(array){
 		var returnVal = array.indexOf(parseInt(AppData.UserId))>=0;
-		console.log('isDevUser returnVal: ' + returnVal);
+		//console.log('isDevUser returnVal: ' + returnVal);
 		return returnVal;
 	},
 	
@@ -115,10 +115,10 @@ onlineForLife.App = {
 		var userDataRef = new Firebase(dbUrl);
 		
 		userDataRef.once('value', function(userData) {
-			//console.log('++++++++++++++++++++++++++++++++++++++userDataRef');
+			console.log('++++++++++++++++++++++++++++++++++++++userDataRef');
 			userDataValue = userData.val();
 			AppData.User = userDataValue;
-			//console.log(userDataValue);
+			console.log(userDataValue);
 		});
 
 	},	

@@ -6,22 +6,14 @@ onlineForLife.Footer = {
 	},
 	
 	getText:function(){
-		var dbUrl = 'https://ofl.firebaseio.com/text/';
-		var textData = new Firebase(dbUrl);
-		onlineForLife.GlobalData = {};
-		textData.once('value', function(textValue) {
-			onlineForLife.GlobalData.Text = textValue.val();
-			onlineForLife.Footer.getFooterText();
-			onlineForLife.Panels.setText();
-		});
+		onlineForLife.Footer.getFooterText();
+		onlineForLife.Panels.setText();
 	},
 	
 	getFooterText:function(){
 		onlineForLife.Footer.footerData = {};
 		
-		var footerTextData = onlineForLife.GlobalData.Text.footer;
-		onlineForLife.Footer.footerData.text = footerTextData;
-		var emailText = footerTextData.email;
+		var emailText = AppData.text.footer.email;
 		//console.log('emailText',emailText);
 		onlineForLife.Footer.setupHandlers();
 	},
@@ -43,13 +35,15 @@ onlineForLife.Footer = {
 		
 		var prayersUrl = 'https://ofl.firebaseio.com/prayersets/' + shareId;
 		var prayerData = new Firebase(prayersUrl);
-		prayerData.set({ user:userId, prayers:prayers });
+		prayerData.set({ user:userId, prayers:prayers, userName:AppData.User.userInfo.name });
 		
 	},
 	
 	handleShare: function(linkId){
 		//console.log('handleShare: ' + linkId);
-		var shareUrl = onlineForLife.Footer.footerData.text.shareUrl;
+		var shareUrl = AppData.text.footer.shareUrl;
+		//console.log('handleShare shareUrl: ' + shareUrl);
+		
 		var userId = onlineForLife.Feed.userData.id;
 		var timeStamp = new Date().getTime().toString();
 		
@@ -59,7 +53,7 @@ onlineForLife.Footer = {
 		onlineForLife.Footer.pushPrayerSetData(userId, shareId);
 		
 		if(linkId=='twitter'){
-			var textData = onlineForLife.Footer.footerData.text.twitter;
+			var textData = AppData.text.footer.twitter;
 			var shareText = textData.body1;
 			var url = 'https://twitter.com/intent/tweet?text=' + shareText + '&url=' + shareUrl + '?shareId='+shareId;;
 			window.open(url, '_blank', 'location=yes');
@@ -69,7 +63,7 @@ onlineForLife.Footer = {
 			window.open(url, '_blank', 'location=yes');
 		}
 		else if(linkId=='email'){
-			var textData = onlineForLife.Footer.footerData.text.email;
+			var textData = AppData.text.footer.email;
 			var subjectText = textData.subject;
 			var bodyText = textData.body1;
 			var url = 'mailto:?subject=' + subjectText + '&body=' + bodyText + ' ' + shareUrl + '?shareId='+shareId;
@@ -77,36 +71,6 @@ onlineForLife.Footer = {
 			window.location.href = url;
 		}
 		
-		/*
-		$('.feed-share-sms').on('click',function(){
-			onlineForLife.Footer.buildPrayerSet();
-			var textData = onlineForLife.Footer.footerData.text.email;
-			var timeStamp = new Date().getTime().toString();
-			
-			var subjectText = textData.subject;
-			var bodyText = textData.body1;
-			var url = 'mailto:?subject=' + subjectText + '&body=' + bodyText + ' ' + shareUrl + '?shareId='+shareId;
-			window.location.href = url;
-		});
-		$('.feed-share-fb').on('click',function(){
-			onlineForLife.Footer.buildPrayerSet();
-			var timeStamp = new Date().getTime().toString();
-			var shareId = userId + timeStamp;
-			var url = 'http://m.facebook.com/sharer.php?u=' + shareUrl + '?shareId='+shareId;
-			window.open(url, '_blank', 'location=yes');
-		});
-		$('.feed-share-twitter').on('click',function(){
-			var textData = onlineForLife.Footer.footerData.text.twitter;
-			var timeStamp = new Date().getTime().toString();
-			var shareId = userId + timeStamp;
-			var userId = onlineForLife.Feed.userData.id;
-			var shareUrl = encodeURIComponent(shareUrl + '?shareId='+shareId);
-			var shareText = textData.body1;
-
-			var url = 'https://twitter.com/intent/tweet?text=' + shareText + '&url=' + shareUrl;
-			window.open(url, '_blank', 'location=yes');
-		});
-		*/
 	},
 	
 	setupHandlers: function(){

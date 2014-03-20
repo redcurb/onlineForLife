@@ -18,15 +18,15 @@
 
 	
 		
-		var feedUrl = 'https://ofl.firebaseio.com/feed';
+		var feedUrl = 'https://ofl.firebaseio.com/feed'; //THIS ITEM WAS REMOVED
 		var feedData = new Firebase(feedUrl);
 //		feedData.set({});
 		$('#feed-submit').click(function (e) {
-			var state = $('#feed-states').val();
+			var state = $('#feed-states').val();                                                                   
 			var stateName = $('#feed-states option:selected').text();
-			var step = $('#feed-steps').val();
+			var step = $('#feed-steps').val();                                                                        
 			console.log(state, stateName, step);
-			if($('#form-create-feed-item input:required:invalid').length==0){
+			if($('#form-create-feed-item input:required:invalid').length==0){                                                 
 				feedData.push({state: state, stateName:stateName, step: step});
 			}
 		});

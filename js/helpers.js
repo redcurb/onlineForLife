@@ -1,24 +1,91 @@
 var Redcurb = window.Redcurb || {}; Redcurb.Helpers = Redcurb.Helpers || {};
 Redcurb.Helpers = {
+	init:function(){
+		Redcurb.Helpers.createPrototypes();
+	},
 
 	getParameterByName: function(name){
 		name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-			results = regex.exec(location.search);
+		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+		var results = regex.exec(location.search);
 		return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	},
+	
+	createPrototypes: function(){
+		console.log('createPrototypes');
+		if (!String.prototype.trim) {
+		  String.prototype.trim = function () {
+			return this.replace(/^\s+|\s+$/g, '');
+		  };
+		}
+		String.prototype.toProperCase = function(){
+		  return this.toLowerCase().replace(/^(.)|\s(.)/g, 
+			  function($1) { return $1.toUpperCase(); });
+		}
+	},
+
+	addDevConsoleLog: function(options){
+		console.log(options);
+		var name = options.name;
+		var tempFunction = console.log;
+		console[name] = tempFunction;
+		Redcurb.Helpers.createDevConsole(options.element);
+	},
+	
+	addDevConsole: function(options){
+		console.log(options);
+		var name = options.name;
+		console[name] = function(key,value){
+			Redcurb.Helpers.addDevConsoleItem(options.element,key,value);
+		}
+		Redcurb.Helpers.createDevConsole(options.element);
+	},
+	
+	createDevConsole: function($element){
+		console.log('createDevConsole');
+		var consoleHtml = '<ul class="dev-console" style="text-shadow: none;color: #0f0;"></ul>';
+		$element.append(consoleHtml);
+	},
+	
+	addDevConsoleItem: function($parent,key,value){
+		console.log('addDevConsoleItem',key);
+		var $console = $parent.find('.dev-console');
+		
+		var itemHtml = '<li>';
+		itemHtml += key;
+		if(value){
+			itemHtml += ': ' + value;
+		}
+		itemHtml += '</li>';
+		$console.append(itemHtml);
+	},
+
+	setupConsole: function(parentLookup,key,value){
+		console.log('setupConsole');
+		var $parent = $(parentLookup);
+		var consoleHtml = '<ul class="dev-console" style="text-shadow: none;color: #0f0;"></ul>';
+		$parent.append(consoleHtml);
+		Redcurb.Helpers.addConsoleItem(parentLookup,key,value);
+	},
+	
+	addConsoleItem: function(parentLookup,key,value){
+		//console.log('addConsoleItem');
+		var $parent = $(parentLookup);
+		var $console = $parent.find('.dev-console');
+		
+		var itemHtml = '<li>';
+		itemHtml += key;
+		if(value){
+			itemHtml += ': ' + value;
+		}
+		itemHtml += '</li>';
+		$console.append(itemHtml);
 	},
 	
 	setupDev: function(){
 		var isDev = false;
 		if(AppData.UserId==1){
 			Redcurb.Helpers.createDevItems();
-		}
-	},
-	
-	createPrototypeItems: function(){
-		String.prototype.toProperCase = function(){
-		  return this.toLowerCase().replace(/^(.)|\s(.)/g, 
-			  function($1) { return $1.toUpperCase(); });
 		}
 	},
 	
@@ -240,4 +307,6 @@ Redcurb.Helpers = {
 
 
 };
-
+$(function() {
+	Redcurb.Helpers.init();
+});

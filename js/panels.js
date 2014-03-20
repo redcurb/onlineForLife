@@ -12,19 +12,11 @@ onlineForLife.Panels = {
 		onlineForLife.Panels.setupStatsData();
 	},
 	
-	setTextOld: function(){
-		var savedCount = onlineForLife.GlobalData.Text.global.savedCount;
-		savedCount = savedCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		//console.log('savedCount',savedCount);
-		$('.mypanel-right .section-total-saved span.total-user-count').text(savedCount);
-	},
-	
 	setText: function(){
 		var dbUrl = 'https://ofl.firebaseio.com/app/text/counts/totalBabiesSaved/total';
 		var textData = new Firebase(dbUrl);
 		textData.on('value', function(snapshot) {
 			var savedCount = snapshot.val();
-			onlineForLife.GlobalData.Text.global.savedCount = savedCount;
 			savedCount = savedCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			$('.mypanel-right .section-total-saved span.total-user-count').text(savedCount);
 		});
@@ -464,24 +456,6 @@ onlineForLife.Panels = {
 		
 	},
 	
-	setupUpdatesOld: function(){
-		var updatesUrl = 'https://ofl.firebaseio.com/updates';
-		var updatesData = new Firebase(updatesUrl);
-		
-		updatesData.on('child_added', function(snapshot) {
-			var message = snapshot.val();
-			//console.log(message);
-			//displayChatMessage(message.name, message.state, message.step);
-			if(onlineForLife.Panels.addFirebaseChild){
-				//console.log('onlineForLife.Feed.addFirebaseChild TRUE');
-				var newHtml = onlineForLife.Panels.buildUpdateItem(message.id, message.state, message.step, message.stateName);
-				$('ul.stats-updates').prepend(newHtml);
-			}
-		});
-		onlineForLife.Panels.setupUpdatesWindow();
-
-	},
-	
 	doesPopupContentExist: function(dataHtml){
 		//console.log('doesPopupContentExist: ' + dataHtml);
 		var exists = true;
@@ -492,7 +466,7 @@ onlineForLife.Panels = {
 	},
 	
 	buildDefaultList: function(){
-		console.log('buildDefaultList');
+		//console.log('buildDefaultList');
 		var $list = $('ul.stats-updates').addClass('status-loading');
 		var defaultHtml = '<li class="default-content spinner"><i class="fa fa-refresh fa-spin"></i></li><li class="default-content no-records"><span class="text-update">There are no updates to show at this time. Please try again later.</span></li>';
 		$list.html(defaultHtml);
@@ -637,11 +611,20 @@ onlineForLife.Panels = {
 	},
 	
 	getStep4ItemText: function(id, lifeNumber, city, stateCode, stateName){
-		var textData = onlineForLife.GlobalData.Text.panels.updates;
+		var textData = AppData.text.panels.updates;
+		var textDataNoState = AppData.text.panels.updatesNoState;
 		var textA = textData.step4a;
 		var textB = textData.step4b;
 		var textC = textData.step4c;
+		var textANoState = textDataNoState.step4a;
+		var textBNoState = textDataNoState.step4b;
 		var textVal = textA + lifeNumber + textB + city + textC + stateName;
+		console
+		
+		if(city == "" || stateCode == "" || stateName ==""){
+			textVal = textANoState + lifeNumber + textBNoState;
+		}
+		
 		//console.log(textVal);
 		return textVal;
 	},
@@ -665,7 +648,8 @@ onlineForLife.Panels = {
 
 	setupSavedBabiesAnimation: function($panel){
 		if(AppData.config.stats.totalBabiesSaved.animateCount){
-			var savedCount = onlineForLife.GlobalData.Text.global.savedCount;
+			var savedCount = AppData.text.counts.totalBabiesSaved.total;
+			console.log('>>>>>>>>>>>>>>>>>>>>>>>>>> ' + savedCount);
 			onlineForLife.Panels.resetSavedBabiesCount($panel);
 			setTimeout(function() {
 				onlineForLife.Panels.animateSavedBabies(0,savedCount,10,$panel);

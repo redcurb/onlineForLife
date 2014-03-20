@@ -26,10 +26,10 @@ onlineForLife.Push = {
 	},
 
 	setupPush: function(){
-		console.log('setupPush');
+		//console.log('setupPush');
 		var isDevUser = onlineForLife.App.isDevUser(AppData.config.push.testUsers);
-		if(AppData.config.push.enabled || isDevUser){
-			console.log('setupPush ENABLED');
+		if(AppData.config.push.enabled){
+			//console.log('setupPush ENABLED');
 			if(!window.plugins) {
 				window.plugins = {};
 			}
@@ -49,8 +49,9 @@ onlineForLife.Push = {
 		var server = AppData.config.push.server;
 		onlineForLife.Push.addPushDom();
 		var $debug = $('#debug');
-		console.log('$debug length: ' + $debug.length);
-		console.log('requestPush: ' + server);
+		window.userPushSettingsRef = new Firebase('https://ofl.firebaseio.com/users/' + AppData.UserId + '/config/push');
+		//console.log('$debug length: ' + $debug.length);
+		//console.log('requestPush: ' + server);
 		
 		var settings = {dailySummary:true,every:false,special:true};
 		if(AppData.User.config.push.dailySummary!=""){
@@ -71,7 +72,9 @@ onlineForLife.Push = {
 		
 		
 		var sendTokenToServer = function sendTokenToServer(token) {
-			$debug.append("###sendTokenToServer");
+			if(onlineForLife.App.isDevUser(AppData.config.push.testUsers)){
+				$debug.append("###sendTokenToServer");
+			}
 			$.ajax(server + "/registerDevice", {
 				type: "post",
 				dataType: 'json',
@@ -83,14 +86,20 @@ onlineForLife.Push = {
 					settings:settings
 				}),
 				success: function(response) {
-					$debug.append('<li>Successfully registered device: ' + token + '</li>');
-					$debug.append("###Successfully registered device.");
+					if(onlineForLife.App.isDevUser(AppData.config.push.testUsers)){
+						$debug.append('<li>Successfully registered device: ' + token + '</li>');
+						$debug.append("###Successfully registered device.");
+					}
 				}
 			});
+			
+			userPushSettingsRef.child('token').set(token);
 		}
 		
 		var addCallback = function addCallback(key, callback) {
-			$debug.append("###addCallback");
+			if(onlineForLife.App.isDevUser(AppData.config.push.testUsers)){
+				$debug.append("###addCallback");
+			}
 			if (window.pushCallbacks === undefined) {
 				window.pushCallbacks = {}
 			}
@@ -98,24 +107,33 @@ onlineForLife.Push = {
 		};
 		var pushNotification = window.plugins.pushNotification;
 		var apnSuccessfulRegistration = function(token) {
-			$debug.append("###apnSuccessfulRegistration");
 			var tokenVal = token.toString(16);
-			$debug.append('<li>Success: ' + tokenVal + '</li>');
+			if(onlineForLife.App.isDevUser(AppData.config.push.testUsers)){
+				$debug.append("###apnSuccessfulRegistration");
+				$debug.append('<li>Success: ' + tokenVal + '</li>');
+				
+			}
 			sendTokenToServer(tokenVal);
 			addCallback('onNotificationAPN', onNotificationAPN);
 		}
 		var apnFailedRegistration = function(error) {
-			$debug.append("###apnFailedRegistration");
+			if(onlineForLife.App.isDevUser(AppData.config.push.testUsers)){
+				$debug.append("###apnFailedRegistration");
+			}
 			alert("Error: " + error.toString());
 		}
 	
 		//the function is a callback when we receive notification from APN
 		var onNotificationAPN = function(e) {
-			$debug.append("###onNotificationAPN");
+			if(onlineForLife.App.isDevUser(AppData.config.push.testUsers)){
+				$debug.append("###onNotificationAPN");
+			}
 			if( navigator.notification ){
 				console.log(e);
-				$debug.append('<li>Message Content</li>');
-				$debug.append('<li>' + e + '</li>');
+				if(onlineForLife.App.isDevUser(AppData.config.push.testUsers)){
+					$debug.append('<li>Message Content</li>');
+					$debug.append('<li>' + e + '</li>');
+				}
 				navigator.notification.alert(e.body, null, 'Online4Life', 'Close');
 			}
 			else {
@@ -125,19 +143,26 @@ onlineForLife.Push = {
 		//alert(device.platform);
 		//device = {platform:'iOS'};
 		if(typeof(device)!='undefined'){
-			$debug.append("###device exists");
+			if(onlineForLife.App.isDevUser(AppData.config.push.testUsers)){
+				$debug.append("###device exists");
+			}
 			if(typeof(device.platform)!='undefined'){
-				$debug.append("###device.platform exists");
+				if(onlineForLife.App.isDevUser(AppData.config.push.testUsers)){
+					$debug.append("###device.platform exists");
+				}
 				if (device.platform == 'android' || device.platform == 'Android') {
-					
-					$debug.append('<li>registering android</li>');
+					if(onlineForLife.App.isDevUser(AppData.config.push.testUsers)){
+						$debug.append('<li>registering android</li>');
+					}
 					pushNotification.register(successHandler, errorHandler, {
 						"senderID":"661780372179",
 						"ecb":"onNotificationGCM"
 					});		// required!
 				}
 				else {
-					$debug.append('<li>registering iOS</li>');
+					if(onlineForLife.App.isDevUser(AppData.config.push.testUsers)){
+						$debug.append('<li>registering iOS</li>');
+					}
 					pushNotification.register(apnSuccessfulRegistration, apnFailedRegistration,{
 						"badge": "true",
 						"sound": "true",
@@ -148,7 +173,9 @@ onlineForLife.Push = {
 			}
 		}
 		else{
-			$debug.append("###device DOES NOT exist");
+			if(onlineForLife.App.isDevUser(AppData.config.push.testUsers)){
+				$debug.append("###device DOES NOT exist");
+			}
 		}
 	}
 	
